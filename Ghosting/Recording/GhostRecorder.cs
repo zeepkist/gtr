@@ -314,7 +314,7 @@ public partial class GhostRecorder
             MaterialPhysicsState mappedState = MaterialPhysicsStateResolver.GetEffectiveState(
                 soapOverride,
                 surfaceMaterial?.physics?.name);
-            LogEncounteredMaterialPhysics(surfaceMaterial, mappedState, soapOverride);
+            // LogEncounteredMaterialPhysics(surfaceMaterial, mappedState, soapOverride);
             state = MaterialPhysicsStateResolver.Combine(state, mappedState);
         }
 
