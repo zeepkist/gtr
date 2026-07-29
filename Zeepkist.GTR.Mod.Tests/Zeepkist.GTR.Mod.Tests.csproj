@@ -40,8 +40,8 @@
     <Compile Include="..\UI\Timeline\GhostTimelineState.cs" Link="Source\GhostTimelineState.cs" />
     <Compile Include="..\UI\Timeline\TimelineScrollStep.cs" Link="Source\TimelineScrollStep.cs" />
     <Compile Include="..\Ghosting\Recording\SurfaceKeyNormalizer.cs" Link="Source\SurfaceKeyNormalizer.cs" />
-    <Compile Include="..\Ghosting\Recording\SurfaceState.cs" Link="Source\SurfaceState.cs" />
-    <Compile Include="..\Ghosting\Recording\SurfaceStateResolver.cs" Link="Source\SurfaceStateResolver.cs" />
+    <Compile Include="..\Ghosting\Recording\MaterialPhysicsState.cs" Link="Source\MaterialPhysicsState.cs" />
+    <Compile Include="..\Ghosting\Recording\MaterialPhysicsStateResolver.cs" Link="Source\MaterialPhysicsStateResolver.cs" />
     <Compile Include="..\Ghosting\Readers\GhostReaderValidation.cs" Link="Source\GhostReaderValidation.cs" />
     <Compile Include="..\Ghosting\Readers\GhostVersionReader.cs" Link="Source\GhostVersionReader.cs" />
     <Compile Include="..\Ghosting\Readers\LimitedMemoryStream.cs" Link="Source\LimitedMemoryStream.cs" />

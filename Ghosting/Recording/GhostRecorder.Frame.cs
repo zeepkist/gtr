@@ -16,7 +16,7 @@ public partial class GhostRecorder
         public WheelState WheelState { get; set; }
         public GroundedWheelState GroundedWheelState { get; set; }
         public SlippingWheelState SlippingWheelState { get; set; }
-        public SurfaceState SurfaceState { get; set; }
+        public MaterialPhysicsState MaterialPhysicsState { get; set; }
         public UnityEngine.Vector3 LocalVelocity { get; set; }
         public UnityEngine.Vector3 LocalAngularVelocity { get; set; }
         public UnityEngine.Vector2 LocalGForce { get; set; }

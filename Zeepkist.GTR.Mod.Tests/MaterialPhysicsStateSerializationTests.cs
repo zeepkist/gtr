@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Zeepkist.GTR.Mod.Tests;
 
-public class SurfaceStateSerializationTests
+public class MaterialPhysicsStateSerializationTests
 {
     [Flags]
     public enum LegacySurfaceState : byte
@@ -28,7 +28,7 @@ public class SurfaceStateSerializationTests
     [ProtoContract]
     public class CurrentFrame
     {
-        [ProtoMember(1)] public SurfaceState SurfaceState { get; set; }
+        [ProtoMember(1)] public MaterialPhysicsState MaterialPhysicsState { get; set; }
     }
 
     [Fact]
@@ -61,23 +61,28 @@ public class SurfaceStateSerializationTests
 
             CurrentFrame frame = Serializer.Deserialize<CurrentFrame>(stream);
 
-            Assert.Equal((SurfaceState)(ushort)value, frame.SurfaceState);
+            Assert.Equal((ushort)value, (ushort)frame.MaterialPhysicsState);
         }
     }
 
     [Theory]
-    [InlineData(SurfaceState.Mud)]
-    [InlineData(SurfaceState.Flesh)]
-    [InlineData(SurfaceState.Mud | SurfaceState.Flesh)]
-    [InlineData(SurfaceState.Wood | SurfaceState.Mud | SurfaceState.Flesh)]
-    public void CurrentUshortState_RoundTripsExtendedValues(SurfaceState value)
+    [InlineData(MaterialPhysicsState.Wood)]
+    [InlineData(MaterialPhysicsState.Mud)]
+    [InlineData(MaterialPhysicsState.Ice1)]
+    [InlineData(MaterialPhysicsState.Ice2)]
+    [InlineData(MaterialPhysicsState.Ice3)]
+    [InlineData(
+        MaterialPhysicsState.Wood |
+        MaterialPhysicsState.Mud |
+        MaterialPhysicsState.Ice3)]
+    public void CurrentUshortState_RoundTripsV7Values(MaterialPhysicsState value)
     {
         using MemoryStream stream = new();
-        Serializer.Serialize(stream, new CurrentFrame { SurfaceState = value });
+        Serializer.Serialize(stream, new CurrentFrame { MaterialPhysicsState = value });
         stream.Position = 0;
 
         CurrentFrame frame = Serializer.Deserialize<CurrentFrame>(stream);
 
-        Assert.Equal(value, frame.SurfaceState);
+        Assert.Equal(value, frame.MaterialPhysicsState);
     }
 }

@@ -27,7 +27,7 @@ public class DeltaFrame
             soapboxFlags,
             GroundedWheelState.HasNone,
             SlippingWheelState.HasNone,
-            SurfaceState.Tarmac,
+            MaterialPhysicsState.Tarmac,
             new Vector3Int(),
             new Vector3Int(),
             new Vector2Int(),
@@ -49,7 +49,7 @@ public class DeltaFrame
         SoapboxFlags soapboxFlags,
         GroundedWheelState groundedWheelState,
         SlippingWheelState slippingWheelState,
-        SurfaceState surfaceState,
+        MaterialPhysicsState materialPhysicsState,
         Vector3Int localVelocity,
         Vector3Int localAngularVelocity,
         Vector2Int localGForce,
@@ -68,7 +68,7 @@ public class DeltaFrame
         SoapboxFlags = soapboxFlags;
         GroundedWheelState = groundedWheelState;
         SlippingWheelState = slippingWheelState;
-        SurfaceState = surfaceState;
+        MaterialPhysicsState = materialPhysicsState;
         LocalVelocity = localVelocity;
         LocalAngularVelocity = localAngularVelocity;
         LocalGForce = localGForce;
@@ -88,7 +88,7 @@ public class DeltaFrame
     [ProtoMember(7)] public SoapboxFlags SoapboxFlags { get; set; }
     [ProtoMember(8)] public GroundedWheelState GroundedWheelState { get; set; }
     [ProtoMember(9)] public SlippingWheelState SlippingWheelState { get; set; }
-    [ProtoMember(10)] public SurfaceState SurfaceState { get; set; }
+    [ProtoMember(10)] public MaterialPhysicsState MaterialPhysicsState { get; set; }
     [ProtoMember(11)] public Vector3Int LocalVelocity { get; set; }
     [ProtoMember(12)] public Vector3Int LocalAngularVelocity { get; set; }
     [ProtoMember(13)] public Vector2Int LocalGForce { get; set; }

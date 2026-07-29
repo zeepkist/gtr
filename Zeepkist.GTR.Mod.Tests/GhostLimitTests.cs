@@ -60,6 +60,14 @@ public class GhostLimitTests
     }
 
     [Fact]
+    public void ReadProtobufVersionReadsV7PayloadHeader()
+    {
+        byte[] payload = { 0x08, 0x07 };
+
+        Assert.Equal(7, GhostVersionReader.ReadProtobuf(payload));
+    }
+
+    [Fact]
     public void ReadBinaryVersionReadsLegacyPayloadHeader()
     {
         byte[] payload = BitConverter.GetBytes(4);
