@@ -8,7 +8,7 @@ namespace TNRD.Zeepkist.GTR.Configuration;
 public class ConfigService : IEagerService
 {
     public const string ProductionBackendUrl = "https://backend.zeepki.st";
-    public const string LocalDevelopmentBackendUrl = "http://localhost:3000";
+    public const string LocalDevelopmentBackendUrl = "http://127.0.0.1:3001";
     public const string CdnUrl = "https://cdn.zeepki.st";
     public const string ProductionGraphQLUrl = "https://graphql.zeepki.st";
     public const string LocalDevelopmentGraphQLUrl = "http://127.0.0.1:5000/";
@@ -300,7 +300,7 @@ public class ConfigService : IEagerService
             "5. URLs",
             "Local Backend",
             false,
-            "Use http://localhost:3000 instead of production backend\n" +
+            "Use http://127.0.0.1:3001 instead of production backend\n" +
             "Changing this logs in again against the selected backend");
 
         UseLocalDevelopmentGraphQL = config.Bind(
