@@ -39,6 +39,7 @@ public partial class GhostRecorder
 
     private readonly PlayerLoopService _playerLoopService;
     private readonly List<Frame> _frames = new(InitialFrameCapacity);
+    private readonly HashSet<int> _encounteredSurfaceMaterialIds = new();
     private readonly ILogger<GhostRecorder> _logger;
 
     private PlayerLoopSubscription _updateToken;
@@ -50,6 +51,7 @@ public partial class GhostRecorder
     private bool _isHorn;
     private bool _isArmsUp;
     private bool _isRagdoll;
+    private bool _loggedSoapSurfaceOverride;
     private Transform _ragdollRoot;
     private Rigidbody[] _ragdollRigidbodies;
     private Renderer[] _ragdollRenderers;
@@ -290,39 +292,83 @@ public partial class GhostRecorder
         return cc.damageDuge != null && cc.damageDuge.IsDead();
     }
 
-    private static SurfaceState GetSurfaceState(New_ControlCar cc)
+    private SurfaceState GetSurfaceState(New_ControlCar cc)
     {
         SurfaceState surfaceState = SurfaceState.None;
-        foreach (var surfaceAndSlippin in cc.GetSlipAndSurfaceList())
+        bool soapOverride = cc.currentZeepkistState == 1;
+
+        foreach (New_CustomWheel wheel in cc.wheels)
         {
-            surfaceState |= GetSurfaceState(surfaceAndSlippin.whichSurface);
+            bool enabled = wheel.enabled;
+            bool grounded = enabled && wheel.IsGrounded();
+
+            if (!SurfaceStateResolver.ShouldIncludeWheel(enabled, grounded))
+                continue;
+
+            MaterialHolder surfaceMaterial = null;
+
+            if (!soapOverride)
+                surfaceMaterial = wheel.GetCurrentSurface();
+
+            SurfaceParticleType particleType = SurfaceStateResolver.GetEffectiveParticleType(
+                soapOverride,
+                surfaceMaterial?.particle ?? default);
+            SurfaceState mappedState = SurfaceStateResolver.FromParticleType(particleType);
+            // LogEncounteredSurface(surfaceMaterial, particleType, mappedState, soapOverride);
+            surfaceState = SurfaceStateResolver.Combine(surfaceState, mappedState);
         }
 
-        return surfaceState == SurfaceState.None ? SurfaceState.Tarmac : surfaceState;
+        return surfaceState;
     }
 
-    private static SurfaceState GetSurfaceState(object surface)
+    private void LogEncounteredSurface(
+        MaterialHolder surfaceMaterial,
+        SurfaceParticleType particleType,
+        SurfaceState surfaceState,
+        bool soapOverride)
     {
-        if (surface == null)
-            return SurfaceState.Tarmac;
-
-        string name;
-
-        if (surface is UnityEngine.Object unityObject)
-            name = unityObject.name;
-        else
-            name = surface.ToString();
-
-        return SurfaceKeyNormalizer.NormalizeSurfaceKey(name) switch
+        if (soapOverride)
         {
-            "grass" => SurfaceState.Grass,
-            "sand" => SurfaceState.Sand,
-            "snow" => SurfaceState.Snow,
-            "ice" => SurfaceState.Ice,
-            "soap" => SurfaceState.Soap,
-            "metal" => SurfaceState.Metal,
-            _ => SurfaceState.Tarmac
-        };
+            if (_loggedSoapSurfaceOverride)
+                return;
+
+            _loggedSoapSurfaceOverride = true;
+            _logger.LogInformation(
+                "Encountered Soap surface through soapbox state override; mapped state: {SurfaceState}",
+                surfaceState);
+            return;
+        }
+
+        int materialId = surfaceMaterial?.materialID ?? 0;
+        bool missingMaterial = surfaceMaterial == null || string.IsNullOrEmpty(surfaceMaterial.name);
+        int materialKey = missingMaterial
+            ? int.MinValue
+            : materialId;
+        if (!_encounteredSurfaceMaterialIds.Add(materialKey))
+            return;
+
+        if (missingMaterial || surfaceState == SurfaceState.None)
+        {
+            _logger.LogWarning(
+                "Encountered unmapped surface material {SurfaceMaterialName} ({SurfaceMaterialId}, {LocalizedSurfaceName}); " +
+                "particle type: {SurfaceParticleType} ({SurfaceParticleTypeValue})",
+                surfaceMaterial?.name ?? "<null>",
+                materialId,
+                surfaceMaterial?.localizedName ?? "<none>",
+                particleType,
+                (int)particleType);
+            return;
+        }
+
+        _logger.LogInformation(
+            "Encountered surface material {SurfaceMaterialName} ({SurfaceMaterialId}, {LocalizedSurfaceName}); " +
+            "particle type: {SurfaceParticleType} ({SurfaceParticleTypeValue}); mapped state: {SurfaceState}",
+            surfaceMaterial.name,
+            materialId,
+            surfaceMaterial.localizedName,
+            particleType,
+            (int)particleType,
+            surfaceState);
     }
 
     private static WheelState GetWheelState(New_ControlCar cc)
@@ -455,16 +501,20 @@ public partial class GhostRecorder
     {
         GameSettingsScriptableObject gameSettings = PlayerManager.Instance.instellingen.GlobalSettings;
 
-        Ghost ghost = new();
-        ghost.Version = 6;
-        ghost.SteamId = SteamClient.SteamId.Value;
-        ghost.TaggedUsername = PlayerManager.Instance.GetNameTag() + SteamClient.Name;
-        ghost.Color = ColorUtilities.ToHexString(
-            Color.HSVToRGB(
-                gameSettings.online_name_color_H,
-                gameSettings.online_name_color_S,
-                gameSettings.online_name_color_V));
-        CosmeticIDs ids = PlayerManager.Instance.adventureCosmetics.GetIDs();
+		Ghost ghost = new()
+		{
+			Version = 6,
+			SteamId = SteamClient.SteamId.Value,
+			TaggedUsername = PlayerManager.Instance.GetNameTag() + SteamClient.Name,
+			Color = ColorUtilities.ToHexString(
+				Color.HSVToRGB(
+					gameSettings.online_name_color_H,
+					gameSettings.online_name_color_S,
+					gameSettings.online_name_color_V))
+		};
+
+		CosmeticIDs ids = PlayerManager.Instance.adventureCosmetics.GetIDs();
+
         ghost.Cosmetics = new Cosmetics()
         {
             Color = ids.color,
