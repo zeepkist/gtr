@@ -25,7 +25,7 @@ public class InitialFrame
             soapboxFlags,
             GroundedWheelState.HasNone,
             SlippingWheelState.HasNone,
-            SurfaceState.Tarmac,
+            MaterialPhysicsState.Tarmac,
             new Vector3Int(),
             new Vector3Int(),
             new Vector2Int(),
@@ -46,7 +46,7 @@ public class InitialFrame
         SoapboxFlags soapboxFlags,
         GroundedWheelState groundedWheelState,
         SlippingWheelState slippingWheelState,
-        SurfaceState surfaceState,
+        MaterialPhysicsState materialPhysicsState,
         Vector3Int localVelocity,
         Vector3Int localAngularVelocity,
         Vector2Int localGForce,
@@ -64,7 +64,7 @@ public class InitialFrame
         SoapboxFlags = soapboxFlags;
         GroundedWheelState = groundedWheelState;
         SlippingWheelState = slippingWheelState;
-        SurfaceState = surfaceState;
+        MaterialPhysicsState = materialPhysicsState;
         LocalVelocity = localVelocity;
         LocalAngularVelocity = localAngularVelocity;
         LocalGForce = localGForce;
@@ -83,7 +83,7 @@ public class InitialFrame
     [ProtoMember(6)] public SoapboxFlags SoapboxFlags { get; set; }
     [ProtoMember(7)] public GroundedWheelState GroundedWheelState { get; set; }
     [ProtoMember(8)] public SlippingWheelState SlippingWheelState { get; set; }
-    [ProtoMember(9)] public SurfaceState SurfaceState { get; set; }
+    [ProtoMember(9)] public MaterialPhysicsState MaterialPhysicsState { get; set; }
     [ProtoMember(10)] public Vector3Int LocalVelocity { get; set; }
     [ProtoMember(11)] public Vector3Int LocalAngularVelocity { get; set; }
     [ProtoMember(12)] public Vector2Int LocalGForce { get; set; }

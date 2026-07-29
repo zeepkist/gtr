@@ -20,12 +20,21 @@ public class V6Reader : GhostReaderBase<V6Ghost>
     private const float PositionMultiplier = 100_000;
     private const float RotationMultiplier = 100;
 
-    private readonly ILogger<V6Reader> _logger;
+    private readonly Microsoft.Extensions.Logging.ILogger _logger;
 
     public V6Reader(IServiceProvider provider, ILogger<V6Reader> logger) : base(provider)
     {
         _logger = logger;
     }
+
+    protected V6Reader(
+        IServiceProvider provider,
+        Microsoft.Extensions.Logging.ILogger logger) : base(provider)
+    {
+        _logger = logger;
+    }
+
+    protected virtual int ExpectedVersion => 6;
 
     public override IGhost Read(byte[] data)
     {
@@ -37,7 +46,7 @@ public class V6Reader : GhostReaderBase<V6Ghost>
                 deserializedGhost.Cosmetics == null ||
                 deserializedGhost.DeltaFrames == null ||
                 deserializedGhost.DeltaFrames.Count > GhostLimits.MaxFrames ||
-                deserializedGhost.Version != 6)
+                deserializedGhost.Version != ExpectedVersion)
             {
                 throw new InvalidDataException("Ghost payload is incomplete or contains too many frames.");
             }
