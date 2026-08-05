@@ -6,6 +6,7 @@ namespace TNRD.Zeepkist.GTR.UI;
 public enum ImWindowAnchor
 {
     MiddleLeft,
+    MiddleRight,
     BottomRight,
     BottomCenter
 }
@@ -38,6 +39,11 @@ public static class ImWindowPlacement
                 height),
             ImWindowAnchor.MiddleLeft => new ImRect(
                 screen.Left + Margin,
+                screen.Bottom + (screen.H - height) * 0.5f,
+                width,
+                height),
+            ImWindowAnchor.MiddleRight => new ImRect(
+                screen.Right - width - Margin,
                 screen.Bottom + (screen.H - height) * 0.5f,
                 width,
                 height),
