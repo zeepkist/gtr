@@ -52,6 +52,9 @@
     <Compile Include="..\LevelBrowser\LevelBrowserSession.cs" Link="Source\LevelBrowserSession.cs" />
     <Compile Include="..\LevelBrowser\LevelItemsBrowseQuery.cs" Link="Source\LevelItemsBrowseQuery.cs" />
     <Compile Include="..\LevelBrowser\LevelItemsBrowseQueryBuilder.cs" Link="Source\LevelItemsBrowseQueryBuilder.cs" />
+    <Compile Include="..\LevelBrowser\WorkshopIdParser.cs" Link="Source\WorkshopIdParser.cs" />
+    <Compile Include="..\LevelBrowser\LevelBrowseRow.cs" Link="Source\LevelBrowseRow.cs" />
+    <Compile Include="..\LevelBrowser\LevelBrowsePage.cs" Link="Source\LevelBrowsePage.cs" />
     <Compile Include="..\PlaylistBrowserHost\PlaylistLevelMetadata.cs" Link="Source\PlaylistLevelMetadata.cs" />
     <Compile Include="..\PlaylistBrowserHost\PlaylistLevelMapper.cs" Link="Source\PlaylistLevelMapper.cs" />
   </ItemGroup>

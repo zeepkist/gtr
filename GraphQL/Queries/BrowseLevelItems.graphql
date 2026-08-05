@@ -1,0 +1,27 @@
+query BrowseLevelItems(
+    $name: String!
+    $fileAuthor: String!
+    $first: Int!
+    $offset: Int!
+) {
+    levelItems(
+        filter: {
+            deleted: { equalTo: false }
+            level: { publiclyVisible: { equalTo: true } }
+            name: { includesInsensitive: $name }
+            fileAuthor: { includesInsensitive: $fileAuthor }
+        }
+        orderBy: DATE_CREATED_DESC
+        first: $first
+        offset: $offset
+    ) {
+        totalCount
+        nodes {
+            fileUid
+            workshopId
+            name
+            fileAuthor
+            imageUrl
+        }
+    }
+}

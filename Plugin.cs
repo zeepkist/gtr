@@ -125,6 +125,7 @@ public class Plugin : BaseUnityPlugin
         services.AddSingleton<OfflineGhostGraphqlService>();
         services.AddSingleton(_ => StorageApi.CreateModStorage(this));
         services.AddSingleton<RecordHolderGraphqlService>();
+        services.AddSingleton<LevelBrowser.LevelBrowseService>();
         services.AddSingleton<ServiceHelper>();
         services.AddSingleton<UserService>();
         services.AddTransient<GhostRecorder>();
