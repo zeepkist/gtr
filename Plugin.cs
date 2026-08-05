@@ -130,6 +130,7 @@ public class Plugin : BaseUnityPlugin
         services.AddSingleton<LevelBrowser.UI.LevelThumbnailCache>();
         services.AddSingleton<LevelBrowser.UI.LevelBrowserWindow>();
         services.AddEagerService<LevelBrowser.UI.LevelBrowserUiService>();
+        services.AddEagerService<PlaylistBrowserHost.PlaylistBrowserHostService>();
         services.AddSingleton<ServiceHelper>();
         services.AddSingleton<UserService>();
         services.AddTransient<GhostRecorder>();
