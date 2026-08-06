@@ -17,12 +17,25 @@ namespace TNRD.Zeepkist.GTR.LevelBrowser;
 /// </summary>
 public class LevelBrowseService
 {
+    /// <summary>Max users pulled into the one-time author cache.</summary>
+    public const int AuthorCacheLimit = 10000;
+
     private readonly IGtrClient _gtrClient;
+    private readonly List<AuthorSuggestion> _authorCache = new();
+    private readonly HashSet<string> _authorCacheIds = new(StringComparer.Ordinal);
+    private bool _authorCacheFullyLoaded;
+    private bool _authorCacheLoading;
+    private UniTaskCompletionSource _authorCacheWait = new();
 
     public LevelBrowseService(IGtrClient gtrClient)
     {
         _gtrClient = gtrClient;
+        // Already completed until a load starts, so waiters don't hang before the first prefetch.
+        _authorCacheWait.TrySetResult();
     }
+
+    /// <summary>Default suggestion page size for <see cref="SearchAuthorsAsync"/>.</summary>
+    public const int DefaultAuthorSearchLimit = 12;
 
     /// <summary>Runs a browse for raw discovery inputs, building the default query internally.</summary>
     public UniTask<Result<LevelBrowsePage>> BrowseAsync(
@@ -37,6 +50,7 @@ public class LevelBrowseService
         bool withoutMyPersonalBest = false,
         bool withoutRecords = false,
         string ownerSteamId = null,
+        string authorUserId = null,
         CancellationToken ct = default)
     {
         return BrowseAsync(
@@ -52,8 +66,175 @@ public class LevelBrowseService
                 withoutMyPersonalBest: withoutMyPersonalBest,
                 withoutRecords: withoutRecords,
                 ownerSteamId: ownerSteamId,
+                authorUserId: authorUserId,
                 nowUtc: DateTimeOffset.UtcNow),
             ct);
+    }
+
+    /// <summary>
+    /// Prefetches GTR users (steam id + steam name) once into an in-memory cache. Safe to call
+    /// repeatedly; concurrent callers share one load.
+    /// </summary>
+    public async UniTask EnsureAuthorCacheAsync(CancellationToken ct = default)
+    {
+        if (_authorCacheFullyLoaded)
+            return;
+
+        if (_authorCacheLoading)
+        {
+            await _authorCacheWait.Task;
+            return;
+        }
+
+        _authorCacheLoading = true;
+        _authorCacheWait = new UniTaskCompletionSource();
+        try
+        {
+            Result<IReadOnlyList<AuthorSuggestion>> result = await FetchAuthorsAsync(
+                namePart: null,
+                limit: AuthorCacheLimit,
+                ct);
+            if (result.IsSuccess)
+            {
+                MergeAuthors(result.Value);
+                _authorCacheFullyLoaded = true;
+            }
+        }
+        finally
+        {
+            _authorCacheLoading = false;
+            _authorCacheWait.TrySetResult();
+        }
+    }
+
+    /// <summary>True when the full author cache has finished loading successfully.</summary>
+    public bool IsAuthorCacheReady => _authorCacheFullyLoaded;
+
+    /// <summary>
+    /// Filters the in-memory author cache synchronously. Returns false when the cache has no
+    /// entries yet (caller should fall back to <see cref="SearchAuthorsAsync"/>).
+    /// </summary>
+    public bool TryFilterAuthors(
+        string namePart,
+        int limit,
+        out IReadOnlyList<AuthorSuggestion> matches)
+    {
+        matches = Array.Empty<AuthorSuggestion>();
+        if (_authorCache.Count == 0)
+            return false;
+
+        if (string.IsNullOrWhiteSpace(namePart) || namePart.Trim().Length < 2)
+            return true;
+
+        matches = FilterCache(namePart.Trim(), limit);
+        return true;
+    }
+
+    /// <summary>
+    /// Searches GTR users by case-insensitive <c>steamName</c> substring for the "Uploaded by"
+    /// autocomplete. Prefers the in-memory cache; falls back to a live GraphQL query and merges
+    /// hits into the cache.
+    /// </summary>
+    public async UniTask<Result<IReadOnlyList<AuthorSuggestion>>> SearchAuthorsAsync(
+        string namePart,
+        int limit = DefaultAuthorSearchLimit,
+        CancellationToken ct = default)
+    {
+        if (string.IsNullOrWhiteSpace(namePart) || namePart.Trim().Length < 2)
+            return Result.Ok<IReadOnlyList<AuthorSuggestion>>(Array.Empty<AuthorSuggestion>());
+
+        if (limit < 1)
+            limit = DefaultAuthorSearchLimit;
+
+        string needle = namePart.Trim();
+
+        if (_authorCacheFullyLoaded || _authorCache.Count > 0)
+        {
+            IReadOnlyList<AuthorSuggestion> local = FilterCache(needle, limit);
+            if (_authorCacheFullyLoaded || local.Count > 0)
+                return Result.Ok(local);
+        }
+
+        Result<IReadOnlyList<AuthorSuggestion>> live = await FetchAuthorsAsync(needle, limit, ct);
+        if (live.IsFailed)
+            return live;
+
+        MergeAuthors(live.Value);
+        return Result.Ok(FilterCache(needle, limit));
+    }
+
+    private IReadOnlyList<AuthorSuggestion> FilterCache(string needle, int limit)
+    {
+        var list = new List<AuthorSuggestion>(Math.Min(limit, 16));
+        foreach (AuthorSuggestion author in _authorCache)
+        {
+            if (author.SteamName.IndexOf(needle, StringComparison.OrdinalIgnoreCase) < 0)
+                continue;
+
+            list.Add(author);
+            if (list.Count >= limit)
+                break;
+        }
+
+        return list;
+    }
+
+    private void MergeAuthors(IReadOnlyList<AuthorSuggestion> authors)
+    {
+        foreach (AuthorSuggestion author in authors)
+        {
+            if (string.IsNullOrWhiteSpace(author.SteamId) || string.IsNullOrWhiteSpace(author.SteamName))
+                continue;
+
+            if (!_authorCacheIds.Add(author.SteamId))
+                continue;
+
+            _authorCache.Add(author);
+        }
+    }
+
+    private async UniTask<Result<IReadOnlyList<AuthorSuggestion>>> FetchAuthorsAsync(
+        string namePart,
+        int limit,
+        CancellationToken ct)
+    {
+        try
+        {
+            var filter = new UserFilter();
+            if (!string.IsNullOrEmpty(namePart))
+                filter.SteamName = new StringFilter { IncludesInsensitive = namePart };
+
+            IOperationResult<ISearchUsersByNameResult> result =
+                await _gtrClient.SearchUsersByName.ExecuteAsync(filter, limit, ct);
+
+            try
+            {
+                result.EnsureNoErrors();
+            }
+            catch (Exception e)
+            {
+                return Result.Fail(new ExceptionalError(e));
+            }
+
+            ISearchUsersByName_Users connection = result.Data?.Users;
+            if (connection == null)
+                return Result.Ok<IReadOnlyList<AuthorSuggestion>>(Array.Empty<AuthorSuggestion>());
+
+            var list = new List<AuthorSuggestion>(connection.Nodes.Count);
+            foreach (ISearchUsersByName_Users_Nodes node in connection.Nodes)
+            {
+                if (string.IsNullOrWhiteSpace(node.SteamId) || string.IsNullOrWhiteSpace(node.SteamName))
+                    continue;
+
+                list.Add(new AuthorSuggestion(node.SteamId, node.SteamName));
+            }
+
+            return Result.Ok<IReadOnlyList<AuthorSuggestion>>(list);
+        }
+        catch (Exception e)
+        {
+            return Result.Fail(new ExceptionalError(e));
+        }
     }
 
     /// <summary>Runs a browse for an already-built query.</summary>
