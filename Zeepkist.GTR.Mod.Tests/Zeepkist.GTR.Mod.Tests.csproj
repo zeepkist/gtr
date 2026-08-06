@@ -47,5 +47,20 @@
     <Compile Include="..\Ghosting\Readers\LimitedMemoryStream.cs" Link="Source\LimitedMemoryStream.cs" />
     <Compile Include="..\Utilities\TaskCancellation.cs" Link="Source\TaskCancellation.cs" />
     <Compile Include="..\GraphQL\LevelGraphqlIdentity.cs" Link="Source\LevelGraphqlIdentity.cs" />
+    <Compile Include="..\LevelBrowser\LevelBrowserSelection.cs" Link="Source\LevelBrowserSelection.cs" />
+    <Compile Include="..\LevelBrowser\SelectionOutcome.cs" Link="Source\SelectionOutcome.cs" />
+    <Compile Include="..\LevelBrowser\LevelBrowserSession.cs" Link="Source\LevelBrowserSession.cs" />
+    <Compile Include="..\LevelBrowser\LevelBrowseSort.cs" Link="Source\LevelBrowseSort.cs" />
+    <Compile Include="..\LevelBrowser\LevelBrowseDateRange.cs" Link="Source\LevelBrowseDateRange.cs" />
+    <Compile Include="..\LevelBrowser\LevelBrowseTrackLength.cs" Link="Source\LevelBrowseTrackLength.cs" />
+    <Compile Include="..\LevelBrowser\LevelBrowseRating.cs" Link="Source\LevelBrowseRating.cs" />
+    <Compile Include="..\LevelBrowser\LevelItemsBrowseQuery.cs" Link="Source\LevelItemsBrowseQuery.cs" />
+    <Compile Include="..\LevelBrowser\LevelItemsBrowseQueryBuilder.cs" Link="Source\LevelItemsBrowseQueryBuilder.cs" />
+    <Compile Include="..\LevelBrowser\LevelBrowserPageWindow.cs" Link="Source\LevelBrowserPageWindow.cs" />
+    <Compile Include="..\LevelBrowser\WorkshopIdParser.cs" Link="Source\WorkshopIdParser.cs" />
+    <Compile Include="..\LevelBrowser\LevelBrowseRow.cs" Link="Source\LevelBrowseRow.cs" />
+    <Compile Include="..\LevelBrowser\LevelBrowsePage.cs" Link="Source\LevelBrowsePage.cs" />
+    <Compile Include="..\PlaylistBrowserHost\PlaylistLevelMetadata.cs" Link="Source\PlaylistLevelMetadata.cs" />
+    <Compile Include="..\PlaylistBrowserHost\PlaylistLevelMapper.cs" Link="Source\PlaylistLevelMapper.cs" />
   </ItemGroup>
 </Project>

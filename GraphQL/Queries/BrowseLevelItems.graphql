@@ -1,0 +1,17 @@
+query BrowseLevelItems(
+    $filter: LevelItemFilter!
+    $orderBy: [LevelItemsOrderBy!]!
+    $first: Int!
+    $offset: Int!
+) {
+    levelItems(filter: $filter, orderBy: $orderBy, first: $first, offset: $offset) {
+        totalCount
+        nodes {
+            fileUid
+            workshopId
+            name
+            fileAuthor
+            imageUrl
+        }
+    }
+}
