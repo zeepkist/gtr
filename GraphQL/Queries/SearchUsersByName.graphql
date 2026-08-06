@@ -1,0 +1,8 @@
+query SearchUsersByName($filter: UserFilter!, $first: Int!) {
+    users(filter: $filter, orderBy: [STEAM_NAME_ASC], first: $first) {
+        nodes {
+            steamId
+            steamName
+        }
+    }
+}
