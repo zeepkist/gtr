@@ -21,14 +21,14 @@ namespace TNRD.Zeepkist.GTR.LevelBrowser.UI;
 public sealed class LevelBrowserWindow : IZeepGUIDrawer
 {
     private const string WindowTitle = "Level Browser";
-    private const float DefaultWidth = 600f;
-    private const float DefaultHeight = 460f;
+    private const float DefaultWidth = 960f;
+    private const float DefaultHeight = 720f;
     private const float RailWidth = 172f;
     private const float Gap = 8f;
     private const float CardHeight = 62f;
     private const float CardSpacing = 6f;
     private const float ThumbWidth = 96f;
-    private const float ActionsWidth = 92f;
+    private const float ActionsWidth = 112f;
     private const float ButtonHeight = 28f;
     private const int PageSize = LevelItemsBrowseQueryBuilder.DefaultPageSize;
     private const float DebounceSeconds = 0.3f;
@@ -93,7 +93,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
 
         _windowOpen = true;
         ImRect rect = ImWindowPlacement.GetRect(
-            gui, WindowTitle.AsSpan(), DefaultWidth, DefaultHeight, ImWindowAnchor.MiddleRight);
+            gui, WindowTitle.AsSpan(), DefaultWidth, DefaultHeight, ImWindowAnchor.MiddleCenter);
 
         if (gui.BeginWindow(WindowTitle, ref _windowOpen, ref _mouseOver, rect, ImWindowFlag.None))
         {
