@@ -129,9 +129,15 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
     {
         if (!_session.IsOpen)
         {
+            LevelBrowserInputGate.SuppressNavigatorInput = false;
             _wasOpen = false;
             return;
         }
+
+        // Cleared each draw; set again below if a filter TextEdit is focused. Navigator.Update reads
+        // the previous frame's value when it runs before Imui, which is enough to keep Backspace
+        // from closing the Playlist Manager while typing.
+        LevelBrowserInputGate.SuppressNavigatorInput = false;
 
         float now = Time.unscaledTime;
 
@@ -423,7 +429,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         {
             string name = _session.SearchName ?? string.Empty;
             gui.Text("Name".AsSpan(), gui.Style.Text.Color);
-            if (gui.TextEdit(ref name, hint: "includes…".AsSpan()))
+            if (DrawFilterTextEdit(gui, ref name, "includes…".AsSpan()))
             {
                 _session.SearchName = name;
                 OnFilterChanged(now);
@@ -431,7 +437,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
 
             string author = _session.SearchAuthor ?? string.Empty;
             gui.Text("Author".AsSpan(), gui.Style.Text.Color);
-            if (gui.TextEdit(ref author, hint: "fileAuthor…".AsSpan()))
+            if (DrawFilterTextEdit(gui, ref author, "fileAuthor…".AsSpan()))
             {
                 _session.SearchAuthor = author;
                 OnFilterChanged(now);
@@ -514,6 +520,8 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
 
             string typed = _authorTyped ?? string.Empty;
             bool changed = gui.TextEdit(fieldId, ref typed, ref state, fieldRect, multiline: false, hint: "steam name…".AsSpan());
+            if (gui.IsControlActive(fieldId))
+                LevelBrowserInputGate.SuppressNavigatorInput = true;
             if (changed)
             {
                 _authorTyped = typed;
@@ -625,6 +633,14 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
             OnFilterChanged(now);
         else if (scheduleLookup && now > 0f)
             _authorLookupAt = now + DebounceSeconds;
+    }
+
+    private static bool DrawFilterTextEdit(ImGui gui, ref string text, ReadOnlySpan<char> hint)
+    {
+        bool changed = gui.TextEdit(ref text, hint: hint);
+        if (gui.IsControlActive(gui.LastControl))
+            LevelBrowserInputGate.SuppressNavigatorInput = true;
+        return changed;
     }
 
     private void DrawRailDropdown(
