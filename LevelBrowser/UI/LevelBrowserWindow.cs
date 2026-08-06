@@ -197,9 +197,6 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         _authorCts = null;
         _toast = null;
         _fetchAt = now;
-
-        // Warm the author-name cache so Uploaded-by filtering is local after the first load.
-        _service.EnsureAuthorCacheAsync().Forget();
     }
 
     private void MaybeRefetch(float now)
@@ -356,13 +353,6 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
             return;
 
         _authorLookupQuery = query;
-
-        // Fast path: filter the warm in-memory cache without an async hop.
-        if (_service.TryFilterAuthors(query, LevelBrowseService.DefaultAuthorSearchLimit, out IReadOnlyList<AuthorSuggestion> local))
-        {
-            _authorSuggestions = local;
-            return;
-        }
 
         _authorCts?.Cancel();
         _authorCts?.Dispose();
