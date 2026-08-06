@@ -124,6 +124,10 @@ public sealed class PlaylistBrowserHostService : IEagerService, IDisposable
             return;
         }
 
+        // Absolute-anchor row: clone inherits Add level's full band and would cover it.
+        // Split that band so Add level (left) and Browse levels (right) sit side by side.
+        SplitRow((RectTransform)template.transform, (RectTransform)clone.transform);
+
         ApplyLabel(clone, BrowseButtonLabel);
 
         // Drop the cloned Add-level wiring and install our toggle.
@@ -139,6 +143,30 @@ public sealed class PlaylistBrowserHostService : IEagerService, IDisposable
 
         BrowseLevelsDownloadGuard guard = clone.AddComponent<BrowseLevelsDownloadGuard>();
         guard.button = browse;
+    }
+
+    /// <summary>
+    /// Subdivides the shared horizontal anchor band of <paramref name="addLevel"/> so Add level
+    /// occupies the left half and <paramref name="browse"/> the right half, with a small gap.
+    /// Captures the original anchors before mutating so Browse's right edge stays the prefab max.
+    /// </summary>
+    private static void SplitRow(RectTransform addLevel, RectTransform browse)
+    {
+        const float Gap = 0.01f;
+
+        Vector2 originalMin = addLevel.anchorMin;
+        Vector2 originalMax = addLevel.anchorMax;
+        float mid = (originalMin.x + originalMax.x) * 0.5f;
+        float halfGap = Gap * 0.5f;
+
+        addLevel.anchorMax = new Vector2(mid - halfGap, originalMax.y);
+        browse.anchorMin = new Vector2(mid + halfGap, originalMin.y);
+        browse.anchorMax = originalMax;
+
+        addLevel.anchoredPosition = Vector2.zero;
+        addLevel.sizeDelta = Vector2.zero;
+        browse.anchoredPosition = Vector2.zero;
+        browse.sizeDelta = Vector2.zero;
     }
 
     private static void ApplyLabel(GameObject clone, string label)
