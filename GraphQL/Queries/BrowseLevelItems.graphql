@@ -1,20 +1,10 @@
 query BrowseLevelItems(
-    $name: String!
-    $fileAuthor: String!
+    $filter: LevelItemFilter!
+    $orderBy: [LevelItemsOrderBy!]!
     $first: Int!
     $offset: Int!
 ) {
-    levelItems(
-        filter: {
-            deleted: { equalTo: false }
-            level: { publiclyVisible: { equalTo: true } }
-            name: { includesInsensitive: $name }
-            fileAuthor: { includesInsensitive: $fileAuthor }
-        }
-        orderBy: DATE_CREATED_DESC
-        first: $first
-        offset: $offset
-    ) {
+    levelItems(filter: $filter, orderBy: $orderBy, first: $first, offset: $offset) {
         totalCount
         nodes {
             fileUid

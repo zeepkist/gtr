@@ -1,3 +1,5 @@
+using System;
+
 namespace TNRD.Zeepkist.GTR.LevelBrowser;
 
 /// <summary>
@@ -13,8 +15,10 @@ public sealed class LevelItemsBrowseQuery
     /// <summary>Always-on hygiene: only public levels (<c>level: { publiclyVisible: { equalTo: true } }</c>).</summary>
     public const bool HygienePubliclyVisibleEqualTo = true;
 
-    /// <summary>Explicit default order; there is no sort UI in v1.</summary>
-    public const string OrderBy = "DATE_CREATED_DESC";
+    /// <summary>
+    /// Net vote-sum threshold used when <see cref="Rating"/> is <see cref="LevelBrowseRating.TopRated"/>.
+    /// </summary>
+    public const int TopRatedNetScore = 10;
 
     /// <summary>
     /// Case-insensitive substring to match against <c>name</c>, or <c>null</c> when no name filter
@@ -28,6 +32,27 @@ public sealed class LevelItemsBrowseQuery
     /// </summary>
     public string FileAuthorIncludesInsensitive { get; }
 
+    /// <summary>Resolved date-created lower bound, or <c>null</c> when Any time.</summary>
+    public DateTimeOffset? DateCreatedAfter { get; }
+
+    /// <summary>Inclusive lower bound on <c>validationTimeAuthor</c> (seconds), or <c>null</c>.</summary>
+    public double? TimeMin { get; }
+
+    /// <summary>Exclusive-or-inclusive upper bound on <c>validationTimeAuthor</c> (seconds), or <c>null</c>.</summary>
+    public double? TimeMax { get; }
+
+    /// <summary>Vote-quality rating preset.</summary>
+    public LevelBrowseRating Rating { get; }
+
+    /// <summary>Minimum distinct vote count, or <c>null</c> when off.</summary>
+    public int? MinVotes { get; }
+
+    /// <summary>Minimum distinct record/play count, or <c>null</c> when off.</summary>
+    public int? MinPlays { get; }
+
+    /// <summary>Sort order for the page.</summary>
+    public LevelBrowseSort Sort { get; }
+
     /// <summary>Page size (<c>first</c>), following the existing <c>first</c>/<c>offset</c> paging style.</summary>
     public int First { get; }
 
@@ -37,11 +62,25 @@ public sealed class LevelItemsBrowseQuery
     internal LevelItemsBrowseQuery(
         string nameIncludesInsensitive,
         string fileAuthorIncludesInsensitive,
+        DateTimeOffset? dateCreatedAfter,
+        double? timeMin,
+        double? timeMax,
+        LevelBrowseRating rating,
+        int? minVotes,
+        int? minPlays,
+        LevelBrowseSort sort,
         int first,
         int offset)
     {
         NameIncludesInsensitive = nameIncludesInsensitive;
         FileAuthorIncludesInsensitive = fileAuthorIncludesInsensitive;
+        DateCreatedAfter = dateCreatedAfter;
+        TimeMin = timeMin;
+        TimeMax = timeMax;
+        Rating = rating;
+        MinVotes = minVotes;
+        MinPlays = minPlays;
+        Sort = sort;
         First = first;
         Offset = offset;
     }

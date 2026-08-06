@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using StrawberryShake;
-using TNRD.Zeepkist.GTR.GraphQL;
 using ZeepSDK.External.Cysharp.Threading.Tasks;
 using ZeepSDK.External.FluentResults;
 
@@ -29,9 +29,27 @@ public class LevelBrowseService
         string name,
         string fileAuthor,
         int page,
+        LevelBrowseSort sort = LevelBrowseSort.Newest,
+        LevelBrowseDateRange dateRange = LevelBrowseDateRange.AnyTime,
+        LevelBrowseTrackLength trackLength = LevelBrowseTrackLength.Any,
+        LevelBrowseRating rating = LevelBrowseRating.Any,
+        int minVotes = 0,
+        int minPlays = 0,
         CancellationToken ct = default)
     {
-        return BrowseAsync(LevelItemsBrowseQueryBuilder.Build(name, fileAuthor, page), ct);
+        return BrowseAsync(
+            LevelItemsBrowseQueryBuilder.Build(
+                name,
+                fileAuthor,
+                page,
+                sort: sort,
+                dateRange: dateRange,
+                trackLength: trackLength,
+                rating: rating,
+                minVotes: minVotes,
+                minPlays: minPlays,
+                nowUtc: DateTimeOffset.UtcNow),
+            ct);
     }
 
     /// <summary>Runs a browse for an already-built query.</summary>
@@ -41,12 +59,11 @@ public class LevelBrowseService
     {
         try
         {
-            // includesInsensitive: "" matches every (non-null) string, i.e. "no filter".
-            string name = query.NameIncludesInsensitive ?? string.Empty;
-            string fileAuthor = query.FileAuthorIncludesInsensitive ?? string.Empty;
+            LevelItemFilter filter = BuildFilter(query);
+            IReadOnlyList<LevelItemsOrderBy> orderBy = BuildOrderBy(query.Sort);
 
             IOperationResult<IBrowseLevelItemsResult> result =
-                await _gtrClient.BrowseLevelItems.ExecuteAsync(name, fileAuthor, query.First, query.Offset, ct);
+                await _gtrClient.BrowseLevelItems.ExecuteAsync(filter, orderBy, query.First, query.Offset, ct);
 
             try
             {
@@ -78,5 +95,132 @@ public class LevelBrowseService
         {
             return Result.Fail(new ExceptionalError(e));
         }
+    }
+
+    internal static LevelItemFilter BuildFilter(LevelItemsBrowseQuery query)
+    {
+        var level = new LevelFilter
+        {
+            PubliclyVisible = new BooleanFilter { EqualTo = LevelItemsBrowseQuery.HygienePubliclyVisibleEqualTo }
+        };
+
+        ApplyEngagement(level, query);
+
+        var filter = new LevelItemFilter
+        {
+            Deleted = new BooleanFilter { EqualTo = LevelItemsBrowseQuery.HygieneDeletedEqualTo },
+            Level = level
+        };
+
+        if (!string.IsNullOrEmpty(query.NameIncludesInsensitive))
+            filter.Name = new StringFilter { IncludesInsensitive = query.NameIncludesInsensitive };
+
+        if (!string.IsNullOrEmpty(query.FileAuthorIncludesInsensitive))
+            filter.FileAuthor = new StringFilter { IncludesInsensitive = query.FileAuthorIncludesInsensitive };
+
+        if (query.TimeMin.HasValue || query.TimeMax.HasValue)
+        {
+            var time = new FloatFilter();
+            if (query.TimeMin.HasValue)
+                time.GreaterThanOrEqualTo = query.TimeMin.Value;
+            if (query.TimeMax.HasValue)
+                time.LessThanOrEqualTo = query.TimeMax.Value;
+            filter.ValidationTimeAuthor = time;
+        }
+
+        if (query.DateCreatedAfter.HasValue)
+        {
+            filter.DateCreated = new DatetimeFilter
+            {
+                GreaterThanOrEqualTo = FormatDatetime(query.DateCreatedAfter.Value)
+            };
+        }
+
+        return filter;
+    }
+
+    private static void ApplyEngagement(LevelFilter level, LevelItemsBrowseQuery query)
+    {
+        bool hasVotes =
+            query.Rating != LevelBrowseRating.Any ||
+            query.MinVotes.HasValue;
+
+        if (hasVotes)
+        {
+            var aggregates = new VoteAggregatesFilter();
+
+            switch (query.Rating)
+            {
+                case LevelBrowseRating.WellRated:
+                    aggregates.Average = new VoteAverageAggregateFilter
+                    {
+                        Value = new BigFloatFilter { GreaterThan = "0" }
+                    };
+                    break;
+                case LevelBrowseRating.TopRated:
+                    aggregates.Sum = new VoteSumAggregateFilter
+                    {
+                        Value = new BigIntFilter
+                        {
+                            GreaterThanOrEqualTo = LevelItemsBrowseQuery.TopRatedNetScore.ToString(CultureInfo.InvariantCulture)
+                        }
+                    };
+                    break;
+            }
+
+            if (query.MinVotes.HasValue)
+            {
+                aggregates.DistinctCount = new VoteDistinctCountAggregateFilter
+                {
+                    UserId = new BigIntFilter
+                    {
+                        GreaterThanOrEqualTo = query.MinVotes.Value.ToString(CultureInfo.InvariantCulture)
+                    }
+                };
+            }
+
+            level.Votes = new LevelToManyVoteFilter { Aggregates = aggregates };
+        }
+
+        if (query.MinPlays.HasValue)
+        {
+            level.Records = new LevelToManyRecordFilter
+            {
+                Aggregates = new RecordAggregatesFilter
+                {
+                    DistinctCount = new RecordDistinctCountAggregateFilter
+                    {
+                        Id = new BigIntFilter
+                        {
+                            GreaterThanOrEqualTo = query.MinPlays.Value.ToString(CultureInfo.InvariantCulture)
+                        }
+                    }
+                }
+            };
+        }
+    }
+
+    internal static IReadOnlyList<LevelItemsOrderBy> BuildOrderBy(LevelBrowseSort sort)
+    {
+        switch (sort)
+        {
+            case LevelBrowseSort.Oldest:
+                return new[] { LevelItemsOrderBy.DateCreatedAsc };
+            case LevelBrowseSort.NameAsc:
+                return new[] { LevelItemsOrderBy.NameAsc };
+            case LevelBrowseSort.NameDesc:
+                return new[] { LevelItemsOrderBy.NameDesc };
+            case LevelBrowseSort.Shortest:
+                return new[] { LevelItemsOrderBy.ValidationTimeAuthorAsc };
+            case LevelBrowseSort.Longest:
+                return new[] { LevelItemsOrderBy.ValidationTimeAuthorDesc };
+            default:
+                return new[] { LevelItemsOrderBy.DateCreatedDesc };
+        }
+    }
+
+    private static string FormatDatetime(DateTimeOffset value)
+    {
+        return value.UtcDateTime.ToString("yyyy-MM-dd'T'HH:mm:ss.fff'Z'", CultureInfo.InvariantCulture);
     }
 }

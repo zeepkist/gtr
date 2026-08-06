@@ -1,3 +1,4 @@
+using System;
 using TNRD.Zeepkist.GTR.LevelBrowser;
 using Xunit;
 
@@ -5,6 +6,9 @@ namespace TNRD.Zeepkist.GTR.Tests;
 
 public class LevelItemsBrowseQueryBuilderTests
 {
+    private static readonly DateTimeOffset FixedNow =
+        new(2026, 8, 6, 12, 0, 0, TimeSpan.Zero);
+
     [Fact]
     public void HygieneConstantsAreAlwaysDeletedFalseAndPublicTrue()
     {
@@ -13,15 +17,15 @@ public class LevelItemsBrowseQueryBuilderTests
     }
 
     [Fact]
-    public void DefaultOrderIsDateCreatedDesc()
+    public void TopRatedNetScoreIsTen()
     {
-        Assert.Equal("DATE_CREATED_DESC", LevelItemsBrowseQuery.OrderBy);
+        Assert.Equal(10, LevelItemsBrowseQuery.TopRatedNetScore);
     }
 
     [Fact]
     public void NameAndAuthorFiltersApplyWhenNonEmpty()
     {
-        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build("Rock", "Matt");
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build("Rock", "Matt", nowUtc: FixedNow);
 
         Assert.Equal("Rock", query.NameIncludesInsensitive);
         Assert.Equal("Matt", query.FileAuthorIncludesInsensitive);
@@ -33,7 +37,7 @@ public class LevelItemsBrowseQueryBuilderTests
     [InlineData("   ")]
     public void BlankFiltersBecomeNullPredicates(string blank)
     {
-        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(blank, blank);
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(blank, blank, nowUtc: FixedNow);
 
         Assert.Null(query.NameIncludesInsensitive);
         Assert.Null(query.FileAuthorIncludesInsensitive);
@@ -42,7 +46,7 @@ public class LevelItemsBrowseQueryBuilderTests
     [Fact]
     public void FilterTextIsTrimmed()
     {
-        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build("  spicy  ", "  matt  ");
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build("  spicy  ", "  matt  ", nowUtc: FixedNow);
 
         Assert.Equal("spicy", query.NameIncludesInsensitive);
         Assert.Equal("matt", query.FileAuthorIncludesInsensitive);
@@ -51,7 +55,7 @@ public class LevelItemsBrowseQueryBuilderTests
     [Fact]
     public void PaginationUsesFirstAndOffsetFromPageAndPageSize()
     {
-        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(null, null, page: 3, pageSize: 10);
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(null, null, page: 3, pageSize: 10, nowUtc: FixedNow);
 
         Assert.Equal(10, query.First);
         Assert.Equal(30, query.Offset);
@@ -60,7 +64,7 @@ public class LevelItemsBrowseQueryBuilderTests
     [Fact]
     public void FirstPageHasZeroOffset()
     {
-        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(null, null, page: 0, pageSize: 12);
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(null, null, page: 0, pageSize: 12, nowUtc: FixedNow);
 
         Assert.Equal(12, query.First);
         Assert.Equal(0, query.Offset);
@@ -69,7 +73,7 @@ public class LevelItemsBrowseQueryBuilderTests
     [Fact]
     public void DefaultPageSizeIsAppliedWhenUnspecified()
     {
-        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(null, null);
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(null, null, nowUtc: FixedNow);
 
         Assert.Equal(LevelItemsBrowseQueryBuilder.DefaultPageSize, query.First);
     }
@@ -79,7 +83,7 @@ public class LevelItemsBrowseQueryBuilderTests
     [InlineData(-100)]
     public void NegativePageClampsToZeroOffset(int page)
     {
-        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(null, null, page, pageSize: 12);
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(null, null, page, pageSize: 12, nowUtc: FixedNow);
 
         Assert.Equal(0, query.Offset);
     }
@@ -89,9 +93,114 @@ public class LevelItemsBrowseQueryBuilderTests
     [InlineData(-5)]
     public void NonPositivePageSizeFallsBackToDefault(int pageSize)
     {
-        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(null, null, page: 1, pageSize: pageSize);
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(null, null, page: 1, pageSize: pageSize, nowUtc: FixedNow);
 
         Assert.Equal(LevelItemsBrowseQueryBuilder.DefaultPageSize, query.First);
         Assert.Equal(LevelItemsBrowseQueryBuilder.DefaultPageSize, query.Offset);
+    }
+
+    [Fact]
+    public void DefaultsAreNewestAnyTimeAnyLengthAnyRatingAndNoCounts()
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(null, null, nowUtc: FixedNow);
+
+        Assert.Equal(LevelBrowseSort.Newest, query.Sort);
+        Assert.Null(query.DateCreatedAfter);
+        Assert.Null(query.TimeMin);
+        Assert.Null(query.TimeMax);
+        Assert.Equal(LevelBrowseRating.Any, query.Rating);
+        Assert.Null(query.MinVotes);
+        Assert.Null(query.MinPlays);
+    }
+
+    [Theory]
+    [InlineData(LevelBrowseDateRange.PastWeek, -7)]
+    [InlineData(LevelBrowseDateRange.PastMonth, -30)]
+    [InlineData(LevelBrowseDateRange.PastYear, -365)]
+    public void DatePresetResolvesAgainstNowUtc(LevelBrowseDateRange range, int daysOffset)
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null, null, dateRange: range, nowUtc: FixedNow);
+
+        Assert.Equal(FixedNow.AddDays(daysOffset), query.DateCreatedAfter);
+    }
+
+    [Fact]
+    public void AnyTimeLeavesDateCreatedAfterNull()
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null, null, dateRange: LevelBrowseDateRange.AnyTime, nowUtc: FixedNow);
+
+        Assert.Null(query.DateCreatedAfter);
+    }
+
+    [Fact]
+    public void ShortTrackMapsToMaxThirtySeconds()
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null, null, trackLength: LevelBrowseTrackLength.Short, nowUtc: FixedNow);
+
+        Assert.Null(query.TimeMin);
+        Assert.Equal(30d, query.TimeMax);
+    }
+
+    [Fact]
+    public void MediumTrackMapsToThirtyThroughNinety()
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null, null, trackLength: LevelBrowseTrackLength.Medium, nowUtc: FixedNow);
+
+        Assert.Equal(30d, query.TimeMin);
+        Assert.Equal(90d, query.TimeMax);
+    }
+
+    [Fact]
+    public void LongTrackMapsToMinNinetySeconds()
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null, null, trackLength: LevelBrowseTrackLength.Long, nowUtc: FixedNow);
+
+        Assert.Equal(90d, query.TimeMin);
+        Assert.Null(query.TimeMax);
+    }
+
+    [Fact]
+    public void SortPassthrough()
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null, null, sort: LevelBrowseSort.NameAsc, nowUtc: FixedNow);
+
+        Assert.Equal(LevelBrowseSort.NameAsc, query.Sort);
+    }
+
+    [Fact]
+    public void RatingPassthrough()
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null, null, rating: LevelBrowseRating.WellRated, nowUtc: FixedNow);
+
+        Assert.Equal(LevelBrowseRating.WellRated, query.Rating);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-3)]
+    public void NonPositiveMinVotesAndPlaysBecomeNull(int count)
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null, null, minVotes: count, minPlays: count, nowUtc: FixedNow);
+
+        Assert.Null(query.MinVotes);
+        Assert.Null(query.MinPlays);
+    }
+
+    [Fact]
+    public void PositiveMinVotesAndPlaysAreKept()
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null, null, minVotes: 5, minPlays: 100, nowUtc: FixedNow);
+
+        Assert.Equal(5, query.MinVotes);
+        Assert.Equal(100, query.MinPlays);
     }
 }

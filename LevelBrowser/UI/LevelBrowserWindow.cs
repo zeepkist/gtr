@@ -13,8 +13,8 @@ using ZeepSDK.UI;
 namespace TNRD.Zeepkist.GTR.LevelBrowser.UI;
 
 /// <summary>
-/// The Level Browser Imui window (layout B): a left name/author filter rail and a right results
-/// area with thumbnail cards, pagination below, and shared loading / empty / error+Retry states.
+/// The Level Browser Imui window (layout B): a left filter rail and a right results area with
+/// thumbnail cards, pagination below, and shared loading / empty / error+Retry states.
 /// Driven entirely by the <see cref="LevelBrowserSession"/> (open state, filters, page, already-in
 /// marking, Selection delivery) and the <see cref="LevelBrowseService"/> (catalog fetch).
 /// </summary>
@@ -23,7 +23,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
     private const string WindowTitle = "Level Browser";
     private const float DefaultWidth = 960f;
     private const float DefaultHeight = 720f;
-    private const float RailWidth = 172f;
+    private const float RailWidth = 188f;
     private const float Gap = 8f;
     private const float CardHeight = 62f;
     private const float CardSpacing = 6f;
@@ -33,6 +33,39 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
     private const int PageSize = LevelItemsBrowseQueryBuilder.DefaultPageSize;
     private const float DebounceSeconds = 0.3f;
     private const float ToastSeconds = 2.5f;
+
+    private static readonly string[] SortLabels =
+    {
+        "Newest",
+        "Oldest",
+        "Name A–Z",
+        "Name Z–A",
+        "Shortest",
+        "Longest"
+    };
+
+    private static readonly string[] DateRangeLabels =
+    {
+        "Any time",
+        "Past week",
+        "Past month",
+        "Past year"
+    };
+
+    private static readonly string[] TrackLengthLabels =
+    {
+        "Any",
+        "Short (<30s)",
+        "Medium (30–90s)",
+        "Long (≥90s)"
+    };
+
+    private static readonly string[] RatingLabels =
+    {
+        "Any",
+        "Well-rated",
+        "Top-rated"
+    };
 
     private enum ResultsState
     {
@@ -59,6 +92,12 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
     private float _fetchAt = -1f;
     private string _appliedName = "\uffff";
     private string _appliedAuthor = "\uffff";
+    private LevelBrowseSort _appliedSort = (LevelBrowseSort)(-1);
+    private LevelBrowseDateRange _appliedDateRange = (LevelBrowseDateRange)(-1);
+    private LevelBrowseTrackLength _appliedTrackLength = (LevelBrowseTrackLength)(-1);
+    private LevelBrowseRating _appliedRating = (LevelBrowseRating)(-1);
+    private int _appliedMinVotes = -1;
+    private int _appliedMinPlays = -1;
     private int _appliedPage = -1;
 
     private string _toast;
@@ -119,6 +158,12 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         _appliedOffset = 0;
         _appliedName = "\uffff";
         _appliedAuthor = "\uffff";
+        _appliedSort = (LevelBrowseSort)(-1);
+        _appliedDateRange = (LevelBrowseDateRange)(-1);
+        _appliedTrackLength = (LevelBrowseTrackLength)(-1);
+        _appliedRating = (LevelBrowseRating)(-1);
+        _appliedMinVotes = -1;
+        _appliedMinPlays = -1;
         _appliedPage = -1;
         _toast = null;
         _fetchAt = now;
@@ -134,25 +179,43 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         }
 
         // Fallback: pick up external session state changes (e.g. a rebind that reset filters/page).
-        if (_fetchAt < 0f && _state != ResultsState.Loading)
-        {
-            if (!string.Equals(_session.SearchName ?? string.Empty, _appliedName, StringComparison.Ordinal) ||
-                !string.Equals(_session.SearchAuthor ?? string.Empty, _appliedAuthor, StringComparison.Ordinal) ||
-                _session.Page != _appliedPage)
-            {
-                _fetchAt = now;
-            }
-        }
+        if (_fetchAt < 0f && _state != ResultsState.Loading && HasPendingFilterChange())
+            _fetchAt = now;
+    }
+
+    private bool HasPendingFilterChange()
+    {
+        return !string.Equals(_session.SearchName ?? string.Empty, _appliedName, StringComparison.Ordinal) ||
+               !string.Equals(_session.SearchAuthor ?? string.Empty, _appliedAuthor, StringComparison.Ordinal) ||
+               _session.Sort != _appliedSort ||
+               _session.DateRange != _appliedDateRange ||
+               _session.TrackLength != _appliedTrackLength ||
+               _session.Rating != _appliedRating ||
+               _session.MinVotes != _appliedMinVotes ||
+               _session.MinPlays != _appliedMinPlays ||
+               _session.Page != _appliedPage;
     }
 
     private void BeginFetch()
     {
         string name = _session.SearchName ?? string.Empty;
         string author = _session.SearchAuthor ?? string.Empty;
+        LevelBrowseSort sort = _session.Sort;
+        LevelBrowseDateRange dateRange = _session.DateRange;
+        LevelBrowseTrackLength trackLength = _session.TrackLength;
+        LevelBrowseRating rating = _session.Rating;
+        int minVotes = _session.MinVotes < 0 ? 0 : _session.MinVotes;
+        int minPlays = _session.MinPlays < 0 ? 0 : _session.MinPlays;
         int page = _session.Page < 0 ? 0 : _session.Page;
 
         _appliedName = name;
         _appliedAuthor = author;
+        _appliedSort = sort;
+        _appliedDateRange = dateRange;
+        _appliedTrackLength = trackLength;
+        _appliedRating = rating;
+        _appliedMinVotes = minVotes;
+        _appliedMinPlays = minPlays;
         _appliedPage = page;
         _appliedOffset = page * PageSize;
 
@@ -164,12 +227,25 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         _cts = new CancellationTokenSource();
 
         _requestId++;
-        FetchAsync(_requestId, name, author, page, _cts.Token).Forget();
+        FetchAsync(_requestId, name, author, page, sort, dateRange, trackLength, rating, minVotes, minPlays, _cts.Token)
+            .Forget();
     }
 
-    private async UniTaskVoid FetchAsync(int requestId, string name, string author, int page, CancellationToken ct)
+    private async UniTaskVoid FetchAsync(
+        int requestId,
+        string name,
+        string author,
+        int page,
+        LevelBrowseSort sort,
+        LevelBrowseDateRange dateRange,
+        LevelBrowseTrackLength trackLength,
+        LevelBrowseRating rating,
+        int minVotes,
+        int minPlays,
+        CancellationToken ct)
     {
-        Result<LevelBrowsePage> result = await _service.BrowseAsync(name, author, page, ct);
+        Result<LevelBrowsePage> result = await _service.BrowseAsync(
+            name, author, page, sort, dateRange, trackLength, rating, minVotes, minPlays, ct);
 
         if (requestId != _requestId)
             return;
@@ -207,36 +283,77 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
 
     private void DrawRail(ImGui gui, ImRect rail, float now)
     {
-        float labelHeight = gui.GetRowHeight() * 0.8f;
-        float fieldHeight = gui.GetRowHeight();
-        float cursor = rail.Top;
+        gui.Layout.Push(ImAxis.Vertical, rail);
+        gui.Canvas.PushClipRect(rail);
+        gui.BeginScrollable();
 
-        cursor = DrawRailLabel(gui, rail, cursor, "Name", labelHeight);
-        string name = _session.SearchName ?? string.Empty;
-        var nameRect = new ImRect(rail.X, cursor - fieldHeight, rail.W, fieldHeight);
-        if (gui.TextEdit(ref name, nameRect, false, hint: "includes…".AsSpan()))
+        try
         {
-            _session.SearchName = name;
-            OnFilterChanged(now);
+            string name = _session.SearchName ?? string.Empty;
+            gui.Text("Name".AsSpan(), gui.Style.TextEdit.HintFrontColor);
+            if (gui.TextEdit(ref name, hint: "includes…".AsSpan()))
+            {
+                _session.SearchName = name;
+                OnFilterChanged(now);
+            }
+
+            string author = _session.SearchAuthor ?? string.Empty;
+            gui.Text("Author".AsSpan(), gui.Style.TextEdit.HintFrontColor);
+            if (gui.TextEdit(ref author, hint: "fileAuthor…".AsSpan()))
+            {
+                _session.SearchAuthor = author;
+                OnFilterChanged(now);
+            }
+
+            DrawRailDropdown(gui, "Sort", SortLabels, (int)_session.Sort, now, i => _session.Sort = (LevelBrowseSort)i);
+            DrawRailDropdown(gui, "Created", DateRangeLabels, (int)_session.DateRange, now, i => _session.DateRange = (LevelBrowseDateRange)i);
+            DrawRailDropdown(gui, "Length", TrackLengthLabels, (int)_session.TrackLength, now, i => _session.TrackLength = (LevelBrowseTrackLength)i);
+            DrawRailDropdown(gui, "Rating", RatingLabels, (int)_session.Rating, now, i => _session.Rating = (LevelBrowseRating)i);
+
+            int minVotes = _session.MinVotes < 0 ? 0 : _session.MinVotes;
+            gui.Text("Min votes".AsSpan(), gui.Style.TextEdit.HintFrontColor);
+            if (gui.NumericEdit(ref minVotes, min: 0, max: 1_000_000))
+            {
+                _session.MinVotes = minVotes;
+                OnFilterChanged(now);
+            }
+
+            int minPlays = _session.MinPlays < 0 ? 0 : _session.MinPlays;
+            gui.Text("Min plays".AsSpan(), gui.Style.TextEdit.HintFrontColor);
+            if (gui.NumericEdit(ref minPlays, min: 0, max: 1_000_000))
+            {
+                _session.MinPlays = minPlays;
+                OnFilterChanged(now);
+            }
+
+            gui.Text("Min plays is slower".AsSpan(), gui.Style.TextEdit.HintFrontColor);
         }
-        cursor -= fieldHeight + Gap;
-
-        cursor = DrawRailLabel(gui, rail, cursor, "Author", labelHeight);
-        string author = _session.SearchAuthor ?? string.Empty;
-        var authorRect = new ImRect(rail.X, cursor - fieldHeight, rail.W, fieldHeight);
-        if (gui.TextEdit(ref author, authorRect, false, hint: "fileAuthor…".AsSpan()))
+        finally
         {
-            _session.SearchAuthor = author;
-            OnFilterChanged(now);
+            gui.EndScrollable();
+            gui.Canvas.PopClipRect();
+            gui.Layout.Pop();
         }
     }
 
-    private float DrawRailLabel(ImGui gui, ImRect rail, float cursor, string label, float height)
+    private void DrawRailDropdown(
+        ImGui gui,
+        string label,
+        string[] items,
+        int selected,
+        float now,
+        Action<int> apply)
     {
-        var rect = new ImRect(rail.X, cursor - height, rail.W, height);
-        var settings = new ImTextSettings(gui.Style.Layout.TextSize * 0.85f, 0f, 0.5f);
-        gui.Canvas.Text(label.AsSpan(), gui.Style.TextEdit.HintFrontColor, rect, in settings);
-        return cursor - height;
+        gui.Text(label.AsSpan(), gui.Style.TextEdit.HintFrontColor);
+        int index = selected;
+        if (index < 0 || index >= items.Length)
+            index = 0;
+
+        if (gui.Dropdown(ref index, items) && index != selected)
+        {
+            apply(index);
+            OnFilterChanged(now);
+        }
     }
 
     private void OnFilterChanged(float now)
