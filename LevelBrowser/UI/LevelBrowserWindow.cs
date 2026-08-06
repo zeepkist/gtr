@@ -271,8 +271,22 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
 
     private void DrawRail(ImGui gui, ImRect rail, float now)
     {
-        gui.Layout.Push(ImAxis.Vertical, rail);
-        gui.Canvas.PushClipRect(rail);
+        float footerHeight = gui.GetRowHeight();
+        var footer = new ImRect(rail.X, rail.Y, rail.W, footerHeight);
+        var filters = new ImRect(
+            rail.X,
+            rail.Y + footerHeight + Gap,
+            rail.W,
+            Mathf.Max(0f, rail.H - footerHeight - Gap));
+
+        DrawRailFilters(gui, filters, now);
+        DrawRailFooter(gui, footer);
+    }
+
+    private void DrawRailFilters(ImGui gui, ImRect filters, float now)
+    {
+        gui.Layout.Push(ImAxis.Vertical, filters);
+        gui.Canvas.PushClipRect(filters);
         gui.BeginScrollable();
 
         try
@@ -304,6 +318,16 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
             gui.Canvas.PopClipRect();
             gui.Layout.Pop();
         }
+    }
+
+    private void DrawRailFooter(ImGui gui, ImRect footer)
+    {
+        if (_state != ResultsState.Loaded)
+            return;
+
+        string info = $"{_totalCount} levels";
+        var settings = new ImTextSettings(gui.Style.Layout.TextSize * 0.85f, 0.5f, 0.5f);
+        gui.Canvas.Text(info.AsSpan(), gui.Style.TextEdit.HintFrontColor, footer, in settings);
     }
 
     private void DrawRailDropdown(
@@ -463,34 +487,87 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
 
     private void DrawPager(ImGui gui, ImRect pager, float now)
     {
-        const float buttonWidth = 76f;
+        const float navButtonWidth = 64f;
+        const float numberMinWidth = 32f;
+        const float ellipsisWidth = 18f;
+        const float numberGap = 4f;
+        const float sideGap = 8f;
+        // Match ImButton.CalculateContentRect padding, plus a little breathing room.
+        float numberPadX = gui.Style.Layout.InnerSpacing * 2f + 8f;
+
         int page = _session.Page < 0 ? 0 : _session.Page;
+        int totalPages = Mathf.Max(1, Mathf.CeilToInt(_totalCount / (float)PageSize));
+        if (page >= totalPages)
+            page = totalPages - 1;
+
         bool canPrev = page > 0;
         bool canNext = _appliedOffset + _rows.Count < _totalCount;
 
-        var prevRect = new ImRect(pager.X, pager.Y, buttonWidth, pager.H);
-        if (DrawPagerButton(gui, prevRect, "Prev", canPrev) && canPrev)
+        var prevRect = new ImRect(pager.X, pager.Y, navButtonWidth, pager.H);
+        if (DrawPagerButton(gui, prevRect, "Prev", canPrev, accent: false) && canPrev)
         {
             _session.Page = page - 1;
             _fetchAt = now;
         }
 
-        var nextRect = new ImRect(pager.Right - buttonWidth, pager.Y, buttonWidth, pager.H);
-        if (DrawPagerButton(gui, nextRect, "Next", canNext) && canNext)
+        var nextRect = new ImRect(pager.Right - navButtonWidth, pager.Y, navButtonWidth, pager.H);
+        if (DrawPagerButton(gui, nextRect, "Next", canNext, accent: false) && canNext)
         {
             _session.Page = page + 1;
             _fetchAt = now;
         }
 
-        var infoRect = new ImRect(prevRect.Right, pager.Y, nextRect.X - prevRect.Right, pager.H);
-        string info = _state == ResultsState.Loaded
-            ? $"Page {page + 1} · {_totalCount} levels"
-            : $"Page {page + 1}";
-        var settings = new ImTextSettings(gui.Style.Layout.TextSize * 0.85f, 0.5f, 0.5f);
-        gui.Canvas.Text(info.AsSpan(), gui.Style.TextEdit.HintFrontColor, infoRect, in settings);
+        float middleLeft = prevRect.Right + sideGap;
+        float middleRight = nextRect.X - sideGap;
+        float middleW = Mathf.Max(0f, middleRight - middleLeft);
+
+        IReadOnlyList<int> slots = LevelBrowserPageWindow.Build(page, totalPages);
+        float textSize = gui.Style.Layout.TextSize;
+        float runWidth = 0f;
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (i > 0)
+                runWidth += numberGap;
+            if (slots[i] == LevelBrowserPageWindow.Ellipsis)
+            {
+                runWidth += ellipsisWidth;
+                continue;
+            }
+
+            string label = (slots[i] + 1).ToString();
+            float labelW = gui.MeasureTextSize(label.AsSpan(), textSize).x;
+            runWidth += Mathf.Max(numberMinWidth, labelW + numberPadX);
+        }
+
+        float x = middleLeft + Mathf.Max(0f, (middleW - runWidth) * 0.5f);
+        var ellipsisSettings = new ImTextSettings(textSize, 0.5f, 0.5f);
+        for (int i = 0; i < slots.Count; i++)
+        {
+            int slot = slots[i];
+            if (slot == LevelBrowserPageWindow.Ellipsis)
+            {
+                var ellipsisRect = new ImRect(x, pager.Y, ellipsisWidth, pager.H);
+                gui.Canvas.Text("…".AsSpan(), gui.Style.TextEdit.HintFrontColor, ellipsisRect, in ellipsisSettings);
+                x += ellipsisWidth + numberGap;
+                continue;
+            }
+
+            string label = (slot + 1).ToString();
+            float labelW = gui.MeasureTextSize(label.AsSpan(), textSize).x;
+            float numberWidth = Mathf.Max(numberMinWidth, labelW + numberPadX);
+            var numberRect = new ImRect(x, pager.Y, numberWidth, pager.H);
+            bool isCurrent = slot == page;
+            if (DrawPagerButton(gui, numberRect, label, enabled: !isCurrent, accent: isCurrent) && !isCurrent)
+            {
+                _session.Page = slot;
+                _fetchAt = now;
+            }
+
+            x += numberWidth + numberGap;
+        }
     }
 
-    private bool DrawPagerButton(ImGui gui, ImRect rect, string label, bool enabled)
+    private bool DrawPagerButton(ImGui gui, ImRect rect, string label, bool enabled, bool accent)
     {
         if (!enabled)
             gui.BeginReadOnly(true);
@@ -498,6 +575,9 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         try
         {
             uint id = gui.GetNextControlId();
+            if (accent)
+                return gui.Button(id, label.AsSpan(), rect, in gui.Style.AccentButton, out _) && enabled;
+
             return gui.Button(id, label.AsSpan(), rect, out _) && enabled;
         }
         finally

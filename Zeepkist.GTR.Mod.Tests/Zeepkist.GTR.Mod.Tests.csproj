@@ -56,6 +56,7 @@
     <Compile Include="..\LevelBrowser\LevelBrowseRating.cs" Link="Source\LevelBrowseRating.cs" />
     <Compile Include="..\LevelBrowser\LevelItemsBrowseQuery.cs" Link="Source\LevelItemsBrowseQuery.cs" />
     <Compile Include="..\LevelBrowser\LevelItemsBrowseQueryBuilder.cs" Link="Source\LevelItemsBrowseQueryBuilder.cs" />
+    <Compile Include="..\LevelBrowser\LevelBrowserPageWindow.cs" Link="Source\LevelBrowserPageWindow.cs" />
     <Compile Include="..\LevelBrowser\WorkshopIdParser.cs" Link="Source\WorkshopIdParser.cs" />
     <Compile Include="..\LevelBrowser\LevelBrowseRow.cs" Link="Source\LevelBrowseRow.cs" />
     <Compile Include="..\LevelBrowser\LevelBrowsePage.cs" Link="Source\LevelBrowsePage.cs" />
