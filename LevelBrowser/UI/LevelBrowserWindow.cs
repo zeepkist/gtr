@@ -93,6 +93,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
     private float _fetchAt = -1f;
     private string _appliedName = "\uffff";
     private string _appliedAuthor = "\uffff";
+    private string _appliedAuthorUserId = "\uffff";
     private LevelBrowseSort _appliedSort = (LevelBrowseSort)(-1);
     private LevelBrowseDateRange _appliedDateRange = (LevelBrowseDateRange)(-1);
     private LevelBrowseTrackLength _appliedTrackLength = (LevelBrowseTrackLength)(-1);
@@ -101,6 +102,15 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
     private bool _appliedWithoutMyPb = true;
     private bool _appliedWithoutRecords = true;
     private int _appliedPage = -1;
+
+    private string _authorTyped = string.Empty;
+    private string _authorLookupQuery = "\uffff";
+    private IReadOnlyList<AuthorSuggestion> _authorSuggestions = Array.Empty<AuthorSuggestion>();
+    private float _authorLookupAt = -1f;
+    private int _authorRequestId;
+    private CancellationTokenSource _authorCts;
+    private AuthorSuggestion _pendingAuthorPick;
+    private bool _authorListOpen;
 
     private string _toast;
     private float _toastUntil;
@@ -131,6 +141,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
 
         _thumbnails.Poll();
         MaybeRefetch(now);
+        MaybeAuthorLookup(now);
 
         _windowOpen = true;
         ImRect rect = ImWindowPlacement.GetRect(
@@ -160,6 +171,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         _appliedOffset = 0;
         _appliedName = "\uffff";
         _appliedAuthor = "\uffff";
+        _appliedAuthorUserId = "\uffff";
         _appliedSort = (LevelBrowseSort)(-1);
         _appliedDateRange = (LevelBrowseDateRange)(-1);
         _appliedTrackLength = (LevelBrowseTrackLength)(-1);
@@ -168,8 +180,20 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         _appliedWithoutMyPb = true;
         _appliedWithoutRecords = true;
         _appliedPage = -1;
+        _authorTyped = string.Empty;
+        _authorLookupQuery = "\uffff";
+        _authorSuggestions = Array.Empty<AuthorSuggestion>();
+        _authorLookupAt = -1f;
+        _pendingAuthorPick = null;
+        _authorListOpen = false;
+        _authorCts?.Cancel();
+        _authorCts?.Dispose();
+        _authorCts = null;
         _toast = null;
         _fetchAt = now;
+
+        // Warm the author-name cache so Uploaded-by filtering is local after the first load.
+        _service.EnsureAuthorCacheAsync().Forget();
     }
 
     private void MaybeRefetch(float now)
@@ -190,6 +214,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
     {
         return !string.Equals(_session.SearchName ?? string.Empty, _appliedName, StringComparison.Ordinal) ||
                !string.Equals(_session.SearchAuthor ?? string.Empty, _appliedAuthor, StringComparison.Ordinal) ||
+               !string.Equals(_session.AuthorUserId ?? string.Empty, _appliedAuthorUserId, StringComparison.Ordinal) ||
                _session.Sort != _appliedSort ||
                _session.DateRange != _appliedDateRange ||
                _session.TrackLength != _appliedTrackLength ||
@@ -204,6 +229,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
     {
         string name = _session.SearchName ?? string.Empty;
         string author = _session.SearchAuthor ?? string.Empty;
+        string authorUserId = _session.AuthorUserId ?? string.Empty;
         LevelBrowseSort sort = _session.Sort;
         LevelBrowseDateRange dateRange = _session.DateRange;
         LevelBrowseTrackLength trackLength = _session.TrackLength;
@@ -216,6 +242,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
 
         _appliedName = name;
         _appliedAuthor = author;
+        _appliedAuthorUserId = authorUserId;
         _appliedSort = sort;
         _appliedDateRange = dateRange;
         _appliedTrackLength = trackLength;
@@ -238,6 +265,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
                 _requestId,
                 name,
                 author,
+                authorUserId,
                 page,
                 sort,
                 dateRange,
@@ -255,6 +283,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         int requestId,
         string name,
         string author,
+        string authorUserId,
         int page,
         LevelBrowseSort sort,
         LevelBrowseDateRange dateRange,
@@ -278,6 +307,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
             withoutMyPersonalBest,
             withoutRecords,
             ownerSteamId,
+            authorUserId,
             ct);
 
         if (requestId != _requestId)
@@ -294,6 +324,61 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         _rows = result.Value.Rows;
         _totalCount = result.Value.TotalCount;
         _state = ResultsState.Loaded;
+    }
+
+    private void MaybeAuthorLookup(float now)
+    {
+        if (_authorLookupAt >= 0f && now >= _authorLookupAt)
+        {
+            _authorLookupAt = -1f;
+            BeginAuthorLookup();
+        }
+    }
+
+    private void BeginAuthorLookup()
+    {
+        string query = _authorTyped?.Trim() ?? string.Empty;
+        if (query.Length < 2)
+        {
+            _authorLookupQuery = query;
+            _authorSuggestions = Array.Empty<AuthorSuggestion>();
+            _authorCts?.Cancel();
+            return;
+        }
+
+        if (string.Equals(query, _authorLookupQuery, StringComparison.Ordinal))
+            return;
+
+        _authorLookupQuery = query;
+
+        // Fast path: filter the warm in-memory cache without an async hop.
+        if (_service.TryFilterAuthors(query, LevelBrowseService.DefaultAuthorSearchLimit, out IReadOnlyList<AuthorSuggestion> local))
+        {
+            _authorSuggestions = local;
+            return;
+        }
+
+        _authorCts?.Cancel();
+        _authorCts?.Dispose();
+        _authorCts = new CancellationTokenSource();
+
+        _authorRequestId++;
+        SearchAuthorsAsync(_authorRequestId, query, _authorCts.Token).Forget();
+    }
+
+    private async UniTaskVoid SearchAuthorsAsync(int requestId, string query, CancellationToken ct)
+    {
+        Result<IReadOnlyList<AuthorSuggestion>> result = await _service.SearchAuthorsAsync(query, ct: ct);
+        if (requestId != _authorRequestId)
+            return;
+
+        if (result.IsFailed)
+        {
+            _authorSuggestions = Array.Empty<AuthorSuggestion>();
+            return;
+        }
+
+        _authorSuggestions = result.Value;
     }
 
     private void DrawBody(ImGui gui, float now)
@@ -352,12 +437,26 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
                 OnFilterChanged(now);
             }
 
+            DrawUploadedBy(gui, now);
+
             DrawRailDropdown(gui, "Sort", SortLabels, (int)_session.Sort, now, i => _session.Sort = (LevelBrowseSort)i);
             DrawRailDropdown(gui, "Created", DateRangeLabels, (int)_session.DateRange, now, i => _session.DateRange = (LevelBrowseDateRange)i);
             DrawRailDropdown(gui, "Length", TrackLengthLabels, (int)_session.TrackLength, now, i => _session.TrackLength = (LevelBrowseTrackLength)i);
             DrawRailDropdown(gui, "Rating", RatingLabels, (int)_session.Rating, now, i => _session.Rating = (LevelBrowseRating)i);
 
-            DrawRailCheckbox(gui, "My levels", _session.OwnLevelsOnly, now, v => _session.OwnLevelsOnly = v);
+            bool hasAuthorUser = !string.IsNullOrEmpty(_session.AuthorUserId);
+            DrawRailCheckbox(
+                gui,
+                "My levels",
+                _session.OwnLevelsOnly,
+                now,
+                v =>
+                {
+                    _session.OwnLevelsOnly = v;
+                    if (v)
+                        ClearAuthorUserSelection(scheduleLookup: false, now: now);
+                },
+                enabled: !hasAuthorUser);
             DrawRailCheckbox(gui, "No PB", _session.WithoutMyPersonalBest, now, v => _session.WithoutMyPersonalBest = v);
             DrawRailCheckbox(gui, "No WR", _session.WithoutRecords, now, v => _session.WithoutRecords = v);
         }
@@ -377,6 +476,155 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         string info = $"{_totalCount} levels";
         var settings = new ImTextSettings(gui.Style.Layout.TextSize * 0.85f, 0.5f, 0.5f);
         gui.Canvas.Text(info.AsSpan(), gui.Style.TextEdit.HintFrontColor, footer, in settings);
+    }
+
+    private void DrawUploadedBy(ImGui gui, float now)
+    {
+        // Apply picks before TextEdit so the field shows the chosen name this frame.
+        if (_pendingAuthorPick != null)
+        {
+            AuthorSuggestion pick = _pendingAuthorPick;
+            _pendingAuthorPick = null;
+            ApplyAuthorPick(pick, now);
+        }
+
+        gui.Text("Uploaded by".AsSpan(), gui.Style.TextEdit.HintFrontColor);
+
+        bool ownLevelsOnly = _session.OwnLevelsOnly;
+        if (ownLevelsOnly)
+            gui.BeginReadOnly(true);
+
+        uint fieldId = 0;
+        ImRect fieldRect = default;
+
+        try
+        {
+            // Restore display text if we have a selection but the field was cleared externally.
+            if (!string.IsNullOrEmpty(_session.AuthorUserId) &&
+                string.IsNullOrEmpty(_authorTyped) &&
+                !string.IsNullOrEmpty(_session.AuthorUserName))
+            {
+                _authorTyped = _session.AuthorUserName;
+            }
+
+            gui.AddSpacingIfLayoutFrameNotEmpty();
+            fieldId = gui.GetNextControlId();
+            fieldRect = ImTextEdit.AddRect(gui, default, multiline: false, out _);
+            ref ImTextEditState state = ref gui.Storage.Get<ImTextEditState>(fieldId);
+
+            string typed = _authorTyped ?? string.Empty;
+            bool changed = gui.TextEdit(fieldId, ref typed, ref state, fieldRect, multiline: false, hint: "steam name…".AsSpan());
+            if (changed)
+            {
+                _authorTyped = typed;
+                if (!string.IsNullOrEmpty(_session.AuthorUserId) &&
+                    !string.Equals(typed, _session.AuthorUserName ?? string.Empty, StringComparison.Ordinal))
+                {
+                    _session.AuthorUserId = string.Empty;
+                    _session.AuthorUserName = string.Empty;
+                    OnFilterChanged(now);
+                }
+
+                _authorLookupAt = now + DebounceSeconds;
+                if (string.IsNullOrWhiteSpace(typed) || typed.Trim().Length < 2)
+                {
+                    _authorSuggestions = Array.Empty<AuthorSuggestion>();
+                    _authorLookupQuery = typed?.Trim() ?? string.Empty;
+                    _authorListOpen = false;
+                }
+            }
+        }
+        finally
+        {
+            if (ownLevelsOnly)
+                gui.EndReadOnly();
+        }
+
+        bool focused = gui.IsControlActive(fieldId);
+        bool canShowList = !ownLevelsOnly &&
+                           _authorSuggestions.Count > 0 &&
+                           string.IsNullOrEmpty(_session.AuthorUserId);
+
+        // Open while typing; keep open after TextEdit loses focus on the suggestion click Down.
+        if (focused && canShowList)
+            _authorListOpen = true;
+        else if (!canShowList)
+            _authorListOpen = false;
+
+        if (_authorListOpen && canShowList)
+            DrawAuthorSuggestionPopup(gui, fieldRect, fieldId);
+
+        if (!string.IsNullOrEmpty(_session.AuthorUserId) && !ownLevelsOnly && gui.Button("Clear".AsSpan()))
+            ClearAuthorUserSelection(scheduleLookup: false, now: now);
+    }
+
+    private void DrawAuthorSuggestionPopup(ImGui gui, ImRect fieldRect, uint fieldId)
+    {
+        // Same pattern as ImDropdown: menu popup with box background + Menu rows.
+        // _authorListOpen stays true after TextEdit loses focus on the suggestion click Down,
+        // so the menu is still drawn that frame and can receive the press.
+        gui.BeginPopup();
+
+        bool open = true;
+        string scopeId = "uploaded-by-" + fieldId.ToString();
+        if (gui.BeginMenuPopup(
+                scopeId.AsSpan(),
+                ref open,
+                fieldRect.BottomLeft,
+                fieldRect.W,
+                ImMenuFlag.DoNotDismissOnClick))
+        {
+            for (int i = 0; i < _authorSuggestions.Count; i++)
+            {
+                AuthorSuggestion suggestion = _authorSuggestions[i];
+                if (!gui.Menu(suggestion.SteamName.AsSpan()))
+                    continue;
+
+                _pendingAuthorPick = suggestion;
+                _authorSuggestions = Array.Empty<AuthorSuggestion>();
+                open = false;
+                break;
+            }
+
+            gui.EndMenuPopup();
+        }
+
+        gui.EndPopup();
+
+        if (!open)
+            _authorListOpen = false;
+    }
+
+    private void ApplyAuthorPick(AuthorSuggestion pick, float now)
+    {
+        _authorTyped = pick.SteamName;
+        _session.AuthorUserId = pick.SteamId;
+        _session.AuthorUserName = pick.SteamName;
+        _session.OwnLevelsOnly = false;
+        _authorSuggestions = Array.Empty<AuthorSuggestion>();
+        _authorLookupQuery = pick.SteamName;
+        _authorLookupAt = -1f;
+        _authorListOpen = false;
+        OnFilterChanged(now);
+    }
+
+    private void ClearAuthorUserSelection(bool scheduleLookup, float now = 0f)
+    {
+        bool hadSelection = !string.IsNullOrEmpty(_session.AuthorUserId);
+        _session.AuthorUserId = string.Empty;
+        _session.AuthorUserName = string.Empty;
+        _authorTyped = string.Empty;
+        _authorSuggestions = Array.Empty<AuthorSuggestion>();
+        _authorLookupQuery = string.Empty;
+        _authorLookupAt = -1f;
+        _authorListOpen = false;
+        _pendingAuthorPick = null;
+        _authorCts?.Cancel();
+
+        if (hadSelection && now > 0f)
+            OnFilterChanged(now);
+        else if (scheduleLookup && now > 0f)
+            _authorLookupAt = now + DebounceSeconds;
     }
 
     private void DrawRailDropdown(
@@ -399,13 +647,30 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         }
     }
 
-    private void DrawRailCheckbox(ImGui gui, string label, bool value, float now, Action<bool> apply)
+    private void DrawRailCheckbox(
+        ImGui gui,
+        string label,
+        bool value,
+        float now,
+        Action<bool> apply,
+        bool enabled = true)
     {
-        bool next = value;
-        if (gui.Checkbox(ref next, label.AsSpan()) && next != value)
+        if (!enabled)
+            gui.BeginReadOnly(true);
+
+        try
         {
-            apply(next);
-            OnFilterChanged(now);
+            bool next = value;
+            if (gui.Checkbox(ref next, label.AsSpan()) && next != value)
+            {
+                apply(next);
+                OnFilterChanged(now);
+            }
+        }
+        finally
+        {
+            if (!enabled)
+                gui.EndReadOnly();
         }
     }
 
