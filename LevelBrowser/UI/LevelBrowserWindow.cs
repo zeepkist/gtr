@@ -96,8 +96,6 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
     private LevelBrowseDateRange _appliedDateRange = (LevelBrowseDateRange)(-1);
     private LevelBrowseTrackLength _appliedTrackLength = (LevelBrowseTrackLength)(-1);
     private LevelBrowseRating _appliedRating = (LevelBrowseRating)(-1);
-    private int _appliedMinVotes = -1;
-    private int _appliedMinPlays = -1;
     private int _appliedPage = -1;
 
     private string _toast;
@@ -162,8 +160,6 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         _appliedDateRange = (LevelBrowseDateRange)(-1);
         _appliedTrackLength = (LevelBrowseTrackLength)(-1);
         _appliedRating = (LevelBrowseRating)(-1);
-        _appliedMinVotes = -1;
-        _appliedMinPlays = -1;
         _appliedPage = -1;
         _toast = null;
         _fetchAt = now;
@@ -191,8 +187,6 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
                _session.DateRange != _appliedDateRange ||
                _session.TrackLength != _appliedTrackLength ||
                _session.Rating != _appliedRating ||
-               _session.MinVotes != _appliedMinVotes ||
-               _session.MinPlays != _appliedMinPlays ||
                _session.Page != _appliedPage;
     }
 
@@ -204,8 +198,6 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         LevelBrowseDateRange dateRange = _session.DateRange;
         LevelBrowseTrackLength trackLength = _session.TrackLength;
         LevelBrowseRating rating = _session.Rating;
-        int minVotes = _session.MinVotes < 0 ? 0 : _session.MinVotes;
-        int minPlays = _session.MinPlays < 0 ? 0 : _session.MinPlays;
         int page = _session.Page < 0 ? 0 : _session.Page;
 
         _appliedName = name;
@@ -214,8 +206,6 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         _appliedDateRange = dateRange;
         _appliedTrackLength = trackLength;
         _appliedRating = rating;
-        _appliedMinVotes = minVotes;
-        _appliedMinPlays = minPlays;
         _appliedPage = page;
         _appliedOffset = page * PageSize;
 
@@ -227,7 +217,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         _cts = new CancellationTokenSource();
 
         _requestId++;
-        FetchAsync(_requestId, name, author, page, sort, dateRange, trackLength, rating, minVotes, minPlays, _cts.Token)
+        FetchAsync(_requestId, name, author, page, sort, dateRange, trackLength, rating, _cts.Token)
             .Forget();
     }
 
@@ -240,12 +230,10 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         LevelBrowseDateRange dateRange,
         LevelBrowseTrackLength trackLength,
         LevelBrowseRating rating,
-        int minVotes,
-        int minPlays,
         CancellationToken ct)
     {
         Result<LevelBrowsePage> result = await _service.BrowseAsync(
-            name, author, page, sort, dateRange, trackLength, rating, minVotes, minPlays, ct);
+            name, author, page, sort, dateRange, trackLength, rating, ct);
 
         if (requestId != _requestId)
             return;
@@ -309,24 +297,6 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
             DrawRailDropdown(gui, "Created", DateRangeLabels, (int)_session.DateRange, now, i => _session.DateRange = (LevelBrowseDateRange)i);
             DrawRailDropdown(gui, "Length", TrackLengthLabels, (int)_session.TrackLength, now, i => _session.TrackLength = (LevelBrowseTrackLength)i);
             DrawRailDropdown(gui, "Rating", RatingLabels, (int)_session.Rating, now, i => _session.Rating = (LevelBrowseRating)i);
-
-            int minVotes = _session.MinVotes < 0 ? 0 : _session.MinVotes;
-            gui.Text("Min votes".AsSpan(), gui.Style.TextEdit.HintFrontColor);
-            if (gui.NumericEdit(ref minVotes, min: 0, max: 1_000_000))
-            {
-                _session.MinVotes = minVotes;
-                OnFilterChanged(now);
-            }
-
-            int minPlays = _session.MinPlays < 0 ? 0 : _session.MinPlays;
-            gui.Text("Min plays".AsSpan(), gui.Style.TextEdit.HintFrontColor);
-            if (gui.NumericEdit(ref minPlays, min: 0, max: 1_000_000))
-            {
-                _session.MinPlays = minPlays;
-                OnFilterChanged(now);
-            }
-
-            gui.Text("Min plays is slower".AsSpan(), gui.Style.TextEdit.HintFrontColor);
         }
         finally
         {

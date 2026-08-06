@@ -33,8 +33,6 @@ public class LevelBrowseService
         LevelBrowseDateRange dateRange = LevelBrowseDateRange.AnyTime,
         LevelBrowseTrackLength trackLength = LevelBrowseTrackLength.Any,
         LevelBrowseRating rating = LevelBrowseRating.Any,
-        int minVotes = 0,
-        int minPlays = 0,
         CancellationToken ct = default)
     {
         return BrowseAsync(
@@ -46,8 +44,6 @@ public class LevelBrowseService
                 dateRange: dateRange,
                 trackLength: trackLength,
                 rating: rating,
-                minVotes: minVotes,
-                minPlays: minPlays,
                 nowUtc: DateTimeOffset.UtcNow),
             ct);
     }
@@ -104,7 +100,7 @@ public class LevelBrowseService
             PubliclyVisible = new BooleanFilter { EqualTo = LevelItemsBrowseQuery.HygienePubliclyVisibleEqualTo }
         };
 
-        ApplyEngagement(level, query);
+        ApplyRating(level, query.Rating);
 
         var filter = new LevelItemFilter
         {
@@ -139,64 +135,37 @@ public class LevelBrowseService
         return filter;
     }
 
-    private static void ApplyEngagement(LevelFilter level, LevelItemsBrowseQuery query)
+    private static void ApplyRating(LevelFilter level, LevelBrowseRating rating)
     {
-        bool hasVotes =
-            query.Rating != LevelBrowseRating.Any ||
-            query.MinVotes.HasValue;
-
-        if (hasVotes)
+        switch (rating)
         {
-            var aggregates = new VoteAggregatesFilter();
-
-            switch (query.Rating)
-            {
-                case LevelBrowseRating.WellRated:
-                    aggregates.Average = new VoteAverageAggregateFilter
-                    {
-                        Value = new BigFloatFilter { GreaterThan = "0" }
-                    };
-                    break;
-                case LevelBrowseRating.TopRated:
-                    aggregates.Sum = new VoteSumAggregateFilter
-                    {
-                        Value = new BigIntFilter
-                        {
-                            GreaterThanOrEqualTo = LevelItemsBrowseQuery.TopRatedNetScore.ToString(CultureInfo.InvariantCulture)
-                        }
-                    };
-                    break;
-            }
-
-            if (query.MinVotes.HasValue)
-            {
-                aggregates.DistinctCount = new VoteDistinctCountAggregateFilter
+            case LevelBrowseRating.WellRated:
+                level.Votes = new LevelToManyVoteFilter
                 {
-                    UserId = new BigIntFilter
+                    Aggregates = new VoteAggregatesFilter
                     {
-                        GreaterThanOrEqualTo = query.MinVotes.Value.ToString(CultureInfo.InvariantCulture)
+                        Average = new VoteAverageAggregateFilter
+                        {
+                            Value = new BigFloatFilter { GreaterThan = "0" }
+                        }
                     }
                 };
-            }
-
-            level.Votes = new LevelToManyVoteFilter { Aggregates = aggregates };
-        }
-
-        if (query.MinPlays.HasValue)
-        {
-            level.Records = new LevelToManyRecordFilter
-            {
-                Aggregates = new RecordAggregatesFilter
+                return;
+            case LevelBrowseRating.TopRated:
+                level.Votes = new LevelToManyVoteFilter
                 {
-                    DistinctCount = new RecordDistinctCountAggregateFilter
+                    Aggregates = new VoteAggregatesFilter
                     {
-                        Id = new BigIntFilter
+                        Sum = new VoteSumAggregateFilter
                         {
-                            GreaterThanOrEqualTo = query.MinPlays.Value.ToString(CultureInfo.InvariantCulture)
+                            Value = new BigIntFilter
+                            {
+                                GreaterThanOrEqualTo = LevelItemsBrowseQuery.TopRatedNetScore.ToString(CultureInfo.InvariantCulture)
+                            }
                         }
                     }
-                }
-            };
+                };
+                return;
         }
     }
 

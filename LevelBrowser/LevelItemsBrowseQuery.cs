@@ -38,17 +38,11 @@ public sealed class LevelItemsBrowseQuery
     /// <summary>Inclusive lower bound on <c>validationTimeAuthor</c> (seconds), or <c>null</c>.</summary>
     public double? TimeMin { get; }
 
-    /// <summary>Exclusive-or-inclusive upper bound on <c>validationTimeAuthor</c> (seconds), or <c>null</c>.</summary>
+    /// <summary>Inclusive upper bound on <c>validationTimeAuthor</c> (seconds), or <c>null</c>.</summary>
     public double? TimeMax { get; }
 
     /// <summary>Vote-quality rating preset.</summary>
     public LevelBrowseRating Rating { get; }
-
-    /// <summary>Minimum distinct vote count, or <c>null</c> when off.</summary>
-    public int? MinVotes { get; }
-
-    /// <summary>Minimum distinct record/play count, or <c>null</c> when off.</summary>
-    public int? MinPlays { get; }
 
     /// <summary>Sort order for the page.</summary>
     public LevelBrowseSort Sort { get; }
@@ -66,8 +60,6 @@ public sealed class LevelItemsBrowseQuery
         double? timeMin,
         double? timeMax,
         LevelBrowseRating rating,
-        int? minVotes,
-        int? minPlays,
         LevelBrowseSort sort,
         int first,
         int offset)
@@ -78,8 +70,6 @@ public sealed class LevelItemsBrowseQuery
         TimeMin = timeMin;
         TimeMax = timeMax;
         Rating = rating;
-        MinVotes = minVotes;
-        MinPlays = minPlays;
         Sort = sort;
         First = first;
         Offset = offset;

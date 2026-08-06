@@ -5,7 +5,7 @@ namespace TNRD.Zeepkist.GTR.LevelBrowser;
 /// <summary>
 /// Builds the default <c>levelItems</c> browse arguments from raw discovery inputs: always-on
 /// hygiene (applied by the query object), case-insensitive substring matchers for name and author
-/// when non-empty, resolved date/track-length/rating/engagement predicates, sort, and
+/// when non-empty, resolved date/track-length/rating predicates, sort, and
 /// <c>first</c>/<c>offset</c> pagination.
 /// </summary>
 public static class LevelItemsBrowseQueryBuilder
@@ -33,8 +33,6 @@ public static class LevelItemsBrowseQueryBuilder
         LevelBrowseDateRange dateRange = LevelBrowseDateRange.AnyTime,
         LevelBrowseTrackLength trackLength = LevelBrowseTrackLength.Any,
         LevelBrowseRating rating = LevelBrowseRating.Any,
-        int minVotes = 0,
-        int minPlays = 0,
         DateTimeOffset? nowUtc = null)
     {
         if (page < 0)
@@ -51,8 +49,6 @@ public static class LevelItemsBrowseQueryBuilder
             timeMin,
             timeMax,
             rating,
-            NormalizeCount(minVotes),
-            NormalizeCount(minPlays),
             sort,
             pageSize,
             page * pageSize);
@@ -64,11 +60,6 @@ public static class LevelItemsBrowseQueryBuilder
             return null;
 
         return value.Trim();
-    }
-
-    private static int? NormalizeCount(int value)
-    {
-        return value > 0 ? value : (int?)null;
     }
 
     private static DateTimeOffset? ResolveDateCreatedAfter(LevelBrowseDateRange dateRange, DateTimeOffset nowUtc)

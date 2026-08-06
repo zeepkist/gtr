@@ -100,7 +100,7 @@ public class LevelItemsBrowseQueryBuilderTests
     }
 
     [Fact]
-    public void DefaultsAreNewestAnyTimeAnyLengthAnyRatingAndNoCounts()
+    public void DefaultsAreNewestAnyTimeAnyLengthAnyRating()
     {
         LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(null, null, nowUtc: FixedNow);
 
@@ -109,8 +109,6 @@ public class LevelItemsBrowseQueryBuilderTests
         Assert.Null(query.TimeMin);
         Assert.Null(query.TimeMax);
         Assert.Equal(LevelBrowseRating.Any, query.Rating);
-        Assert.Null(query.MinVotes);
-        Assert.Null(query.MinPlays);
     }
 
     [Theory]
@@ -180,27 +178,5 @@ public class LevelItemsBrowseQueryBuilderTests
             null, null, rating: LevelBrowseRating.WellRated, nowUtc: FixedNow);
 
         Assert.Equal(LevelBrowseRating.WellRated, query.Rating);
-    }
-
-    [Theory]
-    [InlineData(0)]
-    [InlineData(-3)]
-    public void NonPositiveMinVotesAndPlaysBecomeNull(int count)
-    {
-        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
-            null, null, minVotes: count, minPlays: count, nowUtc: FixedNow);
-
-        Assert.Null(query.MinVotes);
-        Assert.Null(query.MinPlays);
-    }
-
-    [Fact]
-    public void PositiveMinVotesAndPlaysAreKept()
-    {
-        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
-            null, null, minVotes: 5, minPlays: 100, nowUtc: FixedNow);
-
-        Assert.Equal(5, query.MinVotes);
-        Assert.Equal(100, query.MinPlays);
     }
 }

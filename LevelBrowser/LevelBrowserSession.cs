@@ -37,12 +37,6 @@ public sealed class LevelBrowserSession
     /// <summary>Vote-quality rating preset. Reset when a new session opens.</summary>
     public LevelBrowseRating Rating { get; set; }
 
-    /// <summary>Minimum vote count (0 = off). Reset when a new session opens.</summary>
-    public int MinVotes { get; set; }
-
-    /// <summary>Minimum play/record count (0 = off). Reset when a new session opens.</summary>
-    public int MinPlays { get; set; }
-
     /// <summary>Zero-based results page. Reset when a new session opens.</summary>
     public int Page { get; set; }
 
@@ -149,8 +143,6 @@ public sealed class LevelBrowserSession
         DateRange = LevelBrowseDateRange.AnyTime;
         TrackLength = LevelBrowseTrackLength.Any;
         Rating = LevelBrowseRating.Any;
-        MinVotes = 0;
-        MinPlays = 0;
         Page = 0;
     }
 
