@@ -22,7 +22,8 @@ public static class LevelItemsBrowseQueryBuilder
     /// <summary>
     /// Produces the resolved <see cref="LevelItemsBrowseQuery"/>. Blank/whitespace filter text
     /// becomes <c>null</c> (no predicate); page and pageSize are clamped to sane minimums;
-    /// date presets are resolved against <paramref name="nowUtc"/>.
+    /// date presets are resolved against <paramref name="nowUtc"/>. Ownership/PB filters only
+    /// resolve when <paramref name="ownerSteamId"/> is non-blank.
     /// </summary>
     public static LevelItemsBrowseQuery Build(
         string name,
@@ -33,6 +34,10 @@ public static class LevelItemsBrowseQueryBuilder
         LevelBrowseDateRange dateRange = LevelBrowseDateRange.AnyTime,
         LevelBrowseTrackLength trackLength = LevelBrowseTrackLength.Any,
         LevelBrowseRating rating = LevelBrowseRating.Any,
+        bool ownLevelsOnly = false,
+        bool withoutMyPersonalBest = false,
+        bool withoutRecords = false,
+        string ownerSteamId = null,
         DateTimeOffset? nowUtc = null)
     {
         if (page < 0)
@@ -42,6 +47,8 @@ public static class LevelItemsBrowseQueryBuilder
 
         ResolveTrackLength(trackLength, out double? timeMin, out double? timeMax);
 
+        string steamId = Normalize(ownerSteamId);
+
         return new LevelItemsBrowseQuery(
             Normalize(name),
             Normalize(fileAuthor),
@@ -49,6 +56,9 @@ public static class LevelItemsBrowseQueryBuilder
             timeMin,
             timeMax,
             rating,
+            ownLevelsOnly ? steamId : null,
+            withoutMyPersonalBest ? steamId : null,
+            withoutRecords,
             sort,
             pageSize,
             page * pageSize);

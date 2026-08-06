@@ -44,6 +44,23 @@ public sealed class LevelItemsBrowseQuery
     /// <summary>Vote-quality rating preset.</summary>
     public LevelBrowseRating Rating { get; }
 
+    /// <summary>
+    /// Steam id string for <c>authorId: { equalTo: ... }</c> (My levels), or <c>null</c> when off.
+    /// </summary>
+    public string AuthorIdEqualTo { get; }
+
+    /// <summary>
+    /// Steam id string for excluding levels where this user has a personal best
+    /// (<c>level.personalBestGlobals: { none: { user: { steamId: { equalTo: ... } } } }</c>),
+    /// or <c>null</c> when off.
+    /// </summary>
+    public string ExcludePersonalBestSteamId { get; }
+
+    /// <summary>
+    /// When true, only levels with no records (<c>level.recordsExist: false</c>).
+    /// </summary>
+    public bool RequireNoRecords { get; }
+
     /// <summary>Sort order for the page.</summary>
     public LevelBrowseSort Sort { get; }
 
@@ -60,6 +77,9 @@ public sealed class LevelItemsBrowseQuery
         double? timeMin,
         double? timeMax,
         LevelBrowseRating rating,
+        string authorIdEqualTo,
+        string excludePersonalBestSteamId,
+        bool requireNoRecords,
         LevelBrowseSort sort,
         int first,
         int offset)
@@ -70,6 +90,9 @@ public sealed class LevelItemsBrowseQuery
         TimeMin = timeMin;
         TimeMax = timeMax;
         Rating = rating;
+        AuthorIdEqualTo = authorIdEqualTo;
+        ExcludePersonalBestSteamId = excludePersonalBestSteamId;
+        RequireNoRecords = requireNoRecords;
         Sort = sort;
         First = first;
         Offset = offset;

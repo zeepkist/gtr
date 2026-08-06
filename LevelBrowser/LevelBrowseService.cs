@@ -33,6 +33,10 @@ public class LevelBrowseService
         LevelBrowseDateRange dateRange = LevelBrowseDateRange.AnyTime,
         LevelBrowseTrackLength trackLength = LevelBrowseTrackLength.Any,
         LevelBrowseRating rating = LevelBrowseRating.Any,
+        bool ownLevelsOnly = false,
+        bool withoutMyPersonalBest = false,
+        bool withoutRecords = false,
+        string ownerSteamId = null,
         CancellationToken ct = default)
     {
         return BrowseAsync(
@@ -44,6 +48,10 @@ public class LevelBrowseService
                 dateRange: dateRange,
                 trackLength: trackLength,
                 rating: rating,
+                ownLevelsOnly: ownLevelsOnly,
+                withoutMyPersonalBest: withoutMyPersonalBest,
+                withoutRecords: withoutRecords,
+                ownerSteamId: ownerSteamId,
                 nowUtc: DateTimeOffset.UtcNow),
             ct);
     }
@@ -131,6 +139,26 @@ public class LevelBrowseService
                 GreaterThanOrEqualTo = FormatDatetime(query.DateCreatedAfter.Value)
             };
         }
+
+        if (!string.IsNullOrEmpty(query.AuthorIdEqualTo))
+            filter.AuthorId = new BigIntFilter { EqualTo = query.AuthorIdEqualTo };
+
+        if (!string.IsNullOrEmpty(query.ExcludePersonalBestSteamId))
+        {
+            level.PersonalBestGlobals = new LevelToManyPersonalBestGlobalFilter
+            {
+                None = new PersonalBestGlobalFilter
+                {
+                    User = new UserFilter
+                    {
+                        SteamId = new BigIntFilter { EqualTo = query.ExcludePersonalBestSteamId }
+                    }
+                }
+            };
+        }
+
+        if (query.RequireNoRecords)
+            level.RecordsExist = false;
 
         return filter;
     }

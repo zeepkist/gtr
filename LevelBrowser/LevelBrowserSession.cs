@@ -37,6 +37,15 @@ public sealed class LevelBrowserSession
     /// <summary>Vote-quality rating preset. Reset when a new session opens.</summary>
     public LevelBrowseRating Rating { get; set; }
 
+    /// <summary>When true, only levels published by the current user. Reset when a new session opens.</summary>
+    public bool OwnLevelsOnly { get; set; }
+
+    /// <summary>When true, exclude levels where the current user has a personal best. Reset when a new session opens.</summary>
+    public bool WithoutMyPersonalBest { get; set; }
+
+    /// <summary>When true, only levels with no records yet. Reset when a new session opens.</summary>
+    public bool WithoutRecords { get; set; }
+
     /// <summary>Zero-based results page. Reset when a new session opens.</summary>
     public int Page { get; set; }
 
@@ -143,6 +152,9 @@ public sealed class LevelBrowserSession
         DateRange = LevelBrowseDateRange.AnyTime;
         TrackLength = LevelBrowseTrackLength.Any;
         Rating = LevelBrowseRating.Any;
+        OwnLevelsOnly = false;
+        WithoutMyPersonalBest = false;
+        WithoutRecords = false;
         Page = 0;
     }
 

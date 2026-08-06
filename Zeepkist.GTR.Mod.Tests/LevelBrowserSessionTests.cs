@@ -131,6 +131,9 @@ public class LevelBrowserSessionTests
         session.DateRange = LevelBrowseDateRange.PastWeek;
         session.TrackLength = LevelBrowseTrackLength.Long;
         session.Rating = LevelBrowseRating.TopRated;
+        session.OwnLevelsOnly = true;
+        session.WithoutMyPersonalBest = true;
+        session.WithoutRecords = true;
         session.Page = 4;
 
         session.Open(_ => { });
@@ -141,6 +144,9 @@ public class LevelBrowserSessionTests
         Assert.Equal(LevelBrowseDateRange.AnyTime, session.DateRange);
         Assert.Equal(LevelBrowseTrackLength.Any, session.TrackLength);
         Assert.Equal(LevelBrowseRating.Any, session.Rating);
+        Assert.False(session.OwnLevelsOnly);
+        Assert.False(session.WithoutMyPersonalBest);
+        Assert.False(session.WithoutRecords);
         Assert.Equal(0, session.Page);
     }
 

@@ -179,4 +179,106 @@ public class LevelItemsBrowseQueryBuilderTests
 
         Assert.Equal(LevelBrowseRating.WellRated, query.Rating);
     }
+
+    [Fact]
+    public void OwnershipFiltersDefaultOff()
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null, null, ownerSteamId: "76561198000000000", nowUtc: FixedNow);
+
+        Assert.Null(query.AuthorIdEqualTo);
+        Assert.Null(query.ExcludePersonalBestSteamId);
+        Assert.False(query.RequireNoRecords);
+    }
+
+    [Fact]
+    public void OwnLevelsOnlySetsAuthorIdEqualToSteamId()
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null,
+            null,
+            ownLevelsOnly: true,
+            ownerSteamId: "76561198000000000",
+            nowUtc: FixedNow);
+
+        Assert.Equal("76561198000000000", query.AuthorIdEqualTo);
+        Assert.Null(query.ExcludePersonalBestSteamId);
+        Assert.False(query.RequireNoRecords);
+    }
+
+    [Fact]
+    public void WithoutMyPersonalBestSetsExcludeSteamId()
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null,
+            null,
+            withoutMyPersonalBest: true,
+            ownerSteamId: "76561198000000000",
+            nowUtc: FixedNow);
+
+        Assert.Null(query.AuthorIdEqualTo);
+        Assert.Equal("76561198000000000", query.ExcludePersonalBestSteamId);
+        Assert.False(query.RequireNoRecords);
+    }
+
+    [Fact]
+    public void WithoutRecordsSetsRequireNoRecords()
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null, null, withoutRecords: true, nowUtc: FixedNow);
+
+        Assert.True(query.RequireNoRecords);
+        Assert.Null(query.AuthorIdEqualTo);
+        Assert.Null(query.ExcludePersonalBestSteamId);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public void OwnLevelsOnlyWithBlankSteamIdResolvesToNull(string blankSteamId)
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null,
+            null,
+            ownLevelsOnly: true,
+            withoutMyPersonalBest: true,
+            ownerSteamId: blankSteamId,
+            nowUtc: FixedNow);
+
+        Assert.Null(query.AuthorIdEqualTo);
+        Assert.Null(query.ExcludePersonalBestSteamId);
+    }
+
+    [Fact]
+    public void OwnershipFiltersTrimSteamId()
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null,
+            null,
+            ownLevelsOnly: true,
+            withoutMyPersonalBest: true,
+            ownerSteamId: "  76561198000000000  ",
+            nowUtc: FixedNow);
+
+        Assert.Equal("76561198000000000", query.AuthorIdEqualTo);
+        Assert.Equal("76561198000000000", query.ExcludePersonalBestSteamId);
+    }
+
+    [Fact]
+    public void AllOwnershipFiltersCombine()
+    {
+        LevelItemsBrowseQuery query = LevelItemsBrowseQueryBuilder.Build(
+            null,
+            null,
+            ownLevelsOnly: true,
+            withoutMyPersonalBest: true,
+            withoutRecords: true,
+            ownerSteamId: "76561198000000000",
+            nowUtc: FixedNow);
+
+        Assert.Equal("76561198000000000", query.AuthorIdEqualTo);
+        Assert.Equal("76561198000000000", query.ExcludePersonalBestSteamId);
+        Assert.True(query.RequireNoRecords);
+    }
 }
