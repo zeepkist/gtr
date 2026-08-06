@@ -422,7 +422,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         try
         {
             string name = _session.SearchName ?? string.Empty;
-            gui.Text("Name".AsSpan(), gui.Style.TextEdit.HintFrontColor);
+            gui.Text("Name".AsSpan(), gui.Style.Text.Color);
             if (gui.TextEdit(ref name, hint: "includes…".AsSpan()))
             {
                 _session.SearchName = name;
@@ -430,7 +430,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
             }
 
             string author = _session.SearchAuthor ?? string.Empty;
-            gui.Text("Author".AsSpan(), gui.Style.TextEdit.HintFrontColor);
+            gui.Text("Author".AsSpan(), gui.Style.Text.Color);
             if (gui.TextEdit(ref author, hint: "fileAuthor…".AsSpan()))
             {
                 _session.SearchAuthor = author;
@@ -488,7 +488,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
             ApplyAuthorPick(pick, now);
         }
 
-        gui.Text("Uploaded by".AsSpan(), gui.Style.TextEdit.HintFrontColor);
+        gui.Text("Uploaded by".AsSpan(), gui.Style.Text.Color);
 
         bool ownLevelsOnly = _session.OwnLevelsOnly;
         if (ownLevelsOnly)
@@ -635,7 +635,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         float now,
         Action<int> apply)
     {
-        gui.Text(label.AsSpan(), gui.Style.TextEdit.HintFrontColor);
+        gui.Text(label.AsSpan(), gui.Style.Text.Color);
         int index = selected;
         if (index < 0 || index >= items.Length)
             index = 0;
