@@ -34,16 +34,6 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
     private const float DebounceSeconds = 0.3f;
     private const float ToastSeconds = 2.5f;
 
-    private static readonly Color32 CardBg = new(20, 24, 31, 255);
-    private static readonly Color32 ThumbBg = new(30, 37, 48, 255);
-    private static readonly Color32 TextColor = new(232, 234, 237, 255);
-    private static readonly Color32 MutedColor = new(154, 163, 178, 255);
-    private static readonly Color32 BadgeBg = new(42, 74, 50, 255);
-    private static readonly Color32 BadgeText = new(107, 203, 119, 255);
-    private static readonly Color32 ErrorColor = new(217, 107, 107, 255);
-    private static readonly Color32 ToastBg = new(74, 48, 16, 240);
-    private static readonly Color32 ToastText = new(255, 230, 184, 255);
-
     private enum ResultsState
     {
         Loading,
@@ -245,7 +235,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
     {
         var rect = new ImRect(rail.X, cursor - height, rail.W, height);
         var settings = new ImTextSettings(gui.Style.Layout.TextSize * 0.85f, 0f, 0.5f);
-        gui.Canvas.Text(label.AsSpan(), MutedColor, rect, in settings);
+        gui.Canvas.Text(label.AsSpan(), gui.Style.TextEdit.HintFrontColor, rect, in settings);
         return cursor - height;
     }
 
@@ -260,14 +250,14 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         switch (_state)
         {
             case ResultsState.Loading:
-                DrawCentered(gui, results, "Loading…", MutedColor);
+                DrawCentered(gui, results, "Loading…", gui.Style.TextEdit.HintFrontColor);
                 return;
             case ResultsState.Error:
                 DrawError(gui, results, now);
                 return;
             default:
                 if (_rows.Count == 0)
-                    DrawCentered(gui, results, "No levels match", MutedColor);
+                    DrawCentered(gui, results, "No levels match", gui.Style.TextEdit.HintFrontColor);
                 else
                     DrawCards(gui, results, now);
                 return;
@@ -296,7 +286,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
 
     private void DrawCard(ImGui gui, ImRect card, LevelBrowseRow row, float now)
     {
-        gui.Canvas.Rect(card, CardBg);
+        gui.Canvas.Rect(card, gui.Style.List.ItemNormal.Normal.BackColor);
 
         const float pad = 6f;
         var thumb = new ImRect(card.X + pad, card.Y + pad, ThumbWidth, card.H - pad * 2f);
@@ -310,8 +300,8 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
         var authorRect = new ImRect(textRect.X, textRect.Y, textRect.W, textRect.H * 0.5f);
         var nameSettings = new ImTextSettings(gui.Style.Layout.TextSize, 0f, 0.5f);
         var authorSettings = new ImTextSettings(gui.Style.Layout.TextSize * 0.85f, 0f, 0.5f);
-        gui.Canvas.Text(SafeText(row.Name).AsSpan(), TextColor, nameRect, in nameSettings);
-        gui.Canvas.Text(SafeText(row.FileAuthor).AsSpan(), MutedColor, authorRect, in authorSettings);
+        gui.Canvas.Text(SafeText(row.Name).AsSpan(), gui.Style.Text.Color, nameRect, in nameSettings);
+        gui.Canvas.Text(SafeText(row.FileAuthor).AsSpan(), gui.Style.TextEdit.HintFrontColor, authorRect, in authorSettings);
 
         bool alreadyIn = _session.IsAlreadyIn(row.FileUid);
         var actionRect = new ImRect(
@@ -343,16 +333,16 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
             return;
         }
 
-        gui.Canvas.Rect(thumb, ThumbBg);
+        gui.Canvas.Rect(thumb, gui.Style.TextEdit.Normal.Box.BackColor);
         var settings = new ImTextSettings(gui.Style.Layout.TextSize * 0.7f, 0.5f, 0.5f);
-        gui.Canvas.Text("no image".AsSpan(), MutedColor, thumb, in settings);
+        gui.Canvas.Text("no image".AsSpan(), gui.Style.TextEdit.HintFrontColor, thumb, in settings);
     }
 
     private void DrawBadge(ImGui gui, ImRect rect, string label)
     {
-        gui.Canvas.Rect(rect, BadgeBg);
+        gui.Canvas.Rect(rect, gui.Style.AccentButton.Normal.BackColor);
         var settings = new ImTextSettings(gui.Style.Layout.TextSize * 0.8f, 0.5f, 0.5f);
-        gui.Canvas.Text(label.AsSpan(), BadgeText, rect, in settings);
+        gui.Canvas.Text(label.AsSpan(), gui.Style.AccentButton.Normal.FrontColor, rect, in settings);
     }
 
     private void TrySelect(LevelBrowseRow row, float now)
@@ -371,7 +361,7 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
             results.W,
             rowHeight);
         var settings = new ImTextSettings(gui.Style.Layout.TextSize, 0.5f, 0.5f);
-        gui.Canvas.Text("Couldn’t load levels".AsSpan(), ErrorColor, messageRect, in settings);
+        gui.Canvas.Text("Couldn’t load levels".AsSpan(), gui.Style.Text.Color, messageRect, in settings);
 
         const float retryWidth = 100f;
         var retryRect = new ImRect(
@@ -410,21 +400,24 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
             ? $"Page {page + 1} · {_totalCount} levels"
             : $"Page {page + 1}";
         var settings = new ImTextSettings(gui.Style.Layout.TextSize * 0.85f, 0.5f, 0.5f);
-        gui.Canvas.Text(info.AsSpan(), MutedColor, infoRect, in settings);
+        gui.Canvas.Text(info.AsSpan(), gui.Style.TextEdit.HintFrontColor, infoRect, in settings);
     }
 
     private bool DrawPagerButton(ImGui gui, ImRect rect, string label, bool enabled)
     {
         if (!enabled)
-        {
-            gui.Canvas.Rect(rect, CardBg);
-            var settings = new ImTextSettings(gui.Style.Layout.TextSize * 0.85f, 0.5f, 0.5f);
-            gui.Canvas.Text(label.AsSpan(), MutedColor, rect, in settings);
-            return false;
-        }
+            gui.BeginReadOnly(true);
 
-        uint id = gui.GetNextControlId();
-        return gui.Button(id, label.AsSpan(), rect, out _);
+        try
+        {
+            uint id = gui.GetNextControlId();
+            return gui.Button(id, label.AsSpan(), rect, out _) && enabled;
+        }
+        finally
+        {
+            if (!enabled)
+                gui.EndReadOnly();
+        }
     }
 
     private void ShowToast(string message, float now)
@@ -445,9 +438,9 @@ public sealed class LevelBrowserWindow : IZeepGUIDrawer
             area.Y + Gap,
             toastWidth,
             toastHeight);
-        gui.Canvas.Rect(rect, ToastBg);
+        gui.Canvas.Rect(rect, gui.Style.AccentButton.Normal.BackColor);
         var settings = new ImTextSettings(gui.Style.Layout.TextSize * 0.85f, 0.5f, 0.5f);
-        gui.Canvas.Text(_toast.AsSpan(), ToastText, rect, in settings);
+        gui.Canvas.Text(_toast.AsSpan(), gui.Style.AccentButton.Normal.FrontColor, rect, in settings);
     }
 
     private static string SafeText(string value)
