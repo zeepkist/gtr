@@ -5,8 +5,9 @@ namespace TNRD.Zeepkist.GTR.LevelBrowser;
 /// <summary>
 /// Builds the default <c>levelItems</c> browse arguments from raw discovery inputs: always-on
 /// hygiene (applied by the query object), case-insensitive substring matchers for name and author
-/// when non-empty, resolved date/track-length/rating predicates, sort, and
-/// <c>first</c>/<c>offset</c> pagination.
+/// when non-empty, resolved date/track-length/rating predicates, optional <c>authorId</c> from a
+/// selected "Uploaded by" user (winning over My levels), sort, and <c>first</c>/<c>offset</c>
+/// pagination.
 /// </summary>
 public static class LevelItemsBrowseQueryBuilder
 {
@@ -22,7 +23,8 @@ public static class LevelItemsBrowseQueryBuilder
     /// <summary>
     /// Produces the resolved <see cref="LevelItemsBrowseQuery"/>. Blank/whitespace filter text
     /// becomes <c>null</c> (no predicate); page and pageSize are clamped to sane minimums;
-    /// date presets are resolved against <paramref name="nowUtc"/>.
+    /// date presets are resolved against <paramref name="nowUtc"/>. Ownership/PB filters only
+    /// resolve when <paramref name="ownerSteamId"/> is non-blank.
     /// </summary>
     public static LevelItemsBrowseQuery Build(
         string name,
@@ -33,6 +35,11 @@ public static class LevelItemsBrowseQueryBuilder
         LevelBrowseDateRange dateRange = LevelBrowseDateRange.AnyTime,
         LevelBrowseTrackLength trackLength = LevelBrowseTrackLength.Any,
         LevelBrowseRating rating = LevelBrowseRating.Any,
+        bool ownLevelsOnly = false,
+        bool withoutMyPersonalBest = false,
+        bool withoutRecords = false,
+        string ownerSteamId = null,
+        string authorUserId = null,
         DateTimeOffset? nowUtc = null)
     {
         if (page < 0)
@@ -42,6 +49,10 @@ public static class LevelItemsBrowseQueryBuilder
 
         ResolveTrackLength(trackLength, out double? timeMin, out double? timeMax);
 
+        string steamId = Normalize(ownerSteamId);
+        // Selected "Uploaded by" author wins over "My levels" — both target authorId equalTo.
+        string resolvedAuthorId = Normalize(authorUserId) ?? (ownLevelsOnly ? steamId : null);
+
         return new LevelItemsBrowseQuery(
             Normalize(name),
             Normalize(fileAuthor),
@@ -49,6 +60,9 @@ public static class LevelItemsBrowseQueryBuilder
             timeMin,
             timeMax,
             rating,
+            resolvedAuthorId,
+            withoutMyPersonalBest ? steamId : null,
+            withoutRecords,
             sort,
             pageSize,
             page * pageSize);

@@ -127,21 +127,45 @@ public class LevelBrowserSessionTests
         session.Open(_ => { });
         session.SearchName = "rock";
         session.SearchAuthor = "matt";
+        session.AuthorUserId = "76561198111111111";
+        session.AuthorUserName = "Uploader";
         session.Sort = LevelBrowseSort.NameAsc;
         session.DateRange = LevelBrowseDateRange.PastWeek;
         session.TrackLength = LevelBrowseTrackLength.Long;
         session.Rating = LevelBrowseRating.TopRated;
+        session.OwnLevelsOnly = true;
+        session.WithoutMyPersonalBest = true;
+        session.WithoutRecords = true;
         session.Page = 4;
 
         session.Open(_ => { });
 
         Assert.Equal(string.Empty, session.SearchName);
         Assert.Equal(string.Empty, session.SearchAuthor);
+        Assert.Equal(string.Empty, session.AuthorUserId);
+        Assert.Equal(string.Empty, session.AuthorUserName);
         Assert.Equal(LevelBrowseSort.Newest, session.Sort);
         Assert.Equal(LevelBrowseDateRange.AnyTime, session.DateRange);
         Assert.Equal(LevelBrowseTrackLength.Any, session.TrackLength);
         Assert.Equal(LevelBrowseRating.Any, session.Rating);
+        Assert.False(session.OwnLevelsOnly);
+        Assert.False(session.WithoutMyPersonalBest);
+        Assert.False(session.WithoutRecords);
         Assert.Equal(0, session.Page);
+    }
+
+    [Fact]
+    public void CloseByUserResetsAuthorUserFields()
+    {
+        var session = new LevelBrowserSession();
+        session.Open(_ => { });
+        session.AuthorUserId = "76561198111111111";
+        session.AuthorUserName = "Uploader";
+
+        session.CloseByUser();
+
+        Assert.Equal(string.Empty, session.AuthorUserId);
+        Assert.Equal(string.Empty, session.AuthorUserName);
     }
 
     [Fact]

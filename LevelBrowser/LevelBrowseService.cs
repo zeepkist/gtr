@@ -24,6 +24,9 @@ public class LevelBrowseService
         _gtrClient = gtrClient;
     }
 
+    /// <summary>Default suggestion page size for <see cref="SearchAuthorsAsync"/>.</summary>
+    public const int DefaultAuthorSearchLimit = 12;
+
     /// <summary>Runs a browse for raw discovery inputs, building the default query internally.</summary>
     public UniTask<Result<LevelBrowsePage>> BrowseAsync(
         string name,
@@ -33,6 +36,11 @@ public class LevelBrowseService
         LevelBrowseDateRange dateRange = LevelBrowseDateRange.AnyTime,
         LevelBrowseTrackLength trackLength = LevelBrowseTrackLength.Any,
         LevelBrowseRating rating = LevelBrowseRating.Any,
+        bool ownLevelsOnly = false,
+        bool withoutMyPersonalBest = false,
+        bool withoutRecords = false,
+        string ownerSteamId = null,
+        string authorUserId = null,
         CancellationToken ct = default)
     {
         return BrowseAsync(
@@ -44,8 +52,68 @@ public class LevelBrowseService
                 dateRange: dateRange,
                 trackLength: trackLength,
                 rating: rating,
+                ownLevelsOnly: ownLevelsOnly,
+                withoutMyPersonalBest: withoutMyPersonalBest,
+                withoutRecords: withoutRecords,
+                ownerSteamId: ownerSteamId,
+                authorUserId: authorUserId,
                 nowUtc: DateTimeOffset.UtcNow),
             ct);
+    }
+
+    /// <summary>
+    /// Searches GTR users by case-insensitive <c>steamName</c> substring for the "Uploaded by"
+    /// autocomplete. Always queries GraphQL (debounced by the UI).
+    /// </summary>
+    public async UniTask<Result<IReadOnlyList<AuthorSuggestion>>> SearchAuthorsAsync(
+        string namePart,
+        int limit = DefaultAuthorSearchLimit,
+        CancellationToken ct = default)
+    {
+        if (string.IsNullOrWhiteSpace(namePart) || namePart.Trim().Length < 2)
+            return Result.Ok<IReadOnlyList<AuthorSuggestion>>(Array.Empty<AuthorSuggestion>());
+
+        if (limit < 1)
+            limit = DefaultAuthorSearchLimit;
+
+        try
+        {
+            var filter = new UserFilter
+            {
+                SteamName = new StringFilter { IncludesInsensitive = namePart.Trim() }
+            };
+
+            IOperationResult<ISearchUsersByNameResult> result =
+                await _gtrClient.SearchUsersByName.ExecuteAsync(filter, limit, ct);
+
+            try
+            {
+                result.EnsureNoErrors();
+            }
+            catch (Exception e)
+            {
+                return Result.Fail(new ExceptionalError(e));
+            }
+
+            ISearchUsersByName_Users connection = result.Data?.Users;
+            if (connection == null)
+                return Result.Ok<IReadOnlyList<AuthorSuggestion>>(Array.Empty<AuthorSuggestion>());
+
+            var list = new List<AuthorSuggestion>(connection.Nodes.Count);
+            foreach (ISearchUsersByName_Users_Nodes node in connection.Nodes)
+            {
+                if (string.IsNullOrWhiteSpace(node.SteamId) || string.IsNullOrWhiteSpace(node.SteamName))
+                    continue;
+
+                list.Add(new AuthorSuggestion(node.SteamId, node.SteamName));
+            }
+
+            return Result.Ok<IReadOnlyList<AuthorSuggestion>>(list);
+        }
+        catch (Exception e)
+        {
+            return Result.Fail(new ExceptionalError(e));
+        }
     }
 
     /// <summary>Runs a browse for an already-built query.</summary>
@@ -131,6 +199,26 @@ public class LevelBrowseService
                 GreaterThanOrEqualTo = FormatDatetime(query.DateCreatedAfter.Value)
             };
         }
+
+        if (!string.IsNullOrEmpty(query.AuthorIdEqualTo))
+            filter.AuthorId = new BigIntFilter { EqualTo = query.AuthorIdEqualTo };
+
+        if (!string.IsNullOrEmpty(query.ExcludePersonalBestSteamId))
+        {
+            level.PersonalBestGlobals = new LevelToManyPersonalBestGlobalFilter
+            {
+                None = new PersonalBestGlobalFilter
+                {
+                    User = new UserFilter
+                    {
+                        SteamId = new BigIntFilter { EqualTo = query.ExcludePersonalBestSteamId }
+                    }
+                }
+            };
+        }
+
+        if (query.RequireNoRecords)
+            level.RecordsExist = false;
 
         return filter;
     }
