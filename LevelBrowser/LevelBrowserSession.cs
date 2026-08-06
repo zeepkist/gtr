@@ -25,6 +25,18 @@ public sealed class LevelBrowserSession
     /// <summary>Discovery filter: file-author substring. Reset when a new session opens.</summary>
     public string SearchAuthor { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Discovery filter: GTR user Steam id for <c>authorId equalTo</c> ("Uploaded by"). Empty when
+    /// none selected. Reset when a new session opens.
+    /// </summary>
+    public string AuthorUserId { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Display name for the selected "Uploaded by" user. Empty when none selected. Reset when a new
+    /// session opens.
+    /// </summary>
+    public string AuthorUserName { get; set; } = string.Empty;
+
     /// <summary>Sort order. Reset when a new session opens.</summary>
     public LevelBrowseSort Sort { get; set; }
 
@@ -148,6 +160,8 @@ public sealed class LevelBrowserSession
     {
         SearchName = string.Empty;
         SearchAuthor = string.Empty;
+        AuthorUserId = string.Empty;
+        AuthorUserName = string.Empty;
         Sort = LevelBrowseSort.Newest;
         DateRange = LevelBrowseDateRange.AnyTime;
         TrackLength = LevelBrowseTrackLength.Any;

@@ -5,8 +5,9 @@ namespace TNRD.Zeepkist.GTR.LevelBrowser;
 /// <summary>
 /// Builds the default <c>levelItems</c> browse arguments from raw discovery inputs: always-on
 /// hygiene (applied by the query object), case-insensitive substring matchers for name and author
-/// when non-empty, resolved date/track-length/rating predicates, sort, and
-/// <c>first</c>/<c>offset</c> pagination.
+/// when non-empty, resolved date/track-length/rating predicates, optional <c>authorId</c> from a
+/// selected "Uploaded by" user (winning over My levels), sort, and <c>first</c>/<c>offset</c>
+/// pagination.
 /// </summary>
 public static class LevelItemsBrowseQueryBuilder
 {
@@ -38,6 +39,7 @@ public static class LevelItemsBrowseQueryBuilder
         bool withoutMyPersonalBest = false,
         bool withoutRecords = false,
         string ownerSteamId = null,
+        string authorUserId = null,
         DateTimeOffset? nowUtc = null)
     {
         if (page < 0)
@@ -48,6 +50,8 @@ public static class LevelItemsBrowseQueryBuilder
         ResolveTrackLength(trackLength, out double? timeMin, out double? timeMax);
 
         string steamId = Normalize(ownerSteamId);
+        // Selected "Uploaded by" author wins over "My levels" — both target authorId equalTo.
+        string resolvedAuthorId = Normalize(authorUserId) ?? (ownLevelsOnly ? steamId : null);
 
         return new LevelItemsBrowseQuery(
             Normalize(name),
@@ -56,7 +60,7 @@ public static class LevelItemsBrowseQueryBuilder
             timeMin,
             timeMax,
             rating,
-            ownLevelsOnly ? steamId : null,
+            resolvedAuthorId,
             withoutMyPersonalBest ? steamId : null,
             withoutRecords,
             sort,
