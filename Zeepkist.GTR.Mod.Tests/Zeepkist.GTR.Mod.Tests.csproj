@@ -27,6 +27,8 @@
     <Compile Include="..\Ghosting\Playback\OfflineGhostLimit.cs" Link="Source\OfflineGhostLimit.cs" />
     <Compile Include="..\Ghosting\Playback\GhostVisualProfile.cs" Link="Source\GhostVisualProfile.cs" />
     <Compile Include="..\Ghosting\Playback\GhostVisualProfileResolver.cs" Link="Source\GhostVisualProfileResolver.cs" />
+    <Compile Include="..\Ghosting\Playback\GeneratedChildSelection.cs" Link="Source\GeneratedChildSelection.cs" />
+    <Compile Include="..\Ghosting\Playback\HierarchyOwnership.cs" Link="Source\HierarchyOwnership.cs" />
     <Compile Include="..\Ghosting\Ghosts\GhostCharacterPlaybackState.cs" Link="Source\GhostCharacterPlaybackState.cs" />
     <Compile Include="..\Ghosting\Ghosts\GhostFrameSearch.cs" Link="Source\GhostFrameSearch.cs" />
     <Compile Include="..\Ghosting\Playback\BulkGhostBatching.cs" Link="Source\BulkGhostBatching.cs" />

@@ -24,6 +24,8 @@ public partial class GhostPlayer : IEagerService
     private readonly Dictionary<int, GhostData> _ghostData = new();
     private readonly HashSet<int> _ghostsToRemove = new();
     private readonly BulkGhostRenderService _bulkGhostRenderService;
+    private readonly BulkGhostModeState _bulkModeState;
+    private readonly GhostTimingService _timingService;
 
     private bool _roundStarted;
     private bool _manualPlaybackActive;
@@ -37,10 +39,14 @@ public partial class GhostPlayer : IEagerService
     public GhostPlayer(
         PlayerLoopService playerLoopService,
         BulkGhostRenderService bulkGhostRenderService,
+        BulkGhostModeState bulkModeState,
+        GhostTimingService timingService,
         ILogger<GhostPlayer> logger)
     {
         _logger = logger;
         _bulkGhostRenderService = bulkGhostRenderService;
+        _bulkModeState = bulkModeState;
+        _timingService = timingService;
         _fullPool = new ObjectPool<GhostData>(
             CreateFullGhost,
             GetGhost,
@@ -53,7 +59,6 @@ public partial class GhostPlayer : IEagerService
             DestroyGhost);
 
         playerLoopService.SubscribeUpdate(Update);
-        playerLoopService.SubscribeFixedUpdate(FixedUpdate);
         RacingApi.RoundStarted += OnRoundStarted;
         RacingApi.RoundEnded += OnRoundEnded;
         RacingApi.PlayerSpawned += OnPlayerSpawned;
@@ -141,40 +146,48 @@ public partial class GhostPlayer : IEagerService
     private void OnRoundStarted()
     {
         _roundStarted = true;
+        if (_manualPlaybackActive)
+            return;
 
         foreach ((int _, IGhost ghost) in _ghosts)
         {
-            ghost.Start();
+            ghost.Start(_timingService.CurrentTime);
         }
     }
 
     private void OnQuickReset()
     {
         _roundStarted = false;
+        if (_manualPlaybackActive)
+            return;
 
         foreach ((int _, IGhost ghost) in _ghosts)
         {
-            ghost.Start();
+            ghost.Start(_timingService.CurrentTime);
         }
     }
 
     private void OnRoundEnded()
     {
         _roundStarted = false;
+        if (_manualPlaybackActive)
+            return;
 
         foreach ((int _, IGhost ghost) in _ghosts)
         {
-            ghost.Stop();
+            ghost.Stop(_timingService.CurrentTime);
         }
     }
 
     private void OnPlayerSpawned()
     {
         _roundStarted = false;
+        if (_manualPlaybackActive)
+            return;
 
         foreach ((int _, IGhost ghost) in _ghosts)
         {
-            ghost.Stop();
+            ghost.Stop(_timingService.CurrentTime);
         }
     }
 
@@ -241,7 +254,7 @@ public partial class GhostPlayer : IEagerService
             if (ghostData.VisualProfile == visualProfile)
             {
                 hadExistingGhost = true;
-                _ghosts[recordId].Stop();
+                _ghosts[recordId].Stop(_timingService.CurrentTime);
             }
             else
             {
@@ -256,7 +269,7 @@ public partial class GhostPlayer : IEagerService
 
         ghostData.Initialize(type, ghost);
         ghostData.SetIdentity(recordId, steamName);
-        ghost.Initialize(ghostData);
+        ghost.Initialize(ghostData, _bulkModeState, _timingService);
         if (visualProfile == GhostVisualProfile.Full)
         {
             ghostData.PrepareForCosmeticsReuse();
@@ -291,6 +304,14 @@ public partial class GhostPlayer : IEagerService
             _ghosts[recordId] = ghost;
         }
 
+        if (_roundStarted || _manualPlaybackActive)
+        {
+            float currentTime = _timingService.CurrentTime;
+            ghost.Start(currentTime);
+            if (_paused)
+                ghost.Pause(currentTime);
+        }
+
         GhostAdded?.Invoke(this, new GhostAddedEventArgs(recordId, ghost, ghostData));
     }
 
@@ -299,7 +320,7 @@ public partial class GhostPlayer : IEagerService
         if (!_ghosts.TryGetValue(recordId, out IGhost ghost))
             return;
 
-        ghost.Stop();
+        ghost.Stop(_timingService.CurrentTime);
 
         if (_ghostData.TryGetValue(recordId, out GhostData ghostData))
         {
@@ -336,12 +357,24 @@ public partial class GhostPlayer : IEagerService
 
     public void PauseGhosts()
     {
+        if (_paused)
+            return;
+
         _paused = true;
+        float currentTime = _timingService.CurrentTime;
+        foreach (IGhost ghost in _ghosts.Values)
+            ghost.Pause(currentTime);
     }
 
     public void ResumeGhosts()
     {
+        if (!_paused)
+            return;
+
         _paused = false;
+        float currentTime = _timingService.CurrentTime;
+        foreach (IGhost ghost in _ghosts.Values)
+            ghost.Resume(currentTime);
     }
 
     public float GetMaxDuration()
@@ -389,7 +422,7 @@ public partial class GhostPlayer : IEagerService
 
         foreach ((int _, IGhost ghost) in _ghosts)
         {
-            ghost.Start();
+            ghost.Start(_timingService.CurrentTime);
         }
     }
 
@@ -400,7 +433,7 @@ public partial class GhostPlayer : IEagerService
 
         foreach ((int _, IGhost ghost) in _ghosts)
         {
-            ghost.Stop();
+            ghost.Stop(_timingService.CurrentTime);
         }
     }
 
@@ -412,54 +445,38 @@ public partial class GhostPlayer : IEagerService
         }
     }
 
-    private void Update()
+    internal void RestartRoundPlayback()
     {
-        if (!_roundStarted && !_manualPlaybackActive)
+        if (!_roundStarted)
             return;
 
-        if (_paused)
-            return;
-
-        _ghostsToRemove.Clear();
-
-        foreach ((int id, IGhost ghost) in _ghosts)
-        {
-            try
-            {
-                ghost.Update();
-            }
-            catch (Exception exception)
-            {
-                _logger.LogWarning(exception, "Removing ghost {RecordId} after Update failed", id);
-                _ghostsToRemove.Add(id);
-            }
-        }
-
-        foreach (int id in _ghostsToRemove)
-        {
-            RemoveGhost(id);
-        }
+        float currentTime = _timingService.CurrentTime;
+        foreach (IGhost ghost in _ghosts.Values)
+            ghost.Start(currentTime);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        _timingService.Advance();
+
         if (!_roundStarted && !_manualPlaybackActive)
             return;
 
         if (_paused)
             return;
 
+        float currentTime = _timingService.CurrentTime;
         _ghostsToRemove.Clear();
 
         foreach ((int id, IGhost ghost) in _ghosts)
         {
             try
             {
-                ghost.FixedUpdate();
+                ghost.Sample(currentTime);
             }
             catch (Exception exception)
             {
-                _logger.LogWarning(exception, "Removing ghost {RecordId} after FixedUpdate failed", id);
+                _logger.LogWarning(exception, "Removing ghost {RecordId} after sampling failed", id);
                 _ghostsToRemove.Add(id);
             }
         }

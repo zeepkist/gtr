@@ -430,22 +430,9 @@ public sealed class BulkGhostRenderService : IEagerService
 
     private static bool IsBatchHatRenderer(Renderer renderer, SetupModelCar model)
     {
-        if (renderer == null)
-            return false;
-
-        if (model?.hatParent != null && renderer.transform.IsChildOf(model.hatParent))
-            return true;
-
-        Transform current = renderer.transform;
-        while (current != null && current != model?.transform)
-        {
-            if (current.name.IndexOf("hat", StringComparison.OrdinalIgnoreCase) >= 0)
-                return true;
-
-            current = current.parent;
-        }
-
-        return false;
+        return renderer != null &&
+               model?.hatParent != null &&
+               (renderer.transform == model.hatParent || renderer.transform.IsChildOf(model.hatParent));
     }
 
     private static void AddModelRenderersByMaterial(
@@ -456,15 +443,19 @@ public sealed class BulkGhostRenderService : IEagerService
         ICollection<Mesh> bakedMeshes,
         int colorBucketCount)
     {
+        var characterHierarchy = GhostCharacterRenderers.Resolve(model);
+
         foreach (MeshFilter filter in model.GetComponentsInChildren<MeshFilter>(false))
         {
             MeshRenderer renderer = filter.GetComponent<MeshRenderer>();
             if (renderer == null || !renderer.enabled || filter.sharedMesh == null)
                 continue;
+            if (!GhostAuxiliaryRenderers.IsCurrentGeneration(renderer, model))
+                continue;
             if (IsBatchHatRenderer(renderer, model))
                 continue;
 
-            if (GhostCharacterRenderers.IsCharacterRenderer(renderer, model))
+            if (characterHierarchy.Contains(renderer.transform))
                 AddMeshFilterToCharacterGroups(characterMeshes, filter, rootInverse, renderer.sharedMaterials, renderer.name);
             else
                 AddMeshFilterToSoapboxGroups(
@@ -477,10 +468,12 @@ public sealed class BulkGhostRenderService : IEagerService
 
         foreach (SkinnedMeshRenderer renderer in model.GetComponentsInChildren<SkinnedMeshRenderer>(false))
         {
+            if (!GhostAuxiliaryRenderers.IsCurrentGeneration(renderer, model))
+                continue;
             if (IsBatchHatRenderer(renderer, model))
                 continue;
 
-            if (GhostCharacterRenderers.IsCharacterRenderer(renderer, model))
+            if (characterHierarchy.Contains(renderer.transform))
             {
                 AddCorrectedSkinnedRendererByMaterial(
                     characterMeshes,
@@ -508,14 +501,18 @@ public sealed class BulkGhostRenderService : IEagerService
         CharacterMeshGroups characterMeshes,
         ICollection<Mesh> bakedMeshes)
     {
+        var characterHierarchy = GhostCharacterRenderers.Resolve(model);
+
         foreach (MeshFilter filter in model.GetComponentsInChildren<MeshFilter>(false))
         {
             MeshRenderer renderer = filter.GetComponent<MeshRenderer>();
             if (renderer == null || !renderer.enabled || filter.sharedMesh == null)
                 continue;
+            if (!GhostAuxiliaryRenderers.IsCurrentGeneration(renderer, model))
+                continue;
             if (IsBatchHatRenderer(renderer, model))
                 continue;
-            if (!GhostCharacterRenderers.IsCharacterRenderer(renderer, model))
+            if (!characterHierarchy.Contains(renderer.transform))
                 continue;
 
             AddMeshFilterToCharacterGroups(characterMeshes, filter, rootInverse, renderer.sharedMaterials, renderer.name);
@@ -523,9 +520,11 @@ public sealed class BulkGhostRenderService : IEagerService
 
         foreach (SkinnedMeshRenderer renderer in model.GetComponentsInChildren<SkinnedMeshRenderer>(false))
         {
+            if (!GhostAuxiliaryRenderers.IsCurrentGeneration(renderer, model))
+                continue;
             if (IsBatchHatRenderer(renderer, model))
                 continue;
-            if (!GhostCharacterRenderers.IsCharacterRenderer(renderer, model))
+            if (!characterHierarchy.Contains(renderer.transform))
                 continue;
 
             AddCorrectedSkinnedRendererByMaterial(

@@ -7,11 +7,15 @@ public interface IGhost
 {
     Color Color { get; }
     float Duration { get; }
-    void Initialize(GhostData ghost);
+    void Initialize(
+        GhostData ghost,
+        BulkGhostModeState bulkModeState,
+        GhostTimingService timingService);
     void ApplyCosmetics(string steamName);
-    void Start();
-    void Stop();
+    void Start(float time);
+    void Stop(float time);
     void Seek(float time);
-    void Update();
-    void FixedUpdate();
+    void Pause(float time);
+    void Resume(float time);
+    void Sample(float time);
 }

@@ -7,7 +7,7 @@ public sealed class BulkGhostModeState
     public bool IsActive { get; private set; }
     public event Action Changed;
 
-    public bool ShouldSkipFullProfileFixedUpdateExtras(bool isManualPlaybackActive) =>
+    public bool ShouldSkipFullProfilePlaybackEffects(bool isManualPlaybackActive) =>
         IsActive && isManualPlaybackActive;
 
     public void SetActive(bool active)

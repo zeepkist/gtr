@@ -14,11 +14,17 @@ public sealed class GhostCharacterRig
             Transform = transform;
             OriginalParent = transform.parent;
             OriginalSiblingIndex = transform.GetSiblingIndex();
+            OriginalLocalPosition = transform.localPosition;
+            OriginalLocalRotation = transform.localRotation;
+            OriginalLocalScale = transform.localScale;
         }
 
         public Transform Transform { get; }
         public Transform OriginalParent { get; }
         public int OriginalSiblingIndex { get; }
+        public Vector3 OriginalLocalPosition { get; }
+        public Quaternion OriginalLocalRotation { get; }
+        public Vector3 OriginalLocalScale { get; }
     }
 
     private sealed class PoseSnapshot
@@ -38,6 +44,7 @@ public sealed class GhostCharacterRig
     }
 
     private readonly GameObject _root;
+    private readonly Transform _modelTransform;
     private readonly Vector3 _localPosition;
     private readonly Quaternion _localRotation;
     private readonly IReadOnlyList<PoseSnapshot> _poseSnapshots;
@@ -46,6 +53,7 @@ public sealed class GhostCharacterRig
 
     private GhostCharacterRig(
         GameObject root,
+        Transform modelTransform,
         Vector3 localPosition,
         Quaternion localRotation,
         IReadOnlyList<PoseSnapshot> poseSnapshots,
@@ -53,6 +61,7 @@ public sealed class GhostCharacterRig
         LimbPoseController limbPoseController)
     {
         _root = root;
+        _modelTransform = modelTransform;
         _localPosition = localPosition;
         _localRotation = localRotation;
         _poseSnapshots = poseSnapshots;
@@ -68,28 +77,45 @@ public sealed class GhostCharacterRig
         if (model == null)
             return null;
 
-        Transform sourceRoot = GetSourceRoot(model);
+        GhostCharacterRenderers.Hierarchy hierarchy = GhostCharacterRenderers.Resolve(model);
+        if (!hierarchy.IsResolved)
+            return null;
+
+        Transform sourceRoot = GetSourceRoot(model, hierarchy);
         if (sourceRoot == null)
             return null;
+
+        Transform modelTransform = model.transform;
+        Vector3 localPosition = modelTransform.InverseTransformPoint(sourceRoot.position);
+        Quaternion localRotation = Quaternion.Inverse(modelTransform.rotation) * sourceRoot.rotation;
 
         var root = new GameObject("Ghost Character Rig");
         Object.DontDestroyOnLoad(root.transform.root.gameObject);
         root.transform.SetPositionAndRotation(sourceRoot.position, sourceRoot.rotation);
 
         LimbPoseController limbPoseController = LimbPoseController.Create(model);
-        var rigParts = new List<RigPart>();
-        foreach (Transform part in GetTopLevelCharacterParts(model))
+        var characterParts = new HashSet<Transform>();
+        foreach (Transform characterRoot in hierarchy.Roots)
+            AddPart(characterParts, characterRoot);
+
+        foreach (Transform poseTarget in LimbPoseController.GetPoseTargets(model))
         {
-            rigParts.Add(new RigPart(part));
-            part.SetParent(root.transform, true);
+            if (!hierarchy.Contains(poseTarget) && IsSafeStandalonePart(poseTarget, model))
+                AddPart(characterParts, poseTarget);
         }
 
-        Vector3 localPosition = model.transform.InverseTransformPoint(sourceRoot.position);
-        Quaternion localRotation = Quaternion.Inverse(model.transform.rotation) * sourceRoot.rotation;
+        var rigParts = new List<RigPart>();
+        foreach (Transform part in GetTopLevelParts(characterParts))
+            rigParts.Add(new RigPart(part));
+
+        foreach (RigPart rigPart in rigParts)
+            rigPart.Transform.SetParent(root.transform, true);
+
         IReadOnlyList<PoseSnapshot> poseSnapshots = CapturePose(root.transform);
         limbPoseController.CaptureSeatedPose();
         return new GhostCharacterRig(
             root,
+            modelTransform,
             localPosition,
             localRotation,
             poseSnapshots,
@@ -99,8 +125,6 @@ public sealed class GhostCharacterRig
 
     public void AlignToSeated(Transform soapbox)
     {
-        ApplySeatedPose();
-
         if (soapbox == null)
             return;
 
@@ -143,14 +167,66 @@ public sealed class GhostCharacterRig
     public void RestoreToModel()
     {
         ApplySeatedPose(false);
+        AlignToSeated(_modelTransform);
+
+        var restoredParts = new List<RigPart>();
         foreach (RigPart rigPart in _rigParts)
+        {
+            if (rigPart.Transform == null)
+                continue;
+
+            if (rigPart.OriginalParent == null)
+            {
+                DetachFromRigRoot(rigPart.Transform);
+                continue;
+            }
+
+            rigPart.Transform.SetParent(rigPart.OriginalParent, false);
+            rigPart.Transform.localPosition = rigPart.OriginalLocalPosition;
+            rigPart.Transform.localRotation = rigPart.OriginalLocalRotation;
+            rigPart.Transform.localScale = rigPart.OriginalLocalScale;
+            restoredParts.Add(rigPart);
+        }
+
+        var siblingGroups = new Dictionary<Transform, List<RigPart>>();
+        foreach (RigPart rigPart in restoredParts)
         {
             if (rigPart.Transform == null || rigPart.OriginalParent == null)
                 continue;
 
-            rigPart.Transform.SetParent(rigPart.OriginalParent, true);
-            rigPart.Transform.SetSiblingIndex(rigPart.OriginalSiblingIndex);
+            if (!siblingGroups.TryGetValue(rigPart.OriginalParent, out List<RigPart> siblings))
+            {
+                siblings = new List<RigPart>();
+                siblingGroups.Add(rigPart.OriginalParent, siblings);
+            }
+
+            siblings.Add(rigPart);
         }
+
+        foreach (List<RigPart> siblings in siblingGroups.Values)
+        {
+            siblings.Sort((left, right) => left.OriginalSiblingIndex.CompareTo(right.OriginalSiblingIndex));
+            foreach (RigPart rigPart in siblings)
+            {
+                if (rigPart.Transform == null || rigPart.OriginalParent == null)
+                    continue;
+
+                rigPart.Transform.SetSiblingIndex(rigPart.OriginalSiblingIndex);
+            }
+        }
+    }
+
+    private void DetachFromRigRoot(Transform transform)
+    {
+        if (transform == null || _root == null || !transform.IsChildOf(_root.transform))
+            return;
+
+        Transform fallbackParent = _modelTransform;
+        if (fallbackParent != null &&
+            (fallbackParent == transform || fallbackParent.IsChildOf(transform)))
+            fallbackParent = null;
+
+        transform.SetParent(fallbackParent, true);
     }
 
     public void Destroy()
@@ -183,45 +259,37 @@ public sealed class GhostCharacterRig
 
     public static Quaternion GetRagdollRotationOffset(SetupModelCar model)
     {
-        Transform sourceRoot = GetSourceRoot(model);
-        return sourceRoot != null && model != null
+        if (model == null)
+            return Quaternion.identity;
+
+        GhostCharacterRenderers.Hierarchy hierarchy = GhostCharacterRenderers.Resolve(model);
+        Transform sourceRoot = GetSourceRoot(model, hierarchy);
+        return sourceRoot != null
             ? Quaternion.Inverse(model.transform.rotation) * sourceRoot.rotation
             : Quaternion.identity;
     }
 
-    private static Transform GetSourceRoot(SetupModelCar model)
+    private static Transform GetSourceRoot(
+        SetupModelCar model,
+        GhostCharacterRenderers.Hierarchy hierarchy)
     {
-        if (model.character != null)
+        if (model == null || hierarchy == null || !hierarchy.IsResolved)
+            return null;
+
+        if (model.character != null && hierarchy.Contains(model.character.transform))
             return model.character.transform;
 
-        foreach (Renderer renderer in model.GetComponentsInChildren<Renderer>(true))
+        foreach (Transform characterRoot in hierarchy.Roots)
         {
-            if (GhostCharacterRenderers.IsCharacterRenderer(renderer, model))
-                return renderer.transform;
+            if (characterRoot != null)
+                return characterRoot;
         }
 
         return null;
     }
 
-    private static IEnumerable<Transform> GetTopLevelCharacterParts(SetupModelCar model)
+    private static IEnumerable<Transform> GetTopLevelParts(ISet<Transform> parts)
     {
-        var parts = new HashSet<Transform>();
-        AddPart(parts, model.character);
-        AddPart(parts, model.leftArm);
-        AddPart(parts, model.rightArm);
-        AddPart(parts, model.leftLeg);
-        AddPart(parts, model.rightLeg);
-        AddPart(parts, model.hatParent);
-        foreach (Transform poseTarget in LimbPoseController.GetPoseTargets(model))
-            AddPart(parts, poseTarget);
-        AddSkinnedRigParts(parts, model);
-
-        foreach (Renderer renderer in model.GetComponentsInChildren<Renderer>(true))
-        {
-            if (GhostCharacterRenderers.IsCharacterRenderer(renderer, model))
-                parts.Add(renderer.transform);
-        }
-
         foreach (Transform part in parts)
         {
             if (!HasAncestorInSet(part, parts))
@@ -229,16 +297,24 @@ public sealed class GhostCharacterRig
         }
     }
 
-    private static void AddPart(ISet<Transform> parts, Renderer renderer)
-    {
-        if (renderer != null)
-            parts.Add(renderer.transform);
-    }
-
     private static void AddPart(ISet<Transform> parts, Transform transform)
     {
         if (transform != null)
             parts.Add(transform);
+    }
+
+    private static bool IsSafeStandalonePart(Transform part, SetupModelCar model)
+    {
+        if (part == null || model == null || model.transform == null || part == model.transform)
+            return false;
+        if (!part.IsChildOf(model.transform))
+            return false;
+
+        Transform auxiliaryRoot = model.auxObjects;
+        return auxiliaryRoot == null ||
+               (part != auxiliaryRoot &&
+                !part.IsChildOf(auxiliaryRoot) &&
+                !auxiliaryRoot.IsChildOf(part));
     }
 
     private static IReadOnlyList<PoseSnapshot> CapturePose(Transform root)
@@ -248,7 +324,12 @@ public sealed class GhostCharacterRig
             return snapshots;
 
         foreach (Transform transform in root.GetComponentsInChildren<Transform>(true))
+        {
+            if (transform == root)
+                continue;
+
             snapshots.Add(new PoseSnapshot(transform));
+        }
 
         return snapshots;
     }
@@ -264,35 +345,6 @@ public sealed class GhostCharacterRig
             snapshot.Transform.localRotation = snapshot.LocalRotation;
             snapshot.Transform.localScale = snapshot.LocalScale;
         }
-    }
-
-    private static void AddSkinnedRigParts(ISet<Transform> parts, SetupModelCar model)
-    {
-        if (model == null)
-            return;
-
-        foreach (SkinnedMeshRenderer renderer in model.GetComponentsInChildren<SkinnedMeshRenderer>(true))
-        {
-            if (!GhostCharacterRenderers.IsCharacterRenderer(renderer, model))
-                continue;
-
-            AddTopLevelChild(parts, renderer.rootBone, model.transform);
-            foreach (Transform bone in renderer.bones)
-                AddTopLevelChild(parts, bone, model.transform);
-        }
-    }
-
-    private static void AddTopLevelChild(ISet<Transform> parts, Transform transform, Transform root)
-    {
-        if (transform == null || root == null)
-            return;
-
-        Transform current = transform;
-        while (current.parent != null && current.parent != root)
-            current = current.parent;
-
-        if (current != root)
-            parts.Add(current);
     }
 
     private static bool HasAncestorInSet(Transform transform, ISet<Transform> parts)
@@ -361,28 +413,28 @@ public sealed class GhostCharacterRig
                     prefab.visualLeftArm,
                     model.leftArm?.transform,
                     leftArmOffset,
-                    CreateRagdollLocalPosition(model, model.leftArm?.transform, -1, RagdollArmHorizontal, RagdollArmVertical, RagdollArmForward)),
+                    CreateRagdollWorldPosition(model, model.leftArm?.transform, -1, RagdollArmHorizontal, RagdollArmVertical, RagdollArmForward)),
                 LimbPose.Create(
                     model,
                     prefab.ghostModel,
                     prefab.visualRightArm,
                     model.rightArm?.transform,
                     rightArmOffset,
-                    CreateRagdollLocalPosition(model, model.rightArm?.transform, 1, RagdollArmHorizontal, RagdollArmVertical, RagdollArmForward)),
+                    CreateRagdollWorldPosition(model, model.rightArm?.transform, 1, RagdollArmHorizontal, RagdollArmVertical, RagdollArmForward)),
                 LimbPose.Create(
                     model,
                     prefab.ghostModel,
                     prefab.visualLeftLeg,
                     model.leftLeg?.transform,
                     CreateLegStandingRotation(model.leftLeg?.transform),
-                    CreateRagdollLocalPosition(model, model.leftLeg?.transform, -1, RagdollLegHorizontal, RagdollLegVertical, RagdollLegForward)),
+                    CreateRagdollWorldPosition(model, model.leftLeg?.transform, -1, RagdollLegHorizontal, RagdollLegVertical, RagdollLegForward)),
                 LimbPose.Create(
                     model,
                     prefab.ghostModel,
                     prefab.visualRightLeg,
                     model.rightLeg?.transform,
                     CreateLegStandingRotation(model.rightLeg?.transform),
-                    CreateRagdollLocalPosition(model, model.rightLeg?.transform, 1, RagdollLegHorizontal, RagdollLegVertical, RagdollLegForward)));
+                    CreateRagdollWorldPosition(model, model.rightLeg?.transform, 1, RagdollLegHorizontal, RagdollLegVertical, RagdollLegForward)));
 
             if (!controller.IsAvailable)
                 LogUnavailable(model);
@@ -479,7 +531,7 @@ public sealed class GhostCharacterRig
             return Quaternion.FromToRotation(currentDirection, Vector3.down);
         }
 
-        private static PoseLocalPosition CreateRagdollLocalPosition(
+        private static PoseWorldPosition CreateRagdollWorldPosition(
             SetupModelCar model,
             Transform target,
             int side,
@@ -487,15 +539,15 @@ public sealed class GhostCharacterRig
             float vertical,
             float forward)
         {
-            if (model?.character == null || target?.parent == null)
-                return PoseLocalPosition.Unavailable;
+            if (model?.character == null || target == null)
+                return PoseWorldPosition.Unavailable;
 
             Bounds bounds = model.character.bounds;
             Vector3 worldPosition = bounds.center +
                                     model.transform.right * (bounds.extents.x * horizontal * side) +
                                     Vector3.up * (bounds.extents.y * vertical) +
                                     model.transform.forward * (bounds.extents.z * forward);
-            return new PoseLocalPosition(true, target.parent.InverseTransformPoint(worldPosition));
+            return new PoseWorldPosition(true, worldPosition);
         }
 
         public static Transform ResolveTarget(
@@ -551,13 +603,28 @@ public sealed class GhostCharacterRig
         public Vector3 Value { get; }
     }
 
+    private readonly struct PoseWorldPosition
+    {
+        public static PoseWorldPosition Unavailable => new(false, Vector3.zero);
+
+        public PoseWorldPosition(bool available, Vector3 value)
+        {
+            Available = available;
+            Value = value;
+        }
+
+        public bool Available { get; }
+        public Vector3 Value { get; }
+    }
+
     private sealed class LimbPose
     {
-        public static LimbPose Unavailable { get; } = new(null, Quaternion.identity, PoseLocalPosition.Unavailable);
+        public static LimbPose Unavailable { get; } = new(null, Quaternion.identity, PoseWorldPosition.Unavailable);
 
         private readonly Transform _target;
         private readonly Quaternion _poseRotationOffset;
-        private readonly PoseLocalPosition _poseLocalPosition;
+        private readonly PoseWorldPosition _poseWorldPosition;
+        private PoseLocalPosition _poseLocalPosition;
         private Vector3 _seatedLocalPosition;
         private Quaternion _seatedLocalRotation;
         private Vector3 _seatedLocalScale;
@@ -566,11 +633,12 @@ public sealed class GhostCharacterRig
         private LimbPose(
             Transform target,
             Quaternion poseRotationOffset,
-            PoseLocalPosition poseLocalPosition)
+            PoseWorldPosition poseWorldPosition)
         {
             _target = target;
             _poseRotationOffset = poseRotationOffset;
-            _poseLocalPosition = poseLocalPosition;
+            _poseWorldPosition = poseWorldPosition;
+            _poseLocalPosition = PoseLocalPosition.Unavailable;
         }
 
         public bool IsAvailable => _target != null;
@@ -581,10 +649,10 @@ public sealed class GhostCharacterRig
             Transform prefabTarget,
             Transform fallbackTarget,
             Quaternion poseRotationOffset,
-            PoseLocalPosition poseLocalPosition)
+            PoseWorldPosition poseWorldPosition)
         {
             Transform target = LimbPoseController.ResolveTarget(targetModel, prefabModel, prefabTarget, fallbackTarget);
-            return target != null ? new LimbPose(target, poseRotationOffset, poseLocalPosition) : Unavailable;
+            return target != null ? new LimbPose(target, poseRotationOffset, poseWorldPosition) : Unavailable;
         }
 
         public void CaptureSeatedPose()
@@ -595,6 +663,11 @@ public sealed class GhostCharacterRig
             _seatedLocalPosition = _target.localPosition;
             _seatedLocalRotation = _target.localRotation;
             _seatedLocalScale = _target.localScale;
+            _poseLocalPosition = _poseWorldPosition.Available && _target.parent != null
+                ? new PoseLocalPosition(
+                    true,
+                    _target.parent.InverseTransformPoint(_poseWorldPosition.Value))
+                : PoseLocalPosition.Unavailable;
             _hasSeatedPose = true;
         }
 

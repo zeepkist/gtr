@@ -2,6 +2,7 @@ using System;
 using TNRD.Zeepkist.GTR.Core;
 using TNRD.Zeepkist.GTR.PlayerLoop;
 using UnityEngine;
+using ZeepSDK.Multiplayer;
 using ZeepSDK.Racing;
 
 namespace TNRD.Zeepkist.GTR.Ghosting.Playback;
@@ -44,11 +45,21 @@ public class GhostPlaybackService : IEagerService
         _ghostPlayer.GhostAdded += OnGhostsChanged;
         _ghostPlayer.GhostRemoved += OnGhostsChanged;
         RacingApi.RoundStarted += OnRoundStarted;
+        RacingApi.Quit += OnSessionEnded;
+        MultiplayerApi.DisconnectedFromGame += OnSessionEnded;
         _playerLoopService.SubscribeLateUpdate(ApplyPendingGhostSeek);
         RefreshDuration();
     }
 
     private void OnRoundStarted()
+    {
+        if (State == GhostPlaybackState.Stopped)
+            return;
+
+        Stop();
+    }
+
+    private void OnSessionEnded()
     {
         Stop();
     }
@@ -62,17 +73,15 @@ public class GhostPlaybackService : IEagerService
 
         if (State == GhostPlaybackState.Stopped)
         {
-            var startTime = CurrentTime;
+            _timingService.StartManualPlayback();
             _ghostPlayer.StartManualPlayback();
-            _timingService.SetTime(startTime);
-            _ghostPlayer.SeekAllGhosts(startTime);
         }
         else if (State == GhostPlaybackState.Paused)
         {
+            _timingService.ResumeManualPlayback();
             _ghostPlayer.ResumeGhosts();
         }
 
-        _timingService.StartManualPlayback();
         State = GhostPlaybackState.Playing;
     }
 
@@ -90,9 +99,10 @@ public class GhostPlaybackService : IEagerService
     {
         _pendingGhostSeekTime = null;
         _lastGhostSeekApplyFrame = -1;
-        _timingService.StopManualPlayback();
         _ghostPlayer.StopManualPlayback();
+        _timingService.StopManualPlayback();
         State = GhostPlaybackState.Stopped;
+        _ghostPlayer.RestartRoundPlayback();
     }
 
     public void TogglePlayPause()

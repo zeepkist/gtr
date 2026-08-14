@@ -15,13 +15,11 @@ public partial class V6Ghost : GhostBase
     private readonly List<Frame> _frames;
 
     public V6Ghost(
-        GhostTimingService timingService,
-        BulkGhostModeState bulkModeState,
         string taggedUsername,
         Color color,
         ulong steamId,
         CosmeticIDs cosmeticIds,
-        List<Frame> frames) : base(timingService, bulkModeState)
+        List<Frame> frames)
     {
         _taggedUsername = taggedUsername;
         _color = color;
@@ -40,21 +38,8 @@ public partial class V6Ghost : GhostBase
         SetupCosmetics(cosmetics, steamName, _steamId);
         if (Ghost.VisualProfile == GhostVisualProfile.Full)
             Ghost.SetCharacterRig(GhostCharacterRig.Create(Ghost.Visuals?.GhostModel));
-        AlignCharacterToSeated(false);
-    }
-
-    public override void Start()
-    {
-        base.Start();
-        ApplyCharacterPlaybackState(GhostCharacterPlaybackState.Reset);
-        AlignCharacterToSeated(false);
-    }
-
-    public override void Stop()
-    {
-        base.Stop();
-        ApplyCharacterPlaybackState(GhostCharacterPlaybackState.Reset);
-        AlignCharacterToSeated(false);
+        ApplySeatedCharacterState(false);
+        AlignCharacterRootToSeated();
     }
 
     protected override IFrame GetFrame(int index)
@@ -62,63 +47,113 @@ public partial class V6Ghost : GhostBase
         return _frames[index];
     }
 
-    protected override void OnUpdate(IFrame previousFrame, IFrame nextFrame, float t)
+    protected override void OnSample(IFrame currentFrame, IFrame nextFrame, float interpolation)
     {
-        if (previousFrame is not Frame previous || nextFrame is not Frame next)
+        if (currentFrame is not Frame current || nextFrame is not Frame next)
             return;
 
-        GhostCharacterPlaybackState characterState = GhostCharacterPlaybackState.FromSegment(
-            previous.RagdollState,
-            next.RagdollState,
-            next.InputFlags.HasFlagFast(InputFlags.ArmsUp));
-        if (!characterState.RagdollVisible)
+        if (!current.RagdollState)
         {
-            AlignCharacterToSeated(characterState.ArmsUpVisible);
+            AlignCharacterRootToSeated();
             return;
         }
 
         Vector3 position = Vector3.Lerp(
-            previous.RagdollPosition ?? previous.Position,
+            current.RagdollPosition ?? current.Position,
             next.RagdollPosition ?? next.Position,
-            t);
+            interpolation);
         Quaternion rotation = Quaternion.Slerp(
-            previous.RagdollRotation ?? previous.Rotation,
+            current.RagdollRotation ?? current.Rotation,
             next.RagdollRotation ?? next.Rotation,
-            t);
+            interpolation);
 
-        AlignCharacterToWorld(position, rotation);
+        AlignRagdollRootToWorld(position, rotation);
     }
-    protected override void OnFixedUpdate(int fixedUpdateFrame)
+
+    protected override void OnFrameChanged(
+        int previousFrameIndex,
+        int currentFrameIndex,
+        FrameSampleKind sampleKind)
     {
-        if (fixedUpdateFrame <= 0)
+        Frame frame = _frames[currentFrameIndex];
+        Frame previousFrame = previousFrameIndex >= 0 ? _frames[previousFrameIndex] : null;
+        bool forceState = sampleKind != FrameSampleKind.Advance || previousFrame == null;
+        GhostCharacterPlaybackPose pose = GetCharacterPose(frame);
+        if (forceState || GetCharacterPose(previousFrame) != pose)
+        {
+            if (pose == GhostCharacterPlaybackPose.Ragdoll)
+                ApplyRagdollCharacterState();
+            else
+                ApplySeatedCharacterState(pose == GhostCharacterPlaybackPose.SeatedArmsUp);
+        }
+
+        if (!HasFullVisuals)
             return;
 
-        Frame previousFrame = _frames[fixedUpdateFrame - 1];
-        Frame frame = _frames[fixedUpdateFrame];
+        if (forceState)
+            SynchronizeHornState(frame.InputFlags.HasFlagFast(InputFlags.Horn));
 
-        HandleHorn(previousFrame, frame);
-        HandleNone(previousFrame, frame);
-        HandleSoap(previousFrame, frame);
-        HandleOffroad(previousFrame, frame);
-        HandleParaglider(previousFrame, frame);
+        if (forceState || GetWheelState(previousFrame.SoapboxFlags) != GetWheelState(frame.SoapboxFlags))
+            ApplyWheelState(frame.SoapboxFlags);
+
+        bool paraglider = frame.SoapboxFlags.HasFlagFast(SoapboxFlags.Paraglider);
+        if (forceState || previousFrame.SoapboxFlags.HasFlagFast(SoapboxFlags.Paraglider) != paraglider)
+            ApplyParagliderState(frame.SoapboxFlags);
     }
 
-    private void AlignCharacterToSeated(bool armsUp)
+    protected override void OnForwardFramesCrossed(int previousFrameIndex, int currentFrameIndex)
+    {
+        if (!HasFullVisuals)
+            return;
+
+        for (int i = previousFrameIndex + 1; i <= currentFrameIndex; i++)
+        {
+            bool previousHorn = _frames[i - 1].InputFlags.HasFlagFast(InputFlags.Horn);
+            bool currentHorn = _frames[i].InputFlags.HasFlagFast(InputFlags.Horn);
+            HandleHornEdge(previousHorn, currentHorn);
+        }
+    }
+
+    protected override void OnStopped(float time)
+    {
+        ApplySeatedCharacterState(false);
+        AlignCharacterRootToSeated();
+    }
+
+    private void ApplySeatedCharacterState(bool armsUp)
     {
         Ghost?.CharacterRig?.ApplySeatedPose(armsUp);
-        Ghost?.CharacterRig?.AlignToSeated(Ghost.GameObject.transform);
-        Ghost?.SetNameAnchor(Ghost.GameObject.transform);
-        AlignBulkCharacterToGhost();
-        ApplyCharacterPlaybackState(GhostCharacterPlaybackState.FromSeated(armsUp));
+        Ghost?.SetCharacterPlaybackState(GhostCharacterPlaybackState.FromSeated(armsUp));
     }
 
-    private void AlignCharacterToWorld(Vector3 position, Quaternion rotation)
+    private static GhostCharacterPlaybackPose GetCharacterPose(Frame frame)
+    {
+        if (frame.RagdollState)
+            return GhostCharacterPlaybackPose.Ragdoll;
+
+        return frame.InputFlags.HasFlagFast(InputFlags.ArmsUp)
+            ? GhostCharacterPlaybackPose.SeatedArmsUp
+            : GhostCharacterPlaybackPose.Seated;
+    }
+
+    private void ApplyRagdollCharacterState()
+    {
+        Ghost?.CharacterRig?.ApplyStandingRagdollPose();
+        Ghost?.SetCharacterPlaybackState(GhostCharacterPlaybackState.FromSegment(true, true, false));
+    }
+
+    private void AlignCharacterRootToSeated()
+    {
+        Ghost?.CharacterRig?.AlignToSeated(Ghost.GameObject.transform);
+        Ghost?.SetNameAnchor(Ghost.GameObject.transform);
+    }
+
+    private void AlignRagdollRootToWorld(Vector3 position, Quaternion rotation)
     {
         Quaternion visualRotation = Ghost?.CharacterRig != null
             ? Ghost.CharacterRig.GetRagdollWorldRotation(rotation)
             : rotation * (Ghost?.BulkRagdollRotationOffset ?? Quaternion.identity);
 
-        Ghost?.CharacterRig?.ApplyStandingRagdollPose();
         if (Ghost?.CharacterRig != null)
         {
             Ghost.CharacterRig.AlignToWorld(position, visualRotation);
@@ -131,131 +166,5 @@ public partial class V6Ghost : GhostBase
 
         if (Ghost?.BulkRagdollCharacterGameObject != null)
             Ghost.BulkRagdollCharacterGameObject.transform.SetPositionAndRotation(position, visualRotation);
-
-        ApplyCharacterPlaybackState(GhostCharacterPlaybackState.FromSegment(true, true, false));
-    }
-
-    private void ApplyCharacterPlaybackState(GhostCharacterPlaybackState playbackState)
-    {
-        Ghost?.SetCharacterPlaybackState(playbackState);
-        SetCharacterActive(Ghost?.PlaybackVisible == true);
-    }
-
-    private void SetCharacterActive(bool active)
-    {
-        Ghost?.CharacterRig?.SetActive(active);
-    }
-
-
-    private void HandleHorn(Frame previousFrame, Frame frame)
-    {
-        bool currentHorn = frame.InputFlags.HasFlagFast(InputFlags.Horn);
-        bool previousHorn = previousFrame.InputFlags.HasFlagFast(InputFlags.Horn);
-        Ghost.Visuals.HornHolder.SetActive(currentHorn);
-
-        if (currentHorn == previousHorn)
-            return;
-
-        if (currentHorn)
-        {
-            if (Ghost.CurrentHornIsOneShot)
-            {
-                Ghost.CurrentHorn?.Cleanup();
-                Ghost.CurrentHorn?.Stop();
-            }
-
-            Ghost.CurrentHorn = PlayerManager.Instance.hornsIndex.PlayHornPlayback(
-                Ghost.CurrentHornType,
-                Ghost.Visuals.GhostModel.transform,
-                Ghost.CurrentHornTone);
-        }
-        else
-        {
-            if (Ghost.CurrentHornIsOneShot)
-                return;
-
-            Ghost.CurrentHorn?.Stop();
-            Ghost.CurrentHorn?.Cleanup();
-        }
-    }
-
-    private void HandleNone(Frame previousFrame, Frame frame)
-    {
-        bool currentNone = !frame.SoapboxFlags.HasFlagFast(SoapboxFlags.Soap) &&
-                           !frame.SoapboxFlags.HasFlagFast(SoapboxFlags.Offroad) &&
-                           !frame.SoapboxFlags.HasFlagFast(SoapboxFlags.Paraglider);
-
-        bool previousNone = !previousFrame.SoapboxFlags.HasFlagFast(SoapboxFlags.Soap) &&
-                            !previousFrame.SoapboxFlags.HasFlagFast(SoapboxFlags.Offroad) &&
-                            !previousFrame.SoapboxFlags.HasFlagFast(SoapboxFlags.Paraglider);
-
-        if (currentNone == previousNone)
-            return;
-
-        if (currentNone)
-        {
-            foreach (Ghost_AnimateWheel_v16 wheel in Ghost.Visuals.Wheels)
-            {
-                wheel.offroadWheelModel.gameObject.SetActive(false);
-                wheel.soapwheelModel.gameObject.SetActive(false);
-                wheel.wheelModel.gameObject.SetActive(true);
-            }
-        }
-    }
-
-    private void HandleSoap(Frame previousFrame, Frame frame)
-    {
-        bool currentSoap = frame.SoapboxFlags.HasFlagFast(SoapboxFlags.Soap);
-        bool previousSoap = previousFrame.SoapboxFlags.HasFlagFast(SoapboxFlags.Soap);
-
-        if (currentSoap == previousSoap)
-            return;
-
-        if (currentSoap)
-        {
-            foreach (Ghost_AnimateWheel_v16 wheel in Ghost.Visuals.Wheels)
-            {
-                wheel.wheelModel.gameObject.SetActive(false);
-                wheel.offroadWheelModel.gameObject.SetActive(false);
-                wheel.soapwheelModel.gameObject.SetActive(true);
-            }
-        }
-    }
-
-    private void HandleOffroad(Frame previousFrame, Frame frame)
-    {
-        bool currentOffroad = frame.SoapboxFlags.HasFlagFast(SoapboxFlags.Offroad);
-        bool previousOffroad = previousFrame.SoapboxFlags.HasFlagFast(SoapboxFlags.Offroad);
-
-        if (currentOffroad == previousOffroad)
-            return;
-
-        if (currentOffroad)
-        {
-            foreach (Ghost_AnimateWheel_v16 wheel in Ghost.Visuals.Wheels)
-            {
-                wheel.wheelModel.gameObject.SetActive(false);
-                wheel.soapwheelModel.gameObject.SetActive(false);
-                wheel.offroadWheelModel.gameObject.SetActive(true);
-            }
-        }
-    }
-
-    private void HandleParaglider(Frame previousFrame, Frame frame)
-    {
-        bool currentParaglider = frame.SoapboxFlags.HasFlagFast(SoapboxFlags.Paraglider);
-        bool previousParaglider = previousFrame.SoapboxFlags.HasFlagFast(SoapboxFlags.Paraglider);
-
-        if (currentParaglider == previousParaglider)
-            return;
-
-        if (currentParaglider)
-        {
-            Ghost.Visuals.GhostModel.EnableParaglider();
-        }
-        else
-        {
-            Ghost.Visuals.GhostModel.DisableParaglider();
-        }
     }
 }
