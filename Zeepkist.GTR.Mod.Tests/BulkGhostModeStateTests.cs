@@ -25,7 +25,7 @@ public class BulkGhostModeStateTests
     [InlineData(false, true, false)]
     [InlineData(true, false, false)]
     [InlineData(true, true, true)]
-    public void ShouldSkipFullProfileFixedUpdateExtras_RequiresBulkModeAndManualPlayback(
+    public void ShouldSkipFullProfilePlaybackEffects_RequiresBulkModeAndManualPlayback(
         bool bulkModeActive,
         bool manualPlaybackActive,
         bool expected)
@@ -33,6 +33,6 @@ public class BulkGhostModeStateTests
         var state = new BulkGhostModeState();
         state.SetActive(bulkModeActive);
 
-        Assert.Equal(expected, state.ShouldSkipFullProfileFixedUpdateExtras(manualPlaybackActive));
+        Assert.Equal(expected, state.ShouldSkipFullProfilePlaybackEffects(manualPlaybackActive));
     }
 }

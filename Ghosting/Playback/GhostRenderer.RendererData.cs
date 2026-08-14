@@ -21,26 +21,24 @@ public partial class GhostRenderer
         private static Material _bulkGhostMaterial;
 
         private readonly Renderer _renderer;
+        private readonly Material[] _originalSharedMaterials;
         private readonly Material[] _normalMaterials;
         private readonly Material[] _ghostMaterials;
         private readonly Dictionary<Material, MaterialRenderState> _normalMaterialStates = new();
         private readonly bool _ownsMaterials;
-        private readonly bool _useNormalMaterialsInGhostMode;
         private float _lastFade = float.NaN;
-        private Color _lastGhostColor;
-        private bool _hasLastGhostColor;
 
         public RendererData(
             Renderer renderer,
             GhostVisualProfile visualProfile,
-            bool useNormalMaterialsInGhostMode)
+            Material ghostMaterial)
         {
             _renderer = renderer;
             _ownsMaterials = visualProfile == GhostVisualProfile.Full;
-            _useNormalMaterialsInGhostMode = useNormalMaterialsInGhostMode;
+            _originalSharedMaterials = _renderer.sharedMaterials;
             _normalMaterials = _ownsMaterials
                 ? _renderer.materials
-                : _renderer.sharedMaterials;
+                : _originalSharedMaterials;
             _ghostMaterials = new Material[_normalMaterials.Length];
 
             foreach (Material material in _normalMaterials)
@@ -49,20 +47,8 @@ public partial class GhostRenderer
                     _normalMaterialStates.Add(material, MaterialRenderState.Capture(material));
             }
 
-            if (_ownsMaterials)
-            {
-                for (int i = 0; i < _normalMaterials.Length; i++)
-                {
-                    _ghostMaterials[i] = new Material(
-                        ComponentCache.Get<NetworkedGhostSpawner>().zeepkistGhostPrefab.ghostFader.fadeThisMaterial);
-                }
-            }
-            else
-            {
-                Material bulkMaterial = GetBulkGhostMaterial();
-                for (int i = 0; i < _ghostMaterials.Length; i++)
-                    _ghostMaterials[i] = bulkMaterial;
-            }
+            for (int i = 0; i < _ghostMaterials.Length; i++)
+                _ghostMaterials[i] = ghostMaterial;
         }
 
         public void SwitchToNormal()
@@ -80,12 +66,6 @@ public partial class GhostRenderer
         {
             if (_renderer == null)
                 return;
-
-            if (_useNormalMaterialsInGhostMode)
-            {
-                SwitchToNormal();
-                return;
-            }
 
             if (_ownsMaterials)
                 _renderer.materials = _ghostMaterials;
@@ -107,7 +87,7 @@ public partial class GhostRenderer
 
         public void SetFade(float fade)
         {
-            if (!_ownsMaterials)
+            if (!_ownsMaterials || _renderer == null)
                 return;
             if (Mathf.Approximately(_lastFade, fade))
                 return;
@@ -118,42 +98,36 @@ public partial class GhostRenderer
                 SetMaterialAlpha(normalMaterial, fade, _normalMaterialStates);
         }
 
-        public void SetGhostColor(Color color)
-        {
-            if (!_ownsMaterials)
-                return;
-            if (_hasLastGhostColor && _lastGhostColor == color)
-                return;
-
-            if (_useNormalMaterialsInGhostMode)
-            {
-                SetFade(color.a);
-                return;
-            }
-
-            _lastGhostColor = color;
-            _hasLastGhostColor = true;
-
-            foreach (Material ghostMaterial in _ghostMaterials)
-                SetMaterialColor(ghostMaterial, color);
-        }
-
         public void Dispose()
         {
             if (!_ownsMaterials)
                 return;
 
-            foreach (Material material in _normalMaterials)
+            if (_renderer != null)
+                _renderer.sharedMaterials = _originalSharedMaterials;
+
+            foreach (Material material in _normalMaterialStates.Keys)
             {
                 if (material != null)
                     Object.Destroy(material);
+            }
+        }
+
+        public static Material CreateGhostMaterial(GhostVisualProfile visualProfile)
+        {
+            if (visualProfile == GhostVisualProfile.Full)
+            {
+                return new Material(
+                    ComponentCache.Get<NetworkedGhostSpawner>().zeepkistGhostPrefab.ghostFader.fadeThisMaterial);
             }
 
-            foreach (Material material in _ghostMaterials)
-            {
-                if (material != null)
-                    Object.Destroy(material);
-            }
+            return GetBulkGhostMaterial();
+        }
+
+        public static void SetGhostColor(Material material, Color color)
+        {
+            if (material != null && material.HasProperty(ColorId))
+                material.color = color;
         }
 
         public static void DisposeSharedResources()
@@ -186,40 +160,17 @@ public partial class GhostRenderer
         {
             if (material == null)
                 return;
+            if (!originalStates.TryGetValue(material, out MaterialRenderState originalState))
+                return;
 
-            if (alpha < 0.999f)
-                EnableTransparentRendering(material);
-            else if (originalStates.TryGetValue(material, out MaterialRenderState originalState))
-                originalState.Apply(material);
-
-            bool changed = false;
-            changed |= SetMaterialAlpha(material, ColorId, alpha);
-            changed |= SetMaterialAlpha(material, BaseColorId, alpha);
-            changed |= SetMaterialAlpha(material, TintColorId, alpha);
-            changed |= SetMaterialAlpha(material, ColorTintId, alpha);
-            if (!changed && material.HasProperty(ColorId))
+            if (!Mathf.Approximately(alpha, 1f))
             {
-                Color color = material.color;
-                color.a = alpha;
-                material.color = color;
+                EnableTransparentRendering(material);
+                originalState.ApplyFade(material, alpha);
+                return;
             }
-        }
 
-        private static bool SetMaterialAlpha(Material material, int propertyId, float alpha)
-        {
-            if (!material.HasProperty(propertyId))
-                return false;
-
-            Color color = material.GetColor(propertyId);
-            color.a = alpha;
-            material.SetColor(propertyId, color);
-            return true;
-        }
-
-        private static void SetMaterialColor(Material material, Color color)
-        {
-            if (material != null && material.HasProperty(ColorId))
-                material.color = color;
+            originalState.Apply(material);
         }
 
         private static void EnableTransparentRendering(Material material)
@@ -249,7 +200,11 @@ public partial class GhostRenderer
                 int? zWrite,
                 bool alphaTest,
                 bool alphaBlend,
-                bool alphaPremultiply)
+                bool alphaPremultiply,
+                Color? color,
+                Color? baseColor,
+                Color? tintColor,
+                Color? colorTint)
             {
                 RenderQueue = renderQueue;
                 Mode = mode;
@@ -259,6 +214,10 @@ public partial class GhostRenderer
                 AlphaTest = alphaTest;
                 AlphaBlend = alphaBlend;
                 AlphaPremultiply = alphaPremultiply;
+                MainColor = color;
+                BaseColor = baseColor;
+                TintColor = tintColor;
+                ColorTint = colorTint;
             }
 
             private int RenderQueue { get; }
@@ -269,6 +228,10 @@ public partial class GhostRenderer
             private bool AlphaTest { get; }
             private bool AlphaBlend { get; }
             private bool AlphaPremultiply { get; }
+            private Color? MainColor { get; }
+            private Color? BaseColor { get; }
+            private Color? TintColor { get; }
+            private Color? ColorTint { get; }
 
             public static MaterialRenderState Capture(Material material)
             {
@@ -280,7 +243,11 @@ public partial class GhostRenderer
                     material.HasProperty(ZWriteId) ? material.GetInt(ZWriteId) : null,
                     material.IsKeywordEnabled("_ALPHATEST_ON"),
                     material.IsKeywordEnabled("_ALPHABLEND_ON"),
-                    material.IsKeywordEnabled("_ALPHAPREMULTIPLY_ON"));
+                    material.IsKeywordEnabled("_ALPHAPREMULTIPLY_ON"),
+                    GetColor(material, ColorId),
+                    GetColor(material, BaseColorId),
+                    GetColor(material, TintColorId),
+                    GetColor(material, ColorTintId));
             }
 
             public void Apply(Material material)
@@ -298,6 +265,12 @@ public partial class GhostRenderer
                 SetKeyword(material, "_ALPHATEST_ON", AlphaTest);
                 SetKeyword(material, "_ALPHABLEND_ON", AlphaBlend);
                 SetKeyword(material, "_ALPHAPREMULTIPLY_ON", AlphaPremultiply);
+                ApplyColors(material, 1f);
+            }
+
+            public void ApplyFade(Material material, float fade)
+            {
+                ApplyColors(material, fade);
             }
 
             private static void SetKeyword(Material material, string keyword, bool enabled)
@@ -306,6 +279,35 @@ public partial class GhostRenderer
                     material.EnableKeyword(keyword);
                 else
                     material.DisableKeyword(keyword);
+            }
+
+            private static Color? GetColor(Material material, int propertyId)
+            {
+                return material.HasProperty(propertyId)
+                    ? material.GetColor(propertyId)
+                    : null;
+            }
+
+            private void ApplyColors(Material material, float alphaMultiplier)
+            {
+                ApplyColor(material, ColorId, MainColor, alphaMultiplier);
+                ApplyColor(material, BaseColorId, BaseColor, alphaMultiplier);
+                ApplyColor(material, TintColorId, TintColor, alphaMultiplier);
+                ApplyColor(material, ColorTintId, ColorTint, alphaMultiplier);
+            }
+
+            private static void ApplyColor(
+                Material material,
+                int propertyId,
+                Color? originalColor,
+                float alphaMultiplier)
+            {
+                if (!originalColor.HasValue || !material.HasProperty(propertyId))
+                    return;
+
+                Color color = originalColor.Value;
+                color.a *= alphaMultiplier;
+                material.SetColor(propertyId, color);
             }
         }
     }

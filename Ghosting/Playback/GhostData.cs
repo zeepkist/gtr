@@ -66,8 +66,16 @@ public class GhostData
     {
         Renderer?.Dispose();
         Renderer = CharacterRig != null
-            ? new GhostRenderer(Visuals.GhostModel.gameObject, CharacterRig.Root, VisualProfile)
-            : new GhostRenderer(Visuals.GhostModel.gameObject, VisualProfile);
+            ? new GhostRenderer(
+                new[] { Visuals.GhostModel.gameObject, CharacterRig.Root },
+                VisualProfile,
+                Visuals.GhostModel,
+                Visuals.Cosmetics)
+            : new GhostRenderer(
+                Visuals.GhostModel.gameObject,
+                VisualProfile,
+                Visuals.GhostModel,
+                Visuals.Cosmetics);
     }
 
     public void SetCharacterRig(GhostCharacterRig characterRig)
@@ -125,6 +133,7 @@ public class GhostData
         Renderer?.SwitchToNormal();
         Renderer?.SetFade(1);
         CharacterRig?.ApplySeatedPose(false);
+        CharacterRig?.AlignToSeated(GameObject.transform);
         CharacterRig?.SetActive(true);
         SetNameAnchor(GameObject.transform);
         ApplyPlaybackVisibility();

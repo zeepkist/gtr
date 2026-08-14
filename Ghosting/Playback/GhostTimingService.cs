@@ -1,5 +1,4 @@
 ﻿using TNRD.Zeepkist.GTR.Core;
-using TNRD.Zeepkist.GTR.PlayerLoop;
 using UnityEngine;
 using ZeepSDK.Racing;
 
@@ -21,10 +20,8 @@ public class GhostTimingService : IEagerService
     public bool IsManualPaused => _manualPaused;
     public bool IsManualPlaying => _manualPlaybackActive && !_manualPaused;
 
-    public GhostTimingService(PlayerLoopService playerLoopService)
+    public GhostTimingService()
     {
-        playerLoopService.SubscribeUpdate(Update);
-
         RacingApi.RoundStarted += OnRoundStarted;
         RacingApi.RoundEnded += OnRoundEnded;
         RacingApi.PlayerSpawned += OnPlayerSpawned;
@@ -72,37 +69,34 @@ public class GhostTimingService : IEagerService
         _speed = Mathf.Clamp(speed, 0.1f, 4f);
     }
 
-    private void ResetRaceClock()
+    private void SetRaceClockActive(bool active)
     {
-        if (_manualPlaybackActive)
-            return;
-
-        _raceClockActive = false;
-        _time = 0f;
+        _raceClockActive = active;
+        if (!_manualPlaybackActive)
+            _time = 0f;
     }
 
     private void OnRoundStarted()
     {
-        ResetRaceClock();
-        _raceClockActive = true;
+        SetRaceClockActive(true);
     }
 
     private void OnRoundEnded()
     {
-        ResetRaceClock();
+        SetRaceClockActive(false);
     }
 
     private void OnPlayerSpawned()
     {
-        ResetRaceClock();
+        SetRaceClockActive(false);
     }
 
     private void OnQuickReset()
     {
-        ResetRaceClock();
+        SetRaceClockActive(false);
     }
 
-    private void Update()
+    internal void Advance()
     {
         if (_manualPlaybackActive && !_manualPaused)
         {

@@ -6,6 +6,99 @@ namespace Zeepkist.GTR.Mod.Tests;
 public class GhostFrameSearchTests
 {
     [Fact]
+    public void TryGetFrameSample_ReturnsFalseForNoFrames()
+    {
+        Assert.False(GhostFrameSearch.TryGetFrameSample(0, 1f, _ => 0f, out _));
+    }
+
+    [Fact]
+    public void TryGetFrameSample_ClampsSingleFrame()
+    {
+        float[] frameTimes = [2f];
+
+        Assert.True(GhostFrameSearch.TryGetFrameSample(
+            frameTimes.Length,
+            10f,
+            i => frameTimes[i],
+            out GhostFrameSample sample));
+        Assert.Equal(0, sample.CurrentIndex);
+        Assert.Equal(0, sample.NextIndex);
+        Assert.Equal(0f, sample.Interpolation);
+    }
+
+    [Theory]
+    [InlineData(-1f, 0, 0, 0f)]
+    [InlineData(0f, 0, 1, 0f)]
+    [InlineData(0.5f, 0, 1, 0.5f)]
+    [InlineData(1f, 1, 2, 0f)]
+    [InlineData(2f, 2, 2, 0f)]
+    [InlineData(3f, 2, 2, 0f)]
+    public void TryGetFrameSample_SelectsFloorAndInterpolationBracket(
+        float time,
+        int expectedCurrent,
+        int expectedNext,
+        float expectedInterpolation)
+    {
+        float[] frameTimes = [0f, 1f, 2f];
+
+        Assert.True(GhostFrameSearch.TryGetFrameSample(
+            frameTimes.Length,
+            time,
+            i => frameTimes[i],
+            out GhostFrameSample sample));
+        Assert.Equal(expectedCurrent, sample.CurrentIndex);
+        Assert.Equal(expectedNext, sample.NextIndex);
+        Assert.Equal(expectedInterpolation, sample.Interpolation, 5);
+    }
+
+    [Fact]
+    public void TryGetFrameSample_UsesLastDuplicateAtExactTimestamp()
+    {
+        float[] frameTimes = [0f, 1f, 1f, 1f, 2f];
+
+        Assert.True(GhostFrameSearch.TryGetFrameSample(
+            frameTimes.Length,
+            1f,
+            i => frameTimes[i],
+            out GhostFrameSample sample));
+        Assert.Equal(3, sample.CurrentIndex);
+        Assert.Equal(4, sample.NextIndex);
+        Assert.Equal(0f, sample.Interpolation);
+    }
+
+    [Fact]
+    public void TryGetFrameSample_SamplesNinetyHertzSourceAtSixtyHertzRenderTimes()
+    {
+        float[] frameTimes = Enumerable.Range(0, 10).Select(i => i * 0.011f).ToArray();
+        float renderTime = 2f / 60f;
+
+        Assert.True(GhostFrameSearch.TryGetFrameSample(
+            frameTimes.Length,
+            renderTime,
+            i => frameTimes[i],
+            out GhostFrameSample sample));
+        Assert.Equal(3, sample.CurrentIndex);
+        Assert.Equal(4, sample.NextIndex);
+        Assert.InRange(sample.Interpolation, 0.0302f, 0.0304f);
+    }
+
+    [Fact]
+    public void TryGetFrameSample_ForwardHintWalksAcrossSkippedAndDuplicateFrames()
+    {
+        float[] frameTimes = [0f, 0.011f, 0.022f, 0.022f, 0.033f, 0.044f];
+
+        Assert.True(GhostFrameSearch.TryGetFrameSample(
+            frameTimes.Length,
+            2f / 60f,
+            1,
+            i => frameTimes[i],
+            out GhostFrameSample sample));
+        Assert.Equal(4, sample.CurrentIndex);
+        Assert.Equal(5, sample.NextIndex);
+        Assert.InRange(sample.Interpolation, 0.0302f, 0.0304f);
+    }
+
+    [Fact]
     public void FindFirstFrameIndexAtOrAfterTime_ReturnsFirstMatchingFrame()
     {
         float[] frameTimes = { 0f, 1f, 2f, 4f, 8f };
@@ -107,6 +200,27 @@ public class GhostFrameSearchTests
             8f,
             1,
             epsilon,
+            i => frameTimes[i],
+            out _));
+    }
+
+    [Fact]
+    public void TryGetAdjacentFrameTime_ReturnsFalseForSingleFrame()
+    {
+        float[] frameTimes = [1f];
+
+        Assert.False(GhostFrameSearch.TryGetAdjacentFrameTime(
+            frameTimes.Length,
+            1f,
+            1,
+            0.005f,
+            i => frameTimes[i],
+            out _));
+        Assert.False(GhostFrameSearch.TryGetAdjacentFrameTime(
+            frameTimes.Length,
+            1f,
+            -1,
+            0.005f,
             i => frameTimes[i],
             out _));
     }
