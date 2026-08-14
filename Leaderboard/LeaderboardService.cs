@@ -1,6 +1,5 @@
 ﻿using System;
 using TNRD.Zeepkist.GTR.Core;
-using UnityEngine;
 using ZeepSDK.Leaderboard;
 
 namespace TNRD.Zeepkist.GTR.Leaderboard;
