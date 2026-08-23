@@ -14,13 +14,11 @@ public static class VoteReminderFormatter
         return
             "<size=80%><color=#FFFF00>Cast your vote for ZeepCentraal:</color></size><br>" +
             "<size=75%>" +
-            "<size=50%><i>(hated it)</i></size> " +
             FormatChoice(summary, -2, "--", "#FF0000") + " " +
             FormatChoice(summary, -1, "-", "#FF8000") + " " +
             FormatChoice(summary, 0, "-+/+-", "#FFFF00") + " " +
             FormatChoice(summary, 1, "+", "#80FF00") + " " +
-            FormatChoice(summary, 2, "++", "#00FF00") + " " +
-            "<size=50%><i>(loved it)</i></size>" +
+            FormatChoice(summary, 2, "++", "#00FF00") +
             "</size>";
     }
 
@@ -32,6 +30,6 @@ public static class VoteReminderFormatter
 
         long? count = summary.GetCount(voteValue);
         string countText = count?.ToString(CultureInfo.InvariantCulture) ?? "?";
-        return $"{choice} <size=50%>({countText})</size>";
+        return $"{choice}<size=50%>({countText})</size>";
     }
 }
