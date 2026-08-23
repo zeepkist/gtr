@@ -10,14 +10,14 @@ public static class LeaderboardTextFormatter
     private static readonly TimeSpan FadeStart = TimeSpan.FromHours(1);
     private static readonly TimeSpan FadeEnd = TimeSpan.FromDays(365);
 
-    public static string AppendRecordDate(string playerMarkup, string dateCreated, DateTimeOffset now)
+    public static string PrefixRecordDate(string originalText, string dateCreated, DateTimeOffset now)
     {
         if (!DateTimeOffset.TryParse(
                 dateCreated,
                 CultureInfo.InvariantCulture,
                 DateTimeStyles.AssumeUniversal | DateTimeStyles.AllowWhiteSpaces,
                 out DateTimeOffset created))
-            return playerMarkup;
+            return originalText;
 
         TimeSpan age = now - created;
 
@@ -26,8 +26,9 @@ public static class LeaderboardTextFormatter
 
         string text = FormatAge(created, age);
         string color = FormatAgeColor(age);
+        string padding = originalText.Length > 0 ? " " : string.Empty;
 
-        return $"{playerMarkup} <size=50%><color={color}>{text}</color></size>";
+        return $"<size=50%><color={color}>{text}</color></size>{padding}{originalText}";
     }
 
     public static string FormatTitle(string levelName)

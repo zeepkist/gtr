@@ -131,14 +131,17 @@ public class OnlineLeaderboardTab : BaseMultiplayerLeaderboardTab, IDisposable
             playerMarkup = $"<link=\"{item.SteamId}\">{item.SteamName}</link>";
         }
 
-        gui.player_name.text = LeaderboardTextFormatter.AppendRecordDate(
-            playerMarkup,
-            item.DateCreated,
-            DateTimeOffset.Now);
+        gui.player_name.text = playerMarkup;
         gui.time.text = item.Time.GetFormattedTime();
-        gui.pointsWon.gameObject.SetActive(item.LevelDecayedPoints.HasValue);
-        if (item.LevelDecayedPoints.HasValue)
-            gui.pointsWon.text = $"(+{(int)Math.Round(item.LevelDecayedPoints.Value)})";
+        gui.pointsWon.gameObject.SetActive(true);
+
+        string pointsMarkup = LeaderboardTextFormatter.PrefixRecordDate(
+            item.LevelDecayedPoints.HasValue ? Math.Round(item.LevelDecayedPoints.Value).ToString() : string.Empty,
+            item.DateCreated,
+            DateTimeOffset.Now
+        );
+
+        gui.pointsWon.text = pointsMarkup;
     }
 
     private void StopPage()
