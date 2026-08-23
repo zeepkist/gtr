@@ -1,0 +1,85 @@
+using TNRD.Zeepkist.GTR.Leaderboard;
+using TNRD.Zeepkist.GTR.Utilities;
+using Xunit;
+
+namespace TNRD.Zeepkist.GTR.Tests;
+
+public class LeaderboardTextFormatterTests
+{
+    private static readonly DateTimeOffset Now = new(2026, 8, 23, 18, 0, 0, TimeSpan.Zero);
+
+    [Theory]
+    [InlineData(30, "just now")]
+    [InlineData(60, "1 minute ago")]
+    [InlineData(3599, "59 minutes ago")]
+    [InlineData(3600, "1 hour ago")]
+    [InlineData(86399, "23 hours ago")]
+    [InlineData(86400, "1 day ago")]
+    [InlineData(2505600, "29 days ago")]
+    public void FormatsRelativeAgeBoundaries(int ageSeconds, string expected)
+    {
+        string result = LeaderboardTextFormatter.AppendRecordDate(
+            "player",
+            Now.AddSeconds(-ageSeconds).ToString("O"),
+            Now);
+
+        Assert.Contains($">{expected}</color>", result);
+    }
+
+    [Fact]
+    public void UsesFixedLocalDateAtThirtyDays()
+    {
+        DateTimeOffset created = Now.AddDays(-30);
+
+        string result = LeaderboardTextFormatter.AppendRecordDate("player", created.ToString("O"), Now);
+
+        Assert.Contains(created.ToLocalTime().ToString("yyyy/MM/dd HH:mm"), result);
+    }
+
+    [Fact]
+    public void FutureTimestampClampsToJustNow()
+    {
+        string result = LeaderboardTextFormatter.AppendRecordDate(
+            "player",
+            Now.AddMinutes(5).ToString("O"),
+            Now);
+
+        Assert.Contains(">just now</color>", result);
+    }
+
+    [Fact]
+    public void MalformedTimestampLeavesMarkupUnchanged()
+    {
+        Assert.Equal("<link=\"1\">player</link>",
+            LeaderboardTextFormatter.AppendRecordDate("<link=\"1\">player</link>", "bad", Now));
+    }
+
+    [Fact]
+    public void AppendsSmallDateAfterPlayerClosingMarkup()
+    {
+        string result = LeaderboardTextFormatter.AppendRecordDate(
+            "<color=#fff><link=\"1\">player</link></color>",
+            Now.AddMinutes(-2).ToString("O"),
+            Now);
+
+        Assert.StartsWith("<color=#fff><link=\"1\">player</link></color> <size=50%>", result);
+    }
+
+    [Fact]
+    public void FadesFromYellowToWhite()
+    {
+        Assert.Equal(TextColour.Yellow.ToHex(), LeaderboardTextFormatter.FormatAgeColor(TimeSpan.FromHours(1)));
+        Assert.NotEqual(TextColour.Yellow.ToHex(), LeaderboardTextFormatter.FormatAgeColor(TimeSpan.FromDays(180)));
+        Assert.NotEqual(TextColour.White.ToHex(), LeaderboardTextFormatter.FormatAgeColor(TimeSpan.FromDays(180)));
+        Assert.Equal(TextColour.White.ToHex(), LeaderboardTextFormatter.FormatAgeColor(TimeSpan.FromDays(365)));
+    }
+
+    [Fact]
+    public void FormatsEscapedTwoLineTitleAndFallback()
+    {
+        Assert.Equal("GTR Records", LeaderboardTextFormatter.FormatTitle(null));
+        Assert.Equal(
+            "A &lt;Level&gt; &amp; More\n<size=50%>GTR records on zeepki.st</size>",
+            LeaderboardTextFormatter.FormatTitle("A <Level> & More"));
+    }
+}
