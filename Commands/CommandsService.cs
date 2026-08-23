@@ -19,5 +19,8 @@ public class CommandsService : IEagerService
         ChatCommandApi.RegisterLocalChatCommand<DoubleUpvoteCommand>();
         ChatCommandApi.RegisterLocalChatCommand<NeutralVoteCommand>();
         ChatCommandApi.RegisterLocalChatCommand<NeutralVoteAltCommand>();
+
+        ChatCommandApi.RegisterLocalChatCommandAlias<UpvoteCommand>(UpvoteCommand.Alias);
+        ChatCommandApi.RegisterLocalChatCommandAlias<DoubleUpvoteCommand>(DoubleUpvoteCommand.Alias);
     }
 }
