@@ -77,7 +77,7 @@ public static class RecordFeedbackFormatter
             _ => null
         };
         if (improvement != null && !string.IsNullOrEmpty(data.PreviousDelta))
-            lines.Add($"<size=80%>{improvement} improved by {TextColour.Pink.Wrap(data.PreviousDelta)}</size>");
+            lines.Add($"<size=75%>{improvement} improved by {TextColour.Pink.Wrap(data.PreviousDelta)}</size>");
 
         if (data.Position.HasValue && data.LevelDecayedPoints.HasValue)
         {
@@ -85,20 +85,20 @@ public static class RecordFeedbackFormatter
             string position = FormatPosition(data.Position.Value);
             if (data.WasFirstPersonalBest)
             {
-                lines.Add($"<size=80%>{position} <size=75%>({score})</size></size>");
+                lines.Add($"<size=75%>{position} <size=60%>({score})</size></size>");
             }
             else if (data.PreviousPosition.HasValue &&
                      data.PreviousPosition.Value > data.Position.Value)
             {
                 lines.Add(
-                    $"<size=80%>#{data.PreviousPosition.Value} → {position} <size=75%>({score})</size></size>");
+                    $"<size=75%>#{data.PreviousPosition.Value} → {position} <size=60%>({score})</size></size>");
             }
         }
 
         if (!string.IsNullOrEmpty(data.NextDelta) &&
             data.Kind is RecordFeedbackKind.PersonalBest or RecordFeedbackKind.FirstPersonalBest)
         {
-            lines.Add($"<size=60%>Gap to next player: {TextColour.Pink.Wrap(data.NextDelta)}</size>");
+            lines.Add($"<size=50%>Gap to next player: {TextColour.Pink.Wrap(data.NextDelta)}</size>");
         }
 
         return string.Join("<br>", lines);
@@ -107,7 +107,7 @@ public static class RecordFeedbackFormatter
     private static string FormatPosition(int position)
     {
         string value = $"#{position}";
-        return position == 1 ? TextColour.Yellow.Wrap(value) : TextColour.Pink.Wrap(value);
+        return position == 1 ? TextColour.Yellow.Wrap(value) : value;
     }
 
     private static string FormatScore(RecordFeedbackMessageData data)

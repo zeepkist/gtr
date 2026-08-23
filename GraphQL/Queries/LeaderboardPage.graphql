@@ -1,44 +1,4 @@
 fragment LeaderboardPageFields on Query {
-    levelItems(
-        first: 1
-        filter: {
-            level: {
-                or: [
-                    { xxHash: { equalTo: $xxHash } }
-                    {
-                        and: [
-                            { hash: { equalTo: $hash } }
-                            { adventure: { equalTo: true } }
-                        ]
-                    }
-                ]
-            }
-        }
-    ) {
-        nodes {
-            name
-        }
-    }
-    levelPoints(
-        first: 1
-        filter: {
-            level: {
-                or: [
-                    { xxHash: { equalTo: $xxHash } }
-                    {
-                        and: [
-                            { hash: { equalTo: $hash } }
-                            { adventure: { equalTo: true } }
-                        ]
-                    }
-                ]
-            }
-        }
-    ) {
-        nodes {
-            points
-        }
-    }
     records(
         filter: {
             level: {
@@ -56,7 +16,7 @@ fragment LeaderboardPageFields on Query {
         }
         first: $first
         offset: $offset
-        orderBy: TIME_ASC
+        orderBy: [TIME_ASC, DATE_CREATED_ASC]
     ) {
         totalCount
         nodes {
@@ -64,80 +24,21 @@ fragment LeaderboardPageFields on Query {
                 steamName
                 steamId
             }
-            time
-            dateCreated
-        }
-    }
-}
-
-query LeaderboardPage($xxHash: String!, $hash: String!, $first: Int!, $offset: Int!) {
-    levelItems(
-        first: 1
-        filter: {
-            level: {
-                or: [
-                    { xxHash: { equalTo: $xxHash } }
-                    {
-                        and: [
-                            { hash: { equalTo: $hash } }
-                            { adventure: { equalTo: true } }
-                        ]
+            level {
+                levelItems(first: 1) {
+                    nodes {
+                        name
                     }
-                ]
-            }
-        }
-    ) {
-        nodes {
-            name
-        }
-    }
-    levelPoints(
-        first: 1
-        filter: {
-            level: {
-                or: [
-                    { xxHash: { equalTo: $xxHash } }
-                    {
-                        and: [
-                            { hash: { equalTo: $hash } }
-                            { adventure: { equalTo: true } }
-                        ]
-                    }
-                ]
-            }
-        }
-    ) {
-        nodes {
-            points
-        }
-    }
-    records(
-        filter: {
-            level: {
-                or: [
-                    { xxHash: { equalTo: $xxHash } }
-                    {
-                        and: [
-                            { hash: { equalTo: $hash } }
-                            { adventure: { equalTo: true } }
-                        ]
-                    }
-                ]
-            }
-            personalBestGlobalsExist: true
-        }
-        first: $first
-        offset: $offset
-        orderBy: TIME_ASC
-    ) {
-        totalCount
-        nodes {
-            user {
-                steamName
-                steamId
+                }
             }
             time
             dateCreated
+            userPointContributions(first: 1) {
+                nodes {
+                    levelDecayedPoints
+                    levelPosition
+                }
+            }
         }
     }
 }

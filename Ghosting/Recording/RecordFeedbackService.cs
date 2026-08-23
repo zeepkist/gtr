@@ -27,6 +27,8 @@ public sealed class RecordFeedbackBaseline
 
 public sealed class RecordFeedbackService : IEagerService, IDisposable
 {
+    private static readonly TimeSpan CompletionTimeout = TimeSpan.FromSeconds(5);
+
     private readonly CurrentLevelRecordService _currentLevelRecordService;
     private readonly ConfigService _configService;
     private readonly IGtrClient _gtrClient;
@@ -74,7 +76,7 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
         if (!baseline.PersonalBestTime.HasValue || pending.SubmittedTime < baseline.PersonalBestTime.Value)
             baseline.PersonalBestTime = pending.SubmittedTime;
 
-        if ((pending.Kind is RecordFeedbackKind.NewWorldRecord or RecordFeedbackKind.ImprovedWorldRecord) &&
+        if (pending.BaselineKind is RecordFeedbackKind.NewWorldRecord or RecordFeedbackKind.ImprovedWorldRecord &&
             (!baseline.WorldRecordTime.HasValue || pending.SubmittedTime < baseline.WorldRecordTime.Value))
         {
             baseline.WorldRecordTime = pending.SubmittedTime;
@@ -92,20 +94,21 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
             return;
         }
 
-        RecordFeedbackKind kind = RecordFeedbackFormatter.Classify(
+        string playerSteamId = SteamClient.SteamId.ToString();
+        RecordFeedbackKind baselineKind = RecordFeedbackFormatter.Classify(
             submittedTime,
             baseline.PersonalBestTime,
             baseline.WorldRecordTime,
             baseline.WorldRecordSteamId,
-            SteamClient.SteamId.ToString());
-        if (kind == RecordFeedbackKind.None || !ShouldShow(kind))
+            playerSteamId);
+        if (baselineKind == RecordFeedbackKind.None)
             return;
 
         CancelPending();
         int generation = ++_generation;
-        _pending = new PendingFeedback(baseline, submittedTime, kind, generation);
+        _pending = new PendingFeedback(baseline, submittedTime, baselineKind, playerSteamId, generation);
         _pendingCancellationTokenSource = new CancellationTokenSource();
-        WaitForProjectionAsync(generation, _pendingCancellationTokenSource.Token).Forget();
+        WaitForCompletionAsync(generation, _pendingCancellationTokenSource.Token).Forget();
         TryComplete(_currentLevelRecordService.Snapshot, false).Forget();
     }
 
@@ -123,18 +126,13 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
         TryComplete(snapshot, false).Forget();
     }
 
-    private async UniTaskVoid WaitForProjectionAsync(int generation, CancellationToken cancellationToken)
+    private async UniTaskVoid WaitForCompletionAsync(int generation, CancellationToken cancellationToken)
     {
         try
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(45), cancellationToken: cancellationToken);
-            if (generation != _generation)
-                return;
-            _currentLevelRecordService.Refresh();
-            await UniTask.Delay(TimeSpan.FromSeconds(15), cancellationToken: cancellationToken);
-            if (generation != _generation)
-                return;
-            await TryComplete(_currentLevelRecordService.Snapshot, true);
+            await UniTask.Delay(CompletionTimeout, cancellationToken: cancellationToken);
+            if (generation == _generation)
+                await TryComplete(_currentLevelRecordService.Snapshot, true);
         }
         catch (OperationCanceledException)
         {
@@ -150,42 +148,69 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
             return;
 
         PersonalBestHolder personalBest = snapshot?.PersonalBest;
-        bool matchingPersonalBest = personalBest != null && Math.Abs(personalBest.Time - pending.SubmittedTime) < 0.001;
+        bool matchingPersonalBest = personalBest != null &&
+                                    Math.Abs(personalBest.Time - pending.SubmittedTime) < 0.001;
+        if (matchingPersonalBest)
+        {
+            bool isWorldRecord = snapshot.WorldRecord?.RecordId == personalBest.RecordId;
+            pending.ConfirmedKind = ClassifyConfirmed(pending, isWorldRecord);
+            if (!ShouldShow(pending.ConfirmedKind.Value))
+            {
+                CompleteWithoutMessage(pending);
+                return;
+            }
+
+            if (!isWorldRecord && !pending.NextFastestRequestStarted)
+            {
+                pending.NextFastestRequestStarted = true;
+                LoadNextDeltaAsync(pending).Forget();
+            }
+        }
+
+        RecordFeedbackKind kind = pending.ConfirmedKind ??
+                                  (allowPartial ? pending.BaselineKind : RecordFeedbackKind.None);
+        if (kind == RecordFeedbackKind.None || !ShouldShow(kind))
+        {
+            if (allowPartial)
+                CompleteWithoutMessage(pending);
+            return;
+        }
+
         bool projectionReady = matchingPersonalBest && personalBest.Rank.HasValue &&
                                personalBest.LevelDecayedPoints.HasValue;
-        if (!projectionReady && !allowPartial)
+        bool nextFastestReady = kind is RecordFeedbackKind.NewWorldRecord or RecordFeedbackKind.ImprovedWorldRecord ||
+                                pending.NextFastestRequestCompleted;
+        if ((!projectionReady || !nextFastestReady) && !allowPartial)
             return;
 
         RecordFeedbackMessageData data = new()
         {
-            Kind = pending.Kind,
-            PreviousDelta = FormatPreviousDelta(pending),
+            Kind = kind,
+            PreviousDelta = FormatPreviousDelta(pending, kind),
+            NextDelta = pending.NextDelta,
             WasFirstPersonalBest = !pending.Baseline.PersonalBestTime.HasValue,
             PreviousPosition = pending.Baseline.PersonalBestPosition,
             Position = matchingPersonalBest ? personalBest.Rank : null,
             LevelDecayedPoints = matchingPersonalBest ? personalBest.LevelDecayedPoints : null
         };
 
-        if (pending.Kind is RecordFeedbackKind.PersonalBest or RecordFeedbackKind.FirstPersonalBest)
-            data.NextDelta = await GetNextDelta(pending);
-
-        if (pending.Generation != _generation)
-            return;
-
-        _generation++;
-        CancelPending();
+        CompleteWithoutMessage(pending);
         await UniTask.SwitchToMainThread();
         string message = RecordFeedbackFormatter.Format(data);
         if (!string.IsNullOrEmpty(message))
             ChatApi.AddLocalMessage(message);
     }
 
-    private async UniTask<string> GetNextDelta(PendingFeedback pending)
+    private async UniTaskVoid LoadNextDeltaAsync(PendingFeedback pending)
     {
         LevelGraphqlIdentity level = CurrentLevelGraphqlIdentity.Create();
         if (!level.IsAvailable || !string.Equals(level.CacheKey, pending.Baseline.LevelKey, StringComparison.Ordinal))
-            return null;
+        {
+            MarkNextFastestCompleted(pending, null);
+            return;
+        }
 
+        string nextDelta = null;
         try
         {
             IOperationResult<IGetNextFastestPersonalBestResult> result =
@@ -196,29 +221,66 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
                     _pendingCancellationTokenSource?.Token ?? default);
             result.EnsureNoErrors();
             double? nextTime = result.Data?.Records?.Nodes.FirstOrDefault()?.Time;
-            return nextTime.HasValue && pending.SubmittedTime > nextTime.Value
-                ? (pending.SubmittedTime - nextTime.Value).GetFormattedTime()
-                : null;
+            if (nextTime.HasValue && pending.SubmittedTime > nextTime.Value)
+                nextDelta = (pending.SubmittedTime - nextTime.Value).GetFormattedTime();
         }
         catch (OperationCanceledException)
         {
-            return null;
+            return;
         }
         catch (Exception e)
         {
             _logger.LogWarning(e, "Failed to load next fastest PB for record feedback");
-            return null;
         }
+
+        MarkNextFastestCompleted(pending, nextDelta);
     }
 
-    private static string FormatPreviousDelta(PendingFeedback pending)
+    private void MarkNextFastestCompleted(PendingFeedback pending, string nextDelta)
     {
-        double? previousTime = pending.Kind == RecordFeedbackKind.ImprovedWorldRecord
+        if (!ReferenceEquals(_pending, pending) || pending.Generation != _generation)
+            return;
+
+        pending.NextDelta = nextDelta;
+        pending.NextFastestRequestCompleted = true;
+        TryComplete(_currentLevelRecordService.Snapshot, false).Forget();
+    }
+
+    private static RecordFeedbackKind ClassifyConfirmed(PendingFeedback pending, bool isWorldRecord)
+    {
+        if (isWorldRecord)
+        {
+            return pending.Baseline.WorldRecordTime.HasValue &&
+                   string.Equals(
+                       pending.Baseline.WorldRecordSteamId,
+                       pending.PlayerSteamId,
+                       StringComparison.Ordinal)
+                ? RecordFeedbackKind.ImprovedWorldRecord
+                : RecordFeedbackKind.NewWorldRecord;
+        }
+
+        return pending.Baseline.PersonalBestTime.HasValue
+            ? RecordFeedbackKind.PersonalBest
+            : RecordFeedbackKind.FirstPersonalBest;
+    }
+
+    private static string FormatPreviousDelta(PendingFeedback pending, RecordFeedbackKind kind)
+    {
+        double? previousTime = kind == RecordFeedbackKind.ImprovedWorldRecord
             ? pending.Baseline.WorldRecordTime
             : pending.Baseline.PersonalBestTime;
         return previousTime.HasValue && previousTime.Value > pending.SubmittedTime
             ? (previousTime.Value - pending.SubmittedTime).GetFormattedTime()
             : null;
+    }
+
+    private void CompleteWithoutMessage(PendingFeedback pending)
+    {
+        if (!ReferenceEquals(_pending, pending))
+            return;
+
+        _generation++;
+        CancelPending();
     }
 
     private void CancelPending()
@@ -249,18 +311,25 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
         public PendingFeedback(
             RecordFeedbackBaseline baseline,
             double submittedTime,
-            RecordFeedbackKind kind,
+            RecordFeedbackKind baselineKind,
+            string playerSteamId,
             int generation)
         {
             Baseline = baseline;
             SubmittedTime = submittedTime;
-            Kind = kind;
+            BaselineKind = baselineKind;
+            PlayerSteamId = playerSteamId;
             Generation = generation;
         }
 
         public RecordFeedbackBaseline Baseline { get; }
         public double SubmittedTime { get; }
-        public RecordFeedbackKind Kind { get; }
+        public RecordFeedbackKind BaselineKind { get; }
+        public string PlayerSteamId { get; }
         public int Generation { get; }
+        public RecordFeedbackKind? ConfirmedKind { get; set; }
+        public bool NextFastestRequestStarted { get; set; }
+        public bool NextFastestRequestCompleted { get; set; }
+        public string NextDelta { get; set; }
     }
 }

@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using TNRD.Zeepkist.GTR.Ghosting.Playback;
 using TNRD.Zeepkist.GTR.GraphQL;
-using TNRD.Zeepkist.GTR.Messaging;
+using TNRD.Zeepkist.GTR.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 using ZeepSDK.Extensions;
 using ZeepSDK.External.Cysharp.Threading.Tasks;
-using ZeepSDK.External.FluentResults;
 using ZeepSDK.Leaderboard.Pages;
 using ZeepSDK.Multiplayer;
 using ZeepSDK.Racing;
@@ -20,24 +18,19 @@ public class OfflineLeaderboardTab : BaseSingleplayerLeaderboardTab, IDisposable
     private const int PageSize = 14;
 
     private readonly LeaderboardGraphqlService _graphqlService;
-    private readonly MessengerService _messengerService;
     private readonly OfflineGhostsService _offlineGhostsService;
     private readonly UnityEvent[] _originalEvents = new UnityEvent[16];
     private readonly List<LeaderboardRecord> _items = [];
 
-    private int? _levelPoints;
     private int _generation;
     private string _title = "GTR Records";
-    private CancellationTokenSource _cancellationTokenSource;
     private IDisposable _subscription;
 
     public OfflineLeaderboardTab(
         LeaderboardGraphqlService graphqlService,
-        MessengerService messengerService,
         OfflineGhostsService offlineGhostsService)
     {
         _graphqlService = graphqlService;
-        _messengerService = messengerService;
         _offlineGhostsService = offlineGhostsService;
         _offlineGhostsService.BulkModeChanged += OnBulkModeChanged;
         RacingApi.LevelLoaded += StopForContextChange;
@@ -108,34 +101,12 @@ public class OfflineLeaderboardTab : BaseSingleplayerLeaderboardTab, IDisposable
             return;
 
         int generation = ++_generation;
-        _cancellationTokenSource = new CancellationTokenSource();
         _subscription = _graphqlService.WatchPage(
             level,
             page,
             PageSize,
             snapshot => ApplySnapshotAsync(snapshot, generation).Forget(),
             error => Logger.LogWarning("GTR leaderboard subscription failed: " + error));
-        LoadInitialAsync(level, page, generation, _cancellationTokenSource.Token).Forget();
-    }
-
-    private async UniTaskVoid LoadInitialAsync(
-        LevelGraphqlIdentity level,
-        int page,
-        int generation,
-        CancellationToken cancellationToken)
-    {
-        Result<LeaderboardPageSnapshot> result =
-            await _graphqlService.GetPage(level, page, PageSize, cancellationToken);
-        if (cancellationToken.IsCancellationRequested || generation != _generation)
-            return;
-        if (result.IsFailed)
-        {
-            Logger.LogError("Failed to load GTR records: " + result);
-            _messengerService.LogError("Failed to load GTR records");
-            return;
-        }
-
-        ApplySnapshot(result.Value);
     }
 
     private async UniTaskVoid ApplySnapshotAsync(LeaderboardPageSnapshot snapshot, int generation)
@@ -151,7 +122,6 @@ public class OfflineLeaderboardTab : BaseSingleplayerLeaderboardTab, IDisposable
         if (snapshot == null)
             return;
 
-        _levelPoints = snapshot.LevelPoints;
         _items.Clear();
         _items.AddRange(snapshot.Records);
         MaxPages = LeaderboardPagination.GetMaxPageIndex(snapshot.TotalRecords, PageSize);
@@ -215,8 +185,9 @@ public class OfflineLeaderboardTab : BaseSingleplayerLeaderboardTab, IDisposable
     private void OnDrawItem(GUI_OnlineLeaderboardPosition gui, LeaderboardRecord item, int index)
     {
         gui.position.gameObject.SetActive(true);
-        gui.position.text = (index + 1).ToString();
-        gui.position.color = PlayerManager.Instance.GetColorFromPosition(index + 1);
+        int position = item.LevelPosition ?? index + 1;
+        gui.position.text = position.ToString();
+        gui.position.color = PlayerManager.Instance.GetColorFromPosition(position);
         gui.favoriteButton.gameObject.SetActive(true);
         gui.favoriteButton.disabled = false;
         gui.isFavorite = _offlineGhostsService.ContainsAdditionalGhost(item.SteamId);
@@ -241,9 +212,9 @@ public class OfflineLeaderboardTab : BaseSingleplayerLeaderboardTab, IDisposable
             DateTimeOffset.Now);
         gui.time.text = item.Time.GetFormattedTime();
         gui.pointsCurrent.gameObject.SetActive(false);
-        gui.pointsWon.gameObject.SetActive(_levelPoints.HasValue);
-        if (_levelPoints.HasValue)
-            gui.pointsWon.text = $"(+{(int)Math.Round(_levelPoints.Value * Math.Pow(0.985, index))})";
+        gui.pointsWon.gameObject.SetActive(item.LevelDecayedPoints.HasValue);
+        if (item.LevelDecayedPoints.HasValue)
+            gui.pointsWon.text = $"(+{(int)Math.Round(item.LevelDecayedPoints.Value)})";
     }
 
     private void OnShowAllGhostsClicked()
@@ -272,9 +243,6 @@ public class OfflineLeaderboardTab : BaseSingleplayerLeaderboardTab, IDisposable
         _generation++;
         _subscription?.Dispose();
         _subscription = null;
-        _cancellationTokenSource?.Cancel();
-        _cancellationTokenSource?.Dispose();
-        _cancellationTokenSource = null;
     }
 
     private void StopForContextChange()

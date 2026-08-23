@@ -16,7 +16,7 @@ query GetNextFastestPersonalBest($xxHash: String!, $hash: String!, $time: Float!
                 ]
             }
         }
-        orderBy: TIME_DESC
+        orderBy: [TIME_DESC, DATE_CREATED_ASC]
     ) {
         nodes {
             time

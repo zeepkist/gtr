@@ -18,7 +18,6 @@ namespace Microsoft.Extensions.DependencyInjection
             });
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => new global::TNRD.Zeepkist.GTR.State.GtrClientStoreAccessor(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationStore>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IEntityStore>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IEntityIdSerializer>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::System.Collections.Generic.IEnumerable<global::StrawberryShake.IOperationRequestFactory>>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::System.Collections.Generic.IEnumerable<global::StrawberryShake.IOperationResultDataFactory>>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp))));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.BrowseLevelItemsQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.CurrentLevelRecordsQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.WatchCurrentLevelRecordsSubscription>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetAdditionalGhostsQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetAllPersonalBestGhostsQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
@@ -29,11 +28,9 @@ namespace Microsoft.Extensions.DependencyInjection
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetPersonalBestCountQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetPersonalBestGhostsQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetPersonalBestsQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetPlayerRankOnLevelQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetTopRecordGhostsQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetTotalUserCountQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetWorldRecordHolderQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.LeaderboardPageQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.WatchLeaderboardPageSubscription>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.SearchUsersByNameQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GtrClient>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
@@ -346,14 +343,6 @@ namespace Microsoft.Extensions.DependencyInjection
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>, global::StrawberryShake.Json.JsonResultPatcher>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.BrowseLevelItemsQuery>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.IBrowseLevelItemsQuery>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.BrowseLevelItemsQuery>(sp));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsResult>, global::TNRD.Zeepkist.GTR.State.CurrentLevelRecordsResultFactory>(services);
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsResult>>(sp));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsQuery>(sp));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsResult>, global::TNRD.Zeepkist.GTR.State.CurrentLevelRecordsBuilder>(services);
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationExecutor<global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsResult>>(services, sp => new global::StrawberryShake.OperationExecutor<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsResult>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.Transport.Http.IHttpConnection>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsResult>>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>>(sp), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationStore>(sp), strategy));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>, global::StrawberryShake.Json.JsonResultPatcher>(services);
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.CurrentLevelRecordsQuery>(services);
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsQuery>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.CurrentLevelRecordsQuery>(sp));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsResult>, global::TNRD.Zeepkist.GTR.State.WatchCurrentLevelRecordsResultFactory>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsResult>>(sp));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsSubscription>(sp));
@@ -434,14 +423,6 @@ namespace Microsoft.Extensions.DependencyInjection
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>, global::StrawberryShake.Json.JsonResultPatcher>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.GetPersonalBestsQuery>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.IGetPersonalBestsQuery>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetPersonalBestsQuery>(sp));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelResult>, global::TNRD.Zeepkist.GTR.State.GetPlayerRankOnLevelResultFactory>(services);
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelResult>>(sp));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelQuery>(sp));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelResult>, global::TNRD.Zeepkist.GTR.State.GetPlayerRankOnLevelBuilder>(services);
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationExecutor<global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelResult>>(services, sp => new global::StrawberryShake.OperationExecutor<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelResult>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.Transport.Http.IHttpConnection>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelResult>>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>>(sp), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationStore>(sp), strategy));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>, global::StrawberryShake.Json.JsonResultPatcher>(services);
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.GetPlayerRankOnLevelQuery>(services);
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelQuery>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetPlayerRankOnLevelQuery>(sp));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IGetTopRecordGhostsResult>, global::TNRD.Zeepkist.GTR.State.GetTopRecordGhostsResultFactory>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IGetTopRecordGhostsResult>>(sp));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.IGetTopRecordGhostsQuery>(sp));
@@ -466,14 +447,6 @@ namespace Microsoft.Extensions.DependencyInjection
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>, global::StrawberryShake.Json.JsonResultPatcher>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.GetWorldRecordHolderQuery>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.IGetWorldRecordHolderQuery>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetWorldRecordHolderQuery>(sp));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.ILeaderboardPageResult>, global::TNRD.Zeepkist.GTR.State.LeaderboardPageResultFactory>(services);
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.ILeaderboardPageResult>>(sp));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.ILeaderboardPageQuery>(sp));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.ILeaderboardPageResult>, global::TNRD.Zeepkist.GTR.State.LeaderboardPageBuilder>(services);
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationExecutor<global::TNRD.Zeepkist.GTR.ILeaderboardPageResult>>(services, sp => new global::StrawberryShake.OperationExecutor<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.ILeaderboardPageResult>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.Transport.Http.IHttpConnection>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.ILeaderboardPageResult>>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>>(sp), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationStore>(sp), strategy));
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>, global::StrawberryShake.Json.JsonResultPatcher>(services);
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.LeaderboardPageQuery>(services);
-            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.ILeaderboardPageQuery>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.LeaderboardPageQuery>(sp));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageResult>, global::TNRD.Zeepkist.GTR.State.WatchLeaderboardPageResultFactory>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageResult>>(sp));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageSubscription>(sp));
@@ -795,1242 +768,6 @@ namespace TNRD.Zeepkist.GTR
     }
 
     /// <summary>
-    /// The root query type which gives access points into the data universe.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecordsResult : global::System.IEquatable<CurrentLevelRecordsResult>, ICurrentLevelRecordsResult
-    {
-        public CurrentLevelRecordsResult(global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelItems? levelItems, global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelPoints? levelPoints, global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals? personalBestGlobals, global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals? worldRecordGlobals)
-        {
-            LevelItems = levelItems;
-            LevelPoints = levelPoints;
-            PersonalBestGlobals = personalBestGlobals;
-            WorldRecordGlobals = worldRecordGlobals;
-        }
-
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelItem`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelItems? LevelItems { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelPoint`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelPoints? LevelPoints { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `PersonalBestGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals? PersonalBestGlobals { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `WorldRecordGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals? WorldRecordGlobals { get; }
-
-        public virtual global::System.Boolean Equals(CurrentLevelRecordsResult? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (((LevelItems is null && other.LevelItems is null) || LevelItems != null && LevelItems.Equals(other.LevelItems))) && ((LevelPoints is null && other.LevelPoints is null) || LevelPoints != null && LevelPoints.Equals(other.LevelPoints)) && ((PersonalBestGlobals is null && other.PersonalBestGlobals is null) || PersonalBestGlobals != null && PersonalBestGlobals.Equals(other.PersonalBestGlobals)) && ((WorldRecordGlobals is null && other.WorldRecordGlobals is null) || WorldRecordGlobals != null && WorldRecordGlobals.Equals(other.WorldRecordGlobals));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((CurrentLevelRecordsResult)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                if (LevelItems != null)
-                {
-                    hash ^= 397 * LevelItems.GetHashCode();
-                }
-
-                if (LevelPoints != null)
-                {
-                    hash ^= 397 * LevelPoints.GetHashCode();
-                }
-
-                if (PersonalBestGlobals != null)
-                {
-                    hash ^= 397 * PersonalBestGlobals.GetHashCode();
-                }
-
-                if (WorldRecordGlobals != null)
-                {
-                    hash ^= 397 * WorldRecordGlobals.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelItem` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecords_LevelItems_LevelItemsConnection : global::System.IEquatable<CurrentLevelRecords_LevelItems_LevelItemsConnection>, ICurrentLevelRecords_LevelItems_LevelItemsConnection
-    {
-        public CurrentLevelRecords_LevelItems_LevelItemsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelItems_Nodes> nodes)
-        {
-            Nodes = nodes;
-        }
-
-        /// <summary>
-        /// A list of `LevelItem` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelItems_Nodes> Nodes { get; }
-
-        public virtual global::System.Boolean Equals(CurrentLevelRecords_LevelItems_LevelItemsConnection? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((CurrentLevelRecords_LevelItems_LevelItemsConnection)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                foreach (var Nodes_elm in Nodes)
-                {
-                    hash ^= 397 * Nodes_elm.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelPoint` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecords_LevelPoints_LevelPointsConnection : global::System.IEquatable<CurrentLevelRecords_LevelPoints_LevelPointsConnection>, ICurrentLevelRecords_LevelPoints_LevelPointsConnection
-    {
-        public CurrentLevelRecords_LevelPoints_LevelPointsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelPoints_Nodes> nodes)
-        {
-            Nodes = nodes;
-        }
-
-        /// <summary>
-        /// A list of `LevelPoint` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelPoints_Nodes> Nodes { get; }
-
-        public virtual global::System.Boolean Equals(CurrentLevelRecords_LevelPoints_LevelPointsConnection? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((CurrentLevelRecords_LevelPoints_LevelPointsConnection)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                foreach (var Nodes_elm in Nodes)
-                {
-                    hash ^= 397 * Nodes_elm.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// A connection to a list of `PersonalBestGlobal` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecords_PersonalBestGlobals_PersonalBestGlobalsConnection : global::System.IEquatable<CurrentLevelRecords_PersonalBestGlobals_PersonalBestGlobalsConnection>, ICurrentLevelRecords_PersonalBestGlobals_PersonalBestGlobalsConnection
-    {
-        public CurrentLevelRecords_PersonalBestGlobals_PersonalBestGlobalsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes> nodes)
-        {
-            Nodes = nodes;
-        }
-
-        /// <summary>
-        /// A list of `PersonalBestGlobal` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes> Nodes { get; }
-
-        public virtual global::System.Boolean Equals(CurrentLevelRecords_PersonalBestGlobals_PersonalBestGlobalsConnection? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((CurrentLevelRecords_PersonalBestGlobals_PersonalBestGlobalsConnection)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                foreach (var Nodes_elm in Nodes)
-                {
-                    hash ^= 397 * Nodes_elm.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// A connection to a list of `WorldRecordGlobal` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecords_WorldRecordGlobals_WorldRecordGlobalsConnection : global::System.IEquatable<CurrentLevelRecords_WorldRecordGlobals_WorldRecordGlobalsConnection>, ICurrentLevelRecords_WorldRecordGlobals_WorldRecordGlobalsConnection
-    {
-        public CurrentLevelRecords_WorldRecordGlobals_WorldRecordGlobalsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals_Nodes> nodes)
-        {
-            Nodes = nodes;
-        }
-
-        /// <summary>
-        /// A list of `WorldRecordGlobal` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals_Nodes> Nodes { get; }
-
-        public virtual global::System.Boolean Equals(CurrentLevelRecords_WorldRecordGlobals_WorldRecordGlobalsConnection? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((CurrentLevelRecords_WorldRecordGlobals_WorldRecordGlobalsConnection)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                foreach (var Nodes_elm in Nodes)
-                {
-                    hash ^= 397 * Nodes_elm.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecords_LevelItems_Nodes_LevelItem : global::System.IEquatable<CurrentLevelRecords_LevelItems_Nodes_LevelItem>, ICurrentLevelRecords_LevelItems_Nodes_LevelItem
-    {
-        public CurrentLevelRecords_LevelItems_Nodes_LevelItem(global::System.String name)
-        {
-            Name = name;
-        }
-
-        public global::System.String Name { get; }
-
-        public virtual global::System.Boolean Equals(CurrentLevelRecords_LevelItems_Nodes_LevelItem? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (Name.Equals(other.Name));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((CurrentLevelRecords_LevelItems_Nodes_LevelItem)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                hash ^= 397 * Name.GetHashCode();
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecords_LevelPoints_Nodes_LevelPoint : global::System.IEquatable<CurrentLevelRecords_LevelPoints_Nodes_LevelPoint>, ICurrentLevelRecords_LevelPoints_Nodes_LevelPoint
-    {
-        public CurrentLevelRecords_LevelPoints_Nodes_LevelPoint(global::System.Int32 points)
-        {
-            Points = points;
-        }
-
-        public global::System.Int32 Points { get; }
-
-        public virtual global::System.Boolean Equals(CurrentLevelRecords_LevelPoints_Nodes_LevelPoint? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::System.Object.Equals(Points, other.Points));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((CurrentLevelRecords_LevelPoints_Nodes_LevelPoint)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                hash ^= 397 * Points.GetHashCode();
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecords_PersonalBestGlobals_Nodes_PersonalBestGlobal : global::System.IEquatable<CurrentLevelRecords_PersonalBestGlobals_Nodes_PersonalBestGlobal>, ICurrentLevelRecords_PersonalBestGlobals_Nodes_PersonalBestGlobal
-    {
-        public CurrentLevelRecords_PersonalBestGlobals_Nodes_PersonalBestGlobal(global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record? @record)
-        {
-            Record = @record;
-        }
-
-        /// <summary>
-        /// Reads a single `Record` that is related to this `PersonalBestGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record? Record { get; }
-
-        public virtual global::System.Boolean Equals(CurrentLevelRecords_PersonalBestGlobals_Nodes_PersonalBestGlobal? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (((Record is null && other.Record is null) || Record != null && Record.Equals(other.Record)));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((CurrentLevelRecords_PersonalBestGlobals_Nodes_PersonalBestGlobal)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                if (Record != null)
-                {
-                    hash ^= 397 * Record.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecords_WorldRecordGlobals_Nodes_WorldRecordGlobal : global::System.IEquatable<CurrentLevelRecords_WorldRecordGlobals_Nodes_WorldRecordGlobal>, ICurrentLevelRecords_WorldRecordGlobals_Nodes_WorldRecordGlobal
-    {
-        public CurrentLevelRecords_WorldRecordGlobals_Nodes_WorldRecordGlobal(global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record? @record)
-        {
-            Record = @record;
-        }
-
-        /// <summary>
-        /// Reads a single `Record` that is related to this `WorldRecordGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record? Record { get; }
-
-        public virtual global::System.Boolean Equals(CurrentLevelRecords_WorldRecordGlobals_Nodes_WorldRecordGlobal? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (((Record is null && other.Record is null) || Record != null && Record.Equals(other.Record)));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((CurrentLevelRecords_WorldRecordGlobals_Nodes_WorldRecordGlobal)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                if (Record != null)
-                {
-                    hash ^= 397 * Record.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_Record : global::System.IEquatable<CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_Record>, ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_Record
-    {
-        public CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_Record(global::System.Int32 id, global::System.Double time, global::System.String dateCreated, global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions userPointContributions)
-        {
-            Id = id;
-            Time = time;
-            DateCreated = dateCreated;
-            UserPointContributions = userPointContributions;
-        }
-
-        public global::System.Int32 Id { get; }
-        public global::System.Double Time { get; }
-        public global::System.String DateCreated { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `UserPointContribution`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions UserPointContributions { get; }
-
-        public virtual global::System.Boolean Equals(CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_Record? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::System.Object.Equals(Id, other.Id)) && global::System.Object.Equals(Time, other.Time) && DateCreated.Equals(other.DateCreated) && UserPointContributions.Equals(other.UserPointContributions);
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_Record)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                hash ^= 397 * Id.GetHashCode();
-                hash ^= 397 * Time.GetHashCode();
-                hash ^= 397 * DateCreated.GetHashCode();
-                hash ^= 397 * UserPointContributions.GetHashCode();
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecords_WorldRecordGlobals_Nodes_Record_Record : global::System.IEquatable<CurrentLevelRecords_WorldRecordGlobals_Nodes_Record_Record>, ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_Record
-    {
-        public CurrentLevelRecords_WorldRecordGlobals_Nodes_Record_Record(global::System.Int32 id, global::System.Double time, global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User? user)
-        {
-            Id = id;
-            Time = time;
-            User = user;
-        }
-
-        public global::System.Int32 Id { get; }
-        public global::System.Double Time { get; }
-        /// <summary>
-        /// Reads a single `User` that is related to this `Record`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User? User { get; }
-
-        public virtual global::System.Boolean Equals(CurrentLevelRecords_WorldRecordGlobals_Nodes_Record_Record? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::System.Object.Equals(Id, other.Id)) && global::System.Object.Equals(Time, other.Time) && ((User is null && other.User is null) || User != null && User.Equals(other.User));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((CurrentLevelRecords_WorldRecordGlobals_Nodes_Record_Record)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                hash ^= 397 * Id.GetHashCode();
-                hash ^= 397 * Time.GetHashCode();
-                if (User != null)
-                {
-                    hash ^= 397 * User.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// A connection to a list of `UserPointContribution` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection : global::System.IEquatable<CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection>, ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection
-    {
-        public CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes> nodes)
-        {
-            Nodes = nodes;
-        }
-
-        /// <summary>
-        /// A list of `UserPointContribution` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes> Nodes { get; }
-
-        public virtual global::System.Boolean Equals(CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                foreach (var Nodes_elm in Nodes)
-                {
-                    hash ^= 397 * Nodes_elm.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User_User : global::System.IEquatable<CurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User_User>, ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User_User
-    {
-        public CurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User_User(global::System.String? steamId, global::System.String? steamName)
-        {
-            SteamId = steamId;
-            SteamName = steamName;
-        }
-
-        public global::System.String? SteamId { get; }
-        public global::System.String? SteamName { get; }
-
-        public virtual global::System.Boolean Equals(CurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User_User? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (((SteamId is null && other.SteamId is null) || SteamId != null && SteamId.Equals(other.SteamId))) && ((SteamName is null && other.SteamName is null) || SteamName != null && SteamName.Equals(other.SteamName));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((CurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User_User)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                if (SteamId != null)
-                {
-                    hash ^= 397 * SteamId.GetHashCode();
-                }
-
-                if (SteamName != null)
-                {
-                    hash ^= 397 * SteamName.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution : global::System.IEquatable<CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution>, ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution
-    {
-        public CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution(global::System.Int32 contributionRank, global::System.Int32 levelPosition, global::System.Int32 levelPoints, global::System.Double levelDecayedPoints)
-        {
-            ContributionRank = contributionRank;
-            LevelPosition = levelPosition;
-            LevelPoints = levelPoints;
-            LevelDecayedPoints = levelDecayedPoints;
-        }
-
-        public global::System.Int32 ContributionRank { get; }
-        public global::System.Int32 LevelPosition { get; }
-        public global::System.Int32 LevelPoints { get; }
-        public global::System.Double LevelDecayedPoints { get; }
-
-        public virtual global::System.Boolean Equals(CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::System.Object.Equals(ContributionRank, other.ContributionRank)) && global::System.Object.Equals(LevelPosition, other.LevelPosition) && global::System.Object.Equals(LevelPoints, other.LevelPoints) && global::System.Object.Equals(LevelDecayedPoints, other.LevelDecayedPoints);
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                hash ^= 397 * ContributionRank.GetHashCode();
-                hash ^= 397 * LevelPosition.GetHashCode();
-                hash ^= 397 * LevelPoints.GetHashCode();
-                hash ^= 397 * LevelDecayedPoints.GetHashCode();
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// The root query type which gives access points into the data universe.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecordsResult
-    {
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelItem`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelItems? LevelItems { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelPoint`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelPoints? LevelPoints { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `PersonalBestGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals? PersonalBestGlobals { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `WorldRecordGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals? WorldRecordGlobals { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelItem` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_LevelItems
-    {
-        /// <summary>
-        /// A list of `LevelItem` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelItems_Nodes> Nodes { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelItem` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_LevelItems_LevelItemsConnection : ICurrentLevelRecords_LevelItems
-    {
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelPoint` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_LevelPoints
-    {
-        /// <summary>
-        /// A list of `LevelPoint` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelPoints_Nodes> Nodes { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelPoint` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_LevelPoints_LevelPointsConnection : ICurrentLevelRecords_LevelPoints
-    {
-    }
-
-    /// <summary>
-    /// A connection to a list of `PersonalBestGlobal` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_PersonalBestGlobals
-    {
-        /// <summary>
-        /// A list of `PersonalBestGlobal` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes> Nodes { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `PersonalBestGlobal` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_PersonalBestGlobals_PersonalBestGlobalsConnection : ICurrentLevelRecords_PersonalBestGlobals
-    {
-    }
-
-    /// <summary>
-    /// A connection to a list of `WorldRecordGlobal` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_WorldRecordGlobals
-    {
-        /// <summary>
-        /// A list of `WorldRecordGlobal` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals_Nodes> Nodes { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `WorldRecordGlobal` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_WorldRecordGlobals_WorldRecordGlobalsConnection : ICurrentLevelRecords_WorldRecordGlobals
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_LevelItems_Nodes
-    {
-        public global::System.String Name { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_LevelItems_Nodes_LevelItem : ICurrentLevelRecords_LevelItems_Nodes
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_LevelPoints_Nodes
-    {
-        public global::System.Int32 Points { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_LevelPoints_Nodes_LevelPoint : ICurrentLevelRecords_LevelPoints_Nodes
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_PersonalBestGlobals_Nodes
-    {
-        /// <summary>
-        /// Reads a single `Record` that is related to this `PersonalBestGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record? Record { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_PersonalBestGlobals_Nodes_PersonalBestGlobal : ICurrentLevelRecords_PersonalBestGlobals_Nodes
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_WorldRecordGlobals_Nodes
-    {
-        /// <summary>
-        /// Reads a single `Record` that is related to this `WorldRecordGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record? Record { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_WorldRecordGlobals_Nodes_WorldRecordGlobal : ICurrentLevelRecords_WorldRecordGlobals_Nodes
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record
-    {
-        public global::System.Int32 Id { get; }
-        public global::System.Double Time { get; }
-        public global::System.String DateCreated { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `UserPointContribution`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions UserPointContributions { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_Record : ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record
-    {
-        public global::System.Int32 Id { get; }
-        public global::System.Double Time { get; }
-        /// <summary>
-        /// Reads a single `User` that is related to this `Record`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User? User { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_Record : ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record
-    {
-    }
-
-    /// <summary>
-    /// A connection to a list of `UserPointContribution` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions
-    {
-        /// <summary>
-        /// A list of `UserPointContribution` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes> Nodes { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `UserPointContribution` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection : ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User
-    {
-        public global::System.String? SteamId { get; }
-        public global::System.String? SteamName { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User_User : ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes
-    {
-        public global::System.Int32 ContributionRank { get; }
-        public global::System.Int32 LevelPosition { get; }
-        public global::System.Int32 LevelPoints { get; }
-        public global::System.Double LevelDecayedPoints { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution : ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes
-    {
-    }
-
-    /// <summary>
     /// The root subscription type: contains realtime events you can subscribe to with the `subscription` operation.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
@@ -2104,30 +841,20 @@ namespace TNRD.Zeepkist.GTR
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class WatchCurrentLevelRecords_Query_Query : global::System.IEquatable<WatchCurrentLevelRecords_Query_Query>, IWatchCurrentLevelRecords_Query_Query
     {
-        public WatchCurrentLevelRecords_Query_Query(global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelItems? levelItems, global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelPoints? levelPoints, global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals? personalBestGlobals, global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals? worldRecordGlobals)
+        public WatchCurrentLevelRecords_Query_Query(global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest? personalBest, global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecord? worldRecord)
         {
-            LevelItems = levelItems;
-            LevelPoints = levelPoints;
-            PersonalBestGlobals = personalBestGlobals;
-            WorldRecordGlobals = worldRecordGlobals;
+            PersonalBest = personalBest;
+            WorldRecord = worldRecord;
         }
 
         /// <summary>
-        /// Reads and enables pagination through a set of `LevelItem`.
+        /// Reads and enables pagination through a set of `Record`.
         /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelItems? LevelItems { get; }
+        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest? PersonalBest { get; }
         /// <summary>
-        /// Reads and enables pagination through a set of `LevelPoint`.
+        /// Reads and enables pagination through a set of `Record`.
         /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelPoints? LevelPoints { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `PersonalBestGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals? PersonalBestGlobals { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `WorldRecordGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals? WorldRecordGlobals { get; }
+        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecord? WorldRecord { get; }
 
         public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_Query? other)
         {
@@ -2146,7 +873,7 @@ namespace TNRD.Zeepkist.GTR
                 return false;
             }
 
-            return (((LevelItems is null && other.LevelItems is null) || LevelItems != null && LevelItems.Equals(other.LevelItems))) && ((LevelPoints is null && other.LevelPoints is null) || LevelPoints != null && LevelPoints.Equals(other.LevelPoints)) && ((PersonalBestGlobals is null && other.PersonalBestGlobals is null) || PersonalBestGlobals != null && PersonalBestGlobals.Equals(other.PersonalBestGlobals)) && ((WorldRecordGlobals is null && other.WorldRecordGlobals is null) || WorldRecordGlobals != null && WorldRecordGlobals.Equals(other.WorldRecordGlobals));
+            return (((PersonalBest is null && other.PersonalBest is null) || PersonalBest != null && PersonalBest.Equals(other.PersonalBest))) && ((WorldRecord is null && other.WorldRecord is null) || WorldRecord != null && WorldRecord.Equals(other.WorldRecord));
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -2174,24 +901,14 @@ namespace TNRD.Zeepkist.GTR
             unchecked
             {
                 int hash = 5;
-                if (LevelItems != null)
+                if (PersonalBest != null)
                 {
-                    hash ^= 397 * LevelItems.GetHashCode();
+                    hash ^= 397 * PersonalBest.GetHashCode();
                 }
 
-                if (LevelPoints != null)
+                if (WorldRecord != null)
                 {
-                    hash ^= 397 * LevelPoints.GetHashCode();
-                }
-
-                if (PersonalBestGlobals != null)
-                {
-                    hash ^= 397 * PersonalBestGlobals.GetHashCode();
-                }
-
-                if (WorldRecordGlobals != null)
-                {
-                    hash ^= 397 * WorldRecordGlobals.GetHashCode();
+                    hash ^= 397 * WorldRecord.GetHashCode();
                 }
 
                 return hash;
@@ -2200,22 +917,22 @@ namespace TNRD.Zeepkist.GTR
     }
 
     /// <summary>
-    /// A connection to a list of `LevelItem` values.
+    /// A connection to a list of `Record` values.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchCurrentLevelRecords_Query_LevelItems_LevelItemsConnection : global::System.IEquatable<WatchCurrentLevelRecords_Query_LevelItems_LevelItemsConnection>, IWatchCurrentLevelRecords_Query_LevelItems_LevelItemsConnection
+    public partial class WatchCurrentLevelRecords_Query_PersonalBest_RecordsConnection : global::System.IEquatable<WatchCurrentLevelRecords_Query_PersonalBest_RecordsConnection>, IWatchCurrentLevelRecords_Query_PersonalBest_RecordsConnection
     {
-        public WatchCurrentLevelRecords_Query_LevelItems_LevelItemsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelItems_Nodes> nodes)
+        public WatchCurrentLevelRecords_Query_PersonalBest_RecordsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes> nodes)
         {
             Nodes = nodes;
         }
 
         /// <summary>
-        /// A list of `LevelItem` objects.
+        /// A list of `Record` objects.
         /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelItems_Nodes> Nodes { get; }
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes> Nodes { get; }
 
-        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_LevelItems_LevelItemsConnection? other)
+        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_PersonalBest_RecordsConnection? other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -2252,7 +969,7 @@ namespace TNRD.Zeepkist.GTR
                 return false;
             }
 
-            return Equals((WatchCurrentLevelRecords_Query_LevelItems_LevelItemsConnection)obj);
+            return Equals((WatchCurrentLevelRecords_Query_PersonalBest_RecordsConnection)obj);
         }
 
         public override global::System.Int32 GetHashCode()
@@ -2271,22 +988,22 @@ namespace TNRD.Zeepkist.GTR
     }
 
     /// <summary>
-    /// A connection to a list of `LevelPoint` values.
+    /// A connection to a list of `Record` values.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchCurrentLevelRecords_Query_LevelPoints_LevelPointsConnection : global::System.IEquatable<WatchCurrentLevelRecords_Query_LevelPoints_LevelPointsConnection>, IWatchCurrentLevelRecords_Query_LevelPoints_LevelPointsConnection
+    public partial class WatchCurrentLevelRecords_Query_WorldRecord_RecordsConnection : global::System.IEquatable<WatchCurrentLevelRecords_Query_WorldRecord_RecordsConnection>, IWatchCurrentLevelRecords_Query_WorldRecord_RecordsConnection
     {
-        public WatchCurrentLevelRecords_Query_LevelPoints_LevelPointsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelPoints_Nodes> nodes)
+        public WatchCurrentLevelRecords_Query_WorldRecord_RecordsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecord_Nodes> nodes)
         {
             Nodes = nodes;
         }
 
         /// <summary>
-        /// A list of `LevelPoint` objects.
+        /// A list of `Record` objects.
         /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelPoints_Nodes> Nodes { get; }
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecord_Nodes> Nodes { get; }
 
-        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_LevelPoints_LevelPointsConnection? other)
+        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_WorldRecord_RecordsConnection? other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -2323,149 +1040,7 @@ namespace TNRD.Zeepkist.GTR
                 return false;
             }
 
-            return Equals((WatchCurrentLevelRecords_Query_LevelPoints_LevelPointsConnection)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                foreach (var Nodes_elm in Nodes)
-                {
-                    hash ^= 397 * Nodes_elm.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// A connection to a list of `PersonalBestGlobal` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchCurrentLevelRecords_Query_PersonalBestGlobals_PersonalBestGlobalsConnection : global::System.IEquatable<WatchCurrentLevelRecords_Query_PersonalBestGlobals_PersonalBestGlobalsConnection>, IWatchCurrentLevelRecords_Query_PersonalBestGlobals_PersonalBestGlobalsConnection
-    {
-        public WatchCurrentLevelRecords_Query_PersonalBestGlobals_PersonalBestGlobalsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes> nodes)
-        {
-            Nodes = nodes;
-        }
-
-        /// <summary>
-        /// A list of `PersonalBestGlobal` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes> Nodes { get; }
-
-        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_PersonalBestGlobals_PersonalBestGlobalsConnection? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((WatchCurrentLevelRecords_Query_PersonalBestGlobals_PersonalBestGlobalsConnection)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                foreach (var Nodes_elm in Nodes)
-                {
-                    hash ^= 397 * Nodes_elm.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// A connection to a list of `WorldRecordGlobal` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchCurrentLevelRecords_Query_WorldRecordGlobals_WorldRecordGlobalsConnection : global::System.IEquatable<WatchCurrentLevelRecords_Query_WorldRecordGlobals_WorldRecordGlobalsConnection>, IWatchCurrentLevelRecords_Query_WorldRecordGlobals_WorldRecordGlobalsConnection
-    {
-        public WatchCurrentLevelRecords_Query_WorldRecordGlobals_WorldRecordGlobalsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes> nodes)
-        {
-            Nodes = nodes;
-        }
-
-        /// <summary>
-        /// A list of `WorldRecordGlobal` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes> Nodes { get; }
-
-        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_WorldRecordGlobals_WorldRecordGlobalsConnection? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((WatchCurrentLevelRecords_Query_WorldRecordGlobals_WorldRecordGlobalsConnection)obj);
+            return Equals((WatchCurrentLevelRecords_Query_WorldRecord_RecordsConnection)obj);
         }
 
         public override global::System.Int32 GetHashCode()
@@ -2484,267 +1059,9 @@ namespace TNRD.Zeepkist.GTR
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchCurrentLevelRecords_Query_LevelItems_Nodes_LevelItem : global::System.IEquatable<WatchCurrentLevelRecords_Query_LevelItems_Nodes_LevelItem>, IWatchCurrentLevelRecords_Query_LevelItems_Nodes_LevelItem
+    public partial class WatchCurrentLevelRecords_Query_PersonalBest_Nodes_Record : global::System.IEquatable<WatchCurrentLevelRecords_Query_PersonalBest_Nodes_Record>, IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_Record
     {
-        public WatchCurrentLevelRecords_Query_LevelItems_Nodes_LevelItem(global::System.String name)
-        {
-            Name = name;
-        }
-
-        public global::System.String Name { get; }
-
-        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_LevelItems_Nodes_LevelItem? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (Name.Equals(other.Name));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((WatchCurrentLevelRecords_Query_LevelItems_Nodes_LevelItem)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                hash ^= 397 * Name.GetHashCode();
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchCurrentLevelRecords_Query_LevelPoints_Nodes_LevelPoint : global::System.IEquatable<WatchCurrentLevelRecords_Query_LevelPoints_Nodes_LevelPoint>, IWatchCurrentLevelRecords_Query_LevelPoints_Nodes_LevelPoint
-    {
-        public WatchCurrentLevelRecords_Query_LevelPoints_Nodes_LevelPoint(global::System.Int32 points)
-        {
-            Points = points;
-        }
-
-        public global::System.Int32 Points { get; }
-
-        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_LevelPoints_Nodes_LevelPoint? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::System.Object.Equals(Points, other.Points));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((WatchCurrentLevelRecords_Query_LevelPoints_Nodes_LevelPoint)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                hash ^= 397 * Points.GetHashCode();
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_PersonalBestGlobal : global::System.IEquatable<WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_PersonalBestGlobal>, IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_PersonalBestGlobal
-    {
-        public WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_PersonalBestGlobal(global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record? @record)
-        {
-            Record = @record;
-        }
-
-        /// <summary>
-        /// Reads a single `Record` that is related to this `PersonalBestGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record? Record { get; }
-
-        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_PersonalBestGlobal? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (((Record is null && other.Record is null) || Record != null && Record.Equals(other.Record)));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_PersonalBestGlobal)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                if (Record != null)
-                {
-                    hash ^= 397 * Record.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_WorldRecordGlobal : global::System.IEquatable<WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_WorldRecordGlobal>, IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_WorldRecordGlobal
-    {
-        public WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_WorldRecordGlobal(global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record? @record)
-        {
-            Record = @record;
-        }
-
-        /// <summary>
-        /// Reads a single `Record` that is related to this `WorldRecordGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record? Record { get; }
-
-        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_WorldRecordGlobal? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (((Record is null && other.Record is null) || Record != null && Record.Equals(other.Record)));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_WorldRecordGlobal)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                if (Record != null)
-                {
-                    hash ^= 397 * Record.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_Record : global::System.IEquatable<WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_Record>, IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_Record
-    {
-        public WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_Record(global::System.Int32 id, global::System.Double time, global::System.String dateCreated, global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions userPointContributions)
+        public WatchCurrentLevelRecords_Query_PersonalBest_Nodes_Record(global::System.Int32 id, global::System.Double time, global::System.String dateCreated, global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions userPointContributions)
         {
             Id = id;
             Time = time;
@@ -2758,9 +1075,9 @@ namespace TNRD.Zeepkist.GTR
         /// <summary>
         /// Reads and enables pagination through a set of `UserPointContribution`.
         /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions UserPointContributions { get; }
+        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions UserPointContributions { get; }
 
-        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_Record? other)
+        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_PersonalBest_Nodes_Record? other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -2797,7 +1114,7 @@ namespace TNRD.Zeepkist.GTR
                 return false;
             }
 
-            return Equals((WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_Record)obj);
+            return Equals((WatchCurrentLevelRecords_Query_PersonalBest_Nodes_Record)obj);
         }
 
         public override global::System.Int32 GetHashCode()
@@ -2815,9 +1132,9 @@ namespace TNRD.Zeepkist.GTR
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_Record : global::System.IEquatable<WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_Record>, IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_Record
+    public partial class WatchCurrentLevelRecords_Query_WorldRecord_Nodes_Record : global::System.IEquatable<WatchCurrentLevelRecords_Query_WorldRecord_Nodes_Record>, IWatchCurrentLevelRecords_Query_WorldRecord_Nodes_Record
     {
-        public WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_Record(global::System.Int32 id, global::System.Double time, global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User? user)
+        public WatchCurrentLevelRecords_Query_WorldRecord_Nodes_Record(global::System.Int32 id, global::System.Double time, global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecord_Nodes_User? user)
         {
             Id = id;
             Time = time;
@@ -2829,9 +1146,9 @@ namespace TNRD.Zeepkist.GTR
         /// <summary>
         /// Reads a single `User` that is related to this `Record`.
         /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User? User { get; }
+        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecord_Nodes_User? User { get; }
 
-        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_Record? other)
+        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_WorldRecord_Nodes_Record? other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -2868,7 +1185,7 @@ namespace TNRD.Zeepkist.GTR
                 return false;
             }
 
-            return Equals((WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_Record)obj);
+            return Equals((WatchCurrentLevelRecords_Query_WorldRecord_Nodes_Record)obj);
         }
 
         public override global::System.Int32 GetHashCode()
@@ -2892,9 +1209,9 @@ namespace TNRD.Zeepkist.GTR
     /// A connection to a list of `UserPointContribution` values.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection : global::System.IEquatable<WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection>, IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection
+    public partial class WatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_UserPointContributionsConnection : global::System.IEquatable<WatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_UserPointContributionsConnection>, IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_UserPointContributionsConnection
     {
-        public WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes> nodes)
+        public WatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_UserPointContributionsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes> nodes)
         {
             Nodes = nodes;
         }
@@ -2902,9 +1219,9 @@ namespace TNRD.Zeepkist.GTR
         /// <summary>
         /// A list of `UserPointContribution` objects.
         /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes> Nodes { get; }
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes> Nodes { get; }
 
-        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection? other)
+        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_UserPointContributionsConnection? other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -2941,7 +1258,7 @@ namespace TNRD.Zeepkist.GTR
                 return false;
             }
 
-            return Equals((WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection)obj);
+            return Equals((WatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_UserPointContributionsConnection)obj);
         }
 
         public override global::System.Int32 GetHashCode()
@@ -2960,9 +1277,9 @@ namespace TNRD.Zeepkist.GTR
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User_User : global::System.IEquatable<WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User_User>, IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User_User
+    public partial class WatchCurrentLevelRecords_Query_WorldRecord_Nodes_User_User : global::System.IEquatable<WatchCurrentLevelRecords_Query_WorldRecord_Nodes_User_User>, IWatchCurrentLevelRecords_Query_WorldRecord_Nodes_User_User
     {
-        public WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User_User(global::System.String? steamId, global::System.String? steamName)
+        public WatchCurrentLevelRecords_Query_WorldRecord_Nodes_User_User(global::System.String? steamId, global::System.String? steamName)
         {
             SteamId = steamId;
             SteamName = steamName;
@@ -2971,7 +1288,7 @@ namespace TNRD.Zeepkist.GTR
         public global::System.String? SteamId { get; }
         public global::System.String? SteamName { get; }
 
-        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User_User? other)
+        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_WorldRecord_Nodes_User_User? other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -3008,7 +1325,7 @@ namespace TNRD.Zeepkist.GTR
                 return false;
             }
 
-            return Equals((WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User_User)obj);
+            return Equals((WatchCurrentLevelRecords_Query_WorldRecord_Nodes_User_User)obj);
         }
 
         public override global::System.Int32 GetHashCode()
@@ -3032,22 +1349,18 @@ namespace TNRD.Zeepkist.GTR
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution : global::System.IEquatable<WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution>, IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution
+    public partial class WatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes_UserPointContribution : global::System.IEquatable<WatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes_UserPointContribution>, IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes_UserPointContribution
     {
-        public WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution(global::System.Int32 contributionRank, global::System.Int32 levelPosition, global::System.Int32 levelPoints, global::System.Double levelDecayedPoints)
+        public WatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes_UserPointContribution(global::System.Int32 levelPosition, global::System.Double levelDecayedPoints)
         {
-            ContributionRank = contributionRank;
             LevelPosition = levelPosition;
-            LevelPoints = levelPoints;
             LevelDecayedPoints = levelDecayedPoints;
         }
 
-        public global::System.Int32 ContributionRank { get; }
         public global::System.Int32 LevelPosition { get; }
-        public global::System.Int32 LevelPoints { get; }
         public global::System.Double LevelDecayedPoints { get; }
 
-        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution? other)
+        public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes_UserPointContribution? other)
         {
             if (ReferenceEquals(null, other))
             {
@@ -3064,7 +1377,7 @@ namespace TNRD.Zeepkist.GTR
                 return false;
             }
 
-            return (global::System.Object.Equals(ContributionRank, other.ContributionRank)) && global::System.Object.Equals(LevelPosition, other.LevelPosition) && global::System.Object.Equals(LevelPoints, other.LevelPoints) && global::System.Object.Equals(LevelDecayedPoints, other.LevelDecayedPoints);
+            return (global::System.Object.Equals(LevelPosition, other.LevelPosition)) && global::System.Object.Equals(LevelDecayedPoints, other.LevelDecayedPoints);
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -3084,7 +1397,7 @@ namespace TNRD.Zeepkist.GTR
                 return false;
             }
 
-            return Equals((WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution)obj);
+            return Equals((WatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes_UserPointContribution)obj);
         }
 
         public override global::System.Int32 GetHashCode()
@@ -3092,9 +1405,7 @@ namespace TNRD.Zeepkist.GTR
             unchecked
             {
                 int hash = 5;
-                hash ^= 397 * ContributionRank.GetHashCode();
                 hash ^= 397 * LevelPosition.GetHashCode();
-                hash ^= 397 * LevelPoints.GetHashCode();
                 hash ^= 397 * LevelDecayedPoints.GetHashCode();
                 return hash;
             }
@@ -3121,21 +1432,13 @@ namespace TNRD.Zeepkist.GTR
     public partial interface ICurrentLevelRecordFields
     {
         /// <summary>
-        /// Reads and enables pagination through a set of `LevelItem`.
+        /// Reads and enables pagination through a set of `Record`.
         /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelItems? LevelItems { get; }
+        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest? PersonalBest { get; }
         /// <summary>
-        /// Reads and enables pagination through a set of `LevelPoint`.
+        /// Reads and enables pagination through a set of `Record`.
         /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelPoints? LevelPoints { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `PersonalBestGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals? PersonalBestGlobals { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `WorldRecordGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals? WorldRecordGlobals { get; }
+        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecord? WorldRecord { get; }
     }
 
     /// <summary>
@@ -3155,137 +1458,47 @@ namespace TNRD.Zeepkist.GTR
     }
 
     /// <summary>
-    /// A connection to a list of `LevelItem` values.
+    /// A connection to a list of `Record` values.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_LevelItems
+    public partial interface IWatchCurrentLevelRecords_Query_PersonalBest
     {
         /// <summary>
-        /// A list of `LevelItem` objects.
+        /// A list of `Record` objects.
         /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelItems_Nodes> Nodes { get; }
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes> Nodes { get; }
     }
 
     /// <summary>
-    /// A connection to a list of `LevelItem` values.
+    /// A connection to a list of `Record` values.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_LevelItems_LevelItemsConnection : IWatchCurrentLevelRecords_Query_LevelItems
+    public partial interface IWatchCurrentLevelRecords_Query_PersonalBest_RecordsConnection : IWatchCurrentLevelRecords_Query_PersonalBest
     {
     }
 
     /// <summary>
-    /// A connection to a list of `LevelPoint` values.
+    /// A connection to a list of `Record` values.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_LevelPoints
+    public partial interface IWatchCurrentLevelRecords_Query_WorldRecord
     {
         /// <summary>
-        /// A list of `LevelPoint` objects.
+        /// A list of `Record` objects.
         /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelPoints_Nodes> Nodes { get; }
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecord_Nodes> Nodes { get; }
     }
 
     /// <summary>
-    /// A connection to a list of `LevelPoint` values.
+    /// A connection to a list of `Record` values.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_LevelPoints_LevelPointsConnection : IWatchCurrentLevelRecords_Query_LevelPoints
-    {
-    }
-
-    /// <summary>
-    /// A connection to a list of `PersonalBestGlobal` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_PersonalBestGlobals
-    {
-        /// <summary>
-        /// A list of `PersonalBestGlobal` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes> Nodes { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `PersonalBestGlobal` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_PersonalBestGlobals_PersonalBestGlobalsConnection : IWatchCurrentLevelRecords_Query_PersonalBestGlobals
-    {
-    }
-
-    /// <summary>
-    /// A connection to a list of `WorldRecordGlobal` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_WorldRecordGlobals
-    {
-        /// <summary>
-        /// A list of `WorldRecordGlobal` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes> Nodes { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `WorldRecordGlobal` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_WorldRecordGlobals_WorldRecordGlobalsConnection : IWatchCurrentLevelRecords_Query_WorldRecordGlobals
+    public partial interface IWatchCurrentLevelRecords_Query_WorldRecord_RecordsConnection : IWatchCurrentLevelRecords_Query_WorldRecord
     {
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_LevelItems_Nodes
-    {
-        public global::System.String Name { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_LevelItems_Nodes_LevelItem : IWatchCurrentLevelRecords_Query_LevelItems_Nodes
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_LevelPoints_Nodes
-    {
-        public global::System.Int32 Points { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_LevelPoints_Nodes_LevelPoint : IWatchCurrentLevelRecords_Query_LevelPoints_Nodes
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes
-    {
-        /// <summary>
-        /// Reads a single `Record` that is related to this `PersonalBestGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record? Record { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_PersonalBestGlobal : IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes
-    {
-        /// <summary>
-        /// Reads a single `Record` that is related to this `WorldRecordGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record? Record { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_WorldRecordGlobal : IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record
+    public partial interface IWatchCurrentLevelRecords_Query_PersonalBest_Nodes
     {
         public global::System.Int32 Id { get; }
         public global::System.Double Time { get; }
@@ -3293,27 +1506,27 @@ namespace TNRD.Zeepkist.GTR
         /// <summary>
         /// Reads and enables pagination through a set of `UserPointContribution`.
         /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions UserPointContributions { get; }
+        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions UserPointContributions { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_Record : IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record
+    public partial interface IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_Record : IWatchCurrentLevelRecords_Query_PersonalBest_Nodes
     {
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record
+    public partial interface IWatchCurrentLevelRecords_Query_WorldRecord_Nodes
     {
         public global::System.Int32 Id { get; }
         public global::System.Double Time { get; }
         /// <summary>
         /// Reads a single `User` that is related to this `Record`.
         /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User? User { get; }
+        public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecord_Nodes_User? User { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_Record : IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record
+    public partial interface IWatchCurrentLevelRecords_Query_WorldRecord_Nodes_Record : IWatchCurrentLevelRecords_Query_WorldRecord_Nodes
     {
     }
 
@@ -3321,45 +1534,43 @@ namespace TNRD.Zeepkist.GTR
     /// A connection to a list of `UserPointContribution` values.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions
+    public partial interface IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions
     {
         /// <summary>
         /// A list of `UserPointContribution` objects.
         /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes> Nodes { get; }
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes> Nodes { get; }
     }
 
     /// <summary>
     /// A connection to a list of `UserPointContribution` values.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection : IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions
+    public partial interface IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_UserPointContributionsConnection : IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions
     {
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User
+    public partial interface IWatchCurrentLevelRecords_Query_WorldRecord_Nodes_User
     {
         public global::System.String? SteamId { get; }
         public global::System.String? SteamName { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User_User : IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User
+    public partial interface IWatchCurrentLevelRecords_Query_WorldRecord_Nodes_User_User : IWatchCurrentLevelRecords_Query_WorldRecord_Nodes_User
     {
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes
+    public partial interface IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes
     {
-        public global::System.Int32 ContributionRank { get; }
         public global::System.Int32 LevelPosition { get; }
-        public global::System.Int32 LevelPoints { get; }
         public global::System.Double LevelDecayedPoints { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution : IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes
+    public partial interface IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes_UserPointContribution : IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes
     {
     }
 
@@ -6662,176 +4873,6 @@ namespace TNRD.Zeepkist.GTR
     /// The root query type which gives access points into the data universe.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class GetPlayerRankOnLevelResult : global::System.IEquatable<GetPlayerRankOnLevelResult>, IGetPlayerRankOnLevelResult
-    {
-        public GetPlayerRankOnLevelResult(global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevel_Records? records)
-        {
-            Records = records;
-        }
-
-        /// <summary>
-        /// Reads and enables pagination through a set of `Record`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevel_Records? Records { get; }
-
-        public virtual global::System.Boolean Equals(GetPlayerRankOnLevelResult? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (((Records is null && other.Records is null) || Records != null && Records.Equals(other.Records)));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((GetPlayerRankOnLevelResult)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                if (Records != null)
-                {
-                    hash ^= 397 * Records.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// A connection to a list of `Record` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class GetPlayerRankOnLevel_Records_RecordsConnection : global::System.IEquatable<GetPlayerRankOnLevel_Records_RecordsConnection>, IGetPlayerRankOnLevel_Records_RecordsConnection
-    {
-        public GetPlayerRankOnLevel_Records_RecordsConnection(global::System.Int32 totalCount)
-        {
-            TotalCount = totalCount;
-        }
-
-        /// <summary>
-        /// The count of *all* `Record` you could get from the connection.
-        /// </summary>
-        public global::System.Int32 TotalCount { get; }
-
-        public virtual global::System.Boolean Equals(GetPlayerRankOnLevel_Records_RecordsConnection? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::System.Object.Equals(TotalCount, other.TotalCount));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((GetPlayerRankOnLevel_Records_RecordsConnection)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                hash ^= 397 * TotalCount.GetHashCode();
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// The root query type which gives access points into the data universe.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IGetPlayerRankOnLevelResult
-    {
-        /// <summary>
-        /// Reads and enables pagination through a set of `Record`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevel_Records? Records { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `Record` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IGetPlayerRankOnLevel_Records
-    {
-        /// <summary>
-        /// The count of *all* `Record` you could get from the connection.
-        /// </summary>
-        public global::System.Int32 TotalCount { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `Record` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IGetPlayerRankOnLevel_Records_RecordsConnection : IGetPlayerRankOnLevel_Records
-    {
-    }
-
-    /// <summary>
-    /// The root query type which gives access points into the data universe.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class GetTopRecordGhostsResult : global::System.IEquatable<GetTopRecordGhostsResult>, IGetTopRecordGhostsResult
     {
         public GetTopRecordGhostsResult(global::TNRD.Zeepkist.GTR.IGetTopRecordGhosts_Records? records)
@@ -7834,718 +5875,6 @@ namespace TNRD.Zeepkist.GTR
     }
 
     /// <summary>
-    /// The root query type which gives access points into the data universe.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LeaderboardPageResult : global::System.IEquatable<LeaderboardPageResult>, ILeaderboardPageResult
-    {
-        public LeaderboardPageResult(global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelItems? levelItems, global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelPoints? levelPoints, global::TNRD.Zeepkist.GTR.ILeaderboardPage_Records? records)
-        {
-            LevelItems = levelItems;
-            LevelPoints = levelPoints;
-            Records = records;
-        }
-
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelItem`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelItems? LevelItems { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelPoint`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelPoints? LevelPoints { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `Record`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ILeaderboardPage_Records? Records { get; }
-
-        public virtual global::System.Boolean Equals(LeaderboardPageResult? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (((LevelItems is null && other.LevelItems is null) || LevelItems != null && LevelItems.Equals(other.LevelItems))) && ((LevelPoints is null && other.LevelPoints is null) || LevelPoints != null && LevelPoints.Equals(other.LevelPoints)) && ((Records is null && other.Records is null) || Records != null && Records.Equals(other.Records));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((LeaderboardPageResult)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                if (LevelItems != null)
-                {
-                    hash ^= 397 * LevelItems.GetHashCode();
-                }
-
-                if (LevelPoints != null)
-                {
-                    hash ^= 397 * LevelPoints.GetHashCode();
-                }
-
-                if (Records != null)
-                {
-                    hash ^= 397 * Records.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelItem` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LeaderboardPage_LevelItems_LevelItemsConnection : global::System.IEquatable<LeaderboardPage_LevelItems_LevelItemsConnection>, ILeaderboardPage_LevelItems_LevelItemsConnection
-    {
-        public LeaderboardPage_LevelItems_LevelItemsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelItems_Nodes> nodes)
-        {
-            Nodes = nodes;
-        }
-
-        /// <summary>
-        /// A list of `LevelItem` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelItems_Nodes> Nodes { get; }
-
-        public virtual global::System.Boolean Equals(LeaderboardPage_LevelItems_LevelItemsConnection? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((LeaderboardPage_LevelItems_LevelItemsConnection)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                foreach (var Nodes_elm in Nodes)
-                {
-                    hash ^= 397 * Nodes_elm.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelPoint` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LeaderboardPage_LevelPoints_LevelPointsConnection : global::System.IEquatable<LeaderboardPage_LevelPoints_LevelPointsConnection>, ILeaderboardPage_LevelPoints_LevelPointsConnection
-    {
-        public LeaderboardPage_LevelPoints_LevelPointsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelPoints_Nodes> nodes)
-        {
-            Nodes = nodes;
-        }
-
-        /// <summary>
-        /// A list of `LevelPoint` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelPoints_Nodes> Nodes { get; }
-
-        public virtual global::System.Boolean Equals(LeaderboardPage_LevelPoints_LevelPointsConnection? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((LeaderboardPage_LevelPoints_LevelPointsConnection)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                foreach (var Nodes_elm in Nodes)
-                {
-                    hash ^= 397 * Nodes_elm.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// A connection to a list of `Record` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LeaderboardPage_Records_RecordsConnection : global::System.IEquatable<LeaderboardPage_Records_RecordsConnection>, ILeaderboardPage_Records_RecordsConnection
-    {
-        public LeaderboardPage_Records_RecordsConnection(global::System.Int32 totalCount, global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ILeaderboardPage_Records_Nodes> nodes)
-        {
-            TotalCount = totalCount;
-            Nodes = nodes;
-        }
-
-        /// <summary>
-        /// The count of *all* `Record` you could get from the connection.
-        /// </summary>
-        public global::System.Int32 TotalCount { get; }
-        /// <summary>
-        /// A list of `Record` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ILeaderboardPage_Records_Nodes> Nodes { get; }
-
-        public virtual global::System.Boolean Equals(LeaderboardPage_Records_RecordsConnection? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::System.Object.Equals(TotalCount, other.TotalCount)) && global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes);
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((LeaderboardPage_Records_RecordsConnection)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                hash ^= 397 * TotalCount.GetHashCode();
-                foreach (var Nodes_elm in Nodes)
-                {
-                    hash ^= 397 * Nodes_elm.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LeaderboardPage_LevelItems_Nodes_LevelItem : global::System.IEquatable<LeaderboardPage_LevelItems_Nodes_LevelItem>, ILeaderboardPage_LevelItems_Nodes_LevelItem
-    {
-        public LeaderboardPage_LevelItems_Nodes_LevelItem(global::System.String name)
-        {
-            Name = name;
-        }
-
-        public global::System.String Name { get; }
-
-        public virtual global::System.Boolean Equals(LeaderboardPage_LevelItems_Nodes_LevelItem? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (Name.Equals(other.Name));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((LeaderboardPage_LevelItems_Nodes_LevelItem)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                hash ^= 397 * Name.GetHashCode();
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LeaderboardPage_LevelPoints_Nodes_LevelPoint : global::System.IEquatable<LeaderboardPage_LevelPoints_Nodes_LevelPoint>, ILeaderboardPage_LevelPoints_Nodes_LevelPoint
-    {
-        public LeaderboardPage_LevelPoints_Nodes_LevelPoint(global::System.Int32 points)
-        {
-            Points = points;
-        }
-
-        public global::System.Int32 Points { get; }
-
-        public virtual global::System.Boolean Equals(LeaderboardPage_LevelPoints_Nodes_LevelPoint? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::System.Object.Equals(Points, other.Points));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((LeaderboardPage_LevelPoints_Nodes_LevelPoint)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                hash ^= 397 * Points.GetHashCode();
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LeaderboardPage_Records_Nodes_Record : global::System.IEquatable<LeaderboardPage_Records_Nodes_Record>, ILeaderboardPage_Records_Nodes_Record
-    {
-        public LeaderboardPage_Records_Nodes_Record(global::TNRD.Zeepkist.GTR.ILeaderboardPage_Records_Nodes_User? user, global::System.Double time, global::System.String dateCreated)
-        {
-            User = user;
-            Time = time;
-            DateCreated = dateCreated;
-        }
-
-        /// <summary>
-        /// Reads a single `User` that is related to this `Record`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ILeaderboardPage_Records_Nodes_User? User { get; }
-        public global::System.Double Time { get; }
-        public global::System.String DateCreated { get; }
-
-        public virtual global::System.Boolean Equals(LeaderboardPage_Records_Nodes_Record? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (((User is null && other.User is null) || User != null && User.Equals(other.User))) && global::System.Object.Equals(Time, other.Time) && DateCreated.Equals(other.DateCreated);
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((LeaderboardPage_Records_Nodes_Record)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                if (User != null)
-                {
-                    hash ^= 397 * User.GetHashCode();
-                }
-
-                hash ^= 397 * Time.GetHashCode();
-                hash ^= 397 * DateCreated.GetHashCode();
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LeaderboardPage_Records_Nodes_User_User : global::System.IEquatable<LeaderboardPage_Records_Nodes_User_User>, ILeaderboardPage_Records_Nodes_User_User
-    {
-        public LeaderboardPage_Records_Nodes_User_User(global::System.String? steamName, global::System.String? steamId)
-        {
-            SteamName = steamName;
-            SteamId = steamId;
-        }
-
-        public global::System.String? SteamName { get; }
-        public global::System.String? SteamId { get; }
-
-        public virtual global::System.Boolean Equals(LeaderboardPage_Records_Nodes_User_User? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (((SteamName is null && other.SteamName is null) || SteamName != null && SteamName.Equals(other.SteamName))) && ((SteamId is null && other.SteamId is null) || SteamId != null && SteamId.Equals(other.SteamId));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((LeaderboardPage_Records_Nodes_User_User)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                if (SteamName != null)
-                {
-                    hash ^= 397 * SteamName.GetHashCode();
-                }
-
-                if (SteamId != null)
-                {
-                    hash ^= 397 * SteamId.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// The root query type which gives access points into the data universe.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPageResult
-    {
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelItem`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelItems? LevelItems { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelPoint`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelPoints? LevelPoints { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `Record`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ILeaderboardPage_Records? Records { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelItem` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPage_LevelItems
-    {
-        /// <summary>
-        /// A list of `LevelItem` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelItems_Nodes> Nodes { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelItem` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPage_LevelItems_LevelItemsConnection : ILeaderboardPage_LevelItems
-    {
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelPoint` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPage_LevelPoints
-    {
-        /// <summary>
-        /// A list of `LevelPoint` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelPoints_Nodes> Nodes { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelPoint` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPage_LevelPoints_LevelPointsConnection : ILeaderboardPage_LevelPoints
-    {
-    }
-
-    /// <summary>
-    /// A connection to a list of `Record` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPage_Records
-    {
-        /// <summary>
-        /// The count of *all* `Record` you could get from the connection.
-        /// </summary>
-        public global::System.Int32 TotalCount { get; }
-        /// <summary>
-        /// A list of `Record` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ILeaderboardPage_Records_Nodes> Nodes { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `Record` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPage_Records_RecordsConnection : ILeaderboardPage_Records
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPage_LevelItems_Nodes
-    {
-        public global::System.String Name { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPage_LevelItems_Nodes_LevelItem : ILeaderboardPage_LevelItems_Nodes
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPage_LevelPoints_Nodes
-    {
-        public global::System.Int32 Points { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPage_LevelPoints_Nodes_LevelPoint : ILeaderboardPage_LevelPoints_Nodes
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPage_Records_Nodes
-    {
-        /// <summary>
-        /// Reads a single `User` that is related to this `Record`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.ILeaderboardPage_Records_Nodes_User? User { get; }
-        public global::System.Double Time { get; }
-        public global::System.String DateCreated { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPage_Records_Nodes_Record : ILeaderboardPage_Records_Nodes
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPage_Records_Nodes_User
-    {
-        public global::System.String? SteamName { get; }
-        public global::System.String? SteamId { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPage_Records_Nodes_User_User : ILeaderboardPage_Records_Nodes_User
-    {
-    }
-
-    /// <summary>
     /// The root subscription type: contains realtime events you can subscribe to with the `subscription` operation.
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
@@ -8619,21 +5948,11 @@ namespace TNRD.Zeepkist.GTR
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class WatchLeaderboardPage_Query_Query : global::System.IEquatable<WatchLeaderboardPage_Query_Query>, IWatchLeaderboardPage_Query_Query
     {
-        public WatchLeaderboardPage_Query_Query(global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelItems? levelItems, global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelPoints? levelPoints, global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records? records)
+        public WatchLeaderboardPage_Query_Query(global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records? records)
         {
-            LevelItems = levelItems;
-            LevelPoints = levelPoints;
             Records = records;
         }
 
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelItem`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelItems? LevelItems { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelPoint`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelPoints? LevelPoints { get; }
         /// <summary>
         /// Reads and enables pagination through a set of `Record`.
         /// </summary>
@@ -8656,7 +5975,7 @@ namespace TNRD.Zeepkist.GTR
                 return false;
             }
 
-            return (((LevelItems is null && other.LevelItems is null) || LevelItems != null && LevelItems.Equals(other.LevelItems))) && ((LevelPoints is null && other.LevelPoints is null) || LevelPoints != null && LevelPoints.Equals(other.LevelPoints)) && ((Records is null && other.Records is null) || Records != null && Records.Equals(other.Records));
+            return (((Records is null && other.Records is null) || Records != null && Records.Equals(other.Records)));
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -8684,161 +6003,9 @@ namespace TNRD.Zeepkist.GTR
             unchecked
             {
                 int hash = 5;
-                if (LevelItems != null)
-                {
-                    hash ^= 397 * LevelItems.GetHashCode();
-                }
-
-                if (LevelPoints != null)
-                {
-                    hash ^= 397 * LevelPoints.GetHashCode();
-                }
-
                 if (Records != null)
                 {
                     hash ^= 397 * Records.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelItem` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchLeaderboardPage_Query_LevelItems_LevelItemsConnection : global::System.IEquatable<WatchLeaderboardPage_Query_LevelItems_LevelItemsConnection>, IWatchLeaderboardPage_Query_LevelItems_LevelItemsConnection
-    {
-        public WatchLeaderboardPage_Query_LevelItems_LevelItemsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelItems_Nodes> nodes)
-        {
-            Nodes = nodes;
-        }
-
-        /// <summary>
-        /// A list of `LevelItem` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelItems_Nodes> Nodes { get; }
-
-        public virtual global::System.Boolean Equals(WatchLeaderboardPage_Query_LevelItems_LevelItemsConnection? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((WatchLeaderboardPage_Query_LevelItems_LevelItemsConnection)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                foreach (var Nodes_elm in Nodes)
-                {
-                    hash ^= 397 * Nodes_elm.GetHashCode();
-                }
-
-                return hash;
-            }
-        }
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelPoint` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchLeaderboardPage_Query_LevelPoints_LevelPointsConnection : global::System.IEquatable<WatchLeaderboardPage_Query_LevelPoints_LevelPointsConnection>, IWatchLeaderboardPage_Query_LevelPoints_LevelPointsConnection
-    {
-        public WatchLeaderboardPage_Query_LevelPoints_LevelPointsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelPoints_Nodes> nodes)
-        {
-            Nodes = nodes;
-        }
-
-        /// <summary>
-        /// A list of `LevelPoint` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelPoints_Nodes> Nodes { get; }
-
-        public virtual global::System.Boolean Equals(WatchLeaderboardPage_Query_LevelPoints_LevelPointsConnection? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((WatchLeaderboardPage_Query_LevelPoints_LevelPointsConnection)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                foreach (var Nodes_elm in Nodes)
-                {
-                    hash ^= 397 * Nodes_elm.GetHashCode();
                 }
 
                 return hash;
@@ -8924,143 +6091,31 @@ namespace TNRD.Zeepkist.GTR
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchLeaderboardPage_Query_LevelItems_Nodes_LevelItem : global::System.IEquatable<WatchLeaderboardPage_Query_LevelItems_Nodes_LevelItem>, IWatchLeaderboardPage_Query_LevelItems_Nodes_LevelItem
-    {
-        public WatchLeaderboardPage_Query_LevelItems_Nodes_LevelItem(global::System.String name)
-        {
-            Name = name;
-        }
-
-        public global::System.String Name { get; }
-
-        public virtual global::System.Boolean Equals(WatchLeaderboardPage_Query_LevelItems_Nodes_LevelItem? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (Name.Equals(other.Name));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((WatchLeaderboardPage_Query_LevelItems_Nodes_LevelItem)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                hash ^= 397 * Name.GetHashCode();
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WatchLeaderboardPage_Query_LevelPoints_Nodes_LevelPoint : global::System.IEquatable<WatchLeaderboardPage_Query_LevelPoints_Nodes_LevelPoint>, IWatchLeaderboardPage_Query_LevelPoints_Nodes_LevelPoint
-    {
-        public WatchLeaderboardPage_Query_LevelPoints_Nodes_LevelPoint(global::System.Int32 points)
-        {
-            Points = points;
-        }
-
-        public global::System.Int32 Points { get; }
-
-        public virtual global::System.Boolean Equals(WatchLeaderboardPage_Query_LevelPoints_Nodes_LevelPoint? other)
-        {
-            if (ReferenceEquals(null, other))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, other))
-            {
-                return true;
-            }
-
-            if (other.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return (global::System.Object.Equals(Points, other.Points));
-        }
-
-        public override global::System.Boolean Equals(global::System.Object? obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-
-            return Equals((WatchLeaderboardPage_Query_LevelPoints_Nodes_LevelPoint)obj);
-        }
-
-        public override global::System.Int32 GetHashCode()
-        {
-            unchecked
-            {
-                int hash = 5;
-                hash ^= 397 * Points.GetHashCode();
-                return hash;
-            }
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class WatchLeaderboardPage_Query_Records_Nodes_Record : global::System.IEquatable<WatchLeaderboardPage_Query_Records_Nodes_Record>, IWatchLeaderboardPage_Query_Records_Nodes_Record
     {
-        public WatchLeaderboardPage_Query_Records_Nodes_Record(global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_User? user, global::System.Double time, global::System.String dateCreated)
+        public WatchLeaderboardPage_Query_Records_Nodes_Record(global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_User? user, global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_Level? level, global::System.Double time, global::System.String dateCreated, global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions userPointContributions)
         {
             User = user;
+            Level = level;
             Time = time;
             DateCreated = dateCreated;
+            UserPointContributions = userPointContributions;
         }
 
         /// <summary>
         /// Reads a single `User` that is related to this `Record`.
         /// </summary>
         public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_User? User { get; }
+        /// <summary>
+        /// Reads a single `Level` that is related to this `Record`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_Level? Level { get; }
         public global::System.Double Time { get; }
         public global::System.String DateCreated { get; }
+        /// <summary>
+        /// Reads and enables pagination through a set of `UserPointContribution`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions UserPointContributions { get; }
 
         public virtual global::System.Boolean Equals(WatchLeaderboardPage_Query_Records_Nodes_Record? other)
         {
@@ -9079,7 +6134,7 @@ namespace TNRD.Zeepkist.GTR
                 return false;
             }
 
-            return (((User is null && other.User is null) || User != null && User.Equals(other.User))) && global::System.Object.Equals(Time, other.Time) && DateCreated.Equals(other.DateCreated);
+            return (((User is null && other.User is null) || User != null && User.Equals(other.User))) && ((Level is null && other.Level is null) || Level != null && Level.Equals(other.Level)) && global::System.Object.Equals(Time, other.Time) && DateCreated.Equals(other.DateCreated) && UserPointContributions.Equals(other.UserPointContributions);
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -9112,8 +6167,14 @@ namespace TNRD.Zeepkist.GTR
                     hash ^= 397 * User.GetHashCode();
                 }
 
+                if (Level != null)
+                {
+                    hash ^= 397 * Level.GetHashCode();
+                }
+
                 hash ^= 397 * Time.GetHashCode();
                 hash ^= 397 * DateCreated.GetHashCode();
+                hash ^= 397 * UserPointContributions.GetHashCode();
                 return hash;
             }
         }
@@ -9191,6 +6252,337 @@ namespace TNRD.Zeepkist.GTR
         }
     }
 
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class WatchLeaderboardPage_Query_Records_Nodes_Level_Level : global::System.IEquatable<WatchLeaderboardPage_Query_Records_Nodes_Level_Level>, IWatchLeaderboardPage_Query_Records_Nodes_Level_Level
+    {
+        public WatchLeaderboardPage_Query_Records_Nodes_Level_Level(global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems levelItems)
+        {
+            LevelItems = levelItems;
+        }
+
+        /// <summary>
+        /// Reads and enables pagination through a set of `LevelItem`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems LevelItems { get; }
+
+        public virtual global::System.Boolean Equals(WatchLeaderboardPage_Query_Records_Nodes_Level_Level? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (LevelItems.Equals(other.LevelItems));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((WatchLeaderboardPage_Query_Records_Nodes_Level_Level)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * LevelItems.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    /// <summary>
+    /// A connection to a list of `UserPointContribution` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class WatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_UserPointContributionsConnection : global::System.IEquatable<WatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_UserPointContributionsConnection>, IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_UserPointContributionsConnection
+    {
+        public WatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_UserPointContributionsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes> nodes)
+        {
+            Nodes = nodes;
+        }
+
+        /// <summary>
+        /// A list of `UserPointContribution` objects.
+        /// </summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes> Nodes { get; }
+
+        public virtual global::System.Boolean Equals(WatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_UserPointContributionsConnection? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((WatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_UserPointContributionsConnection)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                foreach (var Nodes_elm in Nodes)
+                {
+                    hash ^= 397 * Nodes_elm.GetHashCode();
+                }
+
+                return hash;
+            }
+        }
+    }
+
+    /// <summary>
+    /// A connection to a list of `LevelItem` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class WatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_LevelItemsConnection : global::System.IEquatable<WatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_LevelItemsConnection>, IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_LevelItemsConnection
+    {
+        public WatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_LevelItemsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes> nodes)
+        {
+            Nodes = nodes;
+        }
+
+        /// <summary>
+        /// A list of `LevelItem` objects.
+        /// </summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes> Nodes { get; }
+
+        public virtual global::System.Boolean Equals(WatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_LevelItemsConnection? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((WatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_LevelItemsConnection)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                foreach (var Nodes_elm in Nodes)
+                {
+                    hash ^= 397 * Nodes_elm.GetHashCode();
+                }
+
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class WatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes_UserPointContribution : global::System.IEquatable<WatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes_UserPointContribution>, IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes_UserPointContribution
+    {
+        public WatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes_UserPointContribution(global::System.Double levelDecayedPoints, global::System.Int32 levelPosition)
+        {
+            LevelDecayedPoints = levelDecayedPoints;
+            LevelPosition = levelPosition;
+        }
+
+        public global::System.Double LevelDecayedPoints { get; }
+        public global::System.Int32 LevelPosition { get; }
+
+        public virtual global::System.Boolean Equals(WatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes_UserPointContribution? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (global::System.Object.Equals(LevelDecayedPoints, other.LevelDecayedPoints)) && global::System.Object.Equals(LevelPosition, other.LevelPosition);
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((WatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes_UserPointContribution)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * LevelDecayedPoints.GetHashCode();
+                hash ^= 397 * LevelPosition.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class WatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes_LevelItem : global::System.IEquatable<WatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes_LevelItem>, IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes_LevelItem
+    {
+        public WatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes_LevelItem(global::System.String name)
+        {
+            Name = name;
+        }
+
+        public global::System.String Name { get; }
+
+        public virtual global::System.Boolean Equals(WatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes_LevelItem? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (Name.Equals(other.Name));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((WatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes_LevelItem)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Name.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
     /// <summary>
     /// The root subscription type: contains realtime events you can subscribe to with the `subscription` operation.
     /// </summary>
@@ -9211,14 +6603,6 @@ namespace TNRD.Zeepkist.GTR
     public partial interface ILeaderboardPageFields
     {
         /// <summary>
-        /// Reads and enables pagination through a set of `LevelItem`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelItems? LevelItems { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelPoint`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelPoints? LevelPoints { get; }
-        /// <summary>
         /// Reads and enables pagination through a set of `Record`.
         /// </summary>
         public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records? Records { get; }
@@ -9237,46 +6621,6 @@ namespace TNRD.Zeepkist.GTR
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial interface IWatchLeaderboardPage_Query_Query : IWatchLeaderboardPage_Query
-    {
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelItem` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchLeaderboardPage_Query_LevelItems
-    {
-        /// <summary>
-        /// A list of `LevelItem` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelItems_Nodes> Nodes { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelItem` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchLeaderboardPage_Query_LevelItems_LevelItemsConnection : IWatchLeaderboardPage_Query_LevelItems
-    {
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelPoint` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchLeaderboardPage_Query_LevelPoints
-    {
-        /// <summary>
-        /// A list of `LevelPoint` objects.
-        /// </summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelPoints_Nodes> Nodes { get; }
-    }
-
-    /// <summary>
-    /// A connection to a list of `LevelPoint` values.
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchLeaderboardPage_Query_LevelPoints_LevelPointsConnection : IWatchLeaderboardPage_Query_LevelPoints
     {
     }
 
@@ -9305,36 +6649,22 @@ namespace TNRD.Zeepkist.GTR
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchLeaderboardPage_Query_LevelItems_Nodes
-    {
-        public global::System.String Name { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchLeaderboardPage_Query_LevelItems_Nodes_LevelItem : IWatchLeaderboardPage_Query_LevelItems_Nodes
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchLeaderboardPage_Query_LevelPoints_Nodes
-    {
-        public global::System.Int32 Points { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchLeaderboardPage_Query_LevelPoints_Nodes_LevelPoint : IWatchLeaderboardPage_Query_LevelPoints_Nodes
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial interface IWatchLeaderboardPage_Query_Records_Nodes
     {
         /// <summary>
         /// Reads a single `User` that is related to this `Record`.
         /// </summary>
         public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_User? User { get; }
+        /// <summary>
+        /// Reads a single `Level` that is related to this `Record`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_Level? Level { get; }
         public global::System.Double Time { get; }
         public global::System.String DateCreated { get; }
+        /// <summary>
+        /// Reads and enables pagination through a set of `UserPointContribution`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions UserPointContributions { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
@@ -9351,6 +6681,83 @@ namespace TNRD.Zeepkist.GTR
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial interface IWatchLeaderboardPage_Query_Records_Nodes_User_User : IWatchLeaderboardPage_Query_Records_Nodes_User
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IWatchLeaderboardPage_Query_Records_Nodes_Level
+    {
+        /// <summary>
+        /// Reads and enables pagination through a set of `LevelItem`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems LevelItems { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IWatchLeaderboardPage_Query_Records_Nodes_Level_Level : IWatchLeaderboardPage_Query_Records_Nodes_Level
+    {
+    }
+
+    /// <summary>
+    /// A connection to a list of `UserPointContribution` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions
+    {
+        /// <summary>
+        /// A list of `UserPointContribution` objects.
+        /// </summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes> Nodes { get; }
+    }
+
+    /// <summary>
+    /// A connection to a list of `UserPointContribution` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_UserPointContributionsConnection : IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions
+    {
+    }
+
+    /// <summary>
+    /// A connection to a list of `LevelItem` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems
+    {
+        /// <summary>
+        /// A list of `LevelItem` objects.
+        /// </summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes> Nodes { get; }
+    }
+
+    /// <summary>
+    /// A connection to a list of `LevelItem` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_LevelItemsConnection : IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes
+    {
+        public global::System.Double LevelDecayedPoints { get; }
+        public global::System.Int32 LevelPosition { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes_UserPointContribution : IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes
+    {
+        public global::System.String Name { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes_LevelItem : IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes
     {
     }
 
@@ -106685,1482 +104092,6 @@ namespace TNRD.Zeepkist.GTR
     }
 
     /// <summary>
-    /// Represents the operation service of the CurrentLevelRecords GraphQL operation
-    /// <code>
-    /// query CurrentLevelRecords($xxHash: String!, $hash: String!, $steamId: BigInt!) {
-    ///   levelItems(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       name
-    ///     }
-    ///   }
-    ///   levelPoints(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       points
-    ///     }
-    ///   }
-    ///   personalBestGlobals(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, user: { steamId: { equalTo: $steamId } } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       record {
-    ///         __typename
-    ///         id
-    ///         time
-    ///         dateCreated
-    ///         userPointContributions(first: 1) {
-    ///           __typename
-    ///           nodes {
-    ///             __typename
-    ///             contributionRank
-    ///             levelPosition
-    ///             levelPoints
-    ///             levelDecayedPoints
-    ///           }
-    ///         }
-    ///       }
-    ///     }
-    ///   }
-    ///   worldRecordGlobals(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       record {
-    ///         __typename
-    ///         id
-    ///         time
-    ///         user {
-    ///           __typename
-    ///           steamId
-    ///           steamName
-    ///         }
-    ///       }
-    ///     }
-    ///   }
-    /// }
-    /// </code>
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecordsQueryDocument : global::StrawberryShake.IDocument
-    {
-        private CurrentLevelRecordsQueryDocument()
-        {
-        }
-
-        public static CurrentLevelRecordsQueryDocument Instance { get; } = new CurrentLevelRecordsQueryDocument();
-        public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Query;
-        public MemoryAlias::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]
-        {
-            0x71,
-            0x75,
-            0x65,
-            0x72,
-            0x79,
-            0x20,
-            0x43,
-            0x75,
-            0x72,
-            0x72,
-            0x65,
-            0x6e,
-            0x74,
-            0x4c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x52,
-            0x65,
-            0x63,
-            0x6f,
-            0x72,
-            0x64,
-            0x73,
-            0x28,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x53,
-            0x74,
-            0x72,
-            0x69,
-            0x6e,
-            0x67,
-            0x21,
-            0x2c,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x53,
-            0x74,
-            0x72,
-            0x69,
-            0x6e,
-            0x67,
-            0x21,
-            0x2c,
-            0x20,
-            0x24,
-            0x73,
-            0x74,
-            0x65,
-            0x61,
-            0x6d,
-            0x49,
-            0x64,
-            0x3a,
-            0x20,
-            0x42,
-            0x69,
-            0x67,
-            0x49,
-            0x6e,
-            0x74,
-            0x21,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x49,
-            0x74,
-            0x65,
-            0x6d,
-            0x73,
-            0x28,
-            0x66,
-            0x69,
-            0x72,
-            0x73,
-            0x74,
-            0x3a,
-            0x20,
-            0x31,
-            0x2c,
-            0x20,
-            0x66,
-            0x69,
-            0x6c,
-            0x74,
-            0x65,
-            0x72,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6f,
-            0x72,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x6e,
-            0x64,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x64,
-            0x76,
-            0x65,
-            0x6e,
-            0x74,
-            0x75,
-            0x72,
-            0x65,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x74,
-            0x72,
-            0x75,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x6f,
-            0x64,
-            0x65,
-            0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x50,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x73,
-            0x28,
-            0x66,
-            0x69,
-            0x72,
-            0x73,
-            0x74,
-            0x3a,
-            0x20,
-            0x31,
-            0x2c,
-            0x20,
-            0x66,
-            0x69,
-            0x6c,
-            0x74,
-            0x65,
-            0x72,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6f,
-            0x72,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x6e,
-            0x64,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x64,
-            0x76,
-            0x65,
-            0x6e,
-            0x74,
-            0x75,
-            0x72,
-            0x65,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x74,
-            0x72,
-            0x75,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x6f,
-            0x64,
-            0x65,
-            0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x70,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x73,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x70,
-            0x65,
-            0x72,
-            0x73,
-            0x6f,
-            0x6e,
-            0x61,
-            0x6c,
-            0x42,
-            0x65,
-            0x73,
-            0x74,
-            0x47,
-            0x6c,
-            0x6f,
-            0x62,
-            0x61,
-            0x6c,
-            0x73,
-            0x28,
-            0x66,
-            0x69,
-            0x72,
-            0x73,
-            0x74,
-            0x3a,
-            0x20,
-            0x31,
-            0x2c,
-            0x20,
-            0x66,
-            0x69,
-            0x6c,
-            0x74,
-            0x65,
-            0x72,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6f,
-            0x72,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x6e,
-            0x64,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x64,
-            0x76,
-            0x65,
-            0x6e,
-            0x74,
-            0x75,
-            0x72,
-            0x65,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x74,
-            0x72,
-            0x75,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x75,
-            0x73,
-            0x65,
-            0x72,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x73,
-            0x74,
-            0x65,
-            0x61,
-            0x6d,
-            0x49,
-            0x64,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x73,
-            0x74,
-            0x65,
-            0x61,
-            0x6d,
-            0x49,
-            0x64,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x6f,
-            0x64,
-            0x65,
-            0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x72,
-            0x65,
-            0x63,
-            0x6f,
-            0x72,
-            0x64,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x69,
-            0x64,
-            0x20,
-            0x74,
-            0x69,
-            0x6d,
-            0x65,
-            0x20,
-            0x64,
-            0x61,
-            0x74,
-            0x65,
-            0x43,
-            0x72,
-            0x65,
-            0x61,
-            0x74,
-            0x65,
-            0x64,
-            0x20,
-            0x75,
-            0x73,
-            0x65,
-            0x72,
-            0x50,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x43,
-            0x6f,
-            0x6e,
-            0x74,
-            0x72,
-            0x69,
-            0x62,
-            0x75,
-            0x74,
-            0x69,
-            0x6f,
-            0x6e,
-            0x73,
-            0x28,
-            0x66,
-            0x69,
-            0x72,
-            0x73,
-            0x74,
-            0x3a,
-            0x20,
-            0x31,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x6f,
-            0x64,
-            0x65,
-            0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x63,
-            0x6f,
-            0x6e,
-            0x74,
-            0x72,
-            0x69,
-            0x62,
-            0x75,
-            0x74,
-            0x69,
-            0x6f,
-            0x6e,
-            0x52,
-            0x61,
-            0x6e,
-            0x6b,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x50,
-            0x6f,
-            0x73,
-            0x69,
-            0x74,
-            0x69,
-            0x6f,
-            0x6e,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x50,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x73,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x44,
-            0x65,
-            0x63,
-            0x61,
-            0x79,
-            0x65,
-            0x64,
-            0x50,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x73,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x77,
-            0x6f,
-            0x72,
-            0x6c,
-            0x64,
-            0x52,
-            0x65,
-            0x63,
-            0x6f,
-            0x72,
-            0x64,
-            0x47,
-            0x6c,
-            0x6f,
-            0x62,
-            0x61,
-            0x6c,
-            0x73,
-            0x28,
-            0x66,
-            0x69,
-            0x72,
-            0x73,
-            0x74,
-            0x3a,
-            0x20,
-            0x31,
-            0x2c,
-            0x20,
-            0x66,
-            0x69,
-            0x6c,
-            0x74,
-            0x65,
-            0x72,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6f,
-            0x72,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x6e,
-            0x64,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x64,
-            0x76,
-            0x65,
-            0x6e,
-            0x74,
-            0x75,
-            0x72,
-            0x65,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x74,
-            0x72,
-            0x75,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x6f,
-            0x64,
-            0x65,
-            0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x72,
-            0x65,
-            0x63,
-            0x6f,
-            0x72,
-            0x64,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x69,
-            0x64,
-            0x20,
-            0x74,
-            0x69,
-            0x6d,
-            0x65,
-            0x20,
-            0x75,
-            0x73,
-            0x65,
-            0x72,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x73,
-            0x74,
-            0x65,
-            0x61,
-            0x6d,
-            0x49,
-            0x64,
-            0x20,
-            0x73,
-            0x74,
-            0x65,
-            0x61,
-            0x6d,
-            0x4e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d
-        };
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "c16ed891502ed0137e95d4c943d4f232");
-
-        public override global::System.String ToString()
-        {
-#if NETCOREAPP3_1_OR_GREATER
-        return global::System.Text.Encoding.UTF8.GetString(Body);
-#else
-            return global::System.Text.Encoding.UTF8.GetString(Body.ToArray());
-#endif
-        }
-    }
-
-    /// <summary>
-    /// Represents the operation service of the CurrentLevelRecords GraphQL operation
-    /// <code>
-    /// query CurrentLevelRecords($xxHash: String!, $hash: String!, $steamId: BigInt!) {
-    ///   levelItems(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       name
-    ///     }
-    ///   }
-    ///   levelPoints(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       points
-    ///     }
-    ///   }
-    ///   personalBestGlobals(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, user: { steamId: { equalTo: $steamId } } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       record {
-    ///         __typename
-    ///         id
-    ///         time
-    ///         dateCreated
-    ///         userPointContributions(first: 1) {
-    ///           __typename
-    ///           nodes {
-    ///             __typename
-    ///             contributionRank
-    ///             levelPosition
-    ///             levelPoints
-    ///             levelDecayedPoints
-    ///           }
-    ///         }
-    ///       }
-    ///     }
-    ///   }
-    ///   worldRecordGlobals(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       record {
-    ///         __typename
-    ///         id
-    ///         time
-    ///         user {
-    ///           __typename
-    ///           steamId
-    ///           steamName
-    ///         }
-    ///       }
-    ///     }
-    ///   }
-    /// }
-    /// </code>
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecordsQuery : global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsQuery
-    {
-        private readonly global::StrawberryShake.IOperationExecutor<ICurrentLevelRecordsResult> _operationExecutor;
-        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _stringFormatter;
-        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _bigIntFormatter;
-        public CurrentLevelRecordsQuery(global::StrawberryShake.IOperationExecutor<ICurrentLevelRecordsResult> operationExecutor, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
-        {
-            _operationExecutor = operationExecutor ?? throw new global::System.ArgumentNullException(nameof(operationExecutor));
-            _stringFormatter = serializerResolver.GetInputValueFormatter("String");
-            _bigIntFormatter = serializerResolver.GetInputValueFormatter("BigInt");
-        }
-
-        global::System.Type global::StrawberryShake.IOperationRequestFactory.ResultType => typeof(ICurrentLevelRecordsResult);
-
-        public async global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<ICurrentLevelRecordsResult>> ExecuteAsync(global::System.String xxHash, global::System.String hash, global::System.String steamId, global::System.Threading.CancellationToken cancellationToken = default)
-        {
-            var request = CreateRequest(xxHash, hash, steamId);
-            return await _operationExecutor.ExecuteAsync(request, cancellationToken).ConfigureAwait(false);
-        }
-
-        public global::System.IObservable<global::StrawberryShake.IOperationResult<ICurrentLevelRecordsResult>> Watch(global::System.String xxHash, global::System.String hash, global::System.String steamId, global::StrawberryShake.ExecutionStrategy? strategy = null)
-        {
-            var request = CreateRequest(xxHash, hash, steamId);
-            return _operationExecutor.Watch(request, strategy);
-        }
-
-        private global::StrawberryShake.OperationRequest CreateRequest(global::System.String xxHash, global::System.String hash, global::System.String steamId)
-        {
-            var variables = new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>();
-            variables.Add("xxHash", FormatXxHash(xxHash));
-            variables.Add("hash", FormatHash(hash));
-            variables.Add("steamId", FormatSteamId(steamId));
-            return CreateRequest(variables);
-        }
-
-        private global::StrawberryShake.OperationRequest CreateRequest(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
-        {
-            return new global::StrawberryShake.OperationRequest(id: CurrentLevelRecordsQueryDocument.Instance.Hash.Value, name: "CurrentLevelRecords", document: CurrentLevelRecordsQueryDocument.Instance, strategy: global::StrawberryShake.RequestStrategy.Default, variables: variables);
-        }
-
-        private global::System.Object? FormatXxHash(global::System.String value)
-        {
-            if (value is null)
-            {
-                throw new global::System.ArgumentNullException(nameof(value));
-            }
-
-            return _stringFormatter.Format(value);
-        }
-
-        private global::System.Object? FormatHash(global::System.String value)
-        {
-            if (value is null)
-            {
-                throw new global::System.ArgumentNullException(nameof(value));
-            }
-
-            return _stringFormatter.Format(value);
-        }
-
-        private global::System.Object? FormatSteamId(global::System.String value)
-        {
-            if (value is null)
-            {
-                throw new global::System.ArgumentNullException(nameof(value));
-            }
-
-            return _bigIntFormatter.Format(value);
-        }
-
-        global::StrawberryShake.OperationRequest global::StrawberryShake.IOperationRequestFactory.Create(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
-        {
-            return CreateRequest(variables!);
-        }
-    }
-
-    /// <summary>
-    /// Represents the operation service of the CurrentLevelRecords GraphQL operation
-    /// <code>
-    /// query CurrentLevelRecords($xxHash: String!, $hash: String!, $steamId: BigInt!) {
-    ///   levelItems(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       name
-    ///     }
-    ///   }
-    ///   levelPoints(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       points
-    ///     }
-    ///   }
-    ///   personalBestGlobals(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, user: { steamId: { equalTo: $steamId } } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       record {
-    ///         __typename
-    ///         id
-    ///         time
-    ///         dateCreated
-    ///         userPointContributions(first: 1) {
-    ///           __typename
-    ///           nodes {
-    ///             __typename
-    ///             contributionRank
-    ///             levelPosition
-    ///             levelPoints
-    ///             levelDecayedPoints
-    ///           }
-    ///         }
-    ///       }
-    ///     }
-    ///   }
-    ///   worldRecordGlobals(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       record {
-    ///         __typename
-    ///         id
-    ///         time
-    ///         user {
-    ///           __typename
-    ///           steamId
-    ///           steamName
-    ///         }
-    ///       }
-    ///     }
-    ///   }
-    /// }
-    /// </code>
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ICurrentLevelRecordsQuery : global::StrawberryShake.IOperationRequestFactory
-    {
-        global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<ICurrentLevelRecordsResult>> ExecuteAsync(global::System.String xxHash, global::System.String hash, global::System.String steamId, global::System.Threading.CancellationToken cancellationToken = default);
-        global::System.IObservable<global::StrawberryShake.IOperationResult<ICurrentLevelRecordsResult>> Watch(global::System.String xxHash, global::System.String hash, global::System.String steamId, global::StrawberryShake.ExecutionStrategy? strategy = null);
-    }
-
-    /// <summary>
     /// Represents the operation service of the WatchCurrentLevelRecords GraphQL operation
     /// <code>
     /// subscription WatchCurrentLevelRecords($xxHash: String!, $hash: String!, $steamId: BigInt!) {
@@ -108169,57 +104100,35 @@ namespace TNRD.Zeepkist.GTR
     ///     ... CurrentLevelRecordFields
     ///   }
     /// }
-    ///
+    /// 
     /// fragment CurrentLevelRecordFields on Query {
-    ///   levelItems(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
+    ///   personalBest: records(first: 1, filter: { personalBestGlobalsExist: true, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, user: { steamId: { equalTo: $steamId } } }, orderBy: [ TIME_ASC, DATE_CREATED_ASC ]) {
     ///     __typename
     ///     nodes {
     ///       __typename
-    ///       name
-    ///     }
-    ///   }
-    ///   levelPoints(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       points
-    ///     }
-    ///   }
-    ///   personalBestGlobals(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, user: { steamId: { equalTo: $steamId } } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       record {
+    ///       id
+    ///       time
+    ///       dateCreated
+    ///       userPointContributions(first: 1) {
     ///         __typename
-    ///         id
-    ///         time
-    ///         dateCreated
-    ///         userPointContributions(first: 1) {
+    ///         nodes {
     ///           __typename
-    ///           nodes {
-    ///             __typename
-    ///             contributionRank
-    ///             levelPosition
-    ///             levelPoints
-    ///             levelDecayedPoints
-    ///           }
+    ///           levelPosition
+    ///           levelDecayedPoints
     ///         }
     ///       }
     ///     }
     ///   }
-    ///   worldRecordGlobals(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
+    ///   worldRecord: records(first: 1, filter: { worldRecordGlobalsExist: true, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }, orderBy: [ TIME_ASC, DATE_CREATED_ASC ]) {
     ///     __typename
     ///     nodes {
     ///       __typename
-    ///       record {
+    ///       id
+    ///       time
+    ///       user {
     ///         __typename
-    ///         id
-    ///         time
-    ///         user {
-    ///           __typename
-    ///           steamId
-    ///           steamName
-    ///         }
+    ///         steamId
+    ///         steamName
     ///       }
     ///     }
     ///   }
@@ -108427,15 +104336,26 @@ namespace TNRD.Zeepkist.GTR
             0x20,
             0x7b,
             0x20,
-            0x6c,
+            0x70,
             0x65,
-            0x76,
-            0x65,
+            0x72,
+            0x73,
+            0x6f,
+            0x6e,
+            0x61,
             0x6c,
-            0x49,
+            0x42,
+            0x65,
+            0x73,
             0x74,
+            0x3a,
+            0x20,
+            0x72,
             0x65,
-            0x6d,
+            0x63,
+            0x6f,
+            0x72,
+            0x64,
             0x73,
             0x28,
             0x66,
@@ -108457,386 +104377,6 @@ namespace TNRD.Zeepkist.GTR
             0x3a,
             0x20,
             0x7b,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6f,
-            0x72,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x6e,
-            0x64,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x64,
-            0x76,
-            0x65,
-            0x6e,
-            0x74,
-            0x75,
-            0x72,
-            0x65,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x74,
-            0x72,
-            0x75,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x6f,
-            0x64,
-            0x65,
-            0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x50,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x73,
-            0x28,
-            0x66,
-            0x69,
-            0x72,
-            0x73,
-            0x74,
-            0x3a,
-            0x20,
-            0x31,
-            0x2c,
-            0x20,
-            0x66,
-            0x69,
-            0x6c,
-            0x74,
-            0x65,
-            0x72,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6f,
-            0x72,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x6e,
-            0x64,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x64,
-            0x76,
-            0x65,
-            0x6e,
-            0x74,
-            0x75,
-            0x72,
-            0x65,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x74,
-            0x72,
-            0x75,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x6f,
-            0x64,
-            0x65,
-            0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x70,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x73,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
             0x20,
             0x70,
             0x65,
@@ -108857,26 +104397,18 @@ namespace TNRD.Zeepkist.GTR
             0x61,
             0x6c,
             0x73,
-            0x28,
-            0x66,
+            0x45,
+            0x78,
             0x69,
-            0x72,
             0x73,
             0x74,
             0x3a,
             0x20,
-            0x31,
-            0x2c,
-            0x20,
-            0x66,
-            0x69,
-            0x6c,
             0x74,
-            0x65,
             0x72,
-            0x3a,
-            0x20,
-            0x7b,
+            0x75,
+            0x65,
+            0x2c,
             0x20,
             0x6c,
             0x65,
@@ -109050,161 +104582,165 @@ namespace TNRD.Zeepkist.GTR
             0x7d,
             0x20,
             0x7d,
-            0x29,
+            0x2c,
             0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
+            0x6f,
+            0x72,
+            0x64,
+            0x65,
+            0x72,
+            0x42,
             0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x6f,
-            0x64,
-            0x65,
-            0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x72,
-            0x65,
-            0x63,
-            0x6f,
-            0x72,
-            0x64,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x69,
-            0x64,
-            0x20,
-            0x74,
-            0x69,
-            0x6d,
-            0x65,
-            0x20,
-            0x64,
-            0x61,
-            0x74,
-            0x65,
-            0x43,
-            0x72,
-            0x65,
-            0x61,
-            0x74,
-            0x65,
-            0x64,
-            0x20,
-            0x75,
-            0x73,
-            0x65,
-            0x72,
-            0x50,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x43,
-            0x6f,
-            0x6e,
-            0x74,
-            0x72,
-            0x69,
-            0x62,
-            0x75,
-            0x74,
-            0x69,
-            0x6f,
-            0x6e,
-            0x73,
-            0x28,
-            0x66,
-            0x69,
-            0x72,
-            0x73,
-            0x74,
             0x3a,
             0x20,
-            0x31,
-            0x29,
+            0x5b,
             0x20,
-            0x7b,
-            0x20,
+            0x54,
+            0x49,
+            0x4d,
+            0x45,
             0x5f,
+            0x41,
+            0x53,
+            0x43,
+            0x2c,
+            0x20,
+            0x44,
+            0x41,
+            0x54,
+            0x45,
             0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x6f,
-            0x64,
-            0x65,
-            0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x63,
-            0x6f,
-            0x6e,
-            0x74,
-            0x72,
-            0x69,
-            0x62,
-            0x75,
-            0x74,
-            0x69,
-            0x6f,
-            0x6e,
+            0x43,
             0x52,
+            0x45,
+            0x41,
+            0x54,
+            0x45,
+            0x44,
+            0x5f,
+            0x41,
+            0x53,
+            0x43,
+            0x20,
+            0x5d,
+            0x29,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
             0x61,
+            0x6d,
+            0x65,
+            0x20,
             0x6e,
-            0x6b,
+            0x6f,
+            0x64,
+            0x65,
+            0x73,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x69,
+            0x64,
+            0x20,
+            0x74,
+            0x69,
+            0x6d,
+            0x65,
+            0x20,
+            0x64,
+            0x61,
+            0x74,
+            0x65,
+            0x43,
+            0x72,
+            0x65,
+            0x61,
+            0x74,
+            0x65,
+            0x64,
+            0x20,
+            0x75,
+            0x73,
+            0x65,
+            0x72,
+            0x50,
+            0x6f,
+            0x69,
+            0x6e,
+            0x74,
+            0x43,
+            0x6f,
+            0x6e,
+            0x74,
+            0x72,
+            0x69,
+            0x62,
+            0x75,
+            0x74,
+            0x69,
+            0x6f,
+            0x6e,
+            0x73,
+            0x28,
+            0x66,
+            0x69,
+            0x72,
+            0x73,
+            0x74,
+            0x3a,
+            0x20,
+            0x31,
+            0x29,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x6e,
+            0x6f,
+            0x64,
+            0x65,
+            0x73,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
             0x20,
             0x6c,
             0x65,
@@ -109219,18 +104755,6 @@ namespace TNRD.Zeepkist.GTR
             0x69,
             0x6f,
             0x6e,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x50,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x73,
             0x20,
             0x6c,
             0x65,
@@ -109259,8 +104783,6 @@ namespace TNRD.Zeepkist.GTR
             0x20,
             0x7d,
             0x20,
-            0x7d,
-            0x20,
             0x77,
             0x6f,
             0x72,
@@ -109272,12 +104794,14 @@ namespace TNRD.Zeepkist.GTR
             0x6f,
             0x72,
             0x64,
-            0x47,
-            0x6c,
+            0x3a,
+            0x20,
+            0x72,
+            0x65,
+            0x63,
             0x6f,
-            0x62,
-            0x61,
-            0x6c,
+            0x72,
+            0x64,
             0x73,
             0x28,
             0x66,
@@ -109300,6 +104824,37 @@ namespace TNRD.Zeepkist.GTR
             0x20,
             0x7b,
             0x20,
+            0x77,
+            0x6f,
+            0x72,
+            0x6c,
+            0x64,
+            0x52,
+            0x65,
+            0x63,
+            0x6f,
+            0x72,
+            0x64,
+            0x47,
+            0x6c,
+            0x6f,
+            0x62,
+            0x61,
+            0x6c,
+            0x73,
+            0x45,
+            0x78,
+            0x69,
+            0x73,
+            0x74,
+            0x3a,
+            0x20,
+            0x74,
+            0x72,
+            0x75,
+            0x65,
+            0x2c,
+            0x20,
             0x6c,
             0x65,
             0x76,
@@ -109430,6 +104985,47 @@ namespace TNRD.Zeepkist.GTR
             0x7d,
             0x20,
             0x7d,
+            0x2c,
+            0x20,
+            0x6f,
+            0x72,
+            0x64,
+            0x65,
+            0x72,
+            0x42,
+            0x79,
+            0x3a,
+            0x20,
+            0x5b,
+            0x20,
+            0x54,
+            0x49,
+            0x4d,
+            0x45,
+            0x5f,
+            0x41,
+            0x53,
+            0x43,
+            0x2c,
+            0x20,
+            0x44,
+            0x41,
+            0x54,
+            0x45,
+            0x5f,
+            0x43,
+            0x52,
+            0x45,
+            0x41,
+            0x54,
+            0x45,
+            0x44,
+            0x5f,
+            0x41,
+            0x53,
+            0x43,
+            0x20,
+            0x5d,
             0x29,
             0x20,
             0x7b,
@@ -109450,26 +105046,6 @@ namespace TNRD.Zeepkist.GTR
             0x64,
             0x65,
             0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x72,
-            0x65,
-            0x63,
-            0x6f,
-            0x72,
-            0x64,
             0x20,
             0x7b,
             0x20,
@@ -109534,11 +105110,9 @@ namespace TNRD.Zeepkist.GTR
             0x20,
             0x7d,
             0x20,
-            0x7d,
-            0x20,
             0x7d
         };
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "517211b011f32a8bd0934d91143fe7ad");
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "0a0c6b7f298511a747136cace54f332c");
 
         public override global::System.String ToString()
         {
@@ -109559,57 +105133,35 @@ namespace TNRD.Zeepkist.GTR
     ///     ... CurrentLevelRecordFields
     ///   }
     /// }
-    ///
+    /// 
     /// fragment CurrentLevelRecordFields on Query {
-    ///   levelItems(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
+    ///   personalBest: records(first: 1, filter: { personalBestGlobalsExist: true, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, user: { steamId: { equalTo: $steamId } } }, orderBy: [ TIME_ASC, DATE_CREATED_ASC ]) {
     ///     __typename
     ///     nodes {
     ///       __typename
-    ///       name
-    ///     }
-    ///   }
-    ///   levelPoints(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       points
-    ///     }
-    ///   }
-    ///   personalBestGlobals(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, user: { steamId: { equalTo: $steamId } } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       record {
+    ///       id
+    ///       time
+    ///       dateCreated
+    ///       userPointContributions(first: 1) {
     ///         __typename
-    ///         id
-    ///         time
-    ///         dateCreated
-    ///         userPointContributions(first: 1) {
+    ///         nodes {
     ///           __typename
-    ///           nodes {
-    ///             __typename
-    ///             contributionRank
-    ///             levelPosition
-    ///             levelPoints
-    ///             levelDecayedPoints
-    ///           }
+    ///           levelPosition
+    ///           levelDecayedPoints
     ///         }
     ///       }
     ///     }
     ///   }
-    ///   worldRecordGlobals(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
+    ///   worldRecord: records(first: 1, filter: { worldRecordGlobalsExist: true, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }, orderBy: [ TIME_ASC, DATE_CREATED_ASC ]) {
     ///     __typename
     ///     nodes {
     ///       __typename
-    ///       record {
+    ///       id
+    ///       time
+    ///       user {
     ///         __typename
-    ///         id
-    ///         time
-    ///         user {
-    ///           __typename
-    ///           steamId
-    ///           steamName
-    ///         }
+    ///         steamId
+    ///         steamName
     ///       }
     ///     }
     ///   }
@@ -109696,57 +105248,35 @@ namespace TNRD.Zeepkist.GTR
     ///     ... CurrentLevelRecordFields
     ///   }
     /// }
-    ///
+    /// 
     /// fragment CurrentLevelRecordFields on Query {
-    ///   levelItems(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
+    ///   personalBest: records(first: 1, filter: { personalBestGlobalsExist: true, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, user: { steamId: { equalTo: $steamId } } }, orderBy: [ TIME_ASC, DATE_CREATED_ASC ]) {
     ///     __typename
     ///     nodes {
     ///       __typename
-    ///       name
-    ///     }
-    ///   }
-    ///   levelPoints(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       points
-    ///     }
-    ///   }
-    ///   personalBestGlobals(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, user: { steamId: { equalTo: $steamId } } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       record {
+    ///       id
+    ///       time
+    ///       dateCreated
+    ///       userPointContributions(first: 1) {
     ///         __typename
-    ///         id
-    ///         time
-    ///         dateCreated
-    ///         userPointContributions(first: 1) {
+    ///         nodes {
     ///           __typename
-    ///           nodes {
-    ///             __typename
-    ///             contributionRank
-    ///             levelPosition
-    ///             levelPoints
-    ///             levelDecayedPoints
-    ///           }
+    ///           levelPosition
+    ///           levelDecayedPoints
     ///         }
     ///       }
     ///     }
     ///   }
-    ///   worldRecordGlobals(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
+    ///   worldRecord: records(first: 1, filter: { worldRecordGlobalsExist: true, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }, orderBy: [ TIME_ASC, DATE_CREATED_ASC ]) {
     ///     __typename
     ///     nodes {
     ///       __typename
-    ///       record {
+    ///       id
+    ///       time
+    ///       user {
     ///         __typename
-    ///         id
-    ///         time
-    ///         user {
-    ///           __typename
-    ///           steamId
-    ///           steamName
-    ///         }
+    ///         steamId
+    ///         steamName
     ///       }
     ///     }
     ///   }
@@ -109774,7 +105304,7 @@ namespace TNRD.Zeepkist.GTR
     ///     }
     ///   }
     /// }
-    ///
+    /// 
     /// fragment GhostRecordFrag on Record {
     ///   id
     ///   user {
@@ -110288,7 +105818,7 @@ namespace TNRD.Zeepkist.GTR
     ///     }
     ///   }
     /// }
-    ///
+    /// 
     /// fragment GhostRecordFrag on Record {
     ///   id
     ///   user {
@@ -110407,7 +105937,7 @@ namespace TNRD.Zeepkist.GTR
     ///     }
     ///   }
     /// }
-    ///
+    /// 
     /// fragment GhostRecordFrag on Record {
     ///   id
     ///   user {
@@ -110440,7 +105970,7 @@ namespace TNRD.Zeepkist.GTR
     ///     }
     ///   }
     /// }
-    ///
+    /// 
     /// fragment GhostRecordFrag on Record {
     ///   id
     ///   user {
@@ -110983,7 +106513,7 @@ namespace TNRD.Zeepkist.GTR
     ///     }
     ///   }
     /// }
-    ///
+    /// 
     /// fragment GhostRecordFrag on Record {
     ///   id
     ///   user {
@@ -111088,7 +106618,7 @@ namespace TNRD.Zeepkist.GTR
     ///     }
     ///   }
     /// }
-    ///
+    /// 
     /// fragment GhostRecordFrag on Record {
     ///   id
     ///   user {
@@ -112089,7 +107619,7 @@ namespace TNRD.Zeepkist.GTR
     /// Represents the operation service of the GetNextFastestPersonalBest GraphQL operation
     /// <code>
     /// query GetNextFastestPersonalBest($xxHash: String!, $hash: String!, $time: Float!) {
-    ///   records(first: 1, filter: { personalBestGlobalsExist: true, time: { lessThan: $time }, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }, orderBy: TIME_DESC) {
+    ///   records(first: 1, filter: { personalBestGlobalsExist: true, time: { lessThan: $time }, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }, orderBy: [ TIME_DESC, DATE_CREATED_ASC ]) {
     ///     __typename
     ///     nodes {
     ///       __typename
@@ -112422,6 +107952,8 @@ namespace TNRD.Zeepkist.GTR
             0x79,
             0x3a,
             0x20,
+            0x5b,
+            0x20,
             0x54,
             0x49,
             0x4d,
@@ -112431,6 +107963,26 @@ namespace TNRD.Zeepkist.GTR
             0x45,
             0x53,
             0x43,
+            0x2c,
+            0x20,
+            0x44,
+            0x41,
+            0x54,
+            0x45,
+            0x5f,
+            0x43,
+            0x52,
+            0x45,
+            0x41,
+            0x54,
+            0x45,
+            0x44,
+            0x5f,
+            0x41,
+            0x53,
+            0x43,
+            0x20,
+            0x5d,
             0x29,
             0x20,
             0x7b,
@@ -112476,7 +108028,7 @@ namespace TNRD.Zeepkist.GTR
             0x20,
             0x7d
         };
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "0fc0169b1b4bca4d3f54616e20385ef0");
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "4dc13bfa826d15c25ad4b6c5710aa255");
 
         public override global::System.String ToString()
         {
@@ -112492,7 +108044,7 @@ namespace TNRD.Zeepkist.GTR
     /// Represents the operation service of the GetNextFastestPersonalBest GraphQL operation
     /// <code>
     /// query GetNextFastestPersonalBest($xxHash: String!, $hash: String!, $time: Float!) {
-    ///   records(first: 1, filter: { personalBestGlobalsExist: true, time: { lessThan: $time }, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }, orderBy: TIME_DESC) {
+    ///   records(first: 1, filter: { personalBestGlobalsExist: true, time: { lessThan: $time }, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }, orderBy: [ TIME_DESC, DATE_CREATED_ASC ]) {
     ///     __typename
     ///     nodes {
     ///       __typename
@@ -112578,7 +108130,7 @@ namespace TNRD.Zeepkist.GTR
     /// Represents the operation service of the GetNextFastestPersonalBest GraphQL operation
     /// <code>
     /// query GetNextFastestPersonalBest($xxHash: String!, $hash: String!, $time: Float!) {
-    ///   records(first: 1, filter: { personalBestGlobalsExist: true, time: { lessThan: $time }, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }, orderBy: TIME_DESC) {
+    ///   records(first: 1, filter: { personalBestGlobalsExist: true, time: { lessThan: $time }, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }, orderBy: [ TIME_DESC, DATE_CREATED_ASC ]) {
     ///     __typename
     ///     nodes {
     ///       __typename
@@ -113495,7 +109047,7 @@ namespace TNRD.Zeepkist.GTR
     ///     }
     ///   }
     /// }
-    ///
+    /// 
     /// fragment GhostRecordFrag on Record {
     ///   id
     ///   user {
@@ -114021,7 +109573,7 @@ namespace TNRD.Zeepkist.GTR
     ///     }
     ///   }
     /// }
-    ///
+    /// 
     /// fragment GhostRecordFrag on Record {
     ///   id
     ///   user {
@@ -114129,7 +109681,7 @@ namespace TNRD.Zeepkist.GTR
     ///     }
     ///   }
     /// }
-    ///
+    /// 
     /// fragment GhostRecordFrag on Record {
     ///   id
     ///   user {
@@ -114744,475 +110296,6 @@ namespace TNRD.Zeepkist.GTR
     }
 
     /// <summary>
-    /// Represents the operation service of the GetPlayerRankOnLevel GraphQL operation
-    /// <code>
-    /// query GetPlayerRankOnLevel($xxHash: String!, $hash: String!, $time: Float!) {
-    ///   records(filter: { personalBestGlobalsExist: true, time: { lessThan: $time }, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }, orderBy: TIME_ASC) {
-    ///     __typename
-    ///     totalCount
-    ///   }
-    /// }
-    /// </code>
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class GetPlayerRankOnLevelQueryDocument : global::StrawberryShake.IDocument
-    {
-        private GetPlayerRankOnLevelQueryDocument()
-        {
-        }
-
-        public static GetPlayerRankOnLevelQueryDocument Instance { get; } = new GetPlayerRankOnLevelQueryDocument();
-        public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Query;
-        public MemoryAlias::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]
-        {
-            0x71,
-            0x75,
-            0x65,
-            0x72,
-            0x79,
-            0x20,
-            0x47,
-            0x65,
-            0x74,
-            0x50,
-            0x6c,
-            0x61,
-            0x79,
-            0x65,
-            0x72,
-            0x52,
-            0x61,
-            0x6e,
-            0x6b,
-            0x4f,
-            0x6e,
-            0x4c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x28,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x53,
-            0x74,
-            0x72,
-            0x69,
-            0x6e,
-            0x67,
-            0x21,
-            0x2c,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x53,
-            0x74,
-            0x72,
-            0x69,
-            0x6e,
-            0x67,
-            0x21,
-            0x2c,
-            0x20,
-            0x24,
-            0x74,
-            0x69,
-            0x6d,
-            0x65,
-            0x3a,
-            0x20,
-            0x46,
-            0x6c,
-            0x6f,
-            0x61,
-            0x74,
-            0x21,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x72,
-            0x65,
-            0x63,
-            0x6f,
-            0x72,
-            0x64,
-            0x73,
-            0x28,
-            0x66,
-            0x69,
-            0x6c,
-            0x74,
-            0x65,
-            0x72,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x70,
-            0x65,
-            0x72,
-            0x73,
-            0x6f,
-            0x6e,
-            0x61,
-            0x6c,
-            0x42,
-            0x65,
-            0x73,
-            0x74,
-            0x47,
-            0x6c,
-            0x6f,
-            0x62,
-            0x61,
-            0x6c,
-            0x73,
-            0x45,
-            0x78,
-            0x69,
-            0x73,
-            0x74,
-            0x3a,
-            0x20,
-            0x74,
-            0x72,
-            0x75,
-            0x65,
-            0x2c,
-            0x20,
-            0x74,
-            0x69,
-            0x6d,
-            0x65,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6c,
-            0x65,
-            0x73,
-            0x73,
-            0x54,
-            0x68,
-            0x61,
-            0x6e,
-            0x3a,
-            0x20,
-            0x24,
-            0x74,
-            0x69,
-            0x6d,
-            0x65,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6f,
-            0x72,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x6e,
-            0x64,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x64,
-            0x76,
-            0x65,
-            0x6e,
-            0x74,
-            0x75,
-            0x72,
-            0x65,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x74,
-            0x72,
-            0x75,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x6f,
-            0x72,
-            0x64,
-            0x65,
-            0x72,
-            0x42,
-            0x79,
-            0x3a,
-            0x20,
-            0x54,
-            0x49,
-            0x4d,
-            0x45,
-            0x5f,
-            0x41,
-            0x53,
-            0x43,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x74,
-            0x6f,
-            0x74,
-            0x61,
-            0x6c,
-            0x43,
-            0x6f,
-            0x75,
-            0x6e,
-            0x74,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d
-        };
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "8d39cdef8d9f8b2b0c5d5c364446a337");
-
-        public override global::System.String ToString()
-        {
-#if NETCOREAPP3_1_OR_GREATER
-        return global::System.Text.Encoding.UTF8.GetString(Body);
-#else
-            return global::System.Text.Encoding.UTF8.GetString(Body.ToArray());
-#endif
-        }
-    }
-
-    /// <summary>
-    /// Represents the operation service of the GetPlayerRankOnLevel GraphQL operation
-    /// <code>
-    /// query GetPlayerRankOnLevel($xxHash: String!, $hash: String!, $time: Float!) {
-    ///   records(filter: { personalBestGlobalsExist: true, time: { lessThan: $time }, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }, orderBy: TIME_ASC) {
-    ///     __typename
-    ///     totalCount
-    ///   }
-    /// }
-    /// </code>
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class GetPlayerRankOnLevelQuery : global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelQuery
-    {
-        private readonly global::StrawberryShake.IOperationExecutor<IGetPlayerRankOnLevelResult> _operationExecutor;
-        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _stringFormatter;
-        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _floatFormatter;
-        public GetPlayerRankOnLevelQuery(global::StrawberryShake.IOperationExecutor<IGetPlayerRankOnLevelResult> operationExecutor, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
-        {
-            _operationExecutor = operationExecutor ?? throw new global::System.ArgumentNullException(nameof(operationExecutor));
-            _stringFormatter = serializerResolver.GetInputValueFormatter("String");
-            _floatFormatter = serializerResolver.GetInputValueFormatter("Float");
-        }
-
-        global::System.Type global::StrawberryShake.IOperationRequestFactory.ResultType => typeof(IGetPlayerRankOnLevelResult);
-
-        public async global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<IGetPlayerRankOnLevelResult>> ExecuteAsync(global::System.String xxHash, global::System.String hash, global::System.Double time, global::System.Threading.CancellationToken cancellationToken = default)
-        {
-            var request = CreateRequest(xxHash, hash, time);
-            return await _operationExecutor.ExecuteAsync(request, cancellationToken).ConfigureAwait(false);
-        }
-
-        public global::System.IObservable<global::StrawberryShake.IOperationResult<IGetPlayerRankOnLevelResult>> Watch(global::System.String xxHash, global::System.String hash, global::System.Double time, global::StrawberryShake.ExecutionStrategy? strategy = null)
-        {
-            var request = CreateRequest(xxHash, hash, time);
-            return _operationExecutor.Watch(request, strategy);
-        }
-
-        private global::StrawberryShake.OperationRequest CreateRequest(global::System.String xxHash, global::System.String hash, global::System.Double time)
-        {
-            var variables = new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>();
-            variables.Add("xxHash", FormatXxHash(xxHash));
-            variables.Add("hash", FormatHash(hash));
-            variables.Add("time", FormatTime(time));
-            return CreateRequest(variables);
-        }
-
-        private global::StrawberryShake.OperationRequest CreateRequest(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
-        {
-            return new global::StrawberryShake.OperationRequest(id: GetPlayerRankOnLevelQueryDocument.Instance.Hash.Value, name: "GetPlayerRankOnLevel", document: GetPlayerRankOnLevelQueryDocument.Instance, strategy: global::StrawberryShake.RequestStrategy.Default, variables: variables);
-        }
-
-        private global::System.Object? FormatXxHash(global::System.String value)
-        {
-            if (value is null)
-            {
-                throw new global::System.ArgumentNullException(nameof(value));
-            }
-
-            return _stringFormatter.Format(value);
-        }
-
-        private global::System.Object? FormatHash(global::System.String value)
-        {
-            if (value is null)
-            {
-                throw new global::System.ArgumentNullException(nameof(value));
-            }
-
-            return _stringFormatter.Format(value);
-        }
-
-        private global::System.Object? FormatTime(global::System.Double value)
-        {
-            return _floatFormatter.Format(value);
-        }
-
-        global::StrawberryShake.OperationRequest global::StrawberryShake.IOperationRequestFactory.Create(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
-        {
-            return CreateRequest(variables!);
-        }
-    }
-
-    /// <summary>
-    /// Represents the operation service of the GetPlayerRankOnLevel GraphQL operation
-    /// <code>
-    /// query GetPlayerRankOnLevel($xxHash: String!, $hash: String!, $time: Float!) {
-    ///   records(filter: { personalBestGlobalsExist: true, time: { lessThan: $time }, level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }, orderBy: TIME_ASC) {
-    ///     __typename
-    ///     totalCount
-    ///   }
-    /// }
-    /// </code>
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IGetPlayerRankOnLevelQuery : global::StrawberryShake.IOperationRequestFactory
-    {
-        global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<IGetPlayerRankOnLevelResult>> ExecuteAsync(global::System.String xxHash, global::System.String hash, global::System.Double time, global::System.Threading.CancellationToken cancellationToken = default);
-        global::System.IObservable<global::StrawberryShake.IOperationResult<IGetPlayerRankOnLevelResult>> Watch(global::System.String xxHash, global::System.String hash, global::System.Double time, global::StrawberryShake.ExecutionStrategy? strategy = null);
-    }
-
-    /// <summary>
     /// Represents the operation service of the GetTopRecordGhosts GraphQL operation
     /// <code>
     /// query GetTopRecordGhosts($xxHash: String!, $hash: String!, $first: Int = null) {
@@ -115224,7 +110307,7 @@ namespace TNRD.Zeepkist.GTR
     ///     }
     ///   }
     /// }
-    ///
+    /// 
     /// fragment GhostRecordFrag on Record {
     ///   id
     ///   user {
@@ -115729,7 +110812,7 @@ namespace TNRD.Zeepkist.GTR
     ///     }
     ///   }
     /// }
-    ///
+    /// 
     /// fragment GhostRecordFrag on Record {
     ///   id
     ///   user {
@@ -115834,7 +110917,7 @@ namespace TNRD.Zeepkist.GTR
     ///     }
     ///   }
     /// }
-    ///
+    /// 
     /// fragment GhostRecordFrag on Record {
     ///   id
     ///   user {
@@ -116494,1054 +111577,6 @@ namespace TNRD.Zeepkist.GTR
     }
 
     /// <summary>
-    /// Represents the operation service of the LeaderboardPage GraphQL operation
-    /// <code>
-    /// query LeaderboardPage($xxHash: String!, $hash: String!, $first: Int!, $offset: Int!) {
-    ///   levelItems(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       name
-    ///     }
-    ///   }
-    ///   levelPoints(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       points
-    ///     }
-    ///   }
-    ///   records(filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, personalBestGlobalsExist: true }, first: $first, offset: $offset, orderBy: TIME_ASC) {
-    ///     __typename
-    ///     totalCount
-    ///     nodes {
-    ///       __typename
-    ///       user {
-    ///         __typename
-    ///         steamName
-    ///         steamId
-    ///       }
-    ///       time
-    ///       dateCreated
-    ///     }
-    ///   }
-    /// }
-    /// </code>
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LeaderboardPageQueryDocument : global::StrawberryShake.IDocument
-    {
-        private LeaderboardPageQueryDocument()
-        {
-        }
-
-        public static LeaderboardPageQueryDocument Instance { get; } = new LeaderboardPageQueryDocument();
-        public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Query;
-        public MemoryAlias::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]
-        {
-            0x71,
-            0x75,
-            0x65,
-            0x72,
-            0x79,
-            0x20,
-            0x4c,
-            0x65,
-            0x61,
-            0x64,
-            0x65,
-            0x72,
-            0x62,
-            0x6f,
-            0x61,
-            0x72,
-            0x64,
-            0x50,
-            0x61,
-            0x67,
-            0x65,
-            0x28,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x53,
-            0x74,
-            0x72,
-            0x69,
-            0x6e,
-            0x67,
-            0x21,
-            0x2c,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x53,
-            0x74,
-            0x72,
-            0x69,
-            0x6e,
-            0x67,
-            0x21,
-            0x2c,
-            0x20,
-            0x24,
-            0x66,
-            0x69,
-            0x72,
-            0x73,
-            0x74,
-            0x3a,
-            0x20,
-            0x49,
-            0x6e,
-            0x74,
-            0x21,
-            0x2c,
-            0x20,
-            0x24,
-            0x6f,
-            0x66,
-            0x66,
-            0x73,
-            0x65,
-            0x74,
-            0x3a,
-            0x20,
-            0x49,
-            0x6e,
-            0x74,
-            0x21,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x49,
-            0x74,
-            0x65,
-            0x6d,
-            0x73,
-            0x28,
-            0x66,
-            0x69,
-            0x72,
-            0x73,
-            0x74,
-            0x3a,
-            0x20,
-            0x31,
-            0x2c,
-            0x20,
-            0x66,
-            0x69,
-            0x6c,
-            0x74,
-            0x65,
-            0x72,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6f,
-            0x72,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x6e,
-            0x64,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x64,
-            0x76,
-            0x65,
-            0x6e,
-            0x74,
-            0x75,
-            0x72,
-            0x65,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x74,
-            0x72,
-            0x75,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x6f,
-            0x64,
-            0x65,
-            0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x50,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x73,
-            0x28,
-            0x66,
-            0x69,
-            0x72,
-            0x73,
-            0x74,
-            0x3a,
-            0x20,
-            0x31,
-            0x2c,
-            0x20,
-            0x66,
-            0x69,
-            0x6c,
-            0x74,
-            0x65,
-            0x72,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6f,
-            0x72,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x6e,
-            0x64,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x64,
-            0x76,
-            0x65,
-            0x6e,
-            0x74,
-            0x75,
-            0x72,
-            0x65,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x74,
-            0x72,
-            0x75,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x6f,
-            0x64,
-            0x65,
-            0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x70,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x73,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x72,
-            0x65,
-            0x63,
-            0x6f,
-            0x72,
-            0x64,
-            0x73,
-            0x28,
-            0x66,
-            0x69,
-            0x6c,
-            0x74,
-            0x65,
-            0x72,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6f,
-            0x72,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x6e,
-            0x64,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x64,
-            0x76,
-            0x65,
-            0x6e,
-            0x74,
-            0x75,
-            0x72,
-            0x65,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x74,
-            0x72,
-            0x75,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x70,
-            0x65,
-            0x72,
-            0x73,
-            0x6f,
-            0x6e,
-            0x61,
-            0x6c,
-            0x42,
-            0x65,
-            0x73,
-            0x74,
-            0x47,
-            0x6c,
-            0x6f,
-            0x62,
-            0x61,
-            0x6c,
-            0x73,
-            0x45,
-            0x78,
-            0x69,
-            0x73,
-            0x74,
-            0x3a,
-            0x20,
-            0x74,
-            0x72,
-            0x75,
-            0x65,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x66,
-            0x69,
-            0x72,
-            0x73,
-            0x74,
-            0x3a,
-            0x20,
-            0x24,
-            0x66,
-            0x69,
-            0x72,
-            0x73,
-            0x74,
-            0x2c,
-            0x20,
-            0x6f,
-            0x66,
-            0x66,
-            0x73,
-            0x65,
-            0x74,
-            0x3a,
-            0x20,
-            0x24,
-            0x6f,
-            0x66,
-            0x66,
-            0x73,
-            0x65,
-            0x74,
-            0x2c,
-            0x20,
-            0x6f,
-            0x72,
-            0x64,
-            0x65,
-            0x72,
-            0x42,
-            0x79,
-            0x3a,
-            0x20,
-            0x54,
-            0x49,
-            0x4d,
-            0x45,
-            0x5f,
-            0x41,
-            0x53,
-            0x43,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x74,
-            0x6f,
-            0x74,
-            0x61,
-            0x6c,
-            0x43,
-            0x6f,
-            0x75,
-            0x6e,
-            0x74,
-            0x20,
-            0x6e,
-            0x6f,
-            0x64,
-            0x65,
-            0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x75,
-            0x73,
-            0x65,
-            0x72,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x73,
-            0x74,
-            0x65,
-            0x61,
-            0x6d,
-            0x4e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x73,
-            0x74,
-            0x65,
-            0x61,
-            0x6d,
-            0x49,
-            0x64,
-            0x20,
-            0x7d,
-            0x20,
-            0x74,
-            0x69,
-            0x6d,
-            0x65,
-            0x20,
-            0x64,
-            0x61,
-            0x74,
-            0x65,
-            0x43,
-            0x72,
-            0x65,
-            0x61,
-            0x74,
-            0x65,
-            0x64,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d
-        };
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "bb1ec501546746bdb69c8a21e934690f");
-
-        public override global::System.String ToString()
-        {
-#if NETCOREAPP3_1_OR_GREATER
-        return global::System.Text.Encoding.UTF8.GetString(Body);
-#else
-            return global::System.Text.Encoding.UTF8.GetString(Body.ToArray());
-#endif
-        }
-    }
-
-    /// <summary>
-    /// Represents the operation service of the LeaderboardPage GraphQL operation
-    /// <code>
-    /// query LeaderboardPage($xxHash: String!, $hash: String!, $first: Int!, $offset: Int!) {
-    ///   levelItems(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       name
-    ///     }
-    ///   }
-    ///   levelPoints(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       points
-    ///     }
-    ///   }
-    ///   records(filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, personalBestGlobalsExist: true }, first: $first, offset: $offset, orderBy: TIME_ASC) {
-    ///     __typename
-    ///     totalCount
-    ///     nodes {
-    ///       __typename
-    ///       user {
-    ///         __typename
-    ///         steamName
-    ///         steamId
-    ///       }
-    ///       time
-    ///       dateCreated
-    ///     }
-    ///   }
-    /// }
-    /// </code>
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LeaderboardPageQuery : global::TNRD.Zeepkist.GTR.ILeaderboardPageQuery
-    {
-        private readonly global::StrawberryShake.IOperationExecutor<ILeaderboardPageResult> _operationExecutor;
-        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _stringFormatter;
-        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _intFormatter;
-        public LeaderboardPageQuery(global::StrawberryShake.IOperationExecutor<ILeaderboardPageResult> operationExecutor, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
-        {
-            _operationExecutor = operationExecutor ?? throw new global::System.ArgumentNullException(nameof(operationExecutor));
-            _stringFormatter = serializerResolver.GetInputValueFormatter("String");
-            _intFormatter = serializerResolver.GetInputValueFormatter("Int");
-        }
-
-        global::System.Type global::StrawberryShake.IOperationRequestFactory.ResultType => typeof(ILeaderboardPageResult);
-
-        public async global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<ILeaderboardPageResult>> ExecuteAsync(global::System.String xxHash, global::System.String hash, global::System.Int32 first, global::System.Int32 offset, global::System.Threading.CancellationToken cancellationToken = default)
-        {
-            var request = CreateRequest(xxHash, hash, first, offset);
-            return await _operationExecutor.ExecuteAsync(request, cancellationToken).ConfigureAwait(false);
-        }
-
-        public global::System.IObservable<global::StrawberryShake.IOperationResult<ILeaderboardPageResult>> Watch(global::System.String xxHash, global::System.String hash, global::System.Int32 first, global::System.Int32 offset, global::StrawberryShake.ExecutionStrategy? strategy = null)
-        {
-            var request = CreateRequest(xxHash, hash, first, offset);
-            return _operationExecutor.Watch(request, strategy);
-        }
-
-        private global::StrawberryShake.OperationRequest CreateRequest(global::System.String xxHash, global::System.String hash, global::System.Int32 first, global::System.Int32 offset)
-        {
-            var variables = new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>();
-            variables.Add("xxHash", FormatXxHash(xxHash));
-            variables.Add("hash", FormatHash(hash));
-            variables.Add("first", FormatFirst(first));
-            variables.Add("offset", FormatOffset(offset));
-            return CreateRequest(variables);
-        }
-
-        private global::StrawberryShake.OperationRequest CreateRequest(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
-        {
-            return new global::StrawberryShake.OperationRequest(id: LeaderboardPageQueryDocument.Instance.Hash.Value, name: "LeaderboardPage", document: LeaderboardPageQueryDocument.Instance, strategy: global::StrawberryShake.RequestStrategy.Default, variables: variables);
-        }
-
-        private global::System.Object? FormatXxHash(global::System.String value)
-        {
-            if (value is null)
-            {
-                throw new global::System.ArgumentNullException(nameof(value));
-            }
-
-            return _stringFormatter.Format(value);
-        }
-
-        private global::System.Object? FormatHash(global::System.String value)
-        {
-            if (value is null)
-            {
-                throw new global::System.ArgumentNullException(nameof(value));
-            }
-
-            return _stringFormatter.Format(value);
-        }
-
-        private global::System.Object? FormatFirst(global::System.Int32 value)
-        {
-            return _intFormatter.Format(value);
-        }
-
-        private global::System.Object? FormatOffset(global::System.Int32 value)
-        {
-            return _intFormatter.Format(value);
-        }
-
-        global::StrawberryShake.OperationRequest global::StrawberryShake.IOperationRequestFactory.Create(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
-        {
-            return CreateRequest(variables!);
-        }
-    }
-
-    /// <summary>
-    /// Represents the operation service of the LeaderboardPage GraphQL operation
-    /// <code>
-    /// query LeaderboardPage($xxHash: String!, $hash: String!, $first: Int!, $offset: Int!) {
-    ///   levelItems(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       name
-    ///     }
-    ///   }
-    ///   levelPoints(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       points
-    ///     }
-    ///   }
-    ///   records(filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, personalBestGlobalsExist: true }, first: $first, offset: $offset, orderBy: TIME_ASC) {
-    ///     __typename
-    ///     totalCount
-    ///     nodes {
-    ///       __typename
-    ///       user {
-    ///         __typename
-    ///         steamName
-    ///         steamId
-    ///       }
-    ///       time
-    ///       dateCreated
-    ///     }
-    ///   }
-    /// }
-    /// </code>
-    /// </summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface ILeaderboardPageQuery : global::StrawberryShake.IOperationRequestFactory
-    {
-        global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<ILeaderboardPageResult>> ExecuteAsync(global::System.String xxHash, global::System.String hash, global::System.Int32 first, global::System.Int32 offset, global::System.Threading.CancellationToken cancellationToken = default);
-        global::System.IObservable<global::StrawberryShake.IOperationResult<ILeaderboardPageResult>> Watch(global::System.String xxHash, global::System.String hash, global::System.Int32 first, global::System.Int32 offset, global::StrawberryShake.ExecutionStrategy? strategy = null);
-    }
-
-    /// <summary>
     /// Represents the operation service of the WatchLeaderboardPage GraphQL operation
     /// <code>
     /// subscription WatchLeaderboardPage($xxHash: String!, $hash: String!, $first: Int!, $offset: Int!) {
@@ -117550,23 +111585,9 @@ namespace TNRD.Zeepkist.GTR
     ///     ... LeaderboardPageFields
     ///   }
     /// }
-    ///
+    /// 
     /// fragment LeaderboardPageFields on Query {
-    ///   levelItems(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       name
-    ///     }
-    ///   }
-    ///   levelPoints(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       points
-    ///     }
-    ///   }
-    ///   records(filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, personalBestGlobalsExist: true }, first: $first, offset: $offset, orderBy: TIME_ASC) {
+    ///   records(filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, personalBestGlobalsExist: true }, first: $first, offset: $offset, orderBy: [ TIME_ASC, DATE_CREATED_ASC ]) {
     ///     __typename
     ///     totalCount
     ///     nodes {
@@ -117576,8 +111597,26 @@ namespace TNRD.Zeepkist.GTR
     ///         steamName
     ///         steamId
     ///       }
+    ///       level {
+    ///         __typename
+    ///         levelItems(first: 1) {
+    ///           __typename
+    ///           nodes {
+    ///             __typename
+    ///             name
+    ///           }
+    ///         }
+    ///       }
     ///       time
     ///       dateCreated
+    ///       userPointContributions(first: 1) {
+    ///         __typename
+    ///         nodes {
+    ///           __typename
+    ///           levelDecayedPoints
+    ///           levelPosition
+    ///         }
+    ///       }
     ///     }
     ///   }
     /// }
@@ -117784,417 +111823,6 @@ namespace TNRD.Zeepkist.GTR
             0x20,
             0x7b,
             0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x49,
-            0x74,
-            0x65,
-            0x6d,
-            0x73,
-            0x28,
-            0x66,
-            0x69,
-            0x72,
-            0x73,
-            0x74,
-            0x3a,
-            0x20,
-            0x31,
-            0x2c,
-            0x20,
-            0x66,
-            0x69,
-            0x6c,
-            0x74,
-            0x65,
-            0x72,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6f,
-            0x72,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x6e,
-            0x64,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x64,
-            0x76,
-            0x65,
-            0x6e,
-            0x74,
-            0x75,
-            0x72,
-            0x65,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x74,
-            0x72,
-            0x75,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x6f,
-            0x64,
-            0x65,
-            0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x50,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x73,
-            0x28,
-            0x66,
-            0x69,
-            0x72,
-            0x73,
-            0x74,
-            0x3a,
-            0x20,
-            0x31,
-            0x2c,
-            0x20,
-            0x66,
-            0x69,
-            0x6c,
-            0x74,
-            0x65,
-            0x72,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6c,
-            0x65,
-            0x76,
-            0x65,
-            0x6c,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x6f,
-            0x72,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x6e,
-            0x64,
-            0x3a,
-            0x20,
-            0x5b,
-            0x20,
-            0x7b,
-            0x20,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x24,
-            0x68,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x2c,
-            0x20,
-            0x7b,
-            0x20,
-            0x61,
-            0x64,
-            0x76,
-            0x65,
-            0x6e,
-            0x74,
-            0x75,
-            0x72,
-            0x65,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
-            0x74,
-            0x72,
-            0x75,
-            0x65,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x5d,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x29,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x6e,
-            0x6f,
-            0x64,
-            0x65,
-            0x73,
-            0x20,
-            0x7b,
-            0x20,
-            0x5f,
-            0x5f,
-            0x74,
-            0x79,
-            0x70,
-            0x65,
-            0x6e,
-            0x61,
-            0x6d,
-            0x65,
-            0x20,
-            0x70,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x73,
-            0x20,
-            0x7d,
-            0x20,
-            0x7d,
-            0x20,
             0x72,
             0x65,
             0x63,
@@ -118418,6 +112046,8 @@ namespace TNRD.Zeepkist.GTR
             0x79,
             0x3a,
             0x20,
+            0x5b,
+            0x20,
             0x54,
             0x49,
             0x4d,
@@ -118426,6 +112056,26 @@ namespace TNRD.Zeepkist.GTR
             0x41,
             0x53,
             0x43,
+            0x2c,
+            0x20,
+            0x44,
+            0x41,
+            0x54,
+            0x45,
+            0x5f,
+            0x43,
+            0x52,
+            0x45,
+            0x41,
+            0x54,
+            0x45,
+            0x44,
+            0x5f,
+            0x41,
+            0x53,
+            0x43,
+            0x20,
+            0x5d,
             0x29,
             0x20,
             0x7b,
@@ -118509,6 +112159,89 @@ namespace TNRD.Zeepkist.GTR
             0x20,
             0x7d,
             0x20,
+            0x6c,
+            0x65,
+            0x76,
+            0x65,
+            0x6c,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x6c,
+            0x65,
+            0x76,
+            0x65,
+            0x6c,
+            0x49,
+            0x74,
+            0x65,
+            0x6d,
+            0x73,
+            0x28,
+            0x66,
+            0x69,
+            0x72,
+            0x73,
+            0x74,
+            0x3a,
+            0x20,
+            0x31,
+            0x29,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x6e,
+            0x6f,
+            0x64,
+            0x65,
+            0x73,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d,
+            0x20,
             0x74,
             0x69,
             0x6d,
@@ -118526,13 +112259,115 @@ namespace TNRD.Zeepkist.GTR
             0x65,
             0x64,
             0x20,
+            0x75,
+            0x73,
+            0x65,
+            0x72,
+            0x50,
+            0x6f,
+            0x69,
+            0x6e,
+            0x74,
+            0x43,
+            0x6f,
+            0x6e,
+            0x74,
+            0x72,
+            0x69,
+            0x62,
+            0x75,
+            0x74,
+            0x69,
+            0x6f,
+            0x6e,
+            0x73,
+            0x28,
+            0x66,
+            0x69,
+            0x72,
+            0x73,
+            0x74,
+            0x3a,
+            0x20,
+            0x31,
+            0x29,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x6e,
+            0x6f,
+            0x64,
+            0x65,
+            0x73,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x6c,
+            0x65,
+            0x76,
+            0x65,
+            0x6c,
+            0x44,
+            0x65,
+            0x63,
+            0x61,
+            0x79,
+            0x65,
+            0x64,
+            0x50,
+            0x6f,
+            0x69,
+            0x6e,
+            0x74,
+            0x73,
+            0x20,
+            0x6c,
+            0x65,
+            0x76,
+            0x65,
+            0x6c,
+            0x50,
+            0x6f,
+            0x73,
+            0x69,
+            0x74,
+            0x69,
+            0x6f,
+            0x6e,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d,
+            0x20,
             0x7d,
             0x20,
             0x7d,
             0x20,
             0x7d
         };
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "20d32b3bc09a16022909081f6bfdb076");
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "f5a9586eb7eef7c2a10bd1265d4bf120");
 
         public override global::System.String ToString()
         {
@@ -118553,23 +112388,9 @@ namespace TNRD.Zeepkist.GTR
     ///     ... LeaderboardPageFields
     ///   }
     /// }
-    ///
+    /// 
     /// fragment LeaderboardPageFields on Query {
-    ///   levelItems(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       name
-    ///     }
-    ///   }
-    ///   levelPoints(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       points
-    ///     }
-    ///   }
-    ///   records(filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, personalBestGlobalsExist: true }, first: $first, offset: $offset, orderBy: TIME_ASC) {
+    ///   records(filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, personalBestGlobalsExist: true }, first: $first, offset: $offset, orderBy: [ TIME_ASC, DATE_CREATED_ASC ]) {
     ///     __typename
     ///     totalCount
     ///     nodes {
@@ -118579,8 +112400,26 @@ namespace TNRD.Zeepkist.GTR
     ///         steamName
     ///         steamId
     ///       }
+    ///       level {
+    ///         __typename
+    ///         levelItems(first: 1) {
+    ///           __typename
+    ///           nodes {
+    ///             __typename
+    ///             name
+    ///           }
+    ///         }
+    ///       }
     ///       time
     ///       dateCreated
+    ///       userPointContributions(first: 1) {
+    ///         __typename
+    ///         nodes {
+    ///           __typename
+    ///           levelDecayedPoints
+    ///           levelPosition
+    ///         }
+    ///       }
     ///     }
     ///   }
     /// }
@@ -118667,23 +112506,9 @@ namespace TNRD.Zeepkist.GTR
     ///     ... LeaderboardPageFields
     ///   }
     /// }
-    ///
+    /// 
     /// fragment LeaderboardPageFields on Query {
-    ///   levelItems(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       name
-    ///     }
-    ///   }
-    ///   levelPoints(first: 1, filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] } }) {
-    ///     __typename
-    ///     nodes {
-    ///       __typename
-    ///       points
-    ///     }
-    ///   }
-    ///   records(filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, personalBestGlobalsExist: true }, first: $first, offset: $offset, orderBy: TIME_ASC) {
+    ///   records(filter: { level: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, personalBestGlobalsExist: true }, first: $first, offset: $offset, orderBy: [ TIME_ASC, DATE_CREATED_ASC ]) {
     ///     __typename
     ///     totalCount
     ///     nodes {
@@ -118693,8 +112518,26 @@ namespace TNRD.Zeepkist.GTR
     ///         steamName
     ///         steamId
     ///       }
+    ///       level {
+    ///         __typename
+    ///         levelItems(first: 1) {
+    ///           __typename
+    ///           nodes {
+    ///             __typename
+    ///             name
+    ///           }
+    ///         }
+    ///       }
     ///       time
     ///       dateCreated
+    ///       userPointContributions(first: 1) {
+    ///         __typename
+    ///         nodes {
+    ///           __typename
+    ///           levelDecayedPoints
+    ///           levelPosition
+    ///         }
+    ///       }
     ///     }
     ///   }
     /// }
@@ -119034,7 +112877,6 @@ namespace TNRD.Zeepkist.GTR
     public partial class GtrClient : global::TNRD.Zeepkist.GTR.IGtrClient
     {
         private readonly global::TNRD.Zeepkist.GTR.IBrowseLevelItemsQuery _browseLevelItems;
-        private readonly global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsQuery _currentLevelRecords;
         private readonly global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsSubscription _watchCurrentLevelRecords;
         private readonly global::TNRD.Zeepkist.GTR.IGetAdditionalGhostsQuery _getAdditionalGhosts;
         private readonly global::TNRD.Zeepkist.GTR.IGetAllPersonalBestGhostsQuery _getAllPersonalBestGhosts;
@@ -119045,17 +112887,14 @@ namespace TNRD.Zeepkist.GTR
         private readonly global::TNRD.Zeepkist.GTR.IGetPersonalBestCountQuery _getPersonalBestCount;
         private readonly global::TNRD.Zeepkist.GTR.IGetPersonalBestGhostsQuery _getPersonalBestGhosts;
         private readonly global::TNRD.Zeepkist.GTR.IGetPersonalBestsQuery _getPersonalBests;
-        private readonly global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelQuery _getPlayerRankOnLevel;
         private readonly global::TNRD.Zeepkist.GTR.IGetTopRecordGhostsQuery _getTopRecordGhosts;
         private readonly global::TNRD.Zeepkist.GTR.IGetTotalUserCountQuery _getTotalUserCount;
         private readonly global::TNRD.Zeepkist.GTR.IGetWorldRecordHolderQuery _getWorldRecordHolder;
-        private readonly global::TNRD.Zeepkist.GTR.ILeaderboardPageQuery _leaderboardPage;
         private readonly global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageSubscription _watchLeaderboardPage;
         private readonly global::TNRD.Zeepkist.GTR.ISearchUsersByNameQuery _searchUsersByName;
-        public GtrClient(global::TNRD.Zeepkist.GTR.IBrowseLevelItemsQuery browseLevelItems, global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsQuery currentLevelRecords, global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsSubscription watchCurrentLevelRecords, global::TNRD.Zeepkist.GTR.IGetAdditionalGhostsQuery getAdditionalGhosts, global::TNRD.Zeepkist.GTR.IGetAllPersonalBestGhostsQuery getAllPersonalBestGhosts, global::TNRD.Zeepkist.GTR.IGetLevelPointsQuery getLevelPoints, global::TNRD.Zeepkist.GTR.IGetLevelVoteSummaryQuery getLevelVoteSummary, global::TNRD.Zeepkist.GTR.IGetNextFastestPersonalBestQuery getNextFastestPersonalBest, global::TNRD.Zeepkist.GTR.IGetPersonalBestQuery getPersonalBest, global::TNRD.Zeepkist.GTR.IGetPersonalBestCountQuery getPersonalBestCount, global::TNRD.Zeepkist.GTR.IGetPersonalBestGhostsQuery getPersonalBestGhosts, global::TNRD.Zeepkist.GTR.IGetPersonalBestsQuery getPersonalBests, global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelQuery getPlayerRankOnLevel, global::TNRD.Zeepkist.GTR.IGetTopRecordGhostsQuery getTopRecordGhosts, global::TNRD.Zeepkist.GTR.IGetTotalUserCountQuery getTotalUserCount, global::TNRD.Zeepkist.GTR.IGetWorldRecordHolderQuery getWorldRecordHolder, global::TNRD.Zeepkist.GTR.ILeaderboardPageQuery leaderboardPage, global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageSubscription watchLeaderboardPage, global::TNRD.Zeepkist.GTR.ISearchUsersByNameQuery searchUsersByName)
+        public GtrClient(global::TNRD.Zeepkist.GTR.IBrowseLevelItemsQuery browseLevelItems, global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsSubscription watchCurrentLevelRecords, global::TNRD.Zeepkist.GTR.IGetAdditionalGhostsQuery getAdditionalGhosts, global::TNRD.Zeepkist.GTR.IGetAllPersonalBestGhostsQuery getAllPersonalBestGhosts, global::TNRD.Zeepkist.GTR.IGetLevelPointsQuery getLevelPoints, global::TNRD.Zeepkist.GTR.IGetLevelVoteSummaryQuery getLevelVoteSummary, global::TNRD.Zeepkist.GTR.IGetNextFastestPersonalBestQuery getNextFastestPersonalBest, global::TNRD.Zeepkist.GTR.IGetPersonalBestQuery getPersonalBest, global::TNRD.Zeepkist.GTR.IGetPersonalBestCountQuery getPersonalBestCount, global::TNRD.Zeepkist.GTR.IGetPersonalBestGhostsQuery getPersonalBestGhosts, global::TNRD.Zeepkist.GTR.IGetPersonalBestsQuery getPersonalBests, global::TNRD.Zeepkist.GTR.IGetTopRecordGhostsQuery getTopRecordGhosts, global::TNRD.Zeepkist.GTR.IGetTotalUserCountQuery getTotalUserCount, global::TNRD.Zeepkist.GTR.IGetWorldRecordHolderQuery getWorldRecordHolder, global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageSubscription watchLeaderboardPage, global::TNRD.Zeepkist.GTR.ISearchUsersByNameQuery searchUsersByName)
         {
             _browseLevelItems = browseLevelItems ?? throw new global::System.ArgumentNullException(nameof(browseLevelItems));
-            _currentLevelRecords = currentLevelRecords ?? throw new global::System.ArgumentNullException(nameof(currentLevelRecords));
             _watchCurrentLevelRecords = watchCurrentLevelRecords ?? throw new global::System.ArgumentNullException(nameof(watchCurrentLevelRecords));
             _getAdditionalGhosts = getAdditionalGhosts ?? throw new global::System.ArgumentNullException(nameof(getAdditionalGhosts));
             _getAllPersonalBestGhosts = getAllPersonalBestGhosts ?? throw new global::System.ArgumentNullException(nameof(getAllPersonalBestGhosts));
@@ -119066,18 +112905,15 @@ namespace TNRD.Zeepkist.GTR
             _getPersonalBestCount = getPersonalBestCount ?? throw new global::System.ArgumentNullException(nameof(getPersonalBestCount));
             _getPersonalBestGhosts = getPersonalBestGhosts ?? throw new global::System.ArgumentNullException(nameof(getPersonalBestGhosts));
             _getPersonalBests = getPersonalBests ?? throw new global::System.ArgumentNullException(nameof(getPersonalBests));
-            _getPlayerRankOnLevel = getPlayerRankOnLevel ?? throw new global::System.ArgumentNullException(nameof(getPlayerRankOnLevel));
             _getTopRecordGhosts = getTopRecordGhosts ?? throw new global::System.ArgumentNullException(nameof(getTopRecordGhosts));
             _getTotalUserCount = getTotalUserCount ?? throw new global::System.ArgumentNullException(nameof(getTotalUserCount));
             _getWorldRecordHolder = getWorldRecordHolder ?? throw new global::System.ArgumentNullException(nameof(getWorldRecordHolder));
-            _leaderboardPage = leaderboardPage ?? throw new global::System.ArgumentNullException(nameof(leaderboardPage));
             _watchLeaderboardPage = watchLeaderboardPage ?? throw new global::System.ArgumentNullException(nameof(watchLeaderboardPage));
             _searchUsersByName = searchUsersByName ?? throw new global::System.ArgumentNullException(nameof(searchUsersByName));
         }
 
         public static global::System.String ClientName => "GtrClient";
         public global::TNRD.Zeepkist.GTR.IBrowseLevelItemsQuery BrowseLevelItems => _browseLevelItems;
-        public global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsQuery CurrentLevelRecords => _currentLevelRecords;
         public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsSubscription WatchCurrentLevelRecords => _watchCurrentLevelRecords;
         public global::TNRD.Zeepkist.GTR.IGetAdditionalGhostsQuery GetAdditionalGhosts => _getAdditionalGhosts;
         public global::TNRD.Zeepkist.GTR.IGetAllPersonalBestGhostsQuery GetAllPersonalBestGhosts => _getAllPersonalBestGhosts;
@@ -119088,11 +112924,9 @@ namespace TNRD.Zeepkist.GTR
         public global::TNRD.Zeepkist.GTR.IGetPersonalBestCountQuery GetPersonalBestCount => _getPersonalBestCount;
         public global::TNRD.Zeepkist.GTR.IGetPersonalBestGhostsQuery GetPersonalBestGhosts => _getPersonalBestGhosts;
         public global::TNRD.Zeepkist.GTR.IGetPersonalBestsQuery GetPersonalBests => _getPersonalBests;
-        public global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelQuery GetPlayerRankOnLevel => _getPlayerRankOnLevel;
         public global::TNRD.Zeepkist.GTR.IGetTopRecordGhostsQuery GetTopRecordGhosts => _getTopRecordGhosts;
         public global::TNRD.Zeepkist.GTR.IGetTotalUserCountQuery GetTotalUserCount => _getTotalUserCount;
         public global::TNRD.Zeepkist.GTR.IGetWorldRecordHolderQuery GetWorldRecordHolder => _getWorldRecordHolder;
-        public global::TNRD.Zeepkist.GTR.ILeaderboardPageQuery LeaderboardPage => _leaderboardPage;
         public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageSubscription WatchLeaderboardPage => _watchLeaderboardPage;
         public global::TNRD.Zeepkist.GTR.ISearchUsersByNameQuery SearchUsersByName => _searchUsersByName;
     }
@@ -119104,8 +112938,6 @@ namespace TNRD.Zeepkist.GTR
     public partial interface IGtrClient
     {
         global::TNRD.Zeepkist.GTR.IBrowseLevelItemsQuery BrowseLevelItems { get; }
-
-        global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsQuery CurrentLevelRecords { get; }
 
         global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsSubscription WatchCurrentLevelRecords { get; }
 
@@ -119127,15 +112959,11 @@ namespace TNRD.Zeepkist.GTR
 
         global::TNRD.Zeepkist.GTR.IGetPersonalBestsQuery GetPersonalBests { get; }
 
-        global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelQuery GetPlayerRankOnLevel { get; }
-
         global::TNRD.Zeepkist.GTR.IGetTopRecordGhostsQuery GetTopRecordGhosts { get; }
 
         global::TNRD.Zeepkist.GTR.IGetTotalUserCountQuery GetTotalUserCount { get; }
 
         global::TNRD.Zeepkist.GTR.IGetWorldRecordHolderQuery GetWorldRecordHolder { get; }
-
-        global::TNRD.Zeepkist.GTR.ILeaderboardPageQuery LeaderboardPage { get; }
 
         global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageSubscription WatchLeaderboardPage { get; }
 
@@ -119254,388 +113082,6 @@ namespace TNRD.Zeepkist.GTR.State
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecordsResultFactory : global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.CurrentLevelRecordsResult>
-    {
-        private readonly global::StrawberryShake.IEntityStore _entityStore;
-        public CurrentLevelRecordsResultFactory(global::StrawberryShake.IEntityStore entityStore)
-        {
-            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
-        }
-
-        global::System.Type global::StrawberryShake.IOperationResultDataFactory.ResultType => typeof(global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsResult);
-
-        public CurrentLevelRecordsResult Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
-        {
-            if (snapshot is null)
-            {
-                snapshot = _entityStore.CurrentSnapshot;
-            }
-
-            if (dataInfo is CurrentLevelRecordsResultInfo info)
-            {
-                return new CurrentLevelRecordsResult(MapICurrentLevelRecords_LevelItems(info.LevelItems, snapshot), MapICurrentLevelRecords_LevelPoints(info.LevelPoints, snapshot), MapICurrentLevelRecords_PersonalBestGlobals(info.PersonalBestGlobals, snapshot), MapICurrentLevelRecords_WorldRecordGlobals(info.WorldRecordGlobals, snapshot));
-            }
-
-            throw new global::System.ArgumentException("CurrentLevelRecordsResultInfo expected.");
-        }
-
-        private global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelItems? MapICurrentLevelRecords_LevelItems(global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            ICurrentLevelRecords_LevelItems returnValue = default !;
-            if (data?.__typename.Equals("LevelItemsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new CurrentLevelRecords_LevelItems_LevelItemsConnection(MapNonNullableICurrentLevelRecords_LevelItems_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelItems_Nodes> MapNonNullableICurrentLevelRecords_LevelItems_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelItemData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var levelItems = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelItems_Nodes>();
-            foreach (global::TNRD.Zeepkist.GTR.State.LevelItemData child in list)
-            {
-                levelItems.Add(MapNonNullableICurrentLevelRecords_LevelItems_Nodes(child, snapshot));
-            }
-
-            return levelItems;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelItems_Nodes MapNonNullableICurrentLevelRecords_LevelItems_Nodes(global::TNRD.Zeepkist.GTR.State.LevelItemData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            ICurrentLevelRecords_LevelItems_Nodes returnValue = default !;
-            if (data.__typename.Equals("LevelItem", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new CurrentLevelRecords_LevelItems_Nodes_LevelItem(data.Name ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelPoints? MapICurrentLevelRecords_LevelPoints(global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            ICurrentLevelRecords_LevelPoints returnValue = default !;
-            if (data?.__typename.Equals("LevelPointsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new CurrentLevelRecords_LevelPoints_LevelPointsConnection(MapNonNullableICurrentLevelRecords_LevelPoints_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelPoints_Nodes> MapNonNullableICurrentLevelRecords_LevelPoints_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelPointData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var levelPoints = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelPoints_Nodes>();
-            foreach (global::TNRD.Zeepkist.GTR.State.LevelPointData child in list)
-            {
-                levelPoints.Add(MapNonNullableICurrentLevelRecords_LevelPoints_Nodes(child, snapshot));
-            }
-
-            return levelPoints;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_LevelPoints_Nodes MapNonNullableICurrentLevelRecords_LevelPoints_Nodes(global::TNRD.Zeepkist.GTR.State.LevelPointData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            ICurrentLevelRecords_LevelPoints_Nodes returnValue = default !;
-            if (data.__typename.Equals("LevelPoint", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new CurrentLevelRecords_LevelPoints_Nodes_LevelPoint(data.Points ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals? MapICurrentLevelRecords_PersonalBestGlobals(global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            ICurrentLevelRecords_PersonalBestGlobals returnValue = default !;
-            if (data?.__typename.Equals("PersonalBestGlobalsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new CurrentLevelRecords_PersonalBestGlobals_PersonalBestGlobalsConnection(MapNonNullableICurrentLevelRecords_PersonalBestGlobals_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes> MapNonNullableICurrentLevelRecords_PersonalBestGlobals_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var personalBestGlobals = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes>();
-            foreach (global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData child in list)
-            {
-                personalBestGlobals.Add(MapNonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes(child, snapshot));
-            }
-
-            return personalBestGlobals;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes MapNonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes(global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            ICurrentLevelRecords_PersonalBestGlobals_Nodes returnValue = default !;
-            if (data.__typename.Equals("PersonalBestGlobal", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new CurrentLevelRecords_PersonalBestGlobals_Nodes_PersonalBestGlobal(MapICurrentLevelRecords_PersonalBestGlobals_Nodes_Record(data.Record, snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record? MapICurrentLevelRecords_PersonalBestGlobals_Nodes_Record(global::TNRD.Zeepkist.GTR.State.RecordData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record returnValue = default !;
-            if (data?.__typename.Equals("Record", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_Record(data.Id ?? throw new global::System.ArgumentNullException(), data.Time ?? throw new global::System.ArgumentNullException(), data.DateCreated ?? throw new global::System.ArgumentNullException(), MapNonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions(data.UserPointContributions ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions MapNonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions(global::TNRD.Zeepkist.GTR.State.UserPointContributionsConnectionData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions returnValue = default !;
-            if (data.__typename.Equals("UserPointContributionsConnection", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection(MapNonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes> MapNonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.UserPointContributionData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var userPointContributions = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes>();
-            foreach (global::TNRD.Zeepkist.GTR.State.UserPointContributionData child in list)
-            {
-                userPointContributions.Add(MapNonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes(child, snapshot));
-            }
-
-            return userPointContributions;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes MapNonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes(global::TNRD.Zeepkist.GTR.State.UserPointContributionData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes returnValue = default !;
-            if (data.__typename.Equals("UserPointContribution", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution(data.ContributionRank ?? throw new global::System.ArgumentNullException(), data.LevelPosition ?? throw new global::System.ArgumentNullException(), data.LevelPoints ?? throw new global::System.ArgumentNullException(), data.LevelDecayedPoints ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals? MapICurrentLevelRecords_WorldRecordGlobals(global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            ICurrentLevelRecords_WorldRecordGlobals returnValue = default !;
-            if (data?.__typename.Equals("WorldRecordGlobalsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new CurrentLevelRecords_WorldRecordGlobals_WorldRecordGlobalsConnection(MapNonNullableICurrentLevelRecords_WorldRecordGlobals_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals_Nodes> MapNonNullableICurrentLevelRecords_WorldRecordGlobals_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var worldRecordGlobals = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals_Nodes>();
-            foreach (global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData child in list)
-            {
-                worldRecordGlobals.Add(MapNonNullableICurrentLevelRecords_WorldRecordGlobals_Nodes(child, snapshot));
-            }
-
-            return worldRecordGlobals;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals_Nodes MapNonNullableICurrentLevelRecords_WorldRecordGlobals_Nodes(global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            ICurrentLevelRecords_WorldRecordGlobals_Nodes returnValue = default !;
-            if (data.__typename.Equals("WorldRecordGlobal", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new CurrentLevelRecords_WorldRecordGlobals_Nodes_WorldRecordGlobal(MapICurrentLevelRecords_WorldRecordGlobals_Nodes_Record(data.Record, snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record? MapICurrentLevelRecords_WorldRecordGlobals_Nodes_Record(global::TNRD.Zeepkist.GTR.State.RecordData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record returnValue = default !;
-            if (data?.__typename.Equals("Record", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new CurrentLevelRecords_WorldRecordGlobals_Nodes_Record_Record(data.Id ?? throw new global::System.ArgumentNullException(), data.Time ?? throw new global::System.ArgumentNullException(), MapICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User(data.User, snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User? MapICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User(global::TNRD.Zeepkist.GTR.State.UserData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User returnValue = default !;
-            if (data?.__typename.Equals("User", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new CurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User_User(data.SteamId, data.SteamName);
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        global::System.Object global::StrawberryShake.IOperationResultDataFactory.Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot)
-        {
-            return Create(dataInfo, snapshot);
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecordsResultInfo : global::StrawberryShake.IOperationResultDataInfo
-    {
-        private readonly global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> _entityIds;
-        private readonly global::System.UInt64 _version;
-        public CurrentLevelRecordsResultInfo(global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? levelItems, global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData? levelPoints, global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalsConnectionData? personalBestGlobals, global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalsConnectionData? worldRecordGlobals, global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> entityIds, global::System.UInt64 version)
-        {
-            LevelItems = levelItems;
-            LevelPoints = levelPoints;
-            PersonalBestGlobals = personalBestGlobals;
-            WorldRecordGlobals = worldRecordGlobals;
-            _entityIds = entityIds ?? throw new global::System.ArgumentNullException(nameof(entityIds));
-            _version = version;
-        }
-
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelItem`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? LevelItems { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelPoint`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData? LevelPoints { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `PersonalBestGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalsConnectionData? PersonalBestGlobals { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `WorldRecordGlobal`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalsConnectionData? WorldRecordGlobals { get; }
-        public global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> EntityIds => _entityIds;
-        public global::System.UInt64 Version => _version;
-
-        public global::StrawberryShake.IOperationResultDataInfo WithVersion(global::System.UInt64 version)
-        {
-            return new CurrentLevelRecordsResultInfo(LevelItems, LevelPoints, PersonalBestGlobals, WorldRecordGlobals, _entityIds, version);
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class WatchCurrentLevelRecordsResultFactory : global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.WatchCurrentLevelRecordsResult>
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
@@ -119666,7 +113112,7 @@ namespace TNRD.Zeepkist.GTR.State
             IWatchCurrentLevelRecords_Query returnValue = default !;
             if (data.__typename.Equals("Query", global::System.StringComparison.Ordinal))
             {
-                returnValue = new WatchCurrentLevelRecords_Query_Query(MapIWatchCurrentLevelRecords_Query_LevelItems(data.LevelItems, snapshot), MapIWatchCurrentLevelRecords_Query_LevelPoints(data.LevelPoints, snapshot), MapIWatchCurrentLevelRecords_Query_PersonalBestGlobals(data.PersonalBestGlobals, snapshot), MapIWatchCurrentLevelRecords_Query_WorldRecordGlobals(data.WorldRecordGlobals, snapshot));
+                returnValue = new WatchCurrentLevelRecords_Query_Query(MapIWatchCurrentLevelRecords_Query_PersonalBest(data.PersonalBest, snapshot), MapIWatchCurrentLevelRecords_Query_WorldRecord(data.WorldRecord, snapshot));
             }
             else
             {
@@ -119676,17 +113122,17 @@ namespace TNRD.Zeepkist.GTR.State
             return returnValue;
         }
 
-        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelItems? MapIWatchCurrentLevelRecords_Query_LevelItems(global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest? MapIWatchCurrentLevelRecords_Query_PersonalBest(global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
             if (data is null)
             {
                 return null;
             }
 
-            IWatchCurrentLevelRecords_Query_LevelItems returnValue = default !;
-            if (data?.__typename.Equals("LevelItemsConnection", global::System.StringComparison.Ordinal) ?? false)
+            IWatchCurrentLevelRecords_Query_PersonalBest returnValue = default !;
+            if (data?.__typename.Equals("RecordsConnection", global::System.StringComparison.Ordinal) ?? false)
             {
-                returnValue = new WatchCurrentLevelRecords_Query_LevelItems_LevelItemsConnection(MapNonNullableIWatchCurrentLevelRecords_Query_LevelItems_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
+                returnValue = new WatchCurrentLevelRecords_Query_PersonalBest_RecordsConnection(MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBest_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
             }
             else
             {
@@ -119696,28 +113142,28 @@ namespace TNRD.Zeepkist.GTR.State
             return returnValue;
         }
 
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelItems_Nodes> MapNonNullableIWatchCurrentLevelRecords_Query_LevelItems_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelItemData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes> MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBest_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.RecordData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
             if (list is null)
             {
                 throw new global::System.ArgumentNullException();
             }
 
-            var levelItems = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelItems_Nodes>();
-            foreach (global::TNRD.Zeepkist.GTR.State.LevelItemData child in list)
+            var @records = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes>();
+            foreach (global::TNRD.Zeepkist.GTR.State.RecordData child in list)
             {
-                levelItems.Add(MapNonNullableIWatchCurrentLevelRecords_Query_LevelItems_Nodes(child, snapshot));
+                @records.Add(MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes(child, snapshot));
             }
 
-            return levelItems;
+            return @records;
         }
 
-        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelItems_Nodes MapNonNullableIWatchCurrentLevelRecords_Query_LevelItems_Nodes(global::TNRD.Zeepkist.GTR.State.LevelItemData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes(global::TNRD.Zeepkist.GTR.State.RecordData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
-            IWatchCurrentLevelRecords_Query_LevelItems_Nodes returnValue = default !;
-            if (data.__typename.Equals("LevelItem", global::System.StringComparison.Ordinal))
+            IWatchCurrentLevelRecords_Query_PersonalBest_Nodes returnValue = default !;
+            if (data.__typename.Equals("Record", global::System.StringComparison.Ordinal))
             {
-                returnValue = new WatchCurrentLevelRecords_Query_LevelItems_Nodes_LevelItem(data.Name ?? throw new global::System.ArgumentNullException());
+                returnValue = new WatchCurrentLevelRecords_Query_PersonalBest_Nodes_Record(data.Id ?? throw new global::System.ArgumentNullException(), data.Time ?? throw new global::System.ArgumentNullException(), data.DateCreated ?? throw new global::System.ArgumentNullException(), MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions(data.UserPointContributions ?? throw new global::System.ArgumentNullException(), snapshot));
             }
             else
             {
@@ -119727,134 +113173,12 @@ namespace TNRD.Zeepkist.GTR.State
             return returnValue;
         }
 
-        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelPoints? MapIWatchCurrentLevelRecords_Query_LevelPoints(global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions(global::TNRD.Zeepkist.GTR.State.UserPointContributionsConnectionData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
-            if (data is null)
-            {
-                return null;
-            }
-
-            IWatchCurrentLevelRecords_Query_LevelPoints returnValue = default !;
-            if (data?.__typename.Equals("LevelPointsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new WatchCurrentLevelRecords_Query_LevelPoints_LevelPointsConnection(MapNonNullableIWatchCurrentLevelRecords_Query_LevelPoints_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelPoints_Nodes> MapNonNullableIWatchCurrentLevelRecords_Query_LevelPoints_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelPointData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var levelPoints = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelPoints_Nodes>();
-            foreach (global::TNRD.Zeepkist.GTR.State.LevelPointData child in list)
-            {
-                levelPoints.Add(MapNonNullableIWatchCurrentLevelRecords_Query_LevelPoints_Nodes(child, snapshot));
-            }
-
-            return levelPoints;
-        }
-
-        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_LevelPoints_Nodes MapNonNullableIWatchCurrentLevelRecords_Query_LevelPoints_Nodes(global::TNRD.Zeepkist.GTR.State.LevelPointData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IWatchCurrentLevelRecords_Query_LevelPoints_Nodes returnValue = default !;
-            if (data.__typename.Equals("LevelPoint", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new WatchCurrentLevelRecords_Query_LevelPoints_Nodes_LevelPoint(data.Points ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals? MapIWatchCurrentLevelRecords_Query_PersonalBestGlobals(global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            IWatchCurrentLevelRecords_Query_PersonalBestGlobals returnValue = default !;
-            if (data?.__typename.Equals("PersonalBestGlobalsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new WatchCurrentLevelRecords_Query_PersonalBestGlobals_PersonalBestGlobalsConnection(MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes> MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var personalBestGlobals = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes>();
-            foreach (global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData child in list)
-            {
-                personalBestGlobals.Add(MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes(child, snapshot));
-            }
-
-            return personalBestGlobals;
-        }
-
-        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes(global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes returnValue = default !;
-            if (data.__typename.Equals("PersonalBestGlobal", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_PersonalBestGlobal(MapIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record(data.Record, snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record? MapIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record(global::TNRD.Zeepkist.GTR.State.RecordData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record returnValue = default !;
-            if (data?.__typename.Equals("Record", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_Record(data.Id ?? throw new global::System.ArgumentNullException(), data.Time ?? throw new global::System.ArgumentNullException(), data.DateCreated ?? throw new global::System.ArgumentNullException(), MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions(data.UserPointContributions ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions(global::TNRD.Zeepkist.GTR.State.UserPointContributionsConnectionData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions returnValue = default !;
+            IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions returnValue = default !;
             if (data.__typename.Equals("UserPointContributionsConnection", global::System.StringComparison.Ordinal))
             {
-                returnValue = new WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_UserPointContributionsConnection(MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
+                returnValue = new WatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_UserPointContributionsConnection(MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
             }
             else
             {
@@ -119864,28 +113188,28 @@ namespace TNRD.Zeepkist.GTR.State
             return returnValue;
         }
 
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes> MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.UserPointContributionData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes> MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.UserPointContributionData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
             if (list is null)
             {
                 throw new global::System.ArgumentNullException();
             }
 
-            var userPointContributions = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes>();
+            var userPointContributions = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes>();
             foreach (global::TNRD.Zeepkist.GTR.State.UserPointContributionData child in list)
             {
-                userPointContributions.Add(MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes(child, snapshot));
+                userPointContributions.Add(MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes(child, snapshot));
             }
 
             return userPointContributions;
         }
 
-        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes(global::TNRD.Zeepkist.GTR.State.UserPointContributionData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes MapNonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes(global::TNRD.Zeepkist.GTR.State.UserPointContributionData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
-            IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes returnValue = default !;
+            IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes returnValue = default !;
             if (data.__typename.Equals("UserPointContribution", global::System.StringComparison.Ordinal))
             {
-                returnValue = new WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution(data.ContributionRank ?? throw new global::System.ArgumentNullException(), data.LevelPosition ?? throw new global::System.ArgumentNullException(), data.LevelPoints ?? throw new global::System.ArgumentNullException(), data.LevelDecayedPoints ?? throw new global::System.ArgumentNullException());
+                returnValue = new WatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes_UserPointContribution(data.LevelPosition ?? throw new global::System.ArgumentNullException(), data.LevelDecayedPoints ?? throw new global::System.ArgumentNullException());
             }
             else
             {
@@ -119895,17 +113219,17 @@ namespace TNRD.Zeepkist.GTR.State
             return returnValue;
         }
 
-        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals? MapIWatchCurrentLevelRecords_Query_WorldRecordGlobals(global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecord? MapIWatchCurrentLevelRecords_Query_WorldRecord(global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
             if (data is null)
             {
                 return null;
             }
 
-            IWatchCurrentLevelRecords_Query_WorldRecordGlobals returnValue = default !;
-            if (data?.__typename.Equals("WorldRecordGlobalsConnection", global::System.StringComparison.Ordinal) ?? false)
+            IWatchCurrentLevelRecords_Query_WorldRecord returnValue = default !;
+            if (data?.__typename.Equals("RecordsConnection", global::System.StringComparison.Ordinal) ?? false)
             {
-                returnValue = new WatchCurrentLevelRecords_Query_WorldRecordGlobals_WorldRecordGlobalsConnection(MapNonNullableIWatchCurrentLevelRecords_Query_WorldRecordGlobals_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
+                returnValue = new WatchCurrentLevelRecords_Query_WorldRecord_RecordsConnection(MapNonNullableIWatchCurrentLevelRecords_Query_WorldRecord_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
             }
             else
             {
@@ -119915,28 +113239,28 @@ namespace TNRD.Zeepkist.GTR.State
             return returnValue;
         }
 
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes> MapNonNullableIWatchCurrentLevelRecords_Query_WorldRecordGlobals_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecord_Nodes> MapNonNullableIWatchCurrentLevelRecords_Query_WorldRecord_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.RecordData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
             if (list is null)
             {
                 throw new global::System.ArgumentNullException();
             }
 
-            var worldRecordGlobals = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes>();
-            foreach (global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData child in list)
+            var @records = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecord_Nodes>();
+            foreach (global::TNRD.Zeepkist.GTR.State.RecordData child in list)
             {
-                worldRecordGlobals.Add(MapNonNullableIWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes(child, snapshot));
+                @records.Add(MapNonNullableIWatchCurrentLevelRecords_Query_WorldRecord_Nodes(child, snapshot));
             }
 
-            return worldRecordGlobals;
+            return @records;
         }
 
-        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes MapNonNullableIWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes(global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecord_Nodes MapNonNullableIWatchCurrentLevelRecords_Query_WorldRecord_Nodes(global::TNRD.Zeepkist.GTR.State.RecordData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
-            IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes returnValue = default !;
-            if (data.__typename.Equals("WorldRecordGlobal", global::System.StringComparison.Ordinal))
+            IWatchCurrentLevelRecords_Query_WorldRecord_Nodes returnValue = default !;
+            if (data.__typename.Equals("Record", global::System.StringComparison.Ordinal))
             {
-                returnValue = new WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_WorldRecordGlobal(MapIWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record(data.Record, snapshot));
+                returnValue = new WatchCurrentLevelRecords_Query_WorldRecord_Nodes_Record(data.Id ?? throw new global::System.ArgumentNullException(), data.Time ?? throw new global::System.ArgumentNullException(), MapIWatchCurrentLevelRecords_Query_WorldRecord_Nodes_User(data.User, snapshot));
             }
             else
             {
@@ -119946,37 +113270,17 @@ namespace TNRD.Zeepkist.GTR.State
             return returnValue;
         }
 
-        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record? MapIWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record(global::TNRD.Zeepkist.GTR.State.RecordData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecord_Nodes_User? MapIWatchCurrentLevelRecords_Query_WorldRecord_Nodes_User(global::TNRD.Zeepkist.GTR.State.UserData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
         {
             if (data is null)
             {
                 return null;
             }
 
-            IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record returnValue = default !;
-            if (data?.__typename.Equals("Record", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_Record(data.Id ?? throw new global::System.ArgumentNullException(), data.Time ?? throw new global::System.ArgumentNullException(), MapIWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User(data.User, snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User? MapIWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User(global::TNRD.Zeepkist.GTR.State.UserData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User returnValue = default !;
+            IWatchCurrentLevelRecords_Query_WorldRecord_Nodes_User returnValue = default !;
             if (data?.__typename.Equals("User", global::System.StringComparison.Ordinal) ?? false)
             {
-                returnValue = new WatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User_User(data.SteamId, data.SteamName);
+                returnValue = new WatchCurrentLevelRecords_Query_WorldRecord_Nodes_User_User(data.SteamId, data.SteamName);
             }
             else
             {
@@ -121236,83 +114540,6 @@ namespace TNRD.Zeepkist.GTR.State
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class GetPlayerRankOnLevelResultFactory : global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.GetPlayerRankOnLevelResult>
-    {
-        private readonly global::StrawberryShake.IEntityStore _entityStore;
-        public GetPlayerRankOnLevelResultFactory(global::StrawberryShake.IEntityStore entityStore)
-        {
-            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
-        }
-
-        global::System.Type global::StrawberryShake.IOperationResultDataFactory.ResultType => typeof(global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelResult);
-
-        public GetPlayerRankOnLevelResult Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
-        {
-            if (snapshot is null)
-            {
-                snapshot = _entityStore.CurrentSnapshot;
-            }
-
-            if (dataInfo is GetPlayerRankOnLevelResultInfo info)
-            {
-                return new GetPlayerRankOnLevelResult(MapIGetPlayerRankOnLevel_Records(info.Records, snapshot));
-            }
-
-            throw new global::System.ArgumentException("GetPlayerRankOnLevelResultInfo expected.");
-        }
-
-        private global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevel_Records? MapIGetPlayerRankOnLevel_Records(global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            IGetPlayerRankOnLevel_Records returnValue = default !;
-            if (data?.__typename.Equals("RecordsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new GetPlayerRankOnLevel_Records_RecordsConnection(data.TotalCount ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        global::System.Object global::StrawberryShake.IOperationResultDataFactory.Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot)
-        {
-            return Create(dataInfo, snapshot);
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class GetPlayerRankOnLevelResultInfo : global::StrawberryShake.IOperationResultDataInfo
-    {
-        private readonly global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> _entityIds;
-        private readonly global::System.UInt64 _version;
-        public GetPlayerRankOnLevelResultInfo(global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? records, global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> entityIds, global::System.UInt64 version)
-        {
-            Records = records;
-            _entityIds = entityIds ?? throw new global::System.ArgumentNullException(nameof(entityIds));
-            _version = version;
-        }
-
-        /// <summary>
-        /// Reads and enables pagination through a set of `Record`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? Records { get; }
-        public global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> EntityIds => _entityIds;
-        public global::System.UInt64 Version => _version;
-
-        public global::StrawberryShake.IOperationResultDataInfo WithVersion(global::System.UInt64 version)
-        {
-            return new GetPlayerRankOnLevelResultInfo(Records, _entityIds, version);
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class GetTopRecordGhostsResultFactory : global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.GetTopRecordGhostsResult>
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
@@ -121686,246 +114913,6 @@ namespace TNRD.Zeepkist.GTR.State
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LeaderboardPageResultFactory : global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.LeaderboardPageResult>
-    {
-        private readonly global::StrawberryShake.IEntityStore _entityStore;
-        public LeaderboardPageResultFactory(global::StrawberryShake.IEntityStore entityStore)
-        {
-            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
-        }
-
-        global::System.Type global::StrawberryShake.IOperationResultDataFactory.ResultType => typeof(global::TNRD.Zeepkist.GTR.ILeaderboardPageResult);
-
-        public LeaderboardPageResult Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
-        {
-            if (snapshot is null)
-            {
-                snapshot = _entityStore.CurrentSnapshot;
-            }
-
-            if (dataInfo is LeaderboardPageResultInfo info)
-            {
-                return new LeaderboardPageResult(MapILeaderboardPage_LevelItems(info.LevelItems, snapshot), MapILeaderboardPage_LevelPoints(info.LevelPoints, snapshot), MapILeaderboardPage_Records(info.Records, snapshot));
-            }
-
-            throw new global::System.ArgumentException("LeaderboardPageResultInfo expected.");
-        }
-
-        private global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelItems? MapILeaderboardPage_LevelItems(global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            ILeaderboardPage_LevelItems returnValue = default !;
-            if (data?.__typename.Equals("LevelItemsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new LeaderboardPage_LevelItems_LevelItemsConnection(MapNonNullableILeaderboardPage_LevelItems_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelItems_Nodes> MapNonNullableILeaderboardPage_LevelItems_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelItemData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var levelItems = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelItems_Nodes>();
-            foreach (global::TNRD.Zeepkist.GTR.State.LevelItemData child in list)
-            {
-                levelItems.Add(MapNonNullableILeaderboardPage_LevelItems_Nodes(child, snapshot));
-            }
-
-            return levelItems;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelItems_Nodes MapNonNullableILeaderboardPage_LevelItems_Nodes(global::TNRD.Zeepkist.GTR.State.LevelItemData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            ILeaderboardPage_LevelItems_Nodes returnValue = default !;
-            if (data.__typename.Equals("LevelItem", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new LeaderboardPage_LevelItems_Nodes_LevelItem(data.Name ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelPoints? MapILeaderboardPage_LevelPoints(global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            ILeaderboardPage_LevelPoints returnValue = default !;
-            if (data?.__typename.Equals("LevelPointsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new LeaderboardPage_LevelPoints_LevelPointsConnection(MapNonNullableILeaderboardPage_LevelPoints_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelPoints_Nodes> MapNonNullableILeaderboardPage_LevelPoints_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelPointData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var levelPoints = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelPoints_Nodes>();
-            foreach (global::TNRD.Zeepkist.GTR.State.LevelPointData child in list)
-            {
-                levelPoints.Add(MapNonNullableILeaderboardPage_LevelPoints_Nodes(child, snapshot));
-            }
-
-            return levelPoints;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ILeaderboardPage_LevelPoints_Nodes MapNonNullableILeaderboardPage_LevelPoints_Nodes(global::TNRD.Zeepkist.GTR.State.LevelPointData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            ILeaderboardPage_LevelPoints_Nodes returnValue = default !;
-            if (data.__typename.Equals("LevelPoint", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new LeaderboardPage_LevelPoints_Nodes_LevelPoint(data.Points ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ILeaderboardPage_Records? MapILeaderboardPage_Records(global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            ILeaderboardPage_Records returnValue = default !;
-            if (data?.__typename.Equals("RecordsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new LeaderboardPage_Records_RecordsConnection(data.TotalCount ?? throw new global::System.ArgumentNullException(), MapNonNullableILeaderboardPage_Records_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.ILeaderboardPage_Records_Nodes> MapNonNullableILeaderboardPage_Records_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.RecordData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var @records = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.ILeaderboardPage_Records_Nodes>();
-            foreach (global::TNRD.Zeepkist.GTR.State.RecordData child in list)
-            {
-                @records.Add(MapNonNullableILeaderboardPage_Records_Nodes(child, snapshot));
-            }
-
-            return @records;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ILeaderboardPage_Records_Nodes MapNonNullableILeaderboardPage_Records_Nodes(global::TNRD.Zeepkist.GTR.State.RecordData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            ILeaderboardPage_Records_Nodes returnValue = default !;
-            if (data.__typename.Equals("Record", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new LeaderboardPage_Records_Nodes_Record(MapILeaderboardPage_Records_Nodes_User(data.User, snapshot), data.Time ?? throw new global::System.ArgumentNullException(), data.DateCreated ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.ILeaderboardPage_Records_Nodes_User? MapILeaderboardPage_Records_Nodes_User(global::TNRD.Zeepkist.GTR.State.UserData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            ILeaderboardPage_Records_Nodes_User returnValue = default !;
-            if (data?.__typename.Equals("User", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new LeaderboardPage_Records_Nodes_User_User(data.SteamName, data.SteamId);
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        global::System.Object global::StrawberryShake.IOperationResultDataFactory.Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot)
-        {
-            return Create(dataInfo, snapshot);
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LeaderboardPageResultInfo : global::StrawberryShake.IOperationResultDataInfo
-    {
-        private readonly global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> _entityIds;
-        private readonly global::System.UInt64 _version;
-        public LeaderboardPageResultInfo(global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? levelItems, global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData? levelPoints, global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? records, global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> entityIds, global::System.UInt64 version)
-        {
-            LevelItems = levelItems;
-            LevelPoints = levelPoints;
-            Records = records;
-            _entityIds = entityIds ?? throw new global::System.ArgumentNullException(nameof(entityIds));
-            _version = version;
-        }
-
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelItem`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? LevelItems { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `LevelPoint`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData? LevelPoints { get; }
-        /// <summary>
-        /// Reads and enables pagination through a set of `Record`.
-        /// </summary>
-        public global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? Records { get; }
-        public global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> EntityIds => _entityIds;
-        public global::System.UInt64 Version => _version;
-
-        public global::StrawberryShake.IOperationResultDataInfo WithVersion(global::System.UInt64 version)
-        {
-            return new LeaderboardPageResultInfo(LevelItems, LevelPoints, Records, _entityIds, version);
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class WatchLeaderboardPageResultFactory : global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.WatchLeaderboardPageResult>
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
@@ -121956,109 +114943,7 @@ namespace TNRD.Zeepkist.GTR.State
             IWatchLeaderboardPage_Query returnValue = default !;
             if (data.__typename.Equals("Query", global::System.StringComparison.Ordinal))
             {
-                returnValue = new WatchLeaderboardPage_Query_Query(MapIWatchLeaderboardPage_Query_LevelItems(data.LevelItems, snapshot), MapIWatchLeaderboardPage_Query_LevelPoints(data.LevelPoints, snapshot), MapIWatchLeaderboardPage_Query_Records(data.Records, snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelItems? MapIWatchLeaderboardPage_Query_LevelItems(global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            IWatchLeaderboardPage_Query_LevelItems returnValue = default !;
-            if (data?.__typename.Equals("LevelItemsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new WatchLeaderboardPage_Query_LevelItems_LevelItemsConnection(MapNonNullableIWatchLeaderboardPage_Query_LevelItems_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelItems_Nodes> MapNonNullableIWatchLeaderboardPage_Query_LevelItems_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelItemData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var levelItems = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelItems_Nodes>();
-            foreach (global::TNRD.Zeepkist.GTR.State.LevelItemData child in list)
-            {
-                levelItems.Add(MapNonNullableIWatchLeaderboardPage_Query_LevelItems_Nodes(child, snapshot));
-            }
-
-            return levelItems;
-        }
-
-        private global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelItems_Nodes MapNonNullableIWatchLeaderboardPage_Query_LevelItems_Nodes(global::TNRD.Zeepkist.GTR.State.LevelItemData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IWatchLeaderboardPage_Query_LevelItems_Nodes returnValue = default !;
-            if (data.__typename.Equals("LevelItem", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new WatchLeaderboardPage_Query_LevelItems_Nodes_LevelItem(data.Name ?? throw new global::System.ArgumentNullException());
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelPoints? MapIWatchLeaderboardPage_Query_LevelPoints(global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (data is null)
-            {
-                return null;
-            }
-
-            IWatchLeaderboardPage_Query_LevelPoints returnValue = default !;
-            if (data?.__typename.Equals("LevelPointsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                returnValue = new WatchLeaderboardPage_Query_LevelPoints_LevelPointsConnection(MapNonNullableIWatchLeaderboardPage_Query_LevelPoints_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
-            }
-            else
-            {
-                throw new global::System.NotSupportedException();
-            }
-
-            return returnValue;
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelPoints_Nodes> MapNonNullableIWatchLeaderboardPage_Query_LevelPoints_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelPointData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            if (list is null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var levelPoints = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelPoints_Nodes>();
-            foreach (global::TNRD.Zeepkist.GTR.State.LevelPointData child in list)
-            {
-                levelPoints.Add(MapNonNullableIWatchLeaderboardPage_Query_LevelPoints_Nodes(child, snapshot));
-            }
-
-            return levelPoints;
-        }
-
-        private global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_LevelPoints_Nodes MapNonNullableIWatchLeaderboardPage_Query_LevelPoints_Nodes(global::TNRD.Zeepkist.GTR.State.LevelPointData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
-        {
-            IWatchLeaderboardPage_Query_LevelPoints_Nodes returnValue = default !;
-            if (data.__typename.Equals("LevelPoint", global::System.StringComparison.Ordinal))
-            {
-                returnValue = new WatchLeaderboardPage_Query_LevelPoints_Nodes_LevelPoint(data.Points ?? throw new global::System.ArgumentNullException());
+                returnValue = new WatchLeaderboardPage_Query_Query(MapIWatchLeaderboardPage_Query_Records(data.Records, snapshot));
             }
             else
             {
@@ -122109,7 +114994,7 @@ namespace TNRD.Zeepkist.GTR.State
             IWatchLeaderboardPage_Query_Records_Nodes returnValue = default !;
             if (data.__typename.Equals("Record", global::System.StringComparison.Ordinal))
             {
-                returnValue = new WatchLeaderboardPage_Query_Records_Nodes_Record(MapIWatchLeaderboardPage_Query_Records_Nodes_User(data.User, snapshot), data.Time ?? throw new global::System.ArgumentNullException(), data.DateCreated ?? throw new global::System.ArgumentNullException());
+                returnValue = new WatchLeaderboardPage_Query_Records_Nodes_Record(MapIWatchLeaderboardPage_Query_Records_Nodes_User(data.User, snapshot), MapIWatchLeaderboardPage_Query_Records_Nodes_Level(data.Level, snapshot), data.Time ?? throw new global::System.ArgumentNullException(), data.DateCreated ?? throw new global::System.ArgumentNullException(), MapNonNullableIWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions(data.UserPointContributions ?? throw new global::System.ArgumentNullException(), snapshot));
             }
             else
             {
@@ -122130,6 +115015,118 @@ namespace TNRD.Zeepkist.GTR.State
             if (data?.__typename.Equals("User", global::System.StringComparison.Ordinal) ?? false)
             {
                 returnValue = new WatchLeaderboardPage_Query_Records_Nodes_User_User(data.SteamName, data.SteamId);
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        private global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_Level? MapIWatchLeaderboardPage_Query_Records_Nodes_Level(global::TNRD.Zeepkist.GTR.State.LevelData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (data is null)
+            {
+                return null;
+            }
+
+            IWatchLeaderboardPage_Query_Records_Nodes_Level returnValue = default !;
+            if (data?.__typename.Equals("Level", global::System.StringComparison.Ordinal) ?? false)
+            {
+                returnValue = new WatchLeaderboardPage_Query_Records_Nodes_Level_Level(MapNonNullableIWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems(data.LevelItems ?? throw new global::System.ArgumentNullException(), snapshot));
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        private global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems MapNonNullableIWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems(global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems returnValue = default !;
+            if (data.__typename.Equals("LevelItemsConnection", global::System.StringComparison.Ordinal))
+            {
+                returnValue = new WatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_LevelItemsConnection(MapNonNullableIWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes> MapNonNullableIWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelItemData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (list is null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var levelItems = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes>();
+            foreach (global::TNRD.Zeepkist.GTR.State.LevelItemData child in list)
+            {
+                levelItems.Add(MapNonNullableIWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes(child, snapshot));
+            }
+
+            return levelItems;
+        }
+
+        private global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes MapNonNullableIWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes(global::TNRD.Zeepkist.GTR.State.LevelItemData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes returnValue = default !;
+            if (data.__typename.Equals("LevelItem", global::System.StringComparison.Ordinal))
+            {
+                returnValue = new WatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes_LevelItem(data.Name ?? throw new global::System.ArgumentNullException());
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        private global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions MapNonNullableIWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions(global::TNRD.Zeepkist.GTR.State.UserPointContributionsConnectionData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions returnValue = default !;
+            if (data.__typename.Equals("UserPointContributionsConnection", global::System.StringComparison.Ordinal))
+            {
+                returnValue = new WatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_UserPointContributionsConnection(MapNonNullableIWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes> MapNonNullableIWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.UserPointContributionData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (list is null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var userPointContributions = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes>();
+            foreach (global::TNRD.Zeepkist.GTR.State.UserPointContributionData child in list)
+            {
+                userPointContributions.Add(MapNonNullableIWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes(child, snapshot));
+            }
+
+            return userPointContributions;
+        }
+
+        private global::TNRD.Zeepkist.GTR.IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes MapNonNullableIWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes(global::TNRD.Zeepkist.GTR.State.UserPointContributionData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            IWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes returnValue = default !;
+            if (data.__typename.Equals("UserPointContribution", global::System.StringComparison.Ordinal))
+            {
+                returnValue = new WatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes_UserPointContribution(data.LevelDecayedPoints ?? throw new global::System.ArgumentNullException(), data.LevelPosition ?? throw new global::System.ArgumentNullException());
             }
             else
             {
@@ -127429,480 +120426,6 @@ namespace TNRD.Zeepkist.GTR.State
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class CurrentLevelRecordsBuilder : global::StrawberryShake.OperationResultBuilder<global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsResult>
-    {
-        private readonly global::StrawberryShake.IEntityStore _entityStore;
-        private readonly global::StrawberryShake.IEntityIdSerializer _idSerializer;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _bigIntParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Int32, global::System.Int32> _intParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Double, global::System.Double> _floatParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _datetimeParser;
-        public CurrentLevelRecordsBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
-        {
-            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
-            _idSerializer = idSerializer ?? throw new global::System.ArgumentNullException(nameof(idSerializer));
-            ResultDataFactory = resultDataFactory ?? throw new global::System.ArgumentNullException(nameof(resultDataFactory));
-            _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
-            _bigIntParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("BigInt") ?? throw new global::System.ArgumentException("No serializer for type `BigInt` found.");
-            _intParser = serializerResolver.GetLeafValueParser<global::System.Int32, global::System.Int32>("Int") ?? throw new global::System.ArgumentException("No serializer for type `Int` found.");
-            _floatParser = serializerResolver.GetLeafValueParser<global::System.Double, global::System.Double>("Float") ?? throw new global::System.ArgumentException("No serializer for type `Float` found.");
-            _datetimeParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("Datetime") ?? throw new global::System.ArgumentException("No serializer for type `Datetime` found.");
-        }
-
-        protected override global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.ICurrentLevelRecordsResult> ResultDataFactory { get; }
-
-        protected override global::StrawberryShake.IOperationResultDataInfo BuildData(global::System.Text.Json.JsonElement obj)
-        {
-            var entityIds = new global::System.Collections.Generic.HashSet<global::StrawberryShake.EntityId>();
-            global::StrawberryShake.IEntityStoreSnapshot snapshot = default !;
-            _entityStore.Update(session =>
-            {
-                snapshot = session.CurrentSnapshot;
-            });
-            return new CurrentLevelRecordsResultInfo(Deserialize_ICurrentLevelRecords_LevelItems(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelItems")), Deserialize_ICurrentLevelRecords_LevelPoints(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPoints")), Deserialize_ICurrentLevelRecords_PersonalBestGlobals(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "personalBestGlobals")), Deserialize_ICurrentLevelRecords_WorldRecordGlobals(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "worldRecordGlobals")), entityIds, snapshot.Version);
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? Deserialize_ICurrentLevelRecords_LevelItems(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelItemsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData(typename, nodes: Deserialize_NonNullableICurrentLevelRecords_LevelItems_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelItemData> Deserialize_NonNullableICurrentLevelRecords_LevelItems_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var levelItems = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.LevelItemData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                levelItems.Add(Deserialize_NonNullableICurrentLevelRecords_LevelItems_Nodes(child));
-            }
-
-            return levelItems;
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.LevelItemData Deserialize_NonNullableICurrentLevelRecords_LevelItems_Nodes(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelItem", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.LevelItemData(typename, name: Deserialize_NonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.String Deserialize_NonNullableString(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _stringParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData? Deserialize_ICurrentLevelRecords_LevelPoints(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelPointsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData(typename, nodes: Deserialize_NonNullableICurrentLevelRecords_LevelPoints_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelPointData> Deserialize_NonNullableICurrentLevelRecords_LevelPoints_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var levelPoints = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.LevelPointData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                levelPoints.Add(Deserialize_NonNullableICurrentLevelRecords_LevelPoints_Nodes(child));
-            }
-
-            return levelPoints;
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.LevelPointData Deserialize_NonNullableICurrentLevelRecords_LevelPoints_Nodes(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelPoint", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.LevelPointData(typename, points: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "points")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Int32 Deserialize_NonNullableInt32(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _intParser.Parse(obj.Value.GetInt32()!);
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalsConnectionData? Deserialize_ICurrentLevelRecords_PersonalBestGlobals(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("PersonalBestGlobalsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalsConnectionData(typename, nodes: Deserialize_NonNullableICurrentLevelRecords_PersonalBestGlobals_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData> Deserialize_NonNullableICurrentLevelRecords_PersonalBestGlobals_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var personalBestGlobals = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                personalBestGlobals.Add(Deserialize_NonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes(child));
-            }
-
-            return personalBestGlobals;
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData Deserialize_NonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("PersonalBestGlobal", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData(typename, @record: Deserialize_ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "record")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.RecordData? Deserialize_ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Record", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.RecordData(typename, id: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), time: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "time")), dateCreated: Deserialize_NonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dateCreated")), userPointContributions: Deserialize_NonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "userPointContributions")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Double Deserialize_NonNullableDouble(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _floatParser.Parse(obj.Value.GetDouble()!);
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.UserPointContributionsConnectionData Deserialize_NonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("UserPointContributionsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.UserPointContributionsConnectionData(typename, nodes: Deserialize_NonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.UserPointContributionData> Deserialize_NonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var userPointContributions = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.UserPointContributionData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                userPointContributions.Add(Deserialize_NonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes(child));
-            }
-
-            return userPointContributions;
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.UserPointContributionData Deserialize_NonNullableICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("UserPointContribution", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.UserPointContributionData(typename, contributionRank: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "contributionRank")), levelPosition: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPosition")), levelPoints: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPoints")), levelDecayedPoints: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelDecayedPoints")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalsConnectionData? Deserialize_ICurrentLevelRecords_WorldRecordGlobals(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("WorldRecordGlobalsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalsConnectionData(typename, nodes: Deserialize_NonNullableICurrentLevelRecords_WorldRecordGlobals_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData> Deserialize_NonNullableICurrentLevelRecords_WorldRecordGlobals_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var worldRecordGlobals = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                worldRecordGlobals.Add(Deserialize_NonNullableICurrentLevelRecords_WorldRecordGlobals_Nodes(child));
-            }
-
-            return worldRecordGlobals;
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData Deserialize_NonNullableICurrentLevelRecords_WorldRecordGlobals_Nodes(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("WorldRecordGlobal", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData(typename, @record: Deserialize_ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "record")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.RecordData? Deserialize_ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Record", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.RecordData(typename, id: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), time: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "time")), user: Deserialize_ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "user")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.UserData? Deserialize_ICurrentLevelRecords_WorldRecordGlobals_Nodes_Record_User(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("User", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.UserData(typename, steamId: Deserialize_String(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "steamId")), steamName: Deserialize_String(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "steamName")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.String? Deserialize_String(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            return _bigIntParser.Parse(obj.Value.GetString()!);
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class WatchCurrentLevelRecordsBuilder : global::StrawberryShake.OperationResultBuilder<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsResult>
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
@@ -127952,13 +120475,13 @@ namespace TNRD.Zeepkist.GTR.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("Query", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::TNRD.Zeepkist.GTR.State.QueryData(typename, levelItems: Deserialize_IWatchCurrentLevelRecords_Query_LevelItems(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelItems")), levelPoints: Deserialize_IWatchCurrentLevelRecords_Query_LevelPoints(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPoints")), personalBestGlobals: Deserialize_IWatchCurrentLevelRecords_Query_PersonalBestGlobals(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "personalBestGlobals")), worldRecordGlobals: Deserialize_IWatchCurrentLevelRecords_Query_WorldRecordGlobals(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "worldRecordGlobals")));
+                return new global::TNRD.Zeepkist.GTR.State.QueryData(typename, personalBest: Deserialize_IWatchCurrentLevelRecords_Query_PersonalBest(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "personalBest")), worldRecord: Deserialize_IWatchCurrentLevelRecords_Query_WorldRecord(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "worldRecord")));
             }
 
             throw new global::System.NotSupportedException();
         }
 
-        private global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? Deserialize_IWatchCurrentLevelRecords_Query_LevelItems(global::System.Text.Json.JsonElement? obj)
+        private global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? Deserialize_IWatchCurrentLevelRecords_Query_PersonalBest(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
@@ -127971,15 +120494,15 @@ namespace TNRD.Zeepkist.GTR.State
             }
 
             var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelItemsConnection", global::System.StringComparison.Ordinal) ?? false)
+            if (typename?.Equals("RecordsConnection", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData(typename, nodes: Deserialize_NonNullableIWatchCurrentLevelRecords_Query_LevelItems_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
+                return new global::TNRD.Zeepkist.GTR.State.RecordsConnectionData(typename, nodes: Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBest_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
             }
 
             throw new global::System.NotSupportedException();
         }
 
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelItemData> Deserialize_NonNullableIWatchCurrentLevelRecords_Query_LevelItems_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.RecordData> Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBest_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
@@ -127991,16 +120514,16 @@ namespace TNRD.Zeepkist.GTR.State
                 throw new global::System.ArgumentNullException();
             }
 
-            var levelItems = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.LevelItemData>();
+            var @records = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.RecordData>();
             foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
             {
-                levelItems.Add(Deserialize_NonNullableIWatchCurrentLevelRecords_Query_LevelItems_Nodes(child));
+                @records.Add(Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes(child));
             }
 
-            return levelItems;
+            return @records;
         }
 
-        private global::TNRD.Zeepkist.GTR.State.LevelItemData Deserialize_NonNullableIWatchCurrentLevelRecords_Query_LevelItems_Nodes(global::System.Text.Json.JsonElement? obj)
+        private global::TNRD.Zeepkist.GTR.State.RecordData Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
@@ -128013,87 +120536,9 @@ namespace TNRD.Zeepkist.GTR.State
             }
 
             var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelItem", global::System.StringComparison.Ordinal) ?? false)
+            if (typename?.Equals("Record", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::TNRD.Zeepkist.GTR.State.LevelItemData(typename, name: Deserialize_NonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.String Deserialize_NonNullableString(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _stringParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData? Deserialize_IWatchCurrentLevelRecords_Query_LevelPoints(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelPointsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData(typename, nodes: Deserialize_NonNullableIWatchCurrentLevelRecords_Query_LevelPoints_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelPointData> Deserialize_NonNullableIWatchCurrentLevelRecords_Query_LevelPoints_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var levelPoints = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.LevelPointData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                levelPoints.Add(Deserialize_NonNullableIWatchCurrentLevelRecords_Query_LevelPoints_Nodes(child));
-            }
-
-            return levelPoints;
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.LevelPointData Deserialize_NonNullableIWatchCurrentLevelRecords_Query_LevelPoints_Nodes(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelPoint", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.LevelPointData(typename, points: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "points")));
+                return new global::TNRD.Zeepkist.GTR.State.RecordData(typename, id: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), time: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "time")), dateCreated: Deserialize_NonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dateCreated")), userPointContributions: Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "userPointContributions")));
             }
 
             throw new global::System.NotSupportedException();
@@ -128114,90 +120559,6 @@ namespace TNRD.Zeepkist.GTR.State
             return _intParser.Parse(obj.Value.GetInt32()!);
         }
 
-        private global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalsConnectionData? Deserialize_IWatchCurrentLevelRecords_Query_PersonalBestGlobals(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("PersonalBestGlobalsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalsConnectionData(typename, nodes: Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData> Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var personalBestGlobals = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                personalBestGlobals.Add(Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes(child));
-            }
-
-            return personalBestGlobals;
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("PersonalBestGlobal", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData(typename, @record: Deserialize_IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "record")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.RecordData? Deserialize_IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Record", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.RecordData(typename, id: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), time: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "time")), dateCreated: Deserialize_NonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dateCreated")), userPointContributions: Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "userPointContributions")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
         private global::System.Double Deserialize_NonNullableDouble(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
@@ -128213,7 +120574,22 @@ namespace TNRD.Zeepkist.GTR.State
             return _floatParser.Parse(obj.Value.GetDouble()!);
         }
 
-        private global::TNRD.Zeepkist.GTR.State.UserPointContributionsConnectionData Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions(global::System.Text.Json.JsonElement? obj)
+        private global::System.String Deserialize_NonNullableString(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _datetimeParser.Parse(obj.Value.GetString()!);
+        }
+
+        private global::TNRD.Zeepkist.GTR.State.UserPointContributionsConnectionData Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
@@ -128228,13 +120604,13 @@ namespace TNRD.Zeepkist.GTR.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("UserPointContributionsConnection", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::TNRD.Zeepkist.GTR.State.UserPointContributionsConnectionData(typename, nodes: Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
+                return new global::TNRD.Zeepkist.GTR.State.UserPointContributionsConnectionData(typename, nodes: Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
             }
 
             throw new global::System.NotSupportedException();
         }
 
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.UserPointContributionData> Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.UserPointContributionData> Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
@@ -128249,13 +120625,13 @@ namespace TNRD.Zeepkist.GTR.State
             var userPointContributions = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.UserPointContributionData>();
             foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
             {
-                userPointContributions.Add(Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes(child));
+                userPointContributions.Add(Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes(child));
             }
 
             return userPointContributions;
         }
 
-        private global::TNRD.Zeepkist.GTR.State.UserPointContributionData Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes(global::System.Text.Json.JsonElement? obj)
+        private global::TNRD.Zeepkist.GTR.State.UserPointContributionData Deserialize_NonNullableIWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
@@ -128270,13 +120646,13 @@ namespace TNRD.Zeepkist.GTR.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("UserPointContribution", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::TNRD.Zeepkist.GTR.State.UserPointContributionData(typename, contributionRank: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "contributionRank")), levelPosition: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPosition")), levelPoints: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPoints")), levelDecayedPoints: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelDecayedPoints")));
+                return new global::TNRD.Zeepkist.GTR.State.UserPointContributionData(typename, levelPosition: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPosition")), levelDecayedPoints: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelDecayedPoints")));
             }
 
             throw new global::System.NotSupportedException();
         }
 
-        private global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalsConnectionData? Deserialize_IWatchCurrentLevelRecords_Query_WorldRecordGlobals(global::System.Text.Json.JsonElement? obj)
+        private global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? Deserialize_IWatchCurrentLevelRecords_Query_WorldRecord(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
@@ -128289,15 +120665,15 @@ namespace TNRD.Zeepkist.GTR.State
             }
 
             var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("WorldRecordGlobalsConnection", global::System.StringComparison.Ordinal) ?? false)
+            if (typename?.Equals("RecordsConnection", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalsConnectionData(typename, nodes: Deserialize_NonNullableIWatchCurrentLevelRecords_Query_WorldRecordGlobals_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
+                return new global::TNRD.Zeepkist.GTR.State.RecordsConnectionData(typename, nodes: Deserialize_NonNullableIWatchCurrentLevelRecords_Query_WorldRecord_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
             }
 
             throw new global::System.NotSupportedException();
         }
 
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData> Deserialize_NonNullableIWatchCurrentLevelRecords_Query_WorldRecordGlobals_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.RecordData> Deserialize_NonNullableIWatchCurrentLevelRecords_Query_WorldRecord_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
@@ -128309,16 +120685,16 @@ namespace TNRD.Zeepkist.GTR.State
                 throw new global::System.ArgumentNullException();
             }
 
-            var worldRecordGlobals = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData>();
+            var @records = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.RecordData>();
             foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
             {
-                worldRecordGlobals.Add(Deserialize_NonNullableIWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes(child));
+                @records.Add(Deserialize_NonNullableIWatchCurrentLevelRecords_Query_WorldRecord_Nodes(child));
             }
 
-            return worldRecordGlobals;
+            return @records;
         }
 
-        private global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData Deserialize_NonNullableIWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes(global::System.Text.Json.JsonElement? obj)
+        private global::TNRD.Zeepkist.GTR.State.RecordData Deserialize_NonNullableIWatchCurrentLevelRecords_Query_WorldRecord_Nodes(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
@@ -128328,39 +120704,18 @@ namespace TNRD.Zeepkist.GTR.State
             if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
             {
                 throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("WorldRecordGlobal", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData(typename, @record: Deserialize_IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "record")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.RecordData? Deserialize_IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
             }
 
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("Record", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::TNRD.Zeepkist.GTR.State.RecordData(typename, id: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), time: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "time")), user: Deserialize_IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "user")));
+                return new global::TNRD.Zeepkist.GTR.State.RecordData(typename, id: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")), time: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "time")), user: Deserialize_IWatchCurrentLevelRecords_Query_WorldRecord_Nodes_User(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "user")));
             }
 
             throw new global::System.NotSupportedException();
         }
 
-        private global::TNRD.Zeepkist.GTR.State.UserData? Deserialize_IWatchCurrentLevelRecords_Query_WorldRecordGlobals_Nodes_Record_User(global::System.Text.Json.JsonElement? obj)
+        private global::TNRD.Zeepkist.GTR.State.UserData? Deserialize_IWatchCurrentLevelRecords_Query_WorldRecord_Nodes_User(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
             {
@@ -129730,74 +122085,6 @@ namespace TNRD.Zeepkist.GTR.State
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class GetPlayerRankOnLevelBuilder : global::StrawberryShake.OperationResultBuilder<global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelResult>
-    {
-        private readonly global::StrawberryShake.IEntityStore _entityStore;
-        private readonly global::StrawberryShake.IEntityIdSerializer _idSerializer;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Double, global::System.Double> _floatParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Int32, global::System.Int32> _intParser;
-        public GetPlayerRankOnLevelBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
-        {
-            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
-            _idSerializer = idSerializer ?? throw new global::System.ArgumentNullException(nameof(idSerializer));
-            ResultDataFactory = resultDataFactory ?? throw new global::System.ArgumentNullException(nameof(resultDataFactory));
-            _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
-            _floatParser = serializerResolver.GetLeafValueParser<global::System.Double, global::System.Double>("Float") ?? throw new global::System.ArgumentException("No serializer for type `Float` found.");
-            _intParser = serializerResolver.GetLeafValueParser<global::System.Int32, global::System.Int32>("Int") ?? throw new global::System.ArgumentException("No serializer for type `Int` found.");
-        }
-
-        protected override global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IGetPlayerRankOnLevelResult> ResultDataFactory { get; }
-
-        protected override global::StrawberryShake.IOperationResultDataInfo BuildData(global::System.Text.Json.JsonElement obj)
-        {
-            var entityIds = new global::System.Collections.Generic.HashSet<global::StrawberryShake.EntityId>();
-            global::StrawberryShake.IEntityStoreSnapshot snapshot = default !;
-            _entityStore.Update(session =>
-            {
-                snapshot = session.CurrentSnapshot;
-            });
-            return new GetPlayerRankOnLevelResultInfo(Deserialize_IGetPlayerRankOnLevel_Records(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "records")), entityIds, snapshot.Version);
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? Deserialize_IGetPlayerRankOnLevel_Records(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("RecordsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.RecordsConnectionData(typename, totalCount: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalCount")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Int32 Deserialize_NonNullableInt32(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _intParser.Parse(obj.Value.GetInt32()!);
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class GetTopRecordGhostsBuilder : global::StrawberryShake.OperationResultBuilder<global::TNRD.Zeepkist.GTR.IGetTopRecordGhostsResult>
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
@@ -130192,312 +122479,6 @@ namespace TNRD.Zeepkist.GTR.State
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LeaderboardPageBuilder : global::StrawberryShake.OperationResultBuilder<global::TNRD.Zeepkist.GTR.ILeaderboardPageResult>
-    {
-        private readonly global::StrawberryShake.IEntityStore _entityStore;
-        private readonly global::StrawberryShake.IEntityIdSerializer _idSerializer;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Int32, global::System.Int32> _intParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Double, global::System.Double> _floatParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _datetimeParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _bigIntParser;
-        public LeaderboardPageBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.ILeaderboardPageResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
-        {
-            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
-            _idSerializer = idSerializer ?? throw new global::System.ArgumentNullException(nameof(idSerializer));
-            ResultDataFactory = resultDataFactory ?? throw new global::System.ArgumentNullException(nameof(resultDataFactory));
-            _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
-            _intParser = serializerResolver.GetLeafValueParser<global::System.Int32, global::System.Int32>("Int") ?? throw new global::System.ArgumentException("No serializer for type `Int` found.");
-            _floatParser = serializerResolver.GetLeafValueParser<global::System.Double, global::System.Double>("Float") ?? throw new global::System.ArgumentException("No serializer for type `Float` found.");
-            _datetimeParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("Datetime") ?? throw new global::System.ArgumentException("No serializer for type `Datetime` found.");
-            _bigIntParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("BigInt") ?? throw new global::System.ArgumentException("No serializer for type `BigInt` found.");
-        }
-
-        protected override global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.ILeaderboardPageResult> ResultDataFactory { get; }
-
-        protected override global::StrawberryShake.IOperationResultDataInfo BuildData(global::System.Text.Json.JsonElement obj)
-        {
-            var entityIds = new global::System.Collections.Generic.HashSet<global::StrawberryShake.EntityId>();
-            global::StrawberryShake.IEntityStoreSnapshot snapshot = default !;
-            _entityStore.Update(session =>
-            {
-                snapshot = session.CurrentSnapshot;
-            });
-            return new LeaderboardPageResultInfo(Deserialize_ILeaderboardPage_LevelItems(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelItems")), Deserialize_ILeaderboardPage_LevelPoints(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPoints")), Deserialize_ILeaderboardPage_Records(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "records")), entityIds, snapshot.Version);
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? Deserialize_ILeaderboardPage_LevelItems(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelItemsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData(typename, nodes: Deserialize_NonNullableILeaderboardPage_LevelItems_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelItemData> Deserialize_NonNullableILeaderboardPage_LevelItems_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var levelItems = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.LevelItemData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                levelItems.Add(Deserialize_NonNullableILeaderboardPage_LevelItems_Nodes(child));
-            }
-
-            return levelItems;
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.LevelItemData Deserialize_NonNullableILeaderboardPage_LevelItems_Nodes(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelItem", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.LevelItemData(typename, name: Deserialize_NonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.String Deserialize_NonNullableString(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _stringParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData? Deserialize_ILeaderboardPage_LevelPoints(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelPointsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData(typename, nodes: Deserialize_NonNullableILeaderboardPage_LevelPoints_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelPointData> Deserialize_NonNullableILeaderboardPage_LevelPoints_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var levelPoints = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.LevelPointData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                levelPoints.Add(Deserialize_NonNullableILeaderboardPage_LevelPoints_Nodes(child));
-            }
-
-            return levelPoints;
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.LevelPointData Deserialize_NonNullableILeaderboardPage_LevelPoints_Nodes(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelPoint", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.LevelPointData(typename, points: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "points")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Int32 Deserialize_NonNullableInt32(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _intParser.Parse(obj.Value.GetInt32()!);
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? Deserialize_ILeaderboardPage_Records(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("RecordsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.RecordsConnectionData(typename, totalCount: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "totalCount")), nodes: Deserialize_NonNullableILeaderboardPage_Records_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.RecordData> Deserialize_NonNullableILeaderboardPage_Records_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var @records = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.RecordData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                @records.Add(Deserialize_NonNullableILeaderboardPage_Records_Nodes(child));
-            }
-
-            return @records;
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.RecordData Deserialize_NonNullableILeaderboardPage_Records_Nodes(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("Record", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.RecordData(typename, user: Deserialize_ILeaderboardPage_Records_Nodes_User(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "user")), time: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "time")), dateCreated: Deserialize_NonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dateCreated")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.UserData? Deserialize_ILeaderboardPage_Records_Nodes_User(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("User", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.UserData(typename, steamName: Deserialize_String(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "steamName")), steamId: Deserialize_String(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "steamId")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.String? Deserialize_String(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            return _stringParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::System.Double Deserialize_NonNullableDouble(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _floatParser.Parse(obj.Value.GetDouble()!);
-        }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class WatchLeaderboardPageBuilder : global::StrawberryShake.OperationResultBuilder<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageResult>
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
@@ -130547,166 +122528,10 @@ namespace TNRD.Zeepkist.GTR.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("Query", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::TNRD.Zeepkist.GTR.State.QueryData(typename, levelItems: Deserialize_IWatchLeaderboardPage_Query_LevelItems(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelItems")), levelPoints: Deserialize_IWatchLeaderboardPage_Query_LevelPoints(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPoints")), records: Deserialize_IWatchLeaderboardPage_Query_Records(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "records")));
+                return new global::TNRD.Zeepkist.GTR.State.QueryData(typename, records: Deserialize_IWatchLeaderboardPage_Query_Records(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "records")));
             }
 
             throw new global::System.NotSupportedException();
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? Deserialize_IWatchLeaderboardPage_Query_LevelItems(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelItemsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData(typename, nodes: Deserialize_NonNullableIWatchLeaderboardPage_Query_LevelItems_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelItemData> Deserialize_NonNullableIWatchLeaderboardPage_Query_LevelItems_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var levelItems = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.LevelItemData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                levelItems.Add(Deserialize_NonNullableIWatchLeaderboardPage_Query_LevelItems_Nodes(child));
-            }
-
-            return levelItems;
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.LevelItemData Deserialize_NonNullableIWatchLeaderboardPage_Query_LevelItems_Nodes(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelItem", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.LevelItemData(typename, name: Deserialize_NonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.String Deserialize_NonNullableString(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _stringParser.Parse(obj.Value.GetString()!);
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData? Deserialize_IWatchLeaderboardPage_Query_LevelPoints(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelPointsConnection", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData(typename, nodes: Deserialize_NonNullableIWatchLeaderboardPage_Query_LevelPoints_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelPointData> Deserialize_NonNullableIWatchLeaderboardPage_Query_LevelPoints_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var levelPoints = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.LevelPointData>();
-            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
-            {
-                levelPoints.Add(Deserialize_NonNullableIWatchLeaderboardPage_Query_LevelPoints_Nodes(child));
-            }
-
-            return levelPoints;
-        }
-
-        private global::TNRD.Zeepkist.GTR.State.LevelPointData Deserialize_NonNullableIWatchLeaderboardPage_Query_LevelPoints_Nodes(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            var typename = obj.Value.GetProperty("__typename").GetString();
-            if (typename?.Equals("LevelPoint", global::System.StringComparison.Ordinal) ?? false)
-            {
-                return new global::TNRD.Zeepkist.GTR.State.LevelPointData(typename, points: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "points")));
-            }
-
-            throw new global::System.NotSupportedException();
-        }
-
-        private global::System.Int32 Deserialize_NonNullableInt32(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                throw new global::System.ArgumentNullException();
-            }
-
-            return _intParser.Parse(obj.Value.GetInt32()!);
         }
 
         private global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? Deserialize_IWatchLeaderboardPage_Query_Records(global::System.Text.Json.JsonElement? obj)
@@ -130728,6 +122553,21 @@ namespace TNRD.Zeepkist.GTR.State
             }
 
             throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Int32 Deserialize_NonNullableInt32(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _intParser.Parse(obj.Value.GetInt32()!);
         }
 
         private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.RecordData> Deserialize_NonNullableIWatchLeaderboardPage_Query_Records_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
@@ -130766,7 +122606,7 @@ namespace TNRD.Zeepkist.GTR.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("Record", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::TNRD.Zeepkist.GTR.State.RecordData(typename, user: Deserialize_IWatchLeaderboardPage_Query_Records_Nodes_User(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "user")), time: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "time")), dateCreated: Deserialize_NonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dateCreated")));
+                return new global::TNRD.Zeepkist.GTR.State.RecordData(typename, user: Deserialize_IWatchLeaderboardPage_Query_Records_Nodes_User(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "user")), level: Deserialize_IWatchLeaderboardPage_Query_Records_Nodes_Level(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "level")), time: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "time")), dateCreated: Deserialize_NonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "dateCreated")), userPointContributions: Deserialize_NonNullableIWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "userPointContributions")));
             }
 
             throw new global::System.NotSupportedException();
@@ -130808,6 +122648,105 @@ namespace TNRD.Zeepkist.GTR.State
             return _stringParser.Parse(obj.Value.GetString()!);
         }
 
+        private global::TNRD.Zeepkist.GTR.State.LevelData? Deserialize_IWatchLeaderboardPage_Query_Records_Nodes_Level(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                return null;
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("Level", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::TNRD.Zeepkist.GTR.State.LevelData(typename, levelItems: Deserialize_NonNullableIWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelItems")));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData Deserialize_NonNullableIWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("LevelItemsConnection", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData(typename, nodes: Deserialize_NonNullableIWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelItemData> Deserialize_NonNullableIWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var levelItems = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.LevelItemData>();
+            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
+            {
+                levelItems.Add(Deserialize_NonNullableIWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes(child));
+            }
+
+            return levelItems;
+        }
+
+        private global::TNRD.Zeepkist.GTR.State.LevelItemData Deserialize_NonNullableIWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("LevelItem", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::TNRD.Zeepkist.GTR.State.LevelItemData(typename, name: Deserialize_NonNullableString(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "name")));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.String Deserialize_NonNullableString(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _stringParser.Parse(obj.Value.GetString()!);
+        }
+
         private global::System.Double Deserialize_NonNullableDouble(global::System.Text.Json.JsonElement? obj)
         {
             if (!obj.HasValue)
@@ -130821,6 +122760,69 @@ namespace TNRD.Zeepkist.GTR.State
             }
 
             return _floatParser.Parse(obj.Value.GetDouble()!);
+        }
+
+        private global::TNRD.Zeepkist.GTR.State.UserPointContributionsConnectionData Deserialize_NonNullableIWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("UserPointContributionsConnection", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::TNRD.Zeepkist.GTR.State.UserPointContributionsConnectionData(typename, nodes: Deserialize_NonNullableIWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.UserPointContributionData> Deserialize_NonNullableIWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var userPointContributions = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.UserPointContributionData>();
+            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
+            {
+                userPointContributions.Add(Deserialize_NonNullableIWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes(child));
+            }
+
+            return userPointContributions;
+        }
+
+        private global::TNRD.Zeepkist.GTR.State.UserPointContributionData Deserialize_NonNullableIWatchLeaderboardPage_Query_Records_Nodes_UserPointContributions_Nodes(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("UserPointContribution", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::TNRD.Zeepkist.GTR.State.UserPointContributionData(typename, levelDecayedPoints: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelDecayedPoints")), levelPosition: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPosition")));
+            }
+
+            throw new global::System.NotSupportedException();
         }
     }
 
@@ -130987,26 +122989,32 @@ namespace TNRD.Zeepkist.GTR.State
         public global::System.String? ImageUrl { get; }
     }
 
-    ///<summary>A connection to a list of `LevelPoint` values.</summary>
+    ///<summary>The root query type which gives access points into the data universe.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LevelPointsConnectionData
+    public partial class QueryData : INodeData
     {
-        public LevelPointsConnectionData(global::System.String __typename, global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelPointData>? nodes = default !)
+        public QueryData(global::System.String __typename, global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? personalBest = default !, global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? worldRecord = default !, global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? records = default !)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
-            Nodes = nodes;
+            PersonalBest = personalBest;
+            WorldRecord = worldRecord;
+            Records = records;
         }
 
         public global::System.String __typename { get; }
-        ///<summary>A list of `LevelPoint` objects.</summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelPointData>? Nodes { get; }
+        ///<summary>Reads and enables pagination through a set of `Record`.</summary>
+        public global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? PersonalBest { get; }
+        ///<summary>Reads and enables pagination through a set of `Record`.</summary>
+        public global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? WorldRecord { get; }
+        ///<summary>Reads and enables pagination through a set of `Record`.</summary>
+        public global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? Records { get; }
     }
 
-    ///<summary>A connection to a list of `PersonalBestGlobal` values.</summary>
+    ///<summary>A connection to a list of `Record` values.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class PersonalBestGlobalsConnectionData
+    public partial class RecordsConnectionData
     {
-        public PersonalBestGlobalsConnectionData(global::System.String __typename, global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData>? nodes = default !, global::System.Int32? totalCount = default !)
+        public RecordsConnectionData(global::System.String __typename, global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.RecordData>? nodes = default !, global::System.Int32? totalCount = default !)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
             Nodes = nodes;
@@ -131014,72 +123022,16 @@ namespace TNRD.Zeepkist.GTR.State
         }
 
         public global::System.String __typename { get; }
-        ///<summary>A list of `PersonalBestGlobal` objects.</summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData>? Nodes { get; }
-        ///<summary>The count of *all* `PersonalBestGlobal` you could get from the connection.</summary>
+        ///<summary>A list of `Record` objects.</summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.RecordData>? Nodes { get; }
+        ///<summary>The count of *all* `Record` you could get from the connection.</summary>
         public global::System.Int32? TotalCount { get; }
-    }
-
-    ///<summary>A connection to a list of `WorldRecordGlobal` values.</summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WorldRecordGlobalsConnectionData
-    {
-        public WorldRecordGlobalsConnectionData(global::System.String __typename, global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData>? nodes = default !)
-        {
-            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
-            Nodes = nodes;
-        }
-
-        public global::System.String __typename { get; }
-        ///<summary>A list of `WorldRecordGlobal` objects.</summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData>? Nodes { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LevelPointData : INodeData
-    {
-        public LevelPointData(global::System.String __typename, global::System.Int32? points = default !)
-        {
-            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
-            Points = points;
-        }
-
-        public global::System.String __typename { get; }
-        public global::System.Int32? Points { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class PersonalBestGlobalData : INodeData
-    {
-        public PersonalBestGlobalData(global::System.String __typename, global::TNRD.Zeepkist.GTR.State.RecordData? @record = default !)
-        {
-            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
-            Record = @record;
-        }
-
-        public global::System.String __typename { get; }
-        ///<summary>Reads a single `Record` that is related to this `PersonalBestGlobal`.</summary>
-        public global::TNRD.Zeepkist.GTR.State.RecordData? Record { get; }
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class WorldRecordGlobalData : INodeData
-    {
-        public WorldRecordGlobalData(global::System.String __typename, global::TNRD.Zeepkist.GTR.State.RecordData? @record = default !)
-        {
-            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
-            Record = @record;
-        }
-
-        public global::System.String __typename { get; }
-        ///<summary>Reads a single `Record` that is related to this `WorldRecordGlobal`.</summary>
-        public global::TNRD.Zeepkist.GTR.State.RecordData? Record { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class RecordData : INodeData
     {
-        public RecordData(global::System.String __typename, global::System.Int32? id = default !, global::System.Double? time = default !, global::System.String? dateCreated = default !, global::TNRD.Zeepkist.GTR.State.UserPointContributionsConnectionData? userPointContributions = default !, global::TNRD.Zeepkist.GTR.State.UserData? user = default !, global::TNRD.Zeepkist.GTR.State.RecordMediaData? recordMedia = default !)
+        public RecordData(global::System.String __typename, global::System.Int32? id = default !, global::System.Double? time = default !, global::System.String? dateCreated = default !, global::TNRD.Zeepkist.GTR.State.UserPointContributionsConnectionData? userPointContributions = default !, global::TNRD.Zeepkist.GTR.State.UserData? user = default !, global::TNRD.Zeepkist.GTR.State.RecordMediaData? recordMedia = default !, global::TNRD.Zeepkist.GTR.State.LevelData? level = default !)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
             Id = id;
@@ -131088,6 +123040,7 @@ namespace TNRD.Zeepkist.GTR.State
             UserPointContributions = userPointContributions;
             User = user;
             RecordMedia = recordMedia;
+            Level = level;
         }
 
         public global::System.String __typename { get; }
@@ -131100,6 +123053,8 @@ namespace TNRD.Zeepkist.GTR.State
         public global::TNRD.Zeepkist.GTR.State.UserData? User { get; }
         ///<summary>Reads a single `RecordMedia` that is related to this `Record`.</summary>
         public global::TNRD.Zeepkist.GTR.State.RecordMediaData? RecordMedia { get; }
+        ///<summary>Reads a single `Level` that is related to this `Record`.</summary>
+        public global::TNRD.Zeepkist.GTR.State.LevelData? Level { get; }
     }
 
     ///<summary>A connection to a list of `UserPointContribution` values.</summary>
@@ -131135,47 +123090,48 @@ namespace TNRD.Zeepkist.GTR.State
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class UserPointContributionData : INodeData
     {
-        public UserPointContributionData(global::System.String __typename, global::System.Int32? contributionRank = default !, global::System.Int32? levelPosition = default !, global::System.Int32? levelPoints = default !, global::System.Double? levelDecayedPoints = default !)
+        public UserPointContributionData(global::System.String __typename, global::System.Int32? levelPosition = default !, global::System.Double? levelDecayedPoints = default !)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
-            ContributionRank = contributionRank;
             LevelPosition = levelPosition;
-            LevelPoints = levelPoints;
             LevelDecayedPoints = levelDecayedPoints;
         }
 
         public global::System.String __typename { get; }
-        public global::System.Int32? ContributionRank { get; }
         public global::System.Int32? LevelPosition { get; }
-        public global::System.Int32? LevelPoints { get; }
         public global::System.Double? LevelDecayedPoints { get; }
     }
 
-    ///<summary>The root query type which gives access points into the data universe.</summary>
+    ///<summary>A connection to a list of `PersonalBestGlobal` values.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class QueryData : INodeData
+    public partial class PersonalBestGlobalsConnectionData
     {
-        public QueryData(global::System.String __typename, global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? levelItems = default !, global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData? levelPoints = default !, global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalsConnectionData? personalBestGlobals = default !, global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalsConnectionData? worldRecordGlobals = default !, global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? records = default !)
+        public PersonalBestGlobalsConnectionData(global::System.String __typename, global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData>? nodes = default !, global::System.Int32? totalCount = default !)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
-            LevelItems = levelItems;
-            LevelPoints = levelPoints;
-            PersonalBestGlobals = personalBestGlobals;
-            WorldRecordGlobals = worldRecordGlobals;
-            Records = records;
+            Nodes = nodes;
+            TotalCount = totalCount;
         }
 
         public global::System.String __typename { get; }
-        ///<summary>Reads and enables pagination through a set of `LevelItem`.</summary>
-        public global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? LevelItems { get; }
-        ///<summary>Reads and enables pagination through a set of `LevelPoint`.</summary>
-        public global::TNRD.Zeepkist.GTR.State.LevelPointsConnectionData? LevelPoints { get; }
-        ///<summary>Reads and enables pagination through a set of `PersonalBestGlobal`.</summary>
-        public global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalsConnectionData? PersonalBestGlobals { get; }
-        ///<summary>Reads and enables pagination through a set of `WorldRecordGlobal`.</summary>
-        public global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalsConnectionData? WorldRecordGlobals { get; }
-        ///<summary>Reads and enables pagination through a set of `Record`.</summary>
-        public global::TNRD.Zeepkist.GTR.State.RecordsConnectionData? Records { get; }
+        ///<summary>A list of `PersonalBestGlobal` objects.</summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.PersonalBestGlobalData>? Nodes { get; }
+        ///<summary>The count of *all* `PersonalBestGlobal` you could get from the connection.</summary>
+        public global::System.Int32? TotalCount { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class PersonalBestGlobalData : INodeData
+    {
+        public PersonalBestGlobalData(global::System.String __typename, global::TNRD.Zeepkist.GTR.State.RecordData? @record = default !)
+        {
+            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
+            Record = @record;
+        }
+
+        public global::System.String __typename { get; }
+        ///<summary>Reads a single `Record` that is related to this `PersonalBestGlobal`.</summary>
+        public global::TNRD.Zeepkist.GTR.State.RecordData? Record { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
@@ -131191,22 +123147,32 @@ namespace TNRD.Zeepkist.GTR.State
         public global::System.String? GhostUrl { get; }
     }
 
-    ///<summary>A connection to a list of `Record` values.</summary>
+    ///<summary>A connection to a list of `LevelPoint` values.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class RecordsConnectionData
+    public partial class LevelPointsConnectionData
     {
-        public RecordsConnectionData(global::System.String __typename, global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.RecordData>? nodes = default !, global::System.Int32? totalCount = default !)
+        public LevelPointsConnectionData(global::System.String __typename, global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelPointData>? nodes = default !)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
             Nodes = nodes;
-            TotalCount = totalCount;
         }
 
         public global::System.String __typename { get; }
-        ///<summary>A list of `Record` objects.</summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.RecordData>? Nodes { get; }
-        ///<summary>The count of *all* `Record` you could get from the connection.</summary>
-        public global::System.Int32? TotalCount { get; }
+        ///<summary>A list of `LevelPoint` objects.</summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelPointData>? Nodes { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class LevelPointData : INodeData
+    {
+        public LevelPointData(global::System.String __typename, global::System.Int32? points = default !)
+        {
+            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
+            Points = points;
+        }
+
+        public global::System.String __typename { get; }
+        public global::System.Int32? Points { get; }
     }
 
     ///<summary>A connection to a list of `Vote` values.</summary>
@@ -131288,6 +123254,49 @@ namespace TNRD.Zeepkist.GTR.State
         public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.UserData>? Nodes { get; }
     }
 
+    ///<summary>A connection to a list of `WorldRecordGlobal` values.</summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class WorldRecordGlobalsConnectionData
+    {
+        public WorldRecordGlobalsConnectionData(global::System.String __typename, global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData>? nodes = default !)
+        {
+            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
+            Nodes = nodes;
+        }
+
+        public global::System.String __typename { get; }
+        ///<summary>A list of `WorldRecordGlobal` objects.</summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.WorldRecordGlobalData>? Nodes { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class WorldRecordGlobalData : INodeData
+    {
+        public WorldRecordGlobalData(global::System.String __typename, global::TNRD.Zeepkist.GTR.State.RecordData? @record = default !)
+        {
+            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
+            Record = @record;
+        }
+
+        public global::System.String __typename { get; }
+        ///<summary>Reads a single `Record` that is related to this `WorldRecordGlobal`.</summary>
+        public global::TNRD.Zeepkist.GTR.State.RecordData? Record { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class LevelData : INodeData
+    {
+        public LevelData(global::System.String __typename, global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? levelItems = default !)
+        {
+            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
+            LevelItems = levelItems;
+        }
+
+        public global::System.String __typename { get; }
+        ///<summary>Reads and enables pagination through a set of `LevelItem`.</summary>
+        public global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? LevelItems { get; }
+    }
+
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class GtrClientEntityIdFactory : global::StrawberryShake.IEntityIdSerializer
     {
@@ -131319,3 +123328,4 @@ namespace TNRD.Zeepkist.GTR.State
         }
     }
 }
+
