@@ -127,6 +127,12 @@ public class RecordingService : IEagerService
             return;
         }
 
+        if (!RecordSubmissionEligibility.ShouldSubmit(currentLevel?.UID))
+        {
+            _logger.LogInformation("Discarding record for non-replayable TRTM level");
+            return;
+        }
+
         _logger.LogInformation("Processing ghost data");
         string ghostData = await ProcessGhostRecorder(ghostRecorder);
         if (string.IsNullOrEmpty(ghostData))
