@@ -1,0 +1,21 @@
+query GetLevelVoteSummary($xxHash: String!, $steamId: BigInt!) {
+    voteCounts: votes(filter: { level: { xxHash: { equalTo: $xxHash } } }) {
+        groupedAggregates(groupBy: [VALUE]) {
+            keys
+            distinctCount {
+                userId
+            }
+        }
+    }
+    currentVote: votes(
+        first: 1
+        filter: {
+            level: { xxHash: { equalTo: $xxHash } }
+            user: { steamId: { equalTo: $steamId } }
+        }
+    ) {
+        nodes {
+            value
+        }
+    }
+}

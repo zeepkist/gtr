@@ -8,6 +8,8 @@ namespace TNRD.Zeepkist.GTR.Commands.Voting;
 
 public class UpvoteCommand : ILocalChatCommand
 {
+    public const string Alias = "=";
+
     private readonly VotingService _votingService;
 
     public string Prefix => string.Empty;

@@ -8,14 +8,19 @@ namespace TNRD.Zeepkist.GTR.Configuration;
 public class ConfigService : IEagerService
 {
     public const string ProductionBackendUrl = "https://backend.zeepki.st";
+    public const string AlternativeSpainBackendUrl =
+        "https://es-backend-5eu0pg2dcfyp6u2v33lz.zeepki.st";
     public const string LocalDevelopmentBackendUrl = "http://127.0.0.1:3001";
     public const string CdnUrl = "https://cdn.zeepki.st";
     public const string ProductionGraphQLUrl = "https://graphql.zeepki.st";
+    public const string AlternativeSpainGraphQLUrl =
+        "https://es-graphql-1q5xcqmja6dvh4ctc4t9.zeepki.st/";
     public const string LocalDevelopmentGraphQLUrl = "http://127.0.0.1:5000/";
 
     public ConfigEntry<bool> SubmitRecords { get; private set; }
     public ConfigEntry<bool> ShowRecordSubmitMessage { get; private set; }
     public ConfigEntry<float> ShowRecordSubmitMessageDuration { get; private set; }
+    public ConfigEntry<bool> ShowVoteReminderAfterVoting { get; private set; }
 
     public ConfigEntry<bool> EnableGhosts { get; private set; }
 
@@ -52,16 +57,23 @@ public class ConfigService : IEagerService
     public ConfigEntry<bool> ButtonLinkDiscord { get; private set; }
     public ConfigEntry<bool> ButtonUnlinkDiscord { get; private set; }
 
+    public ConfigEntry<bool> UseAlternativeDomainsInSpain { get; private set; }
     public ConfigEntry<bool> UseLocalDevelopmentBackend { get; private set; }
     public ConfigEntry<bool> UseLocalDevelopmentGraphQL { get; private set; }
 
-    public string SelectedBackendUrl => UseLocalDevelopmentBackend.Value
-        ? LocalDevelopmentBackendUrl
-        : ProductionBackendUrl;
+    public string SelectedBackendUrl => ServiceUrlSelector.Select(
+        UseLocalDevelopmentBackend.Value,
+        UseAlternativeDomainsInSpain.Value,
+        ProductionBackendUrl,
+        AlternativeSpainBackendUrl,
+        LocalDevelopmentBackendUrl);
 
-    public string SelectedGraphQLUrl => UseLocalDevelopmentGraphQL.Value
-        ? LocalDevelopmentGraphQLUrl
-        : ProductionGraphQLUrl;
+    public string SelectedGraphQLUrl => ServiceUrlSelector.Select(
+        UseLocalDevelopmentGraphQL.Value,
+        UseAlternativeDomainsInSpain.Value,
+        ProductionGraphQLUrl,
+        AlternativeSpainGraphQLUrl,
+        LocalDevelopmentGraphQLUrl);
 
     public ConfigEntry<KeyCode>[] PlaybackScrubProgressKeys { get; private set; }
     public ConfigEntry<KeyCode> PlaybackSpeedIncreaseKey { get; private set; }
@@ -82,6 +94,7 @@ public class ConfigService : IEagerService
         ConfigDiscord(config);
         ConfigUrls(config);
         ConfigPlayback(config);
+        ConfigChatMessages(config);
 
         SettingsApi.ConfigureModSettingsTabs(plugin, builder =>
         {
@@ -96,6 +109,8 @@ public class ConfigService : IEagerService
                 "3. Record Holder - General",
                 "3.1 Record Holder - Visibility",
                 "3.2 Record Holder - Keys");
+            builder.Tab("Chat Messages",
+                "7. Chat Messages");
             builder.Tab("Other",
                 "4. Discord",
                 "5. URLs");
@@ -296,6 +311,14 @@ public class ConfigService : IEagerService
 
     private void ConfigUrls(ConfigFile config)
     {
+        UseAlternativeDomainsInSpain = config.Bind(
+            "5. URLs",
+            "(Spain) Use Alternative URLs",
+            false,
+            "Route ZeepCentraal traffic through alternative\n" +
+            "domains that do not use Cloudflare to avoid\n" +
+            "La Liga censorship in Spain.");
+
         UseLocalDevelopmentBackend = config.Bind(
             "5. URLs",
             "Local Backend",
@@ -308,6 +331,15 @@ public class ConfigService : IEagerService
             "Local GraphQL",
             false,
             "Use http://127.0.0.1:5000/ instead of production GraphQL");
+    }
+
+    private void ConfigChatMessages(ConfigFile config)
+    {
+        ShowVoteReminderAfterVoting = config.Bind(
+            "7. Chat Messages",
+            "1. Show Vote Reminder After Voting",
+            true,
+            "Should the vote reminder be shown when you have already voted on the current level");
     }
 
     private void ConfigPlayback(ConfigFile config)

@@ -19,10 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\Api\FavouriteResource.cs" Link="Source\FavouriteResource.cs" />
     <Compile Include="..\Api\LevelRequestResource.cs" Link="Source\LevelRequestResource.cs" />
     <Compile Include="..\Api\RecordPostResource.cs" Link="Source\RecordPostResource.cs" />
     <Compile Include="..\Api\RecordWorkshopId.cs" Link="Source\RecordWorkshopId.cs" />
     <Compile Include="..\Configuration\ServiceUriValidator.cs" Link="Source\ServiceUriValidator.cs" />
+    <Compile Include="..\Configuration\ServiceUrlSelector.cs" Link="Source\ServiceUrlSelector.cs" />
+    <Compile Include="..\Dialogs\SpainCountryDetection.cs" Link="Source\SpainCountryDetection.cs" />
     <Compile Include="..\Ghosting\GhostLimits.cs" Link="Source\GhostLimits.cs" />
     <Compile Include="..\Ghosting\Playback\OfflineGhostLimit.cs" Link="Source\OfflineGhostLimit.cs" />
     <Compile Include="..\Ghosting\Playback\GhostVisualProfile.cs" Link="Source\GhostVisualProfile.cs" />
@@ -42,12 +45,15 @@
     <Compile Include="..\UI\Timeline\GhostTimelineState.cs" Link="Source\GhostTimelineState.cs" />
     <Compile Include="..\UI\Timeline\TimelineScrollStep.cs" Link="Source\TimelineScrollStep.cs" />
     <Compile Include="..\Ghosting\Recording\SurfaceKeyNormalizer.cs" Link="Source\SurfaceKeyNormalizer.cs" />
+    <Compile Include="..\Ghosting\Recording\RecordSubmissionEligibility.cs" Link="Source\RecordSubmissionEligibility.cs" />
     <Compile Include="..\Ghosting\Recording\MaterialPhysicsState.cs" Link="Source\MaterialPhysicsState.cs" />
     <Compile Include="..\Ghosting\Recording\MaterialPhysicsStateResolver.cs" Link="Source\MaterialPhysicsStateResolver.cs" />
     <Compile Include="..\Ghosting\Readers\GhostReaderValidation.cs" Link="Source\GhostReaderValidation.cs" />
     <Compile Include="..\Ghosting\Readers\GhostVersionReader.cs" Link="Source\GhostVersionReader.cs" />
     <Compile Include="..\Ghosting\Readers\LimitedMemoryStream.cs" Link="Source\LimitedMemoryStream.cs" />
     <Compile Include="..\Utilities\TaskCancellation.cs" Link="Source\TaskCancellation.cs" />
+    <Compile Include="..\Voting\VoteReminderFormatter.cs" Link="Source\VoteReminderFormatter.cs" />
+    <Compile Include="..\Voting\VoteSummary.cs" Link="Source\VoteSummary.cs" />
     <Compile Include="..\GraphQL\LevelGraphqlIdentity.cs" Link="Source\LevelGraphqlIdentity.cs" />
     <Compile Include="..\LevelBrowser\LevelBrowserSelection.cs" Link="Source\LevelBrowserSelection.cs" />
     <Compile Include="..\LevelBrowser\SelectionOutcome.cs" Link="Source\SelectionOutcome.cs" />

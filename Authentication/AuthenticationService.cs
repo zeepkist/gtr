@@ -34,7 +34,8 @@ public class AuthenticationService : IEagerService
         _configService = configService;
 
         MainMenuUi_Awake.Postfixed += OnMainMenuAwake;
-        _configService.UseLocalDevelopmentBackend.SettingChanged += OnUseLocalDevelopmentBackendChanged;
+        _configService.UseLocalDevelopmentBackend.SettingChanged += OnBackendSelectionChanged;
+        _configService.UseAlternativeDomainsInSpain.SettingChanged += OnBackendSelectionChanged;
     }
 
     private void OnMainMenuAwake()
@@ -50,7 +51,7 @@ public class AuthenticationService : IEagerService
             Login(false).Forget();
     }
 
-    private void OnUseLocalDevelopmentBackendChanged(object sender, EventArgs e)
+    private void OnBackendSelectionChanged(object sender, EventArgs e)
     {
         Login(true).Forget();
     }
