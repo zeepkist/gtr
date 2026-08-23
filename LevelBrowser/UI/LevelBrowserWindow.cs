@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using Imui.Controls;
 using Imui.Core;
-using Imui.Rendering;
 using Steamworks;
 using TNRD.Zeepkist.GTR.UI;
 using UnityEngine;

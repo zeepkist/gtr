@@ -8,7 +8,6 @@ using ZeepSDK.Chat;
 using ZeepSDK.ChatCommands;
 using ZeepSDK.External.Cysharp.Threading.Tasks;
 using ZeepSDK.External.FluentResults;
-using ZeepSDK.Level;
 
 namespace TNRD.Zeepkist.GTR.Commands;
 

@@ -11,7 +11,6 @@ using ZeepSDK.External.Cysharp.Threading.Tasks;
 using ZeepSDK.Level;
 using ZeepSDK.Messaging;
 using ZeepSDK.Multiplayer;
-using ZeepSDK.Racing;
 
 namespace TNRD.Zeepkist.GTR.Voting;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TNRD.Zeepkist.GTR.Discord.Wrapper
+﻿namespace TNRD.Zeepkist.GTR.Discord.Wrapper
 {
     static class Constants
     {

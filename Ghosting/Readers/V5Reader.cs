@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using EasyCompressor;
 using Microsoft.Extensions.Logging;
 using ProtoBuf;
 using TNRD.Zeepkist.GTR.Ghosting.Ghosts;
@@ -10,7 +9,6 @@ using TNRD.Zeepkist.GTR.Ghosting.Recording.Data;
 using TNRD.Zeepkist.GTR.Utilities;
 using UnityEngine;
 using ZeepkistNetworking;
-using Decoder = SevenZip.Compression.LZMA.Decoder;
 using InputFlags = TNRD.Zeepkist.GTR.Ghosting.Recording.InputFlags;
 using SoapboxFlags = TNRD.Zeepkist.GTR.Ghosting.Recording.SoapboxFlags;
 using Vector3 = UnityEngine.Vector3;

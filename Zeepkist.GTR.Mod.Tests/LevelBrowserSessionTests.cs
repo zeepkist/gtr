@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TNRD.Zeepkist.GTR.LevelBrowser;
 using Xunit;
 

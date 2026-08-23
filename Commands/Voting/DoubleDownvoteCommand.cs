@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using TNRD.Zeepkist.GTR.Utilities;
 using TNRD.Zeepkist.GTR.Voting;
 using ZeepSDK.Chat;
