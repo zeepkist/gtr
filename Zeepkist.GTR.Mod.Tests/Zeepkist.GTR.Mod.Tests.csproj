@@ -49,6 +49,8 @@
     <Compile Include="..\Ghosting\Readers\GhostVersionReader.cs" Link="Source\GhostVersionReader.cs" />
     <Compile Include="..\Ghosting\Readers\LimitedMemoryStream.cs" Link="Source\LimitedMemoryStream.cs" />
     <Compile Include="..\Utilities\TaskCancellation.cs" Link="Source\TaskCancellation.cs" />
+    <Compile Include="..\Voting\VoteReminderFormatter.cs" Link="Source\VoteReminderFormatter.cs" />
+    <Compile Include="..\Voting\VoteSummary.cs" Link="Source\VoteSummary.cs" />
     <Compile Include="..\GraphQL\LevelGraphqlIdentity.cs" Link="Source\LevelGraphqlIdentity.cs" />
     <Compile Include="..\LevelBrowser\LevelBrowserSelection.cs" Link="Source\LevelBrowserSelection.cs" />
     <Compile Include="..\LevelBrowser\SelectionOutcome.cs" Link="Source\SelectionOutcome.cs" />

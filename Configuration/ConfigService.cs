@@ -16,6 +16,7 @@ public class ConfigService : IEagerService
     public ConfigEntry<bool> SubmitRecords { get; private set; }
     public ConfigEntry<bool> ShowRecordSubmitMessage { get; private set; }
     public ConfigEntry<float> ShowRecordSubmitMessageDuration { get; private set; }
+    public ConfigEntry<bool> ShowVoteReminderAfterVoting { get; private set; }
 
     public ConfigEntry<bool> EnableGhosts { get; private set; }
 
@@ -82,6 +83,7 @@ public class ConfigService : IEagerService
         ConfigDiscord(config);
         ConfigUrls(config);
         ConfigPlayback(config);
+        ConfigChatMessages(config);
 
         SettingsApi.ConfigureModSettingsTabs(plugin, builder =>
         {
@@ -96,6 +98,8 @@ public class ConfigService : IEagerService
                 "3. Record Holder - General",
                 "3.1 Record Holder - Visibility",
                 "3.2 Record Holder - Keys");
+            builder.Tab("Chat Messages",
+                "7. Chat Messages");
             builder.Tab("Other",
                 "4. Discord",
                 "5. URLs");
@@ -308,6 +312,15 @@ public class ConfigService : IEagerService
             "Local GraphQL",
             false,
             "Use http://127.0.0.1:5000/ instead of production GraphQL");
+    }
+
+    private void ConfigChatMessages(ConfigFile config)
+    {
+        ShowVoteReminderAfterVoting = config.Bind(
+            "7. Chat Messages",
+            "1. Show Vote Reminder After Voting",
+            true,
+            "Should the vote reminder be shown when you have already voted on the current level");
     }
 
     private void ConfigPlayback(ConfigFile config)

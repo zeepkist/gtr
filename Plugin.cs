@@ -115,6 +115,7 @@ public class Plugin : BaseUnityPlugin
         services.AddEagerService<DiscordService>();
         services.AddEagerService<UnhandledExceptionLoggerService>();
         services.AddEagerService<VotingService>();
+        services.AddSingleton<VotingGraphqlService>();
         services.AddSingleton<AssetService>();
         services.AddSingleton<GhostReaderFactory>();
         services.AddSingleton<GhostRecorderFactory>();

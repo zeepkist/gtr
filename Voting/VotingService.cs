@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
+using Steamworks;
 using TNRD.Zeepkist.GTR.Api;
+using TNRD.Zeepkist.GTR.Configuration;
 using TNRD.Zeepkist.GTR.Core;
 using TNRD.Zeepkist.GTR.PlayerLoop;
 using ZeepkistClient;
 using ZeepSDK.Chat;
 using ZeepSDK.External.Cysharp.Threading.Tasks;
+using ZeepSDK.External.FluentResults;
 using ZeepSDK.Level;
 using ZeepSDK.Messaging;
 using ZeepSDK.Multiplayer;
@@ -23,43 +27,79 @@ public class VotingService : IEagerService
     private readonly PlayerLoopService _playerLoopService;
     private readonly ILogger<VotingService> _logger;
     private readonly ApiHttpClient _apiHttpClient;
+    private readonly ConfigService _configService;
+    private readonly VotingGraphqlService _votingGraphqlService;
 
     private string _previousTimeLeft;
+    private int _reminderRequestVersion;
 
     public VotingService(PlayerLoopService playerLoopService, ILogger<VotingService> logger,
-        ApiHttpClient apiHttpClient)
+        ApiHttpClient apiHttpClient, ConfigService configService, VotingGraphqlService votingGraphqlService)
     {
         _playerLoopService = playerLoopService;
         _logger = logger;
         _apiHttpClient = apiHttpClient;
+        _configService = configService;
+        _votingGraphqlService = votingGraphqlService;
         _playerLoopService.SubscribeUpdate(OnUpdate);
     }
 
     private void OnUpdate()
     {
         if (!MultiplayerApi.IsPlayingOnline)
+        {
+            if (_previousTimeLeft != null)
+            {
+                _previousTimeLeft = null;
+                _reminderRequestVersion++;
+            }
             return;
+        }
 
         string currentTimeLeft = ZeepkistNetwork.CurrentLobby.timeLeftString;
 
         if (currentTimeLeft == TIME_LEFT && _previousTimeLeft != TIME_LEFT)
-        {
-            ChatApi.AddLocalMessage(
-                "<size=80%><color=#FFFF00>Cast your vote for ZeepCentraal:</color></size><br>" +
-                "<size=75%>" +
-                "<size=50%><i>(hated it)</i></size> " +
-                "<b><color=#FF0000>--</color></b> " +
-                "<b><color=#FF8000>-</color></b> " +
-                "<b><color=#FFFF00>-+</color>/<color=#FFFF00>+-</color></b> " +
-                "<b><color=#80FF00>+</color></b> " +
-                "<b><color=#00FF00>++</color></b> " +
-                "<size=50%><i>(loved it)</i></size>" +
-                "</size>"
-            );
-
-        }
+            ShowVoteReminderAsync(++_reminderRequestVersion).Forget();
 
         _previousTimeLeft = currentTimeLeft;
+    }
+
+    private async UniTaskVoid ShowVoteReminderAsync(int requestVersion)
+    {
+        string currentHash = LevelApi.CurrentHashV2?.Hash;
+        VoteSummary summary = VoteSummary.Unknown;
+
+        if (string.IsNullOrEmpty(currentHash))
+        {
+            _logger.LogError("Unable to get vote summary because current level hash is empty");
+        }
+        else
+        {
+            Result<VoteSummary> result = await _votingGraphqlService.GetVoteSummary(
+                currentHash,
+                SteamClient.SteamId.Value,
+                CancellationToken.None);
+            if (result.IsSuccess)
+            {
+                summary = result.Value;
+            }
+            else
+            {
+                _logger.LogError("Failed to get vote summary: {Result}", result);
+            }
+        }
+
+        if (requestVersion != _reminderRequestVersion ||
+            !MultiplayerApi.IsPlayingOnline ||
+            !string.Equals(currentHash, LevelApi.CurrentHashV2?.Hash, StringComparison.Ordinal))
+        {
+            return;
+        }
+
+        if (!VoteReminderFormatter.ShouldShow(_configService.ShowVoteReminderAfterVoting.Value, summary))
+            return;
+
+        ChatApi.AddLocalMessage(VoteReminderFormatter.Format(summary));
     }
 
     private void OnVoteSuccess(string vote)
