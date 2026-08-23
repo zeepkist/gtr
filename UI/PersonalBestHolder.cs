@@ -9,5 +9,4 @@ public class PersonalBestHolder
     public int? ContributionRank { get; set; }
     public int? LevelPoints { get; set; }
     public double? LevelDecayedPoints { get; set; }
-    public double? PlayerDecayedPoints { get; set; }
 }

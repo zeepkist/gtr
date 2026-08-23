@@ -152,8 +152,7 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
         PersonalBestHolder personalBest = snapshot?.PersonalBest;
         bool matchingPersonalBest = personalBest != null && Math.Abs(personalBest.Time - pending.SubmittedTime) < 0.001;
         bool projectionReady = matchingPersonalBest && personalBest.Rank.HasValue &&
-                               personalBest.LevelDecayedPoints.HasValue &&
-                               personalBest.PlayerDecayedPoints.HasValue;
+                               personalBest.LevelDecayedPoints.HasValue;
         if (!projectionReady && !allowPartial)
             return;
 
@@ -164,8 +163,7 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
             WasFirstPersonalBest = !pending.Baseline.PersonalBestTime.HasValue,
             PreviousPosition = pending.Baseline.PersonalBestPosition,
             Position = matchingPersonalBest ? personalBest.Rank : null,
-            LevelDecayedPoints = matchingPersonalBest ? personalBest.LevelDecayedPoints : null,
-            PlayerDecayedPoints = matchingPersonalBest ? personalBest.PlayerDecayedPoints : null
+            LevelDecayedPoints = matchingPersonalBest ? personalBest.LevelDecayedPoints : null
         };
 
         if (pending.Kind is RecordFeedbackKind.PersonalBest or RecordFeedbackKind.FirstPersonalBest)
@@ -177,7 +175,9 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
         _generation++;
         CancelPending();
         await UniTask.SwitchToMainThread();
-        ChatApi.AddLocalMessage(RecordFeedbackFormatter.Format(data));
+        string message = RecordFeedbackFormatter.Format(data);
+        if (!string.IsNullOrEmpty(message))
+            ChatApi.AddLocalMessage(message);
     }
 
     private async UniTask<string> GetNextDelta(PendingFeedback pending)

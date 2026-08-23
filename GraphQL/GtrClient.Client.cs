@@ -1730,20 +1730,18 @@ namespace TNRD.Zeepkist.GTR
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution : global::System.IEquatable<CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution>, ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution
     {
-        public CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution(global::System.Int32 contributionRank, global::System.Int32 levelPosition, global::System.Int32 levelPoints, global::System.Double levelDecayedPoints, global::System.Double playerDecayedPoints)
+        public CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution(global::System.Int32 contributionRank, global::System.Int32 levelPosition, global::System.Int32 levelPoints, global::System.Double levelDecayedPoints)
         {
             ContributionRank = contributionRank;
             LevelPosition = levelPosition;
             LevelPoints = levelPoints;
             LevelDecayedPoints = levelDecayedPoints;
-            PlayerDecayedPoints = playerDecayedPoints;
         }
 
         public global::System.Int32 ContributionRank { get; }
         public global::System.Int32 LevelPosition { get; }
         public global::System.Int32 LevelPoints { get; }
         public global::System.Double LevelDecayedPoints { get; }
-        public global::System.Double PlayerDecayedPoints { get; }
 
         public virtual global::System.Boolean Equals(CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution? other)
         {
@@ -1762,7 +1760,7 @@ namespace TNRD.Zeepkist.GTR
                 return false;
             }
 
-            return (global::System.Object.Equals(ContributionRank, other.ContributionRank)) && global::System.Object.Equals(LevelPosition, other.LevelPosition) && global::System.Object.Equals(LevelPoints, other.LevelPoints) && global::System.Object.Equals(LevelDecayedPoints, other.LevelDecayedPoints) && global::System.Object.Equals(PlayerDecayedPoints, other.PlayerDecayedPoints);
+            return (global::System.Object.Equals(ContributionRank, other.ContributionRank)) && global::System.Object.Equals(LevelPosition, other.LevelPosition) && global::System.Object.Equals(LevelPoints, other.LevelPoints) && global::System.Object.Equals(LevelDecayedPoints, other.LevelDecayedPoints);
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -1794,7 +1792,6 @@ namespace TNRD.Zeepkist.GTR
                 hash ^= 397 * LevelPosition.GetHashCode();
                 hash ^= 397 * LevelPoints.GetHashCode();
                 hash ^= 397 * LevelDecayedPoints.GetHashCode();
-                hash ^= 397 * PlayerDecayedPoints.GetHashCode();
                 return hash;
             }
         }
@@ -2026,7 +2023,6 @@ namespace TNRD.Zeepkist.GTR
         public global::System.Int32 LevelPosition { get; }
         public global::System.Int32 LevelPoints { get; }
         public global::System.Double LevelDecayedPoints { get; }
-        public global::System.Double PlayerDecayedPoints { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
@@ -3038,20 +3034,18 @@ namespace TNRD.Zeepkist.GTR
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution : global::System.IEquatable<WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution>, IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution
     {
-        public WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution(global::System.Int32 contributionRank, global::System.Int32 levelPosition, global::System.Int32 levelPoints, global::System.Double levelDecayedPoints, global::System.Double playerDecayedPoints)
+        public WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution(global::System.Int32 contributionRank, global::System.Int32 levelPosition, global::System.Int32 levelPoints, global::System.Double levelDecayedPoints)
         {
             ContributionRank = contributionRank;
             LevelPosition = levelPosition;
             LevelPoints = levelPoints;
             LevelDecayedPoints = levelDecayedPoints;
-            PlayerDecayedPoints = playerDecayedPoints;
         }
 
         public global::System.Int32 ContributionRank { get; }
         public global::System.Int32 LevelPosition { get; }
         public global::System.Int32 LevelPoints { get; }
         public global::System.Double LevelDecayedPoints { get; }
-        public global::System.Double PlayerDecayedPoints { get; }
 
         public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution? other)
         {
@@ -3070,7 +3064,7 @@ namespace TNRD.Zeepkist.GTR
                 return false;
             }
 
-            return (global::System.Object.Equals(ContributionRank, other.ContributionRank)) && global::System.Object.Equals(LevelPosition, other.LevelPosition) && global::System.Object.Equals(LevelPoints, other.LevelPoints) && global::System.Object.Equals(LevelDecayedPoints, other.LevelDecayedPoints) && global::System.Object.Equals(PlayerDecayedPoints, other.PlayerDecayedPoints);
+            return (global::System.Object.Equals(ContributionRank, other.ContributionRank)) && global::System.Object.Equals(LevelPosition, other.LevelPosition) && global::System.Object.Equals(LevelPoints, other.LevelPoints) && global::System.Object.Equals(LevelDecayedPoints, other.LevelDecayedPoints);
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -3102,7 +3096,6 @@ namespace TNRD.Zeepkist.GTR
                 hash ^= 397 * LevelPosition.GetHashCode();
                 hash ^= 397 * LevelPoints.GetHashCode();
                 hash ^= 397 * LevelDecayedPoints.GetHashCode();
-                hash ^= 397 * PlayerDecayedPoints.GetHashCode();
                 return hash;
             }
         }
@@ -3363,7 +3356,6 @@ namespace TNRD.Zeepkist.GTR
         public global::System.Int32 LevelPosition { get; }
         public global::System.Int32 LevelPoints { get; }
         public global::System.Double LevelDecayedPoints { get; }
-        public global::System.Double PlayerDecayedPoints { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
@@ -106727,7 +106719,6 @@ namespace TNRD.Zeepkist.GTR
     ///             levelPosition
     ///             levelPoints
     ///             levelDecayedPoints
-    ///             playerDecayedPoints
     ///           }
     ///         }
     ///       }
@@ -107668,26 +107659,6 @@ namespace TNRD.Zeepkist.GTR
             0x74,
             0x73,
             0x20,
-            0x70,
-            0x6c,
-            0x61,
-            0x79,
-            0x65,
-            0x72,
-            0x44,
-            0x65,
-            0x63,
-            0x61,
-            0x79,
-            0x65,
-            0x64,
-            0x50,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x73,
-            0x20,
             0x7d,
             0x20,
             0x7d,
@@ -107975,7 +107946,7 @@ namespace TNRD.Zeepkist.GTR
             0x20,
             0x7d
         };
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "0d9e23d39a806c2b940fddb1a5570660");
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "c16ed891502ed0137e95d4c943d4f232");
 
         public override global::System.String ToString()
         {
@@ -108022,7 +107993,6 @@ namespace TNRD.Zeepkist.GTR
     ///             levelPosition
     ///             levelPoints
     ///             levelDecayedPoints
-    ///             playerDecayedPoints
     ///           }
     ///         }
     ///       }
@@ -108159,7 +108129,6 @@ namespace TNRD.Zeepkist.GTR
     ///             levelPosition
     ///             levelPoints
     ///             levelDecayedPoints
-    ///             playerDecayedPoints
     ///           }
     ///         }
     ///       }
@@ -108233,7 +108202,6 @@ namespace TNRD.Zeepkist.GTR
     ///             levelPosition
     ///             levelPoints
     ///             levelDecayedPoints
-    ///             playerDecayedPoints
     ///           }
     ///         }
     ///       }
@@ -109283,26 +109251,6 @@ namespace TNRD.Zeepkist.GTR
             0x74,
             0x73,
             0x20,
-            0x70,
-            0x6c,
-            0x61,
-            0x79,
-            0x65,
-            0x72,
-            0x44,
-            0x65,
-            0x63,
-            0x61,
-            0x79,
-            0x65,
-            0x64,
-            0x50,
-            0x6f,
-            0x69,
-            0x6e,
-            0x74,
-            0x73,
-            0x20,
             0x7d,
             0x20,
             0x7d,
@@ -109590,7 +109538,7 @@ namespace TNRD.Zeepkist.GTR
             0x20,
             0x7d
         };
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "07c4f951255f3184b9e4cc7938ad67b3");
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "517211b011f32a8bd0934d91143fe7ad");
 
         public override global::System.String ToString()
         {
@@ -109644,7 +109592,6 @@ namespace TNRD.Zeepkist.GTR
     ///             levelPosition
     ///             levelPoints
     ///             levelDecayedPoints
-    ///             playerDecayedPoints
     ///           }
     ///         }
     ///       }
@@ -109782,7 +109729,6 @@ namespace TNRD.Zeepkist.GTR
     ///             levelPosition
     ///             levelPoints
     ///             levelDecayedPoints
-    ///             playerDecayedPoints
     ///           }
     ///         }
     ///       }
@@ -119542,7 +119488,7 @@ namespace TNRD.Zeepkist.GTR.State
             ICurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes returnValue = default !;
             if (data.__typename.Equals("UserPointContribution", global::System.StringComparison.Ordinal))
             {
-                returnValue = new CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution(data.ContributionRank ?? throw new global::System.ArgumentNullException(), data.LevelPosition ?? throw new global::System.ArgumentNullException(), data.LevelPoints ?? throw new global::System.ArgumentNullException(), data.LevelDecayedPoints ?? throw new global::System.ArgumentNullException(), data.PlayerDecayedPoints ?? throw new global::System.ArgumentNullException());
+                returnValue = new CurrentLevelRecords_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution(data.ContributionRank ?? throw new global::System.ArgumentNullException(), data.LevelPosition ?? throw new global::System.ArgumentNullException(), data.LevelPoints ?? throw new global::System.ArgumentNullException(), data.LevelDecayedPoints ?? throw new global::System.ArgumentNullException());
             }
             else
             {
@@ -119939,7 +119885,7 @@ namespace TNRD.Zeepkist.GTR.State
             IWatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes returnValue = default !;
             if (data.__typename.Equals("UserPointContribution", global::System.StringComparison.Ordinal))
             {
-                returnValue = new WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution(data.ContributionRank ?? throw new global::System.ArgumentNullException(), data.LevelPosition ?? throw new global::System.ArgumentNullException(), data.LevelPoints ?? throw new global::System.ArgumentNullException(), data.LevelDecayedPoints ?? throw new global::System.ArgumentNullException(), data.PlayerDecayedPoints ?? throw new global::System.ArgumentNullException());
+                returnValue = new WatchCurrentLevelRecords_Query_PersonalBestGlobals_Nodes_Record_UserPointContributions_Nodes_UserPointContribution(data.ContributionRank ?? throw new global::System.ArgumentNullException(), data.LevelPosition ?? throw new global::System.ArgumentNullException(), data.LevelPoints ?? throw new global::System.ArgumentNullException(), data.LevelDecayedPoints ?? throw new global::System.ArgumentNullException());
             }
             else
             {
@@ -127829,7 +127775,7 @@ namespace TNRD.Zeepkist.GTR.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("UserPointContribution", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::TNRD.Zeepkist.GTR.State.UserPointContributionData(typename, contributionRank: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "contributionRank")), levelPosition: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPosition")), levelPoints: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPoints")), levelDecayedPoints: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelDecayedPoints")), playerDecayedPoints: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "playerDecayedPoints")));
+                return new global::TNRD.Zeepkist.GTR.State.UserPointContributionData(typename, contributionRank: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "contributionRank")), levelPosition: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPosition")), levelPoints: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPoints")), levelDecayedPoints: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelDecayedPoints")));
             }
 
             throw new global::System.NotSupportedException();
@@ -128324,7 +128270,7 @@ namespace TNRD.Zeepkist.GTR.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("UserPointContribution", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::TNRD.Zeepkist.GTR.State.UserPointContributionData(typename, contributionRank: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "contributionRank")), levelPosition: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPosition")), levelPoints: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPoints")), levelDecayedPoints: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelDecayedPoints")), playerDecayedPoints: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "playerDecayedPoints")));
+                return new global::TNRD.Zeepkist.GTR.State.UserPointContributionData(typename, contributionRank: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "contributionRank")), levelPosition: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPosition")), levelPoints: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPoints")), levelDecayedPoints: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelDecayedPoints")));
             }
 
             throw new global::System.NotSupportedException();
@@ -131189,14 +131135,13 @@ namespace TNRD.Zeepkist.GTR.State
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class UserPointContributionData : INodeData
     {
-        public UserPointContributionData(global::System.String __typename, global::System.Int32? contributionRank = default !, global::System.Int32? levelPosition = default !, global::System.Int32? levelPoints = default !, global::System.Double? levelDecayedPoints = default !, global::System.Double? playerDecayedPoints = default !)
+        public UserPointContributionData(global::System.String __typename, global::System.Int32? contributionRank = default !, global::System.Int32? levelPosition = default !, global::System.Int32? levelPoints = default !, global::System.Double? levelDecayedPoints = default !)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
             ContributionRank = contributionRank;
             LevelPosition = levelPosition;
             LevelPoints = levelPoints;
             LevelDecayedPoints = levelDecayedPoints;
-            PlayerDecayedPoints = playerDecayedPoints;
         }
 
         public global::System.String __typename { get; }
@@ -131204,7 +131149,6 @@ namespace TNRD.Zeepkist.GTR.State
         public global::System.Int32? LevelPosition { get; }
         public global::System.Int32? LevelPoints { get; }
         public global::System.Double? LevelDecayedPoints { get; }
-        public global::System.Double? PlayerDecayedPoints { get; }
     }
 
     ///<summary>The root query type which gives access points into the data universe.</summary>

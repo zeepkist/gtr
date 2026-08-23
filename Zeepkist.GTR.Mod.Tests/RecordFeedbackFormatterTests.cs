@@ -30,7 +30,7 @@ public class RecordFeedbackFormatterTests
     }
 
     [Fact]
-    public void FormatsImprovementPlaceScoresAndNextTarget()
+    public void FormatsCompactPersonalBestFeedback()
     {
         string result = RecordFeedbackFormatter.Format(new RecordFeedbackMessageData
         {
@@ -39,59 +39,77 @@ public class RecordFeedbackFormatterTests
             NextDelta = "00:00.250",
             PreviousPosition = 8,
             Position = 5,
-            LevelDecayedPoints = 123.6,
-            PlayerDecayedPoints = 77.4
+            LevelDecayedPoints = 123.6
         });
 
-        Assert.Contains($"PB improved by {TextColour.Pink.Wrap("00:01.000")}", result);
-        Assert.Contains($"gained {TextColour.Pink.Wrap("3")} places", result);
-        Assert.Contains(TextColour.Yellow.Wrap("124pts"), result);
-        Assert.Contains(TextColour.Yellow.Wrap("77 ranked pts"), result);
-        Assert.Contains($"Improve by {TextColour.Pink.Wrap("00:00.250")}", result);
+        Assert.Equal(
+            $"<size=75%>PB improved by {TextColour.Pink.Wrap("00:01.000")}</size><br>" +
+            $"<size=75%>#8 → #5 <size=60%>({TextColour.Yellow.Wrap("124pts")})</size></size><br>" +
+            $"<size=50%>Gap to next player: {TextColour.Pink.Wrap("00:00.250")}</size>",
+            result);
     }
 
     [Fact]
-    public void FormatsFirstPersonalBestEntry()
+    public void FormatsCompactWorldRecordFeedbackAndHighlightsFirstPlace()
+    {
+        string result = RecordFeedbackFormatter.Format(new RecordFeedbackMessageData
+        {
+            Kind = RecordFeedbackKind.ImprovedWorldRecord,
+            PreviousDelta = "00:00.500",
+            PreviousPosition = 2,
+            Position = 1,
+            LevelDecayedPoints = 100
+        });
+
+        Assert.Equal(
+            $"<size=75%>WR improved by {TextColour.Pink.Wrap("00:00.500")}</size><br>" +
+            $"<size=75%>#2 → {TextColour.Yellow.Wrap("#1")} " +
+            $"<size=60%>({TextColour.Yellow.Wrap("100pts")})</size></size>",
+            result);
+    }
+
+    [Fact]
+    public void FirstPersonalBestUsesOnlyEntryAndGapLines()
     {
         string result = RecordFeedbackFormatter.Format(new RecordFeedbackMessageData
         {
             Kind = RecordFeedbackKind.FirstPersonalBest,
+            NextDelta = "00:02.000",
             WasFirstPersonalBest = true,
             Position = 42,
-            LevelDecayedPoints = 10,
-            PlayerDecayedPoints = 5
+            LevelDecayedPoints = 10
         });
 
-        Assert.StartsWith("[GTR] You set your first PB", result);
-        Assert.Contains($"entered the level leaderboard at {TextColour.Pink.Wrap("#42")}", result);
+        Assert.Equal(
+            $"<size=75%>#42 <size=60%>({TextColour.Yellow.Wrap("10pts")})</size></size><br>" +
+            $"<size=50%>Gap to next player: {TextColour.Pink.Wrap("00:02.000")}</size>",
+            result);
     }
 
     [Fact]
-    public void FirstPersonalBestWorldRecordKeepsWorldRecordHeadlineAndEntryClause()
+    public void FirstPersonalBestWorldRecordUsesOnlyHighlightedEntryLine()
     {
         string result = RecordFeedbackFormatter.Format(new RecordFeedbackMessageData
         {
             Kind = RecordFeedbackKind.NewWorldRecord,
             WasFirstPersonalBest = true,
             Position = 1,
-            LevelDecayedPoints = 100,
-            PlayerDecayedPoints = 50
+            LevelDecayedPoints = 100
         });
 
-        Assert.StartsWith("[GTR] You set the new WR", result);
-        Assert.Contains($"entered the level leaderboard at {TextColour.Pink.Wrap("#1")}", result);
+        Assert.Equal(
+            $"<size=75%>{TextColour.Yellow.Wrap("#1")} " +
+            $"<size=60%>({TextColour.Yellow.Wrap("100pts")})</size></size>",
+            result);
     }
 
     [Fact]
-    public void WorldRecordHeadlineSuppressesNextTarget()
+    public void RemovedHeadlinesProduceNoFallbackText()
     {
-        string result = RecordFeedbackFormatter.Format(new RecordFeedbackMessageData
+        Assert.Equal(string.Empty, RecordFeedbackFormatter.Format(new RecordFeedbackMessageData
         {
-            Kind = RecordFeedbackKind.NewWorldRecord,
-            NextDelta = "00:00.001"
-        });
-
-        Assert.Equal("[GTR] You set the new WR", result);
+            Kind = RecordFeedbackKind.NewWorldRecord
+        }));
     }
 
     [Fact]

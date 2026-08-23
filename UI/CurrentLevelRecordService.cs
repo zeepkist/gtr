@@ -165,7 +165,6 @@ public sealed class CurrentLevelRecordService : IEagerService, IDisposable
             contribution?.LevelPosition,
             contribution?.LevelPoints,
             contribution?.LevelDecayedPoints,
-            contribution?.PlayerDecayedPoints,
             worldRecord?.Id,
             worldRecord?.Time,
             worldRecord?.User?.SteamId,
@@ -192,7 +191,6 @@ public sealed class CurrentLevelRecordService : IEagerService, IDisposable
             contribution?.LevelPosition,
             contribution?.LevelPoints,
             contribution?.LevelDecayedPoints,
-            contribution?.PlayerDecayedPoints,
             worldRecord?.Id,
             worldRecord?.Time,
             worldRecord?.User?.SteamId,
@@ -210,7 +208,6 @@ public sealed class CurrentLevelRecordService : IEagerService, IDisposable
         int? levelPosition,
         int? contributionLevelPoints,
         double? levelDecayedPoints,
-        double? playerDecayedPoints,
         int? worldRecordId,
         double? worldRecordTime,
         string worldRecordSteamId,
@@ -230,8 +227,7 @@ public sealed class CurrentLevelRecordService : IEagerService, IDisposable
                     ContributionRank = contributionRank,
                     Rank = levelPosition,
                     LevelPoints = contributionLevelPoints,
-                    LevelDecayedPoints = levelDecayedPoints,
-                    PlayerDecayedPoints = playerDecayedPoints
+                    LevelDecayedPoints = levelDecayedPoints
                 }
                 : null,
             WorldRecord = worldRecordId.HasValue && worldRecordTime.HasValue

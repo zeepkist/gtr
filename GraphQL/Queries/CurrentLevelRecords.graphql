@@ -67,7 +67,6 @@ fragment CurrentLevelRecordFields on Query {
                         levelPosition
                         levelPoints
                         levelDecayedPoints
-                        playerDecayedPoints
                     }
                 }
             }
@@ -171,7 +170,6 @@ query CurrentLevelRecords($xxHash: String!, $hash: String!, $steamId: BigInt!) {
                         levelPosition
                         levelPoints
                         levelDecayedPoints
-                        playerDecayedPoints
                     }
                 }
             }
