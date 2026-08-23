@@ -24,6 +24,8 @@
     <Compile Include="..\Api\RecordPostResource.cs" Link="Source\RecordPostResource.cs" />
     <Compile Include="..\Api\RecordWorkshopId.cs" Link="Source\RecordWorkshopId.cs" />
     <Compile Include="..\Configuration\ServiceUriValidator.cs" Link="Source\ServiceUriValidator.cs" />
+    <Compile Include="..\Configuration\ServiceUrlSelector.cs" Link="Source\ServiceUrlSelector.cs" />
+    <Compile Include="..\Dialogs\SpainCountryDetection.cs" Link="Source\SpainCountryDetection.cs" />
     <Compile Include="..\Ghosting\GhostLimits.cs" Link="Source\GhostLimits.cs" />
     <Compile Include="..\Ghosting\Playback\OfflineGhostLimit.cs" Link="Source\OfflineGhostLimit.cs" />
     <Compile Include="..\Ghosting\Playback\GhostVisualProfile.cs" Link="Source\GhostVisualProfile.cs" />

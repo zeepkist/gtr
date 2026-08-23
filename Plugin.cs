@@ -12,6 +12,7 @@ using TNRD.Zeepkist.GTR.Authentication;
 using TNRD.Zeepkist.GTR.Commands;
 using TNRD.Zeepkist.GTR.Configuration;
 using TNRD.Zeepkist.GTR.Core;
+using TNRD.Zeepkist.GTR.Dialogs;
 using TNRD.Zeepkist.GTR.Discord;
 using TNRD.Zeepkist.GTR.Favourites;
 using TNRD.Zeepkist.GTR.Ghosting.Playback;
@@ -113,6 +114,7 @@ public class Plugin : BaseUnityPlugin
         services.AddEagerService<LeaderboardService>();
         services.AddEagerService<RecordHolderService>();
         services.AddEagerService<DiscordService>();
+        services.AddEagerService<LaLigaCensorshipDialogService>();
         services.AddEagerService<UnhandledExceptionLoggerService>();
         services.AddEagerService<VotingService>();
         services.AddSingleton<VotingGraphqlService>();
@@ -146,6 +148,11 @@ public class Plugin : BaseUnityPlugin
         services.AddTransient<V7Reader>();
         services.AddSingleton<ApiHttpClient>();
         services.AddHttpClient();
+        services.AddHttpClient(LaLigaCensorshipDialogService.CountryDetectionClientKey, client =>
+        {
+            client.BaseAddress = new Uri("https://ipinfo.io/");
+            client.Timeout = TimeSpan.FromSeconds(10);
+        });
         services.AddHttpClient(GhostRepository.ClientKey, client =>
         {
             client.Timeout = TimeSpan.FromSeconds(60);
