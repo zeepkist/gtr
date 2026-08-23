@@ -26,14 +26,28 @@ public class LeaderboardTextFormatterTests
         Assert.Contains($">{expected}</color>", result);
     }
 
-    [Fact]
-    public void UsesFixedLocalDateAtThirtyDays()
+    [Theory]
+    [InlineData(2592000, "1 month ago")]
+    [InlineData(5184000, "2 months ago")]
+    [InlineData(31449600, "12 months ago")]
+    public void FormatsMonthsThroughFirstYear(int ageSeconds, string expected)
     {
-        DateTimeOffset created = Now.AddDays(-30);
+        string result = LeaderboardTextFormatter.AppendRecordDate(
+            "player",
+            Now.AddSeconds(-ageSeconds).ToString("O"),
+            Now);
+
+        Assert.Contains($">{expected}</color>", result);
+    }
+
+    [Fact]
+    public void UsesFixedLocalDateAtOneYear()
+    {
+        DateTimeOffset created = Now.AddDays(-365);
 
         string result = LeaderboardTextFormatter.AppendRecordDate("player", created.ToString("O"), Now);
 
-        Assert.Contains(created.ToLocalTime().ToString("yyyy/MM/dd HH:mm"), result);
+        Assert.Contains(created.ToLocalTime().ToString("yyyy/MM/dd"), result);
     }
 
     [Fact]

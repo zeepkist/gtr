@@ -160,7 +160,8 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
                 return;
             }
 
-            if (!isWorldRecord && !pending.NextFastestRequestStarted)
+            if (RecordFeedbackFormatter.RequiresNextFastest(pending.ConfirmedKind.Value) &&
+                !pending.NextFastestRequestStarted)
             {
                 pending.NextFastestRequestStarted = true;
                 LoadNextDeltaAsync(pending).Forget();
@@ -248,20 +249,15 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
 
     private static RecordFeedbackKind ClassifyConfirmed(PendingFeedback pending, bool isWorldRecord)
     {
-        if (isWorldRecord)
-        {
-            return pending.Baseline.WorldRecordTime.HasValue &&
-                   string.Equals(
-                       pending.Baseline.WorldRecordSteamId,
-                       pending.PlayerSteamId,
-                       StringComparison.Ordinal)
-                ? RecordFeedbackKind.ImprovedWorldRecord
-                : RecordFeedbackKind.NewWorldRecord;
-        }
-
-        return pending.Baseline.PersonalBestTime.HasValue
-            ? RecordFeedbackKind.PersonalBest
-            : RecordFeedbackKind.FirstPersonalBest;
+        bool previousWorldRecordOwnedByPlayer = pending.Baseline.WorldRecordTime.HasValue &&
+                                                string.Equals(
+                                                    pending.Baseline.WorldRecordSteamId,
+                                                    pending.PlayerSteamId,
+                                                    StringComparison.Ordinal);
+        return RecordFeedbackFormatter.ClassifyConfirmed(
+            pending.Baseline.PersonalBestTime.HasValue,
+            isWorldRecord,
+            previousWorldRecordOwnedByPlayer);
     }
 
     private static string FormatPreviousDelta(PendingFeedback pending, RecordFeedbackKind kind)

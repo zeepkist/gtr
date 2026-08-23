@@ -67,22 +67,47 @@ public static class RecordFeedbackFormatter
         };
     }
 
+    public static RecordFeedbackKind ClassifyConfirmed(
+        bool hadPreviousPersonalBest,
+        bool isWorldRecord,
+        bool previousWorldRecordOwnedByPlayer)
+    {
+        if (isWorldRecord)
+        {
+            return previousWorldRecordOwnedByPlayer
+                ? RecordFeedbackKind.ImprovedWorldRecord
+                : RecordFeedbackKind.NewWorldRecord;
+        }
+
+        return hadPreviousPersonalBest
+            ? RecordFeedbackKind.PersonalBest
+            : RecordFeedbackKind.FirstPersonalBest;
+    }
+
+    public static bool RequiresNextFastest(RecordFeedbackKind kind)
+    {
+        return kind is RecordFeedbackKind.PersonalBest or RecordFeedbackKind.FirstPersonalBest;
+    }
+
     public static string Format(RecordFeedbackMessageData data)
     {
         List<string> lines = new();
+
         string improvement = data.Kind switch
         {
             RecordFeedbackKind.PersonalBest => "PB",
             RecordFeedbackKind.NewWorldRecord or RecordFeedbackKind.ImprovedWorldRecord => "WR",
             _ => null
         };
+
         if (improvement != null && !string.IsNullOrEmpty(data.PreviousDelta))
-            lines.Add($"<size=75%>{improvement} improved by {TextColour.Pink.Wrap(data.PreviousDelta)}</size>");
+            lines.Add($"<size=75%>{TextColour.Yellow.Wrap("[GTR]")} {improvement} improved by {TextColour.Pink.Wrap(data.PreviousDelta)}</size>");
 
         if (data.Position.HasValue && data.LevelDecayedPoints.HasValue)
         {
             string score = FormatScore(data);
             string position = FormatPosition(data.Position.Value);
+
             if (data.WasFirstPersonalBest)
             {
                 lines.Add($"<size=75%>{position} <size=60%>({score})</size></size>");

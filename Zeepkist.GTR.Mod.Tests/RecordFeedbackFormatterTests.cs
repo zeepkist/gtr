@@ -119,4 +119,34 @@ public class RecordFeedbackFormatterTests
         Assert.False(RecordFeedbackFormatter.ShouldShow(RecordFeedbackKind.NewWorldRecord, true, false, true));
         Assert.False(RecordFeedbackFormatter.ShouldShow(RecordFeedbackKind.ImprovedWorldRecord, true, true, false));
     }
+
+    [Theory]
+    [InlineData(RecordFeedbackKind.PersonalBest, true, false, false)]
+    [InlineData(RecordFeedbackKind.FirstPersonalBest, false, false, false)]
+    [InlineData(RecordFeedbackKind.NewWorldRecord, true, true, false)]
+    [InlineData(RecordFeedbackKind.ImprovedWorldRecord, true, true, true)]
+    public void ClassifiesConfirmedSubscriptionResult(
+        RecordFeedbackKind expected,
+        bool hadPreviousPersonalBest,
+        bool isWorldRecord,
+        bool previousWorldRecordOwnedByPlayer)
+    {
+        Assert.Equal(expected, RecordFeedbackFormatter.ClassifyConfirmed(
+            hadPreviousPersonalBest,
+            isWorldRecord,
+            previousWorldRecordOwnedByPlayer));
+    }
+
+    [Theory]
+    [InlineData(RecordFeedbackKind.PersonalBest, true)]
+    [InlineData(RecordFeedbackKind.FirstPersonalBest, true)]
+    [InlineData(RecordFeedbackKind.NewWorldRecord, false)]
+    [InlineData(RecordFeedbackKind.ImprovedWorldRecord, false)]
+    [InlineData(RecordFeedbackKind.None, false)]
+    public void OnlyNonWorldRecordPersonalBestsRequestNextFastest(
+        RecordFeedbackKind kind,
+        bool expected)
+    {
+        Assert.Equal(expected, RecordFeedbackFormatter.RequiresNextFastest(kind));
+    }
 }
