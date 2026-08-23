@@ -13,6 +13,7 @@ using TNRD.Zeepkist.GTR.Commands;
 using TNRD.Zeepkist.GTR.Configuration;
 using TNRD.Zeepkist.GTR.Core;
 using TNRD.Zeepkist.GTR.Discord;
+using TNRD.Zeepkist.GTR.Favourites;
 using TNRD.Zeepkist.GTR.Ghosting.Playback;
 using TNRD.Zeepkist.GTR.Ghosting.Readers;
 using TNRD.Zeepkist.GTR.Ghosting.Recording;
@@ -121,6 +122,7 @@ public class Plugin : BaseUnityPlugin
         services.AddSingleton<OnlineLeaderboardTab>();
         services.AddSingleton<OfflineLeaderboardTab>();
         services.AddSingleton<MessengerService>();
+        services.AddSingleton<FavouriteService>();
         services.AddSingleton<OnlineGhostGraphqlService>();
         services.AddSingleton<OfflineGhostGraphqlService>();
         services.AddSingleton(_ => StorageApi.CreateModStorage(this));

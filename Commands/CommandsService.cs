@@ -1,4 +1,5 @@
-﻿using TNRD.Zeepkist.GTR.Commands.Voting;
+﻿using TNRD.Zeepkist.GTR.Commands.Favourites;
+using TNRD.Zeepkist.GTR.Commands.Voting;
 using TNRD.Zeepkist.GTR.Core;
 using ZeepSDK.ChatCommands;
 
@@ -9,6 +10,8 @@ public class CommandsService : IEagerService
     public CommandsService()
     {
         ChatCommandApi.RegisterLocalChatCommand<WorldRecordCommand>();
+        ChatCommandApi.RegisterLocalChatCommand<FavouriteCommand>();
+        ChatCommandApi.RegisterLocalChatCommand<UnfavouriteCommand>();
 
         ChatCommandApi.RegisterLocalChatCommand<DownvoteCommand>();
         ChatCommandApi.RegisterLocalChatCommand<DoubleDownvoteCommand>();
