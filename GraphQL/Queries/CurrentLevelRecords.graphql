@@ -1,0 +1,213 @@
+fragment CurrentLevelRecordFields on Query {
+    levelItems(
+        first: 1
+        filter: {
+            level: {
+                or: [
+                    { xxHash: { equalTo: $xxHash } }
+                    {
+                        and: [
+                            { hash: { equalTo: $hash } }
+                            { adventure: { equalTo: true } }
+                        ]
+                    }
+                ]
+            }
+        }
+    ) {
+        nodes {
+            name
+        }
+    }
+    levelPoints(
+        first: 1
+        filter: {
+            level: {
+                or: [
+                    { xxHash: { equalTo: $xxHash } }
+                    {
+                        and: [
+                            { hash: { equalTo: $hash } }
+                            { adventure: { equalTo: true } }
+                        ]
+                    }
+                ]
+            }
+        }
+    ) {
+        nodes {
+            points
+        }
+    }
+    personalBestGlobals(
+        first: 1
+        filter: {
+            level: {
+                or: [
+                    { xxHash: { equalTo: $xxHash } }
+                    {
+                        and: [
+                            { hash: { equalTo: $hash } }
+                            { adventure: { equalTo: true } }
+                        ]
+                    }
+                ]
+            }
+            user: { steamId: { equalTo: $steamId } }
+        }
+    ) {
+        nodes {
+            record {
+                id
+                time
+                dateCreated
+                userPointContributions(first: 1) {
+                    nodes {
+                        contributionRank
+                        levelPosition
+                        levelPoints
+                        levelDecayedPoints
+                        playerDecayedPoints
+                    }
+                }
+            }
+        }
+    }
+    worldRecordGlobals(
+        first: 1
+        filter: {
+            level: {
+                or: [
+                    { xxHash: { equalTo: $xxHash } }
+                    {
+                        and: [
+                            { hash: { equalTo: $hash } }
+                            { adventure: { equalTo: true } }
+                        ]
+                    }
+                ]
+            }
+        }
+    ) {
+        nodes {
+            record {
+                id
+                time
+                user {
+                    steamId
+                    steamName
+                }
+            }
+        }
+    }
+}
+
+query CurrentLevelRecords($xxHash: String!, $hash: String!, $steamId: BigInt!) {
+    levelItems(
+        first: 1
+        filter: {
+            level: {
+                or: [
+                    { xxHash: { equalTo: $xxHash } }
+                    {
+                        and: [
+                            { hash: { equalTo: $hash } }
+                            { adventure: { equalTo: true } }
+                        ]
+                    }
+                ]
+            }
+        }
+    ) {
+        nodes {
+            name
+        }
+    }
+    levelPoints(
+        first: 1
+        filter: {
+            level: {
+                or: [
+                    { xxHash: { equalTo: $xxHash } }
+                    {
+                        and: [
+                            { hash: { equalTo: $hash } }
+                            { adventure: { equalTo: true } }
+                        ]
+                    }
+                ]
+            }
+        }
+    ) {
+        nodes {
+            points
+        }
+    }
+    personalBestGlobals(
+        first: 1
+        filter: {
+            level: {
+                or: [
+                    { xxHash: { equalTo: $xxHash } }
+                    {
+                        and: [
+                            { hash: { equalTo: $hash } }
+                            { adventure: { equalTo: true } }
+                        ]
+                    }
+                ]
+            }
+            user: { steamId: { equalTo: $steamId } }
+        }
+    ) {
+        nodes {
+            record {
+                id
+                time
+                dateCreated
+                userPointContributions(first: 1) {
+                    nodes {
+                        contributionRank
+                        levelPosition
+                        levelPoints
+                        levelDecayedPoints
+                        playerDecayedPoints
+                    }
+                }
+            }
+        }
+    }
+    worldRecordGlobals(
+        first: 1
+        filter: {
+            level: {
+                or: [
+                    { xxHash: { equalTo: $xxHash } }
+                    {
+                        and: [
+                            { hash: { equalTo: $hash } }
+                            { adventure: { equalTo: true } }
+                        ]
+                    }
+                ]
+            }
+        }
+    ) {
+        nodes {
+            record {
+                id
+                time
+                user {
+                    steamId
+                    steamName
+                }
+            }
+        }
+    }
+}
+
+subscription WatchCurrentLevelRecords($xxHash: String!, $hash: String!, $steamId: BigInt!) {
+    query {
+        ...CurrentLevelRecordFields
+    }
+}

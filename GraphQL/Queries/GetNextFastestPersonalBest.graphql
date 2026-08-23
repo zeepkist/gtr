@@ -1,0 +1,25 @@
+query GetNextFastestPersonalBest($xxHash: String!, $hash: String!, $time: Float!) {
+    records(
+        first: 1
+        filter: {
+            personalBestGlobalsExist: true
+            time: { lessThan: $time }
+            level: {
+                or: [
+                    { xxHash: { equalTo: $xxHash } }
+                    {
+                        and: [
+                            { hash: { equalTo: $hash } }
+                            { adventure: { equalTo: true } }
+                        ]
+                    }
+                ]
+            }
+        }
+        orderBy: TIME_DESC
+    ) {
+        nodes {
+            time
+        }
+    }
+}

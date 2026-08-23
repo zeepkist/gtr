@@ -21,6 +21,9 @@ public class ConfigService : IEagerService
     public ConfigEntry<bool> ShowRecordSubmitMessage { get; private set; }
     public ConfigEntry<float> ShowRecordSubmitMessageDuration { get; private set; }
     public ConfigEntry<bool> ShowVoteReminderAfterVoting { get; private set; }
+    public ConfigEntry<bool> ShowPersonalBestImprovementMessages { get; private set; }
+    public ConfigEntry<bool> ShowPersonalBestBecameWorldRecordMessages { get; private set; }
+    public ConfigEntry<bool> ShowWorldRecordImprovementMessages { get; private set; }
 
     public ConfigEntry<bool> EnableGhosts { get; private set; }
 
@@ -340,6 +343,24 @@ public class ConfigService : IEagerService
             "1. Show Vote Reminder After Voting",
             true,
             "Should the vote reminder be shown when you have already voted on the current level");
+        ShowPersonalBestImprovementMessages = config.Bind(
+            "7. Chat Messages",
+            "2. Show PB Improvement",
+            true,
+            "Show message when you improve your Personal Best\n" +
+            "time (or set your first time)");
+        ShowPersonalBestBecameWorldRecordMessages = config.Bind(
+            "7. Chat Messages",
+            "3. Show PB Became WR",
+            true,
+            "Show message when your Personal Best becomes\n" +
+            "the new World Record time");
+        ShowWorldRecordImprovementMessages = config.Bind(
+            "7. Chat Messages",
+            "4. Show WR Improvement",
+            true,
+            "Show message when you improve your existing\n" +
+            "World Record time");
     }
 
     private void ConfigPlayback(ConfigFile config)

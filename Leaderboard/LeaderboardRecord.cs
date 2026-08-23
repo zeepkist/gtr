@@ -5,4 +5,5 @@ public class LeaderboardRecord
     public string SteamId { get; set; }
     public string SteamName { get; set; }
     public double Time { get; set; }
+    public string DateCreated { get; set; }
 }

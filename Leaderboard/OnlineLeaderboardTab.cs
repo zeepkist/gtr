@@ -9,38 +9,46 @@ using ZeepSDK.Extensions;
 using ZeepSDK.External.Cysharp.Threading.Tasks;
 using ZeepSDK.External.FluentResults;
 using ZeepSDK.Leaderboard.Pages;
+using ZeepSDK.Multiplayer;
+using ZeepSDK.Racing;
 
 namespace TNRD.Zeepkist.GTR.Leaderboard;
 
-public class OnlineLeaderboardTab : BaseMultiplayerLeaderboardTab
+public class OnlineLeaderboardTab : BaseMultiplayerLeaderboardTab, IDisposable
 {
     private readonly LeaderboardGraphqlService _graphqlService;
     private readonly MessengerService _messengerService;
-    private readonly List<IGetPersonalBests_Records_Nodes> _items = [];
+    private readonly List<LeaderboardRecord> _items = [];
 
     private CancellationTokenSource _cancellationTokenSource;
-
-    private int _personalBests;
+    private IDisposable _subscription;
+    private int _generation;
     private int? _levelPoints;
+    private string _title = "GTR Records";
 
     public OnlineLeaderboardTab(LeaderboardGraphqlService graphqlService, MessengerService messengerService)
     {
         _graphqlService = graphqlService;
         _messengerService = messengerService;
+        RacingApi.LevelLoaded += StopForContextChange;
+        RacingApi.Quit += StopForContextChange;
+        MultiplayerApi.DisconnectedFromGame += StopForContextChange;
     }
 
     protected override string GetLeaderboardTitle()
     {
-        return "GTR Records";
+        return _title;
     }
 
     protected override void OnEnable()
     {
-        InitializeAsync().Forget();
+        _title = "GTR Records";
+        LoadPage(CurrentPage);
     }
 
     protected override void OnDisable()
     {
+        StopPage();
     }
 
     protected override void OnDraw()
@@ -49,127 +57,141 @@ public class OnlineLeaderboardTab : BaseMultiplayerLeaderboardTab
         {
             GUI_OnlineLeaderboardPosition gui = Instance.leaderboard_tab_positions[i];
             if (i >= _items.Count)
-            {
                 continue;
-            }
 
             gui.gameObject.SetActive(true);
-            IGetPersonalBests_Records_Nodes item = _items[i];
             int index = CurrentPage * Instance.leaderboard_tab_positions.Count + i;
-            OnDrawItem(gui, item, index);
+            OnDrawItem(gui, _items[i], index);
         }
     }
 
     protected override void OnPageChanged(int previous, int current)
     {
-        LoadRecords(current);
+        LoadPage(current);
     }
 
-    private async UniTaskVoid InitializeAsync()
+    private void LoadPage(int page)
     {
+        StopPage();
         LevelGraphqlIdentity level = CurrentLevelGraphqlIdentity.Create();
         if (!level.IsAvailable)
             return;
 
-        Result<int?> levelPointsResult = await _graphqlService.GetLevelPoints(level);
-        if (levelPointsResult.IsFailed)
-        {
-            Logger.LogError("Failed to get level points");
-            levelPointsResult.NotifyErrors();
-            _levelPoints = null;
-        }
-        else
-        {
-            _levelPoints = levelPointsResult.Value;
-        }
-
-        Result<int> personalBestCount = await _graphqlService.GetPersonalBestCount(level);
-        if (personalBestCount.IsFailed)
-        {
-            Logger.LogError("Failed to get count");
-            personalBestCount.NotifyErrors();
-            return;
-        }
-
-        _personalBests = personalBestCount.Value;
-        MaxPages = _personalBests / Instance.leaderboard_tab_positions.Count;
-        UpdatePageNumber();
-
-        LoadRecords(CurrentPage);
-    }
-
-    private void LoadRecords(int page)
-    {
-        _cancellationTokenSource?.Cancel();
+        int generation = ++_generation;
+        int pageSize = Instance.leaderboard_tab_positions.Count;
         _cancellationTokenSource = new CancellationTokenSource();
-        LoadRecords(page, _cancellationTokenSource.Token).Forget();
+        _subscription = _graphqlService.WatchPage(
+            level,
+            page,
+            pageSize,
+            snapshot => ApplySnapshotAsync(snapshot, generation).Forget(),
+            error => Logger.LogWarning("GTR leaderboard subscription failed: " + error));
+        LoadInitialAsync(level, page, pageSize, generation, _cancellationTokenSource.Token).Forget();
     }
 
-    private async UniTaskVoid LoadRecords(int page, CancellationToken ct)
+    private async UniTaskVoid LoadInitialAsync(
+        LevelGraphqlIdentity level,
+        int page,
+        int pageSize,
+        int generation,
+        CancellationToken cancellationToken)
     {
-        LevelGraphqlIdentity level = CurrentLevelGraphqlIdentity.Create();
-        if (!level.IsAvailable)
+        Result<LeaderboardPageSnapshot> result =
+            await _graphqlService.GetPage(level, page, pageSize, cancellationToken);
+        if (cancellationToken.IsCancellationRequested || generation != _generation)
             return;
-
-        UniTask<Result<IGetPersonalBestsResult>> recordsTask =
-            _graphqlService.GetLeaderboardRecords(level, page, ct);
-        UniTask<Result<int>> userCountTask = _graphqlService.GetTotalUserCount(ct);
-
-        (Result<IGetPersonalBestsResult> recordsResult, Result<int> userCountResult) =
-            await UniTask.WhenAll(recordsTask, userCountTask);
-
-        if (ct.IsCancellationRequested)
-            return;
-
-        if (recordsResult.IsFailed)
+        if (result.IsFailed)
         {
-            Logger.LogError("Failed to load GTR records: " + recordsResult);
+            Logger.LogError("Failed to load GTR records: " + result);
             _messengerService.LogError("Failed to load GTR records");
             return;
         }
 
-        if (recordsResult.IsFailed)
-        {
-            Logger.LogError("Failed to get user count: " + recordsResult);
-            _messengerService.LogError("Failed to load GTR records");
-            return;
-        }
+        ApplySnapshot(result.Value);
+    }
 
+    private async UniTaskVoid ApplySnapshotAsync(LeaderboardPageSnapshot snapshot, int generation)
+    {
+        await UniTask.SwitchToMainThread();
+        if (generation != _generation)
+            return;
+        ApplySnapshot(snapshot);
+    }
+
+    private void ApplySnapshot(LeaderboardPageSnapshot snapshot)
+    {
+        if (snapshot == null)
+            return;
+
+        _levelPoints = snapshot.LevelPoints;
         _items.Clear();
-        _items.AddRange(recordsResult.Value.Records!.Nodes);
+        _items.AddRange(snapshot.Records);
+        MaxPages = LeaderboardPagination.GetMaxPageIndex(
+            snapshot.TotalRecords,
+            Instance.leaderboard_tab_positions.Count);
+        UpdatePageNumber();
+        _title = LeaderboardTextFormatter.FormatTitle(snapshot.LevelName);
+        Instance.leaderboardTitle.text = _title;
         Draw();
     }
 
-    private void OnDrawItem(GUI_OnlineLeaderboardPosition gui, IGetPersonalBests_Records_Nodes item, int index)
+    private void OnDrawItem(GUI_OnlineLeaderboardPosition gui, LeaderboardRecord item, int index)
     {
-        ZeepkistNetwork.TryGetPlayer(Convert.ToUInt64(item.User.SteamId), out gui.thePlayer);
+        ZeepkistNetwork.TryGetPlayer(Convert.ToUInt64(item.SteamId), out gui.thePlayer);
 
         gui.position.gameObject.SetActive(true);
         gui.position.text = (index + 1).ToString();
         gui.position.color = PlayerManager.Instance.GetColorFromPosition(index + 1);
         gui.favoriteButton.gameObject.SetActive(false);
-        ColorUtility.ToHtmlStringRGB(PlayerManager.Instance.GetChatColor());
 
-        if (ZeepkistNetwork.LocalPlayer.SteamID.ToString() == item.User.SteamId)
+        string playerMarkup;
+        if (ZeepkistNetwork.LocalPlayer.SteamID.ToString() == item.SteamId)
         {
             string playerColor = ColorUtility.ToHtmlStringRGB(ZeepkistNetwork.LocalPlayer.chatColor);
-            gui.player_name.text =
-                $"<color=#{playerColor}><link=\"{item.User.SteamId}\">{item.User.SteamName}</link></color>";
+            playerMarkup = $"<color=#{playerColor}><link=\"{item.SteamId}\">{item.SteamName}</link></color>";
         }
-        else if (gui.thePlayer != null && gui.thePlayer.SteamID.ToString() == item.User.SteamId)
+        else if (gui.thePlayer != null && gui.thePlayer.SteamID.ToString() == item.SteamId)
         {
             string playerColor = ColorUtility.ToHtmlStringRGB(gui.thePlayer.chatColor);
-            gui.player_name.text =
-                $"<color=#{playerColor}><link=\"{item.User.SteamId}\">{item.User.SteamName}</link></color>";
+            playerMarkup = $"<color=#{playerColor}><link=\"{item.SteamId}\">{item.SteamName}</link></color>";
         }
         else
-            gui.player_name.text = $"<link=\"{item.User.SteamId}\">{item.User.SteamName}</link>";
+        {
+            playerMarkup = $"<link=\"{item.SteamId}\">{item.SteamName}</link>";
+        }
 
+        gui.player_name.text = LeaderboardTextFormatter.AppendRecordDate(
+            playerMarkup,
+            item.DateCreated,
+            DateTimeOffset.Now);
         gui.time.text = item.Time.GetFormattedTime();
         gui.pointsWon.gameObject.SetActive(_levelPoints.HasValue);
         if (_levelPoints.HasValue)
-        {
             gui.pointsWon.text = $"(+{(int)Math.Round(_levelPoints.Value * Math.Pow(0.985, index))})";
-        }
+    }
+
+    private void StopPage()
+    {
+        _generation++;
+        _subscription?.Dispose();
+        _subscription = null;
+        _cancellationTokenSource?.Cancel();
+        _cancellationTokenSource?.Dispose();
+        _cancellationTokenSource = null;
+    }
+
+    private void StopForContextChange()
+    {
+        StopPage();
+        _items.Clear();
+        _title = "GTR Records";
+    }
+
+    public void Dispose()
+    {
+        RacingApi.LevelLoaded -= StopForContextChange;
+        RacingApi.Quit -= StopForContextChange;
+        MultiplayerApi.DisconnectedFromGame -= StopForContextChange;
+        StopPage();
     }
 }

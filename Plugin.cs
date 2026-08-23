@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Net.Http;
+using System.Net.WebSockets;
 using BepInEx;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -88,6 +89,7 @@ public class Plugin : BaseUnityPlugin
         services.AddEagerService<LevelRequestService>();
         services.AddEagerService<OfflineGhostsService>();
         services.AddEagerService<OnlineGhostsService>();
+        services.AddEagerService<RecordFeedbackService>();
         services.AddEagerService<RecordingService>();
         services.AddEagerService<PlayerLoopService>();
         services.AddSingleton<BulkGhostModeState>();
@@ -112,6 +114,7 @@ public class Plugin : BaseUnityPlugin
         services.AddEagerService<GhostTimelineOverlayVisibilityService>();
         services.AddEagerService<GhostPlaybackInputService>();
         services.AddEagerService<LeaderboardService>();
+        services.AddEagerService<CurrentLevelRecordService>();
         services.AddEagerService<RecordHolderService>();
         services.AddEagerService<DiscordService>();
         services.AddEagerService<LaLigaCensorshipDialogService>();
@@ -129,7 +132,6 @@ public class Plugin : BaseUnityPlugin
         services.AddSingleton<OnlineGhostGraphqlService>();
         services.AddSingleton<OfflineGhostGraphqlService>();
         services.AddSingleton(_ => StorageApi.CreateModStorage(this));
-        services.AddSingleton<RecordHolderGraphqlService>();
         services.AddSingleton<LevelBrowser.LevelBrowseService>();
         services.AddSingleton<LevelBrowser.LevelBrowserSession>();
         services.AddSingleton<LevelBrowser.UI.LevelThumbnailCache>();
@@ -175,20 +177,36 @@ public class Plugin : BaseUnityPlugin
             AddDefaultHeaders(client);
         });
         services.AddGtrClient(StrawberryShake.ExecutionStrategy.CacheAndNetwork)
-            .ConfigureHttpClient((provider,client) =>
+            .ConfigureHttpClient((provider, client) =>
             {
                 var configService = provider.GetRequiredService<ConfigService>();
                 client.BaseAddress = ServiceUriValidator.ParseBaseAddress(configService.SelectedGraphQLUrl, "GraphQL URL");
                 client.Timeout = TimeSpan.FromSeconds(30);
                 AddDefaultHeaders(client);
+            })
+            .ConfigureWebSocketClient((provider, client) =>
+            {
+                var configService = provider.GetRequiredService<ConfigService>();
+                Uri graphQlUri = ServiceUriValidator.ParseBaseAddress(
+                    configService.SelectedGraphQLUrl,
+                    "GraphQL URL");
+                client.Uri = GraphqlWebSocketUri.FromHttp(graphQlUri);
+                if (client.Socket is ClientWebSocket socket)
+                    AddDefaultHeaders((name, value) => socket.Options.SetRequestHeader(name, value));
             });
     }
 
     private static void AddDefaultHeaders(HttpClient client)
     {
-        client.DefaultRequestHeaders.Add("X-Zeepkist-Version", $"{PlayerManager.Instance.version.version}.{PlayerManager.Instance.version.patch}");
-        client.DefaultRequestHeaders.Add("X-Zeepkist-Major-Version", PlayerManager.Instance.version.version.ToString());
-        client.DefaultRequestHeaders.Add("X-GTR-Version", MyPluginInfo.PLUGIN_VERSION);
-        client.DefaultRequestHeaders.Add("X-Steam-ID", Steamworks.SteamClient.SteamId.ToString());
+        AddDefaultHeaders((name, value) => client.DefaultRequestHeaders.Add(name, value));
+    }
+
+    private static void AddDefaultHeaders(Action<string, string> addHeader)
+    {
+        addHeader("X-Zeepkist-Version",
+            $"{PlayerManager.Instance.version.version}.{PlayerManager.Instance.version.patch}");
+        addHeader("X-Zeepkist-Major-Version", PlayerManager.Instance.version.version.ToString());
+        addHeader("X-GTR-Version", MyPluginInfo.PLUGIN_VERSION);
+        addHeader("X-Steam-ID", Steamworks.SteamClient.SteamId.ToString());
     }
 }
