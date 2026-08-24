@@ -8,7 +8,6 @@ public class ServiceUriValidatorTests
     [Theory]
     [InlineData("https://backend.zeepki.st")]
     [InlineData("http://127.0.0.1:3001")]
-    [InlineData("http://127.0.0.1:3001")]
     public void ParseBaseAddressAcceptsSecureAndLoopbackUrls(string value)
     {
         Uri result = ServiceUriValidator.ParseBaseAddress(value, "Test URL");
