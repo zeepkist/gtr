@@ -23,6 +23,7 @@ public sealed class RecordFeedbackMessageData
     public int? PreviousPosition { get; set; }
     public int? Position { get; set; }
     public double? LevelDecayedPoints { get; set; }
+    public double? PlayerDecayedPoints { get; set; }
 }
 
 public static class RecordFeedbackFormatter
@@ -87,6 +88,11 @@ public static class RecordFeedbackFormatter
     public static bool RequiresNextFastest(RecordFeedbackKind kind)
     {
         return kind is RecordFeedbackKind.PersonalBest or RecordFeedbackKind.FirstPersonalBest;
+    }
+
+    public static bool IsWorldRecordPosition(int? levelPosition)
+    {
+        return levelPosition == 1;
     }
 
     public static string Format(RecordFeedbackMessageData data)

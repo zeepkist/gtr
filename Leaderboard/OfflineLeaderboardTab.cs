@@ -206,15 +206,14 @@ public class OfflineLeaderboardTab : BaseSingleplayerLeaderboardTab, IDisposable
             playerMarkup = $"<link=\"{item.SteamId}\">{item.SteamName}</link>";
         }
 
-        gui.player_name.text = LeaderboardTextFormatter.AppendRecordDate(
-            playerMarkup,
-            item.DateCreated,
-            DateTimeOffset.Now);
+        gui.player_name.text = playerMarkup;
         gui.time.text = item.Time.GetFormattedTime();
         gui.pointsCurrent.gameObject.SetActive(false);
-        gui.pointsWon.gameObject.SetActive(item.LevelDecayedPoints.HasValue);
-        if (item.LevelDecayedPoints.HasValue)
-            gui.pointsWon.text = $"(+{(int)Math.Round(item.LevelDecayedPoints.Value)})";
+        gui.pointsWon.gameObject.SetActive(true);
+        gui.pointsWon.text = LeaderboardTextFormatter.PrefixRecordDate(
+            item.LevelDecayedPoints.HasValue ? $"(+{(int)Math.Round(item.LevelDecayedPoints.Value)})" : string.Empty,
+            item.DateCreated,
+            DateTimeOffset.Now);
     }
 
     private void OnShowAllGhostsClicked()

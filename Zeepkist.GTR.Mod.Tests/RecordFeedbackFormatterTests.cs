@@ -43,7 +43,7 @@ public class RecordFeedbackFormatterTests
         });
 
         Assert.Equal(
-            $"<size=75%>PB improved by {TextColour.Pink.Wrap("00:01.000")}</size><br>" +
+            $"<size=75%><color=#FACC15>[GTR]</color> PB improved by {TextColour.Pink.Wrap("00:01.000")}</size><br>" +
             $"<size=75%>#8 → #5 <size=60%>({TextColour.Yellow.Wrap("124pts")})</size></size><br>" +
             $"<size=50%>Gap to next player: {TextColour.Pink.Wrap("00:00.250")}</size>",
             result);
@@ -62,7 +62,7 @@ public class RecordFeedbackFormatterTests
         });
 
         Assert.Equal(
-            $"<size=75%>WR improved by {TextColour.Pink.Wrap("00:00.500")}</size><br>" +
+            $"<size=75%><color=#FACC15>[GTR]</color> WR improved by {TextColour.Pink.Wrap("00:00.500")}</size><br>" +
             $"<size=75%>#2 → {TextColour.Yellow.Wrap("#1")} " +
             $"<size=60%>({TextColour.Yellow.Wrap("100pts")})</size></size>",
             result);
@@ -148,5 +148,14 @@ public class RecordFeedbackFormatterTests
         bool expected)
     {
         Assert.Equal(expected, RecordFeedbackFormatter.RequiresNextFastest(kind));
+    }
+
+    [Theory]
+    [InlineData(1, true)]
+    [InlineData(2, false)]
+    [InlineData(null, false)]
+    public void DetectsWorldRecordFromLevelPosition(int? levelPosition, bool expected)
+    {
+        Assert.Equal(expected, RecordFeedbackFormatter.IsWorldRecordPosition(levelPosition));
     }
 }

@@ -48,7 +48,7 @@ public sealed class CurrentLevelRecordService : IEagerService, IDisposable
 
         int generation = ++_generation;
         _subscription = _gtrClient.WatchCurrentLevelRecords
-            .Watch(_level.XxHash, _level.Hash, SteamClient.SteamId.ToString())
+            .Watch(_level.XxHash, SteamClient.SteamId.ToString())
             .Subscribe(new OperationObserver<IOperationResult<IWatchCurrentLevelRecordsResult>>(
                 result => OnSubscriptionResult(result, _level.CacheKey, generation).Forget(),
                 error => _logger.LogWarning(error, "Current-level record subscription failed")));
@@ -80,32 +80,31 @@ public sealed class CurrentLevelRecordService : IEagerService, IDisposable
     {
         IWatchCurrentLevelRecords_Query_PersonalBest_Nodes personalBest =
             data?.PersonalBest?.Nodes.FirstOrDefault();
-        IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_UserPointContributions_Nodes contribution =
-            personalBest?.UserPointContributions?.Nodes.FirstOrDefault();
         IWatchCurrentLevelRecords_Query_WorldRecord_Nodes worldRecord =
             data?.WorldRecord?.Nodes.FirstOrDefault();
 
         return new CurrentLevelRecordSnapshot
         {
             LevelKey = levelKey,
-            PersonalBest = personalBest == null
+            PersonalBest = personalBest?.Time.HasValue != true
                 ? null
                 : new PersonalBestHolder
                 {
-                    RecordId = personalBest.Id,
-                    Time = personalBest.Time,
-                    DateCreated = personalBest.DateCreated,
-                    Rank = contribution?.LevelPosition,
-                    LevelDecayedPoints = contribution?.LevelDecayedPoints
+                    Time = personalBest.Time.Value,
+                    Rank = personalBest.LevelPosition,
+                    LevelDecayedPoints = personalBest.LevelDecayedPoints,
+                    PlayerDecayedPoints = personalBest.PlayerDecayedPoints
                 },
-            WorldRecord = worldRecord == null
+            WorldRecord = worldRecord?.Time.HasValue != true
                 ? null
                 : new WorldRecordHolder
                 {
-                    RecordId = worldRecord.Id,
-                    Time = worldRecord.Time,
-                    SteamId = worldRecord.User?.SteamId,
-                    SteamName = worldRecord.User?.SteamName
+                    Time = worldRecord.Time.Value,
+                    Rank = worldRecord.LevelPosition,
+                    SteamId = worldRecord.UserSteamId,
+                    SteamName = worldRecord.UserName,
+                    LevelDecayedPoints = worldRecord.LevelDecayedPoints,
+                    PlayerDecayedPoints = worldRecord.PlayerDecayedPoints
                 }
         };
     }

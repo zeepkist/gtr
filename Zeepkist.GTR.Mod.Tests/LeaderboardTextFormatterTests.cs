@@ -18,7 +18,7 @@ public class LeaderboardTextFormatterTests
     [InlineData(2505600, "29 days ago")]
     public void FormatsRelativeAgeBoundaries(int ageSeconds, string expected)
     {
-        string result = LeaderboardTextFormatter.AppendRecordDate(
+        string result = LeaderboardTextFormatter.PrefixRecordDate(
             "player",
             Now.AddSeconds(-ageSeconds).ToString("O"),
             Now);
@@ -32,7 +32,7 @@ public class LeaderboardTextFormatterTests
     [InlineData(31449600, "12 months ago")]
     public void FormatsMonthsThroughFirstYear(int ageSeconds, string expected)
     {
-        string result = LeaderboardTextFormatter.AppendRecordDate(
+        string result = LeaderboardTextFormatter.PrefixRecordDate(
             "player",
             Now.AddSeconds(-ageSeconds).ToString("O"),
             Now);
@@ -45,7 +45,7 @@ public class LeaderboardTextFormatterTests
     {
         DateTimeOffset created = Now.AddDays(-365);
 
-        string result = LeaderboardTextFormatter.AppendRecordDate("player", created.ToString("O"), Now);
+        string result = LeaderboardTextFormatter.PrefixRecordDate("player", created.ToString("O"), Now);
 
         Assert.Contains(created.ToLocalTime().ToString("yyyy/MM/dd"), result);
     }
@@ -53,7 +53,7 @@ public class LeaderboardTextFormatterTests
     [Fact]
     public void FutureTimestampClampsToJustNow()
     {
-        string result = LeaderboardTextFormatter.AppendRecordDate(
+        string result = LeaderboardTextFormatter.PrefixRecordDate(
             "player",
             Now.AddMinutes(5).ToString("O"),
             Now);
@@ -65,18 +65,19 @@ public class LeaderboardTextFormatterTests
     public void MalformedTimestampLeavesMarkupUnchanged()
     {
         Assert.Equal("<link=\"1\">player</link>",
-            LeaderboardTextFormatter.AppendRecordDate("<link=\"1\">player</link>", "bad", Now));
+            LeaderboardTextFormatter.PrefixRecordDate("<link=\"1\">player</link>", "bad", Now));
     }
 
     [Fact]
-    public void AppendsSmallDateAfterPlayerClosingMarkup()
+    public void PrefixesSmallDateBeforeText()
     {
-        string result = LeaderboardTextFormatter.AppendRecordDate(
+        string result = LeaderboardTextFormatter.PrefixRecordDate(
             "<color=#fff><link=\"1\">player</link></color>",
             Now.AddMinutes(-2).ToString("O"),
             Now);
 
-        Assert.StartsWith("<color=#fff><link=\"1\">player</link></color> <size=50%>", result);
+        Assert.StartsWith("<size=50%>", result);
+        Assert.EndsWith(" <color=#fff><link=\"1\">player</link></color>", result);
     }
 
     [Fact]

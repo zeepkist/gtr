@@ -1,66 +1,36 @@
-fragment CurrentLevelRecordFields on Query {
-    personalBest: records(
-        first: 1
-        filter: {
-            personalBestGlobalsExist: true
-            level: {
-                or: [
-                    { xxHash: { equalTo: $xxHash } }
-                    {
-                        and: [
-                            { hash: { equalTo: $hash } }
-                            { adventure: { equalTo: true } }
-                        ]
-                    }
-                ]
-            }
-            user: { steamId: { equalTo: $steamId } }
-        }
-        orderBy: [TIME_ASC, DATE_CREATED_ASC]
-    ) {
-        nodes {
-            id
-            time
-            dateCreated
-            userPointContributions(first: 1) {
-                nodes {
-                    levelPosition
-                    levelDecayedPoints
-                }
-            }
-        }
-    }
-    worldRecord: records(
-        first: 1
-        filter: {
-            worldRecordGlobalsExist: true
-            level: {
-                or: [
-                    { xxHash: { equalTo: $xxHash } }
-                    {
-                        and: [
-                            { hash: { equalTo: $hash } }
-                            { adventure: { equalTo: true } }
-                        ]
-                    }
-                ]
-            }
-        }
-        orderBy: [TIME_ASC, DATE_CREATED_ASC]
-    ) {
-        nodes {
-            id
-            time
-            user {
-                steamId
-                steamName
-            }
-        }
-    }
+fragment RecordHolderFields on RecordHistoryEntry {
+    levelPosition
+    time
+    levelDecayedPoints
+    userSteamId
+    userName
+    playerDecayedPoints
 }
 
-subscription WatchCurrentLevelRecords($xxHash: String!, $hash: String!, $steamId: BigInt!) {
+subscription WatchCurrentLevelRecords($xxHash: String!, $steamId: BigInt!) {
     query {
-        ...CurrentLevelRecordFields
+        personalBest: recordHistoryEntries(
+            filter: {
+                historyView: { equalTo: "personal-bests" }
+                levelXxHash: { equalTo: $xxHash }
+                userSteamId: { equalTo: $steamId }
+            }
+            first: 1
+        ) {
+            nodes {
+                ...RecordHolderFields
+            }
+        }
+        worldRecord: recordHistoryEntries(
+            filter: {
+                historyView: { equalTo: "world-records" }
+                levelXxHash: { equalTo: $xxHash }
+            }
+            first: 1
+        ) {
+            nodes {
+                ...RecordHolderFields
+            }
+        }
     }
 }

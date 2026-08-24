@@ -152,7 +152,7 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
                                     Math.Abs(personalBest.Time - pending.SubmittedTime) < 0.001;
         if (matchingPersonalBest)
         {
-            bool isWorldRecord = snapshot.WorldRecord?.RecordId == personalBest.RecordId;
+            bool isWorldRecord = RecordFeedbackFormatter.IsWorldRecordPosition(personalBest.Rank);
             pending.ConfirmedKind = ClassifyConfirmed(pending, isWorldRecord);
             if (!ShouldShow(pending.ConfirmedKind.Value))
             {
@@ -192,7 +192,8 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
             WasFirstPersonalBest = !pending.Baseline.PersonalBestTime.HasValue,
             PreviousPosition = pending.Baseline.PersonalBestPosition,
             Position = matchingPersonalBest ? personalBest.Rank : null,
-            LevelDecayedPoints = matchingPersonalBest ? personalBest.LevelDecayedPoints : null
+            LevelDecayedPoints = matchingPersonalBest ? personalBest.LevelDecayedPoints : null,
+            PlayerDecayedPoints = matchingPersonalBest ? personalBest.PlayerDecayedPoints : null
         };
 
         CompleteWithoutMessage(pending);
