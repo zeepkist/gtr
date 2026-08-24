@@ -9,8 +9,7 @@ using UnityEngine;
 
 namespace TNRD.Zeepkist.GTR.Patching.Patches;
 
-[HarmonyPatch(typeof(FlyingCameraScript), nameof(FlyingCameraScript.LateUpdate))]
-public static class FlyingCameraScript_LateUpdate_TimelineMode
+internal static class FlyingCameraTimelineLook
 {
     private const float EditorLookFrameFactor = 0.01666666666f;
 
@@ -31,38 +30,7 @@ public static class FlyingCameraScript_LateUpdate_TimelineMode
     private static PlaybackUiInputState PlaybackUiInput =>
         _playbackUiInputState ??= ServiceHelper.Instance.GetRequiredService<PlaybackUiInputState>();
 
-    private static void Prefix(FlyingCameraScript __instance)
-    {
-        if (!ShouldApplyTimelineLook(__instance))
-            return;
-
-        SavedLookStates[__instance] = new TimelineLookState
-        {
-            Rotation = __instance.transform.rotation,
-            HelperLocalEuler = GetHelperLocalEuler(__instance)
-        };
-    }
-
-    private static void Postfix(FlyingCameraScript __instance)
-    {
-        if (!ShouldApplyTimelineLook(__instance))
-            return;
-
-        if (!SavedLookStates.TryGetValue(__instance, out TimelineLookState saved))
-            return;
-
-        SavedLookStates.Remove(__instance);
-
-        if (PlaybackUiInput.IsPointerOverGtrWindow || !Input.GetMouseButton(1))
-        {
-            RestoreSavedLook(__instance, saved);
-            return;
-        }
-
-        ApplyEditorLook(__instance, saved);
-    }
-
-    private static bool ShouldApplyTimelineLook(FlyingCameraScript camera)
+    public static bool ShouldApply(FlyingCameraScript camera)
     {
         if (camera.GameMaster == null || !camera.GameMaster.isPhotoMode)
             return false;
@@ -71,6 +39,29 @@ public static class FlyingCameraScript_LateUpdate_TimelineMode
             return false;
 
         return camera.currentCameraState < 3;
+    }
+
+    public static void Save(FlyingCameraScript camera)
+    {
+        SavedLookStates[camera] = new TimelineLookState
+        {
+            Rotation = camera.transform.rotation,
+            HelperLocalEuler = GetHelperLocalEuler(camera)
+        };
+    }
+
+    public static void RestoreOrApplyEditorLook(FlyingCameraScript camera)
+    {
+        if (!SavedLookStates.Remove(camera, out var saved))
+            return;
+
+        if (PlaybackUiInput.IsPointerOverGtrWindow || !Input.GetMouseButton(1))
+        {
+            RestoreSavedLook(camera, saved);
+            return;
+        }
+
+        ApplyEditorLook(camera, saved);
     }
 
     private static void RestoreSavedLook(FlyingCameraScript camera, TimelineLookState saved)
@@ -96,9 +87,9 @@ public static class FlyingCameraScript_LateUpdate_TimelineMode
 
     private static void ApplyEditorLook(FlyingCameraScript camera, TimelineLookState saved)
     {
-        float sensitivity = PlayerManager.Instance.instellingen.Settings.editor_sensitivity * EditorLookFrameFactor;
-        float yawDelta = Input.GetAxis("Mouse X") * sensitivity;
-        float pitchDelta = Input.GetAxis("Mouse Y") * sensitivity;
+        var sensitivity = PlayerManager.Instance.instellingen.Settings.editor_sensitivity * EditorLookFrameFactor;
+        var yawDelta = Input.GetAxis("Mouse X") * sensitivity;
+        var pitchDelta = Input.GetAxis("Mouse Y") * sensitivity;
 
         if (camera.currentCameraState == 2)
         {
@@ -111,8 +102,8 @@ public static class FlyingCameraScript_LateUpdate_TimelineMode
         }
 
         var euler = saved.Rotation.eulerAngles;
-        float pitch = NormalizePitch(euler.x) - pitchDelta;
-        float yaw = euler.y + yawDelta;
+        var pitch = NormalizePitch(euler.x) - pitchDelta;
+        var yaw = euler.y + yawDelta;
         pitch = Mathf.Clamp(pitch, -90f, 90f);
 
         camera.transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
@@ -129,14 +120,14 @@ public static class FlyingCameraScript_LateUpdate_TimelineMode
 
     private static void SyncCameraXFromRotation(FlyingCameraScript camera)
     {
-        float pitch = NormalizePitch(camera.transform.eulerAngles.x);
+        var pitch = NormalizePitch(camera.transform.eulerAngles.x);
         CameraXField?.SetValue(camera, pitch);
     }
 
     private static float NormalizePitch(float pitch)
     {
         if (pitch > 180f)
-            pitch -= 360f;
+            return pitch - 360f;
 
         return pitch;
     }
@@ -145,5 +136,25 @@ public static class FlyingCameraScript_LateUpdate_TimelineMode
     {
         public Quaternion Rotation;
         public Vector3 HelperLocalEuler;
+    }
+}
+
+[HarmonyPatch(typeof(FlyingCameraScript), nameof(FlyingCameraScript.LateUpdate))]
+public static class FlyingCameraScript_LateUpdate_TimelineMode
+{
+    private static void Prefix(FlyingCameraScript __instance)
+    {
+        if (!FlyingCameraTimelineLook.ShouldApply(__instance))
+            return;
+
+        FlyingCameraTimelineLook.Save(__instance);
+    }
+
+    private static void Postfix(FlyingCameraScript __instance)
+    {
+        if (!FlyingCameraTimelineLook.ShouldApply(__instance))
+            return;
+
+        FlyingCameraTimelineLook.RestoreOrApplyEditorLook(__instance);
     }
 }
