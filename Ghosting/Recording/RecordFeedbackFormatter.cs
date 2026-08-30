@@ -122,7 +122,7 @@ public static class RecordFeedbackFormatter
                      data.PreviousPosition.Value > data.Position.Value)
             {
                 lines.Add(
-                    $"<size=70%>#{data.PreviousPosition.Value} → {position} <size=60%>({score})</size></size>");
+                    $"<size=70%>#{data.PreviousPosition.Value} -> {position} <size=60%>({score})</size></size>");
             }
         }
 

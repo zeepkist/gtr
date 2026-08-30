@@ -28,7 +28,7 @@ public static class LeaderboardTextFormatter
         string color = FormatAgeColor(age);
         string padding = originalText.Length > 0 ? " " : string.Empty;
 
-        return $"<size=50%><color={color}>{text}</color></size>{padding}{originalText}";
+        return $"{originalText}{padding}<size=50%><color={color}>{text}</color></size>";
     }
 
     public static string FormatTitle(string levelName)
