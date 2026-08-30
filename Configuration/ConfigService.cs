@@ -67,6 +67,7 @@ public class ConfigService : IEagerService
     public string SelectedBackendUrl => ServiceUrlSelector.Select(
         UseLocalDevelopmentBackend.Value,
         UseAlternativeDomainsInSpain.Value,
+        false,
         ProductionBackendUrl,
         AlternativeSpainBackendUrl,
         LocalDevelopmentBackendUrl);
@@ -74,6 +75,7 @@ public class ConfigService : IEagerService
     public string SelectedGraphQLUrl => ServiceUrlSelector.Select(
         UseLocalDevelopmentGraphQL.Value,
         UseAlternativeDomainsInSpain.Value,
+        false,
         ProductionGraphQLUrl,
         AlternativeSpainGraphQLUrl,
         LocalDevelopmentGraphQLUrl);

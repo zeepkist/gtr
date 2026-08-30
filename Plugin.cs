@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net.Http;
 using System.Net.WebSockets;
+using System.Threading;
 using BepInEx;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,6 +13,7 @@ using TNRD.Zeepkist.GTR.Assets;
 using TNRD.Zeepkist.GTR.Authentication;
 using TNRD.Zeepkist.GTR.Commands;
 using TNRD.Zeepkist.GTR.Configuration;
+using TNRD.Zeepkist.GTR.Connectivity;
 using TNRD.Zeepkist.GTR.Core;
 using TNRD.Zeepkist.GTR.Dialogs;
 using TNRD.Zeepkist.GTR.Discord;
@@ -83,6 +85,7 @@ public class Plugin : BaseUnityPlugin
         services.AddSingleton(Info);
         services.AddSingleton<IHostLifetime, NoopHostLifetime>();
         services.AddMemoryCache();
+        services.AddEagerService<SpainRoutingService>();
         services.AddEagerService<AuthenticationService>();
         services.AddEagerService<CommandsService>();
         services.AddEagerService<ConfigService>();
@@ -150,10 +153,14 @@ public class Plugin : BaseUnityPlugin
         services.AddTransient<V7Reader>();
         services.AddSingleton<ApiHttpClient>();
         services.AddHttpClient();
-        services.AddHttpClient(LaLigaCensorshipDialogService.CountryDetectionClientKey, client =>
+        services.AddHttpClient(SpainRoutingService.TraceClientKey, client =>
         {
-            client.BaseAddress = new Uri("https://ipinfo.io/");
-            client.Timeout = TimeSpan.FromSeconds(10);
+            client.BaseAddress = CloudflareTraceRequest.BaseAddress;
+            client.Timeout = CloudflareTraceRequest.Timeout;
+        });
+        services.AddHttpClient(AlternativeDomainFallbackHandler.TransportClientKey, client =>
+        {
+            client.Timeout = AlternativeDomainFallbackHandler.RequestTimeout;
         });
         services.AddHttpClient(GhostRepository.ClientKey, client =>
         {
@@ -170,25 +177,41 @@ public class Plugin : BaseUnityPlugin
                 configService.MaximumGhostCacheMegabytes.Value * 1024L * 1024L);
         });
         services.AddHttpClient(ApiHttpClient.ClientKey, (provider, client) =>
-        {
-            var configService = provider.GetRequiredService<ConfigService>();
-            client.BaseAddress = ServiceUriValidator.ParseBaseAddress(configService.SelectedBackendUrl, "Backend API URL");
-            client.Timeout = TimeSpan.FromSeconds(30);
-            AddDefaultHeaders(client);
-        });
-        services.AddGtrClient(StrawberryShake.ExecutionStrategy.CacheAndNetwork)
-            .ConfigureHttpClient((provider, client) =>
             {
-                var configService = provider.GetRequiredService<ConfigService>();
-                client.BaseAddress = ServiceUriValidator.ParseBaseAddress(configService.SelectedGraphQLUrl, "GraphQL URL");
-                client.Timeout = TimeSpan.FromSeconds(30);
+                var routingService = provider.GetRequiredService<SpainRoutingService>();
+                client.BaseAddress = ServiceUriValidator.ParseBaseAddress(
+                    routingService.SelectedBackendUrl,
+                    "Backend API URL");
+                client.Timeout = Timeout.InfiniteTimeSpan;
                 AddDefaultHeaders(client);
             })
+            .AddHttpMessageHandler(provider => new AlternativeDomainFallbackHandler(
+                provider.GetRequiredService<SpainRoutingService>(),
+                ServiceEndpoint.Backend,
+                () => provider.GetRequiredService<IHttpClientFactory>()
+                    .CreateClient(AlternativeDomainFallbackHandler.TransportClientKey)));
+        services.AddGtrClient(StrawberryShake.ExecutionStrategy.CacheAndNetwork)
+            .ConfigureHttpClient(
+                (provider, client) =>
+                {
+                    var routingService = provider.GetRequiredService<SpainRoutingService>();
+                    client.BaseAddress = ServiceUriValidator.ParseBaseAddress(
+                        routingService.SelectedGraphQLUrl,
+                        "GraphQL URL");
+                    client.Timeout = Timeout.InfiniteTimeSpan;
+                    AddDefaultHeaders(client);
+                },
+                clientBuilder => clientBuilder.AddHttpMessageHandler(provider =>
+                    new AlternativeDomainFallbackHandler(
+                        provider.GetRequiredService<SpainRoutingService>(),
+                        ServiceEndpoint.GraphQL,
+                        () => provider.GetRequiredService<IHttpClientFactory>()
+                            .CreateClient(AlternativeDomainFallbackHandler.TransportClientKey))))
             .ConfigureWebSocketClient((provider, client) =>
             {
-                var configService = provider.GetRequiredService<ConfigService>();
+                var routingService = provider.GetRequiredService<SpainRoutingService>();
                 Uri graphQlUri = ServiceUriValidator.ParseBaseAddress(
-                    configService.SelectedGraphQLUrl,
+                    routingService.SelectedGraphQLUrl,
                     "GraphQL URL");
                 client.Uri = GraphqlWebSocketUri.FromHttp(graphQlUri);
                 if (client.Socket is ClientWebSocket socket)

@@ -122,14 +122,14 @@ public static class RecordFeedbackFormatter
                      data.PreviousPosition.Value > data.Position.Value)
             {
                 lines.Add(
-                    $"<size=75%>#{data.PreviousPosition.Value} → {position} <size=60%>({score})</size></size>");
+                    $"<size=70%>#{data.PreviousPosition.Value} → {position} <size=60%>({score})</size></size>");
             }
         }
 
         if (!string.IsNullOrEmpty(data.NextDelta) &&
             data.Kind is RecordFeedbackKind.PersonalBest or RecordFeedbackKind.FirstPersonalBest)
         {
-            lines.Add($"<size=50%>Gap to next player: {TextColour.Pink.Wrap(data.NextDelta)}</size>");
+            lines.Add($"<size=70%>Gap to next player: {TextColour.Pink.Wrap(data.NextDelta)}</size>");
         }
 
         return string.Join("<br>", lines);
