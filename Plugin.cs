@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.WebSockets;
 using System.Threading;
 using BepInEx;
+using BepInEx.Bootstrap;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -83,6 +84,9 @@ public class Plugin : BaseUnityPlugin
         services.AddSingleton(Config);
         services.AddSingleton(Logger);
         services.AddSingleton(Info);
+        services.AddSingleton(new NetworkUserAgent(
+            MyPluginInfo.PLUGIN_VERSION,
+            Chainloader.PluginInfos["ZeepSDK"].Metadata.Version.ToString()));
         services.AddSingleton<IHostLifetime, NoopHostLifetime>();
         services.AddMemoryCache();
         services.AddEagerService<SpainRoutingService>();
@@ -153,17 +157,22 @@ public class Plugin : BaseUnityPlugin
         services.AddTransient<V7Reader>();
         services.AddSingleton<ApiHttpClient>();
         services.AddHttpClient();
-        services.AddHttpClient(SpainRoutingService.TraceClientKey, client =>
+        services.AddHttpClient(SpainRoutingService.TraceClientKey, (provider, client) =>
         {
+            provider.GetRequiredService<NetworkUserAgent>().Apply(client);
             client.BaseAddress = CloudflareTraceRequest.BaseAddress;
             client.Timeout = CloudflareTraceRequest.Timeout;
         });
-        services.AddHttpClient(AlternativeDomainFallbackHandler.TransportClientKey, client =>
+        services.AddHttpClient(
+            AlternativeDomainFallbackHandler.TransportClientKey,
+            (provider, client) =>
+            {
+                provider.GetRequiredService<NetworkUserAgent>().Apply(client);
+                client.Timeout = AlternativeDomainFallbackHandler.RequestTimeout;
+            });
+        services.AddHttpClient(GhostRepository.ClientKey, (provider, client) =>
         {
-            client.Timeout = AlternativeDomainFallbackHandler.RequestTimeout;
-        });
-        services.AddHttpClient(GhostRepository.ClientKey, client =>
-        {
+            provider.GetRequiredService<NetworkUserAgent>().Apply(client);
             client.Timeout = TimeSpan.FromSeconds(60);
         });
         services.AddSingleton(provider =>
@@ -183,6 +192,7 @@ public class Plugin : BaseUnityPlugin
                     routingService.SelectedBackendUrl,
                     "Backend API URL");
                 client.Timeout = Timeout.InfiniteTimeSpan;
+                provider.GetRequiredService<NetworkUserAgent>().Apply(client);
                 AddDefaultHeaders(client);
             })
             .AddHttpMessageHandler(provider => new AlternativeDomainFallbackHandler(
@@ -199,6 +209,7 @@ public class Plugin : BaseUnityPlugin
                         routingService.SelectedGraphQLUrl,
                         "GraphQL URL");
                     client.Timeout = Timeout.InfiniteTimeSpan;
+                    provider.GetRequiredService<NetworkUserAgent>().Apply(client);
                     AddDefaultHeaders(client);
                 },
                 clientBuilder => clientBuilder.AddHttpMessageHandler(provider =>
@@ -215,7 +226,11 @@ public class Plugin : BaseUnityPlugin
                     "GraphQL URL");
                 client.Uri = GraphqlWebSocketUri.FromHttp(graphQlUri);
                 if (client.Socket is ClientWebSocket socket)
+                {
+                    provider.GetRequiredService<NetworkUserAgent>()
+                        .Apply((name, value) => socket.Options.SetRequestHeader(name, value));
                     AddDefaultHeaders((name, value) => socket.Options.SetRequestHeader(name, value));
+                }
             });
     }
 

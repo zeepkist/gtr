@@ -31,6 +31,7 @@
     <Compile Include="..\Connectivity\CloudflareTraceParser.cs" Link="Source\CloudflareTraceParser.cs" />
     <Compile Include="..\Connectivity\CloudflareTraceRequest.cs" Link="Source\CloudflareTraceRequest.cs" />
     <Compile Include="..\Connectivity\ISpainRoutingState.cs" Link="Source\ISpainRoutingState.cs" />
+    <Compile Include="..\Connectivity\NetworkUserAgent.cs" Link="Source\NetworkUserAgent.cs" />
     <Compile Include="..\Connectivity\ServiceEndpoint.cs" Link="Source\ServiceEndpoint.cs" />
     <Compile Include="..\Connectivity\SpainTraceResult.cs" Link="Source\SpainTraceResult.cs" />
     <Compile Include="..\Ghosting\GhostLimits.cs" Link="Source\GhostLimits.cs" />
