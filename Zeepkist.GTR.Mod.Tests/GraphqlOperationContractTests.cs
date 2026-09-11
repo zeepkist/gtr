@@ -31,9 +31,26 @@ public class GraphqlOperationContractTests
             operation,
             @"personalBest: recordHistoryEntries\([\s\S]*?\)\s*\{").Value;
 
-        Assert.Contains("historyView: { equalTo: \"personal-bests\" }", personalBest);
+        Assert.Contains("historyView: \"personal-bests\"", personalBest);
+        Assert.Contains("levelId: $levelId", personalBest);
+        Assert.Contains("userId: $userId", personalBest);
+        Assert.Contains("orderBy: [ID_DESC]", personalBest);
+        Assert.DoesNotContain("levelXxHash", operation);
+        Assert.DoesNotContain("userSteamId: { equalTo:", operation);
         Assert.Contains("levelPosition", operation);
         Assert.Contains("levelDecayedPoints", operation);
+    }
+
+    [Fact]
+    public void CurrentLevelIdResolverUsesAdventureFallbackAndSteamIdentity()
+    {
+        string operation = ReadOperation("ResolveCurrentLevelRecordIds.graphql");
+
+        Assert.Contains("{ xxHash: { equalTo: $xxHash } }", operation);
+        Assert.Contains("{ hash: { equalTo: $hash } }", operation);
+        Assert.Contains("{ adventure: { equalTo: true } }", operation);
+        Assert.Contains("orderBy: [ID_DESC]", operation);
+        Assert.Contains("userBySteamId(steamId: $steamId)", operation);
     }
 
     private static string ReadOperation(string name)

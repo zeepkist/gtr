@@ -32,6 +32,7 @@ namespace Microsoft.Extensions.DependencyInjection
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetTotalUserCountQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetWorldRecordHolderQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.WatchLeaderboardPageSubscription>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.ResolveCurrentLevelRecordIdsQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.SearchUsersByNameQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetLevelTrackTournamentsQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.WatchTrackTournamentPageSubscription>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
@@ -457,6 +458,14 @@ namespace Microsoft.Extensions.DependencyInjection
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>, global::StrawberryShake.Json.JsonResultPatcher>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.WatchLeaderboardPageSubscription>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageSubscription>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.WatchLeaderboardPageSubscription>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsResult>, global::TNRD.Zeepkist.GTR.State.ResolveCurrentLevelRecordIdsResultFactory>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsResult>>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsQuery>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsResult>, global::TNRD.Zeepkist.GTR.State.ResolveCurrentLevelRecordIdsBuilder>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationExecutor<global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsResult>>(services, sp => new global::StrawberryShake.OperationExecutor<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsResult>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.Transport.Http.IHttpConnection>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsResult>>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>>(sp), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationStore>(sp), strategy));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>, global::StrawberryShake.Json.JsonResultPatcher>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.ResolveCurrentLevelRecordIdsQuery>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsQuery>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.ResolveCurrentLevelRecordIdsQuery>(sp));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.ISearchUsersByNameResult>, global::TNRD.Zeepkist.GTR.State.SearchUsersByNameResultFactory>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.ISearchUsersByNameResult>>(sp));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.ISearchUsersByNameQuery>(sp));
@@ -1079,21 +1088,17 @@ namespace TNRD.Zeepkist.GTR
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class WatchCurrentLevelRecords_Query_PersonalBest_Nodes_RecordHistoryEntry : global::System.IEquatable<WatchCurrentLevelRecords_Query_PersonalBest_Nodes_RecordHistoryEntry>, IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_RecordHistoryEntry
     {
-        public WatchCurrentLevelRecords_Query_PersonalBest_Nodes_RecordHistoryEntry(global::System.Int32? levelPosition, global::System.Double? time, global::System.Double? levelDecayedPoints, global::System.String? userSteamId, global::System.String? userName, global::System.Double? playerDecayedPoints)
+        public WatchCurrentLevelRecords_Query_PersonalBest_Nodes_RecordHistoryEntry(global::System.Int32? levelPosition, global::System.Double? time, global::System.Double? levelDecayedPoints, global::System.Double? playerDecayedPoints)
         {
             LevelPosition = levelPosition;
             Time = time;
             LevelDecayedPoints = levelDecayedPoints;
-            UserSteamId = userSteamId;
-            UserName = userName;
             PlayerDecayedPoints = playerDecayedPoints;
         }
 
         public global::System.Int32? LevelPosition { get; }
         public global::System.Double? Time { get; }
         public global::System.Double? LevelDecayedPoints { get; }
-        public global::System.String? UserSteamId { get; }
-        public global::System.String? UserName { get; }
         public global::System.Double? PlayerDecayedPoints { get; }
 
         public virtual global::System.Boolean Equals(WatchCurrentLevelRecords_Query_PersonalBest_Nodes_RecordHistoryEntry? other)
@@ -1113,7 +1118,7 @@ namespace TNRD.Zeepkist.GTR
                 return false;
             }
 
-            return (global::System.Object.Equals(LevelPosition, other.LevelPosition)) && global::System.Object.Equals(Time, other.Time) && global::System.Object.Equals(LevelDecayedPoints, other.LevelDecayedPoints) && ((UserSteamId is null && other.UserSteamId is null) || UserSteamId != null && UserSteamId.Equals(other.UserSteamId)) && ((UserName is null && other.UserName is null) || UserName != null && UserName.Equals(other.UserName)) && global::System.Object.Equals(PlayerDecayedPoints, other.PlayerDecayedPoints);
+            return (global::System.Object.Equals(LevelPosition, other.LevelPosition)) && global::System.Object.Equals(Time, other.Time) && global::System.Object.Equals(LevelDecayedPoints, other.LevelDecayedPoints) && global::System.Object.Equals(PlayerDecayedPoints, other.PlayerDecayedPoints);
         }
 
         public override global::System.Boolean Equals(global::System.Object? obj)
@@ -1154,16 +1159,6 @@ namespace TNRD.Zeepkist.GTR
                 if (LevelDecayedPoints != null)
                 {
                     hash ^= 397 * LevelDecayedPoints.GetHashCode();
-                }
-
-                if (UserSteamId != null)
-                {
-                    hash ^= 397 * UserSteamId.GetHashCode();
-                }
-
-                if (UserName != null)
-                {
-                    hash ^= 397 * UserName.GetHashCode();
                 }
 
                 if (PlayerDecayedPoints != null)
@@ -1354,7 +1349,26 @@ namespace TNRD.Zeepkist.GTR
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IRecordHolderFields
+    public partial interface IPersonalBestHolderFields
+    {
+        public global::System.Int32? LevelPosition { get; }
+        public global::System.Double? Time { get; }
+        public global::System.Double? LevelDecayedPoints { get; }
+        public global::System.Double? PlayerDecayedPoints { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IWatchCurrentLevelRecords_Query_PersonalBest_Nodes : IPersonalBestHolderFields
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_RecordHistoryEntry : IWatchCurrentLevelRecords_Query_PersonalBest_Nodes
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IWorldRecordHolderFields
     {
         public global::System.Int32? LevelPosition { get; }
         public global::System.Double? Time { get; }
@@ -1365,17 +1379,7 @@ namespace TNRD.Zeepkist.GTR
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_PersonalBest_Nodes : IRecordHolderFields
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_PersonalBest_Nodes_RecordHistoryEntry : IWatchCurrentLevelRecords_Query_PersonalBest_Nodes
-    {
-    }
-
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial interface IWatchCurrentLevelRecords_Query_WorldRecord_Nodes : IRecordHolderFields
+    public partial interface IWatchCurrentLevelRecords_Query_WorldRecord_Nodes : IWorldRecordHolderFields
     {
     }
 
@@ -6568,6 +6572,338 @@ namespace TNRD.Zeepkist.GTR
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial interface IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes_LevelItem : IWatchLeaderboardPage_Query_Records_Nodes_Level_LevelItems_Nodes
+    {
+    }
+
+    /// <summary>
+    /// The root query type which gives access points into the data universe.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class ResolveCurrentLevelRecordIdsResult : global::System.IEquatable<ResolveCurrentLevelRecordIdsResult>, IResolveCurrentLevelRecordIdsResult
+    {
+        public ResolveCurrentLevelRecordIdsResult(global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIds_Levels? levels, global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIds_UserBySteamId? userBySteamId)
+        {
+            Levels = levels;
+            UserBySteamId = userBySteamId;
+        }
+
+        /// <summary>
+        /// Reads and enables pagination through a set of `Level`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIds_Levels? Levels { get; }
+        /// <summary>
+        /// Get a single `User`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIds_UserBySteamId? UserBySteamId { get; }
+
+        public virtual global::System.Boolean Equals(ResolveCurrentLevelRecordIdsResult? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (((Levels is null && other.Levels is null) || Levels != null && Levels.Equals(other.Levels))) && ((UserBySteamId is null && other.UserBySteamId is null) || UserBySteamId != null && UserBySteamId.Equals(other.UserBySteamId));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((ResolveCurrentLevelRecordIdsResult)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                if (Levels != null)
+                {
+                    hash ^= 397 * Levels.GetHashCode();
+                }
+
+                if (UserBySteamId != null)
+                {
+                    hash ^= 397 * UserBySteamId.GetHashCode();
+                }
+
+                return hash;
+            }
+        }
+    }
+
+    /// <summary>
+    /// A connection to a list of `Level` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class ResolveCurrentLevelRecordIds_Levels_LevelsConnection : global::System.IEquatable<ResolveCurrentLevelRecordIds_Levels_LevelsConnection>, IResolveCurrentLevelRecordIds_Levels_LevelsConnection
+    {
+        public ResolveCurrentLevelRecordIds_Levels_LevelsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIds_Levels_Nodes> nodes)
+        {
+            Nodes = nodes;
+        }
+
+        /// <summary>
+        /// A list of `Level` objects.
+        /// </summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIds_Levels_Nodes> Nodes { get; }
+
+        public virtual global::System.Boolean Equals(ResolveCurrentLevelRecordIds_Levels_LevelsConnection? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((ResolveCurrentLevelRecordIds_Levels_LevelsConnection)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                foreach (var Nodes_elm in Nodes)
+                {
+                    hash ^= 397 * Nodes_elm.GetHashCode();
+                }
+
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class ResolveCurrentLevelRecordIds_UserBySteamId_User : global::System.IEquatable<ResolveCurrentLevelRecordIds_UserBySteamId_User>, IResolveCurrentLevelRecordIds_UserBySteamId_User
+    {
+        public ResolveCurrentLevelRecordIds_UserBySteamId_User(global::System.Int32 id)
+        {
+            Id = id;
+        }
+
+        public global::System.Int32 Id { get; }
+
+        public virtual global::System.Boolean Equals(ResolveCurrentLevelRecordIds_UserBySteamId_User? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (global::System.Object.Equals(Id, other.Id));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((ResolveCurrentLevelRecordIds_UserBySteamId_User)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Id.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class ResolveCurrentLevelRecordIds_Levels_Nodes_Level : global::System.IEquatable<ResolveCurrentLevelRecordIds_Levels_Nodes_Level>, IResolveCurrentLevelRecordIds_Levels_Nodes_Level
+    {
+        public ResolveCurrentLevelRecordIds_Levels_Nodes_Level(global::System.Int32 id)
+        {
+            Id = id;
+        }
+
+        public global::System.Int32 Id { get; }
+
+        public virtual global::System.Boolean Equals(ResolveCurrentLevelRecordIds_Levels_Nodes_Level? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (global::System.Object.Equals(Id, other.Id));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((ResolveCurrentLevelRecordIds_Levels_Nodes_Level)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * Id.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    /// <summary>
+    /// The root query type which gives access points into the data universe.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IResolveCurrentLevelRecordIdsResult
+    {
+        /// <summary>
+        /// Reads and enables pagination through a set of `Level`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIds_Levels? Levels { get; }
+        /// <summary>
+        /// Get a single `User`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIds_UserBySteamId? UserBySteamId { get; }
+    }
+
+    /// <summary>
+    /// A connection to a list of `Level` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IResolveCurrentLevelRecordIds_Levels
+    {
+        /// <summary>
+        /// A list of `Level` objects.
+        /// </summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIds_Levels_Nodes> Nodes { get; }
+    }
+
+    /// <summary>
+    /// A connection to a list of `Level` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IResolveCurrentLevelRecordIds_Levels_LevelsConnection : IResolveCurrentLevelRecordIds_Levels
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IResolveCurrentLevelRecordIds_UserBySteamId
+    {
+        public global::System.Int32 Id { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IResolveCurrentLevelRecordIds_UserBySteamId_User : IResolveCurrentLevelRecordIds_UserBySteamId
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IResolveCurrentLevelRecordIds_Levels_Nodes
+    {
+        public global::System.Int32 Id { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IResolveCurrentLevelRecordIds_Levels_Nodes_Level : IResolveCurrentLevelRecordIds_Levels_Nodes
     {
     }
 
@@ -104626,27 +104962,34 @@ namespace TNRD.Zeepkist.GTR
     /// <summary>
     /// Represents the operation service of the WatchCurrentLevelRecords GraphQL operation
     /// <code>
-    /// subscription WatchCurrentLevelRecords($xxHash: String!, $steamId: BigInt!) {
+    /// subscription WatchCurrentLevelRecords($levelId: Int!, $userId: Int!) {
     ///   query {
     ///     __typename
-    ///     personalBest: recordHistoryEntries(filter: { historyView: { equalTo: "personal-bests" }, levelXxHash: { equalTo: $xxHash }, userSteamId: { equalTo: $steamId } }, first: 1) {
+    ///     personalBest: recordHistoryEntries(condition: { historyView: "personal-bests", levelId: $levelId, userId: $userId }, first: 1, orderBy: [ ID_DESC ]) {
     ///       __typename
     ///       nodes {
     ///         __typename
-    ///         ... RecordHolderFields
+    ///         ... PersonalBestHolderFields
     ///       }
     ///     }
-    ///     worldRecord: recordHistoryEntries(filter: { historyView: { equalTo: "world-records" }, levelXxHash: { equalTo: $xxHash } }, first: 1) {
+    ///     worldRecord: recordHistoryEntries(condition: { historyView: "world-records", levelId: $levelId }, first: 1, orderBy: [ ID_DESC ]) {
     ///       __typename
     ///       nodes {
     ///         __typename
-    ///         ... RecordHolderFields
+    ///         ... WorldRecordHolderFields
     ///       }
     ///     }
     ///   }
     /// }
     ///
-    /// fragment RecordHolderFields on RecordHistoryEntry {
+    /// fragment PersonalBestHolderFields on RecordHistoryEntry {
+    ///   levelPosition
+    ///   time
+    ///   levelDecayedPoints
+    ///   playerDecayedPoints
+    /// }
+    ///
+    /// fragment WorldRecordHolderFields on RecordHistoryEntry {
     ///   levelPosition
     ///   time
     ///   levelDecayedPoints
@@ -104706,36 +105049,30 @@ namespace TNRD.Zeepkist.GTR
             0x73,
             0x28,
             0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x53,
-            0x74,
-            0x72,
-            0x69,
-            0x6e,
-            0x67,
-            0x21,
-            0x2c,
-            0x20,
-            0x24,
-            0x73,
-            0x74,
+            0x6c,
             0x65,
-            0x61,
-            0x6d,
+            0x76,
+            0x65,
+            0x6c,
             0x49,
             0x64,
             0x3a,
             0x20,
-            0x42,
-            0x69,
-            0x67,
+            0x49,
+            0x6e,
+            0x74,
+            0x21,
+            0x2c,
+            0x20,
+            0x24,
+            0x75,
+            0x73,
+            0x65,
+            0x72,
+            0x49,
+            0x64,
+            0x3a,
+            0x20,
             0x49,
             0x6e,
             0x74,
@@ -104798,12 +105135,15 @@ namespace TNRD.Zeepkist.GTR
             0x65,
             0x73,
             0x28,
-            0x66,
+            0x63,
+            0x6f,
+            0x6e,
+            0x64,
             0x69,
-            0x6c,
             0x74,
-            0x65,
-            0x72,
+            0x69,
+            0x6f,
+            0x6e,
             0x3a,
             0x20,
             0x7b,
@@ -104819,17 +105159,6 @@ namespace TNRD.Zeepkist.GTR
             0x69,
             0x65,
             0x77,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
             0x3a,
             0x20,
             0x22,
@@ -104848,8 +105177,6 @@ namespace TNRD.Zeepkist.GTR
             0x74,
             0x73,
             0x22,
-            0x20,
-            0x7d,
             0x2c,
             0x20,
             0x6c,
@@ -104857,70 +105184,35 @@ namespace TNRD.Zeepkist.GTR
             0x76,
             0x65,
             0x6c,
-            0x58,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
+            0x49,
+            0x64,
             0x3a,
             0x20,
             0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
+            0x6c,
+            0x65,
+            0x76,
+            0x65,
+            0x6c,
+            0x49,
+            0x64,
             0x2c,
             0x20,
             0x75,
             0x73,
             0x65,
             0x72,
-            0x53,
-            0x74,
-            0x65,
-            0x61,
-            0x6d,
             0x49,
             0x64,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
             0x3a,
             0x20,
             0x24,
+            0x75,
             0x73,
-            0x74,
             0x65,
-            0x61,
-            0x6d,
+            0x72,
             0x49,
             0x64,
-            0x20,
-            0x7d,
             0x20,
             0x7d,
             0x2c,
@@ -104933,6 +105225,28 @@ namespace TNRD.Zeepkist.GTR
             0x3a,
             0x20,
             0x31,
+            0x2c,
+            0x20,
+            0x6f,
+            0x72,
+            0x64,
+            0x65,
+            0x72,
+            0x42,
+            0x79,
+            0x3a,
+            0x20,
+            0x5b,
+            0x20,
+            0x49,
+            0x44,
+            0x5f,
+            0x44,
+            0x45,
+            0x53,
+            0x43,
+            0x20,
+            0x5d,
             0x29,
             0x20,
             0x7b,
@@ -104971,12 +105285,18 @@ namespace TNRD.Zeepkist.GTR
             0x2e,
             0x2e,
             0x20,
-            0x52,
+            0x50,
             0x65,
-            0x63,
-            0x6f,
             0x72,
-            0x64,
+            0x73,
+            0x6f,
+            0x6e,
+            0x61,
+            0x6c,
+            0x42,
+            0x65,
+            0x73,
+            0x74,
             0x48,
             0x6f,
             0x6c,
@@ -105028,12 +105348,15 @@ namespace TNRD.Zeepkist.GTR
             0x65,
             0x73,
             0x28,
-            0x66,
+            0x63,
+            0x6f,
+            0x6e,
+            0x64,
             0x69,
-            0x6c,
             0x74,
-            0x65,
-            0x72,
+            0x69,
+            0x6f,
+            0x6e,
             0x3a,
             0x20,
             0x7b,
@@ -105051,17 +105374,6 @@ namespace TNRD.Zeepkist.GTR
             0x77,
             0x3a,
             0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
-            0x3a,
-            0x20,
             0x22,
             0x77,
             0x6f,
@@ -105077,8 +105389,6 @@ namespace TNRD.Zeepkist.GTR
             0x64,
             0x73,
             0x22,
-            0x20,
-            0x7d,
             0x2c,
             0x20,
             0x6c,
@@ -105086,34 +105396,18 @@ namespace TNRD.Zeepkist.GTR
             0x76,
             0x65,
             0x6c,
-            0x58,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x3a,
-            0x20,
-            0x7b,
-            0x20,
-            0x65,
-            0x71,
-            0x75,
-            0x61,
-            0x6c,
-            0x54,
-            0x6f,
+            0x49,
+            0x64,
             0x3a,
             0x20,
             0x24,
-            0x78,
-            0x78,
-            0x48,
-            0x61,
-            0x73,
-            0x68,
-            0x20,
-            0x7d,
+            0x6c,
+            0x65,
+            0x76,
+            0x65,
+            0x6c,
+            0x49,
+            0x64,
             0x20,
             0x7d,
             0x2c,
@@ -105126,6 +105420,28 @@ namespace TNRD.Zeepkist.GTR
             0x3a,
             0x20,
             0x31,
+            0x2c,
+            0x20,
+            0x6f,
+            0x72,
+            0x64,
+            0x65,
+            0x72,
+            0x42,
+            0x79,
+            0x3a,
+            0x20,
+            0x5b,
+            0x20,
+            0x49,
+            0x44,
+            0x5f,
+            0x44,
+            0x45,
+            0x53,
+            0x43,
+            0x20,
+            0x5d,
             0x29,
             0x20,
             0x7b,
@@ -105164,6 +105480,11 @@ namespace TNRD.Zeepkist.GTR
             0x2e,
             0x2e,
             0x20,
+            0x57,
+            0x6f,
+            0x72,
+            0x6c,
+            0x64,
             0x52,
             0x65,
             0x63,
@@ -105200,6 +105521,129 @@ namespace TNRD.Zeepkist.GTR
             0x6e,
             0x74,
             0x20,
+            0x50,
+            0x65,
+            0x72,
+            0x73,
+            0x6f,
+            0x6e,
+            0x61,
+            0x6c,
+            0x42,
+            0x65,
+            0x73,
+            0x74,
+            0x48,
+            0x6f,
+            0x6c,
+            0x64,
+            0x65,
+            0x72,
+            0x46,
+            0x69,
+            0x65,
+            0x6c,
+            0x64,
+            0x73,
+            0x20,
+            0x6f,
+            0x6e,
+            0x20,
+            0x52,
+            0x65,
+            0x63,
+            0x6f,
+            0x72,
+            0x64,
+            0x48,
+            0x69,
+            0x73,
+            0x74,
+            0x6f,
+            0x72,
+            0x79,
+            0x45,
+            0x6e,
+            0x74,
+            0x72,
+            0x79,
+            0x20,
+            0x7b,
+            0x20,
+            0x6c,
+            0x65,
+            0x76,
+            0x65,
+            0x6c,
+            0x50,
+            0x6f,
+            0x73,
+            0x69,
+            0x74,
+            0x69,
+            0x6f,
+            0x6e,
+            0x20,
+            0x74,
+            0x69,
+            0x6d,
+            0x65,
+            0x20,
+            0x6c,
+            0x65,
+            0x76,
+            0x65,
+            0x6c,
+            0x44,
+            0x65,
+            0x63,
+            0x61,
+            0x79,
+            0x65,
+            0x64,
+            0x50,
+            0x6f,
+            0x69,
+            0x6e,
+            0x74,
+            0x73,
+            0x20,
+            0x70,
+            0x6c,
+            0x61,
+            0x79,
+            0x65,
+            0x72,
+            0x44,
+            0x65,
+            0x63,
+            0x61,
+            0x79,
+            0x65,
+            0x64,
+            0x50,
+            0x6f,
+            0x69,
+            0x6e,
+            0x74,
+            0x73,
+            0x20,
+            0x7d,
+            0x20,
+            0x66,
+            0x72,
+            0x61,
+            0x67,
+            0x6d,
+            0x65,
+            0x6e,
+            0x74,
+            0x20,
+            0x57,
+            0x6f,
+            0x72,
+            0x6c,
+            0x64,
             0x52,
             0x65,
             0x63,
@@ -105324,7 +105768,7 @@ namespace TNRD.Zeepkist.GTR
             0x20,
             0x7d
         };
-        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "4aa9d775465fec0e585387c286cabc81");
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "6bd0391cca1f206c25e320848aa4320c");
 
         public override global::System.String ToString()
         {
@@ -105339,27 +105783,34 @@ namespace TNRD.Zeepkist.GTR
     /// <summary>
     /// Represents the operation service of the WatchCurrentLevelRecords GraphQL operation
     /// <code>
-    /// subscription WatchCurrentLevelRecords($xxHash: String!, $steamId: BigInt!) {
+    /// subscription WatchCurrentLevelRecords($levelId: Int!, $userId: Int!) {
     ///   query {
     ///     __typename
-    ///     personalBest: recordHistoryEntries(filter: { historyView: { equalTo: "personal-bests" }, levelXxHash: { equalTo: $xxHash }, userSteamId: { equalTo: $steamId } }, first: 1) {
+    ///     personalBest: recordHistoryEntries(condition: { historyView: "personal-bests", levelId: $levelId, userId: $userId }, first: 1, orderBy: [ ID_DESC ]) {
     ///       __typename
     ///       nodes {
     ///         __typename
-    ///         ... RecordHolderFields
+    ///         ... PersonalBestHolderFields
     ///       }
     ///     }
-    ///     worldRecord: recordHistoryEntries(filter: { historyView: { equalTo: "world-records" }, levelXxHash: { equalTo: $xxHash } }, first: 1) {
+    ///     worldRecord: recordHistoryEntries(condition: { historyView: "world-records", levelId: $levelId }, first: 1, orderBy: [ ID_DESC ]) {
     ///       __typename
     ///       nodes {
     ///         __typename
-    ///         ... RecordHolderFields
+    ///         ... WorldRecordHolderFields
     ///       }
     ///     }
     ///   }
     /// }
     ///
-    /// fragment RecordHolderFields on RecordHistoryEntry {
+    /// fragment PersonalBestHolderFields on RecordHistoryEntry {
+    ///   levelPosition
+    ///   time
+    ///   levelDecayedPoints
+    ///   playerDecayedPoints
+    /// }
+    ///
+    /// fragment WorldRecordHolderFields on RecordHistoryEntry {
     ///   levelPosition
     ///   time
     ///   levelDecayedPoints
@@ -105373,28 +105824,26 @@ namespace TNRD.Zeepkist.GTR
     public partial class WatchCurrentLevelRecordsSubscription : global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsSubscription
     {
         private readonly global::StrawberryShake.IOperationExecutor<IWatchCurrentLevelRecordsResult> _operationExecutor;
-        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _stringFormatter;
-        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _bigIntFormatter;
+        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _intFormatter;
         public WatchCurrentLevelRecordsSubscription(global::StrawberryShake.IOperationExecutor<IWatchCurrentLevelRecordsResult> operationExecutor, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
         {
             _operationExecutor = operationExecutor ?? throw new global::System.ArgumentNullException(nameof(operationExecutor));
-            _stringFormatter = serializerResolver.GetInputValueFormatter("String");
-            _bigIntFormatter = serializerResolver.GetInputValueFormatter("BigInt");
+            _intFormatter = serializerResolver.GetInputValueFormatter("Int");
         }
 
         global::System.Type global::StrawberryShake.IOperationRequestFactory.ResultType => typeof(IWatchCurrentLevelRecordsResult);
 
-        public global::System.IObservable<global::StrawberryShake.IOperationResult<IWatchCurrentLevelRecordsResult>> Watch(global::System.String xxHash, global::System.String steamId, global::StrawberryShake.ExecutionStrategy? strategy = null)
+        public global::System.IObservable<global::StrawberryShake.IOperationResult<IWatchCurrentLevelRecordsResult>> Watch(global::System.Int32 levelId, global::System.Int32 userId, global::StrawberryShake.ExecutionStrategy? strategy = null)
         {
-            var request = CreateRequest(xxHash, steamId);
+            var request = CreateRequest(levelId, userId);
             return _operationExecutor.Watch(request, strategy);
         }
 
-        private global::StrawberryShake.OperationRequest CreateRequest(global::System.String xxHash, global::System.String steamId)
+        private global::StrawberryShake.OperationRequest CreateRequest(global::System.Int32 levelId, global::System.Int32 userId)
         {
             var variables = new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>();
-            variables.Add("xxHash", FormatXxHash(xxHash));
-            variables.Add("steamId", FormatSteamId(steamId));
+            variables.Add("levelId", FormatLevelId(levelId));
+            variables.Add("userId", FormatUserId(userId));
             return CreateRequest(variables);
         }
 
@@ -105403,24 +105852,14 @@ namespace TNRD.Zeepkist.GTR
             return new global::StrawberryShake.OperationRequest(id: WatchCurrentLevelRecordsSubscriptionDocument.Instance.Hash.Value, name: "WatchCurrentLevelRecords", document: WatchCurrentLevelRecordsSubscriptionDocument.Instance, strategy: global::StrawberryShake.RequestStrategy.Default, variables: variables);
         }
 
-        private global::System.Object? FormatXxHash(global::System.String value)
+        private global::System.Object? FormatLevelId(global::System.Int32 value)
         {
-            if (value is null)
-            {
-                throw new global::System.ArgumentNullException(nameof(value));
-            }
-
-            return _stringFormatter.Format(value);
+            return _intFormatter.Format(value);
         }
 
-        private global::System.Object? FormatSteamId(global::System.String value)
+        private global::System.Object? FormatUserId(global::System.Int32 value)
         {
-            if (value is null)
-            {
-                throw new global::System.ArgumentNullException(nameof(value));
-            }
-
-            return _bigIntFormatter.Format(value);
+            return _intFormatter.Format(value);
         }
 
         global::StrawberryShake.OperationRequest global::StrawberryShake.IOperationRequestFactory.Create(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
@@ -105432,27 +105871,34 @@ namespace TNRD.Zeepkist.GTR
     /// <summary>
     /// Represents the operation service of the WatchCurrentLevelRecords GraphQL operation
     /// <code>
-    /// subscription WatchCurrentLevelRecords($xxHash: String!, $steamId: BigInt!) {
+    /// subscription WatchCurrentLevelRecords($levelId: Int!, $userId: Int!) {
     ///   query {
     ///     __typename
-    ///     personalBest: recordHistoryEntries(filter: { historyView: { equalTo: "personal-bests" }, levelXxHash: { equalTo: $xxHash }, userSteamId: { equalTo: $steamId } }, first: 1) {
+    ///     personalBest: recordHistoryEntries(condition: { historyView: "personal-bests", levelId: $levelId, userId: $userId }, first: 1, orderBy: [ ID_DESC ]) {
     ///       __typename
     ///       nodes {
     ///         __typename
-    ///         ... RecordHolderFields
+    ///         ... PersonalBestHolderFields
     ///       }
     ///     }
-    ///     worldRecord: recordHistoryEntries(filter: { historyView: { equalTo: "world-records" }, levelXxHash: { equalTo: $xxHash } }, first: 1) {
+    ///     worldRecord: recordHistoryEntries(condition: { historyView: "world-records", levelId: $levelId }, first: 1, orderBy: [ ID_DESC ]) {
     ///       __typename
     ///       nodes {
     ///         __typename
-    ///         ... RecordHolderFields
+    ///         ... WorldRecordHolderFields
     ///       }
     ///     }
     ///   }
     /// }
     ///
-    /// fragment RecordHolderFields on RecordHistoryEntry {
+    /// fragment PersonalBestHolderFields on RecordHistoryEntry {
+    ///   levelPosition
+    ///   time
+    ///   levelDecayedPoints
+    ///   playerDecayedPoints
+    /// }
+    ///
+    /// fragment WorldRecordHolderFields on RecordHistoryEntry {
     ///   levelPosition
     ///   time
     ///   levelDecayedPoints
@@ -105465,7 +105911,7 @@ namespace TNRD.Zeepkist.GTR
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial interface IWatchCurrentLevelRecordsSubscription : global::StrawberryShake.IOperationRequestFactory
     {
-        global::System.IObservable<global::StrawberryShake.IOperationResult<IWatchCurrentLevelRecordsResult>> Watch(global::System.String xxHash, global::System.String steamId, global::StrawberryShake.ExecutionStrategy? strategy = null);
+        global::System.IObservable<global::StrawberryShake.IOperationResult<IWatchCurrentLevelRecordsResult>> Watch(global::System.Int32 levelId, global::System.Int32 userId, global::StrawberryShake.ExecutionStrategy? strategy = null);
     }
 
     /// <summary>
@@ -112729,6 +113175,519 @@ namespace TNRD.Zeepkist.GTR
     }
 
     /// <summary>
+    /// Represents the operation service of the ResolveCurrentLevelRecordIds GraphQL operation
+    /// <code>
+    /// query ResolveCurrentLevelRecordIds($xxHash: String!, $hash: String!, $steamId: BigInt!) {
+    ///   levels(first: 1, filter: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, orderBy: [ ID_DESC ]) {
+    ///     __typename
+    ///     nodes {
+    ///       __typename
+    ///       id
+    ///     }
+    ///   }
+    ///   userBySteamId(steamId: $steamId) {
+    ///     __typename
+    ///     id
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class ResolveCurrentLevelRecordIdsQueryDocument : global::StrawberryShake.IDocument
+    {
+        private ResolveCurrentLevelRecordIdsQueryDocument()
+        {
+        }
+
+        public static ResolveCurrentLevelRecordIdsQueryDocument Instance { get; } = new ResolveCurrentLevelRecordIdsQueryDocument();
+        public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Query;
+        public MemoryAlias::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]
+        {
+            0x71,
+            0x75,
+            0x65,
+            0x72,
+            0x79,
+            0x20,
+            0x52,
+            0x65,
+            0x73,
+            0x6f,
+            0x6c,
+            0x76,
+            0x65,
+            0x43,
+            0x75,
+            0x72,
+            0x72,
+            0x65,
+            0x6e,
+            0x74,
+            0x4c,
+            0x65,
+            0x76,
+            0x65,
+            0x6c,
+            0x52,
+            0x65,
+            0x63,
+            0x6f,
+            0x72,
+            0x64,
+            0x49,
+            0x64,
+            0x73,
+            0x28,
+            0x24,
+            0x78,
+            0x78,
+            0x48,
+            0x61,
+            0x73,
+            0x68,
+            0x3a,
+            0x20,
+            0x53,
+            0x74,
+            0x72,
+            0x69,
+            0x6e,
+            0x67,
+            0x21,
+            0x2c,
+            0x20,
+            0x24,
+            0x68,
+            0x61,
+            0x73,
+            0x68,
+            0x3a,
+            0x20,
+            0x53,
+            0x74,
+            0x72,
+            0x69,
+            0x6e,
+            0x67,
+            0x21,
+            0x2c,
+            0x20,
+            0x24,
+            0x73,
+            0x74,
+            0x65,
+            0x61,
+            0x6d,
+            0x49,
+            0x64,
+            0x3a,
+            0x20,
+            0x42,
+            0x69,
+            0x67,
+            0x49,
+            0x6e,
+            0x74,
+            0x21,
+            0x29,
+            0x20,
+            0x7b,
+            0x20,
+            0x6c,
+            0x65,
+            0x76,
+            0x65,
+            0x6c,
+            0x73,
+            0x28,
+            0x66,
+            0x69,
+            0x72,
+            0x73,
+            0x74,
+            0x3a,
+            0x20,
+            0x31,
+            0x2c,
+            0x20,
+            0x66,
+            0x69,
+            0x6c,
+            0x74,
+            0x65,
+            0x72,
+            0x3a,
+            0x20,
+            0x7b,
+            0x20,
+            0x6f,
+            0x72,
+            0x3a,
+            0x20,
+            0x5b,
+            0x20,
+            0x7b,
+            0x20,
+            0x78,
+            0x78,
+            0x48,
+            0x61,
+            0x73,
+            0x68,
+            0x3a,
+            0x20,
+            0x7b,
+            0x20,
+            0x65,
+            0x71,
+            0x75,
+            0x61,
+            0x6c,
+            0x54,
+            0x6f,
+            0x3a,
+            0x20,
+            0x24,
+            0x78,
+            0x78,
+            0x48,
+            0x61,
+            0x73,
+            0x68,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d,
+            0x2c,
+            0x20,
+            0x7b,
+            0x20,
+            0x61,
+            0x6e,
+            0x64,
+            0x3a,
+            0x20,
+            0x5b,
+            0x20,
+            0x7b,
+            0x20,
+            0x68,
+            0x61,
+            0x73,
+            0x68,
+            0x3a,
+            0x20,
+            0x7b,
+            0x20,
+            0x65,
+            0x71,
+            0x75,
+            0x61,
+            0x6c,
+            0x54,
+            0x6f,
+            0x3a,
+            0x20,
+            0x24,
+            0x68,
+            0x61,
+            0x73,
+            0x68,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d,
+            0x2c,
+            0x20,
+            0x7b,
+            0x20,
+            0x61,
+            0x64,
+            0x76,
+            0x65,
+            0x6e,
+            0x74,
+            0x75,
+            0x72,
+            0x65,
+            0x3a,
+            0x20,
+            0x7b,
+            0x20,
+            0x65,
+            0x71,
+            0x75,
+            0x61,
+            0x6c,
+            0x54,
+            0x6f,
+            0x3a,
+            0x20,
+            0x74,
+            0x72,
+            0x75,
+            0x65,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d,
+            0x20,
+            0x5d,
+            0x20,
+            0x7d,
+            0x20,
+            0x5d,
+            0x20,
+            0x7d,
+            0x2c,
+            0x20,
+            0x6f,
+            0x72,
+            0x64,
+            0x65,
+            0x72,
+            0x42,
+            0x79,
+            0x3a,
+            0x20,
+            0x5b,
+            0x20,
+            0x49,
+            0x44,
+            0x5f,
+            0x44,
+            0x45,
+            0x53,
+            0x43,
+            0x20,
+            0x5d,
+            0x29,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x6e,
+            0x6f,
+            0x64,
+            0x65,
+            0x73,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x69,
+            0x64,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d,
+            0x20,
+            0x75,
+            0x73,
+            0x65,
+            0x72,
+            0x42,
+            0x79,
+            0x53,
+            0x74,
+            0x65,
+            0x61,
+            0x6d,
+            0x49,
+            0x64,
+            0x28,
+            0x73,
+            0x74,
+            0x65,
+            0x61,
+            0x6d,
+            0x49,
+            0x64,
+            0x3a,
+            0x20,
+            0x24,
+            0x73,
+            0x74,
+            0x65,
+            0x61,
+            0x6d,
+            0x49,
+            0x64,
+            0x29,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x69,
+            0x64,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d
+        };
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "d80cde1158220cca06b678b0447566f4");
+
+        public override global::System.String ToString()
+        {
+#if NETCOREAPP3_1_OR_GREATER
+        return global::System.Text.Encoding.UTF8.GetString(Body);
+#else
+            return global::System.Text.Encoding.UTF8.GetString(Body.ToArray());
+#endif
+        }
+    }
+
+    /// <summary>
+    /// Represents the operation service of the ResolveCurrentLevelRecordIds GraphQL operation
+    /// <code>
+    /// query ResolveCurrentLevelRecordIds($xxHash: String!, $hash: String!, $steamId: BigInt!) {
+    ///   levels(first: 1, filter: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, orderBy: [ ID_DESC ]) {
+    ///     __typename
+    ///     nodes {
+    ///       __typename
+    ///       id
+    ///     }
+    ///   }
+    ///   userBySteamId(steamId: $steamId) {
+    ///     __typename
+    ///     id
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class ResolveCurrentLevelRecordIdsQuery : global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsQuery
+    {
+        private readonly global::StrawberryShake.IOperationExecutor<IResolveCurrentLevelRecordIdsResult> _operationExecutor;
+        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _stringFormatter;
+        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _bigIntFormatter;
+        public ResolveCurrentLevelRecordIdsQuery(global::StrawberryShake.IOperationExecutor<IResolveCurrentLevelRecordIdsResult> operationExecutor, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _operationExecutor = operationExecutor ?? throw new global::System.ArgumentNullException(nameof(operationExecutor));
+            _stringFormatter = serializerResolver.GetInputValueFormatter("String");
+            _bigIntFormatter = serializerResolver.GetInputValueFormatter("BigInt");
+        }
+
+        global::System.Type global::StrawberryShake.IOperationRequestFactory.ResultType => typeof(IResolveCurrentLevelRecordIdsResult);
+
+        public async global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<IResolveCurrentLevelRecordIdsResult>> ExecuteAsync(global::System.String xxHash, global::System.String hash, global::System.String steamId, global::System.Threading.CancellationToken cancellationToken = default)
+        {
+            var request = CreateRequest(xxHash, hash, steamId);
+            return await _operationExecutor.ExecuteAsync(request, cancellationToken).ConfigureAwait(false);
+        }
+
+        public global::System.IObservable<global::StrawberryShake.IOperationResult<IResolveCurrentLevelRecordIdsResult>> Watch(global::System.String xxHash, global::System.String hash, global::System.String steamId, global::StrawberryShake.ExecutionStrategy? strategy = null)
+        {
+            var request = CreateRequest(xxHash, hash, steamId);
+            return _operationExecutor.Watch(request, strategy);
+        }
+
+        private global::StrawberryShake.OperationRequest CreateRequest(global::System.String xxHash, global::System.String hash, global::System.String steamId)
+        {
+            var variables = new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>();
+            variables.Add("xxHash", FormatXxHash(xxHash));
+            variables.Add("hash", FormatHash(hash));
+            variables.Add("steamId", FormatSteamId(steamId));
+            return CreateRequest(variables);
+        }
+
+        private global::StrawberryShake.OperationRequest CreateRequest(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
+        {
+            return new global::StrawberryShake.OperationRequest(id: ResolveCurrentLevelRecordIdsQueryDocument.Instance.Hash.Value, name: "ResolveCurrentLevelRecordIds", document: ResolveCurrentLevelRecordIdsQueryDocument.Instance, strategy: global::StrawberryShake.RequestStrategy.Default, variables: variables);
+        }
+
+        private global::System.Object? FormatXxHash(global::System.String value)
+        {
+            if (value is null)
+            {
+                throw new global::System.ArgumentNullException(nameof(value));
+            }
+
+            return _stringFormatter.Format(value);
+        }
+
+        private global::System.Object? FormatHash(global::System.String value)
+        {
+            if (value is null)
+            {
+                throw new global::System.ArgumentNullException(nameof(value));
+            }
+
+            return _stringFormatter.Format(value);
+        }
+
+        private global::System.Object? FormatSteamId(global::System.String value)
+        {
+            if (value is null)
+            {
+                throw new global::System.ArgumentNullException(nameof(value));
+            }
+
+            return _bigIntFormatter.Format(value);
+        }
+
+        global::StrawberryShake.OperationRequest global::StrawberryShake.IOperationRequestFactory.Create(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
+        {
+            return CreateRequest(variables!);
+        }
+    }
+
+    /// <summary>
+    /// Represents the operation service of the ResolveCurrentLevelRecordIds GraphQL operation
+    /// <code>
+    /// query ResolveCurrentLevelRecordIds($xxHash: String!, $hash: String!, $steamId: BigInt!) {
+    ///   levels(first: 1, filter: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, orderBy: [ ID_DESC ]) {
+    ///     __typename
+    ///     nodes {
+    ///       __typename
+    ///       id
+    ///     }
+    ///   }
+    ///   userBySteamId(steamId: $steamId) {
+    ///     __typename
+    ///     id
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IResolveCurrentLevelRecordIdsQuery : global::StrawberryShake.IOperationRequestFactory
+    {
+        global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<IResolveCurrentLevelRecordIdsResult>> ExecuteAsync(global::System.String xxHash, global::System.String hash, global::System.String steamId, global::System.Threading.CancellationToken cancellationToken = default);
+        global::System.IObservable<global::StrawberryShake.IOperationResult<IResolveCurrentLevelRecordIdsResult>> Watch(global::System.String xxHash, global::System.String hash, global::System.String steamId, global::StrawberryShake.ExecutionStrategy? strategy = null);
+    }
+
+    /// <summary>
     /// Represents the operation service of the SearchUsersByName GraphQL operation
     /// <code>
     /// query SearchUsersByName($filter: UserFilter!, $first: Int!) {
@@ -114161,10 +115120,11 @@ namespace TNRD.Zeepkist.GTR
         private readonly global::TNRD.Zeepkist.GTR.IGetTotalUserCountQuery _getTotalUserCount;
         private readonly global::TNRD.Zeepkist.GTR.IGetWorldRecordHolderQuery _getWorldRecordHolder;
         private readonly global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageSubscription _watchLeaderboardPage;
+        private readonly global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsQuery _resolveCurrentLevelRecordIds;
         private readonly global::TNRD.Zeepkist.GTR.ISearchUsersByNameQuery _searchUsersByName;
         private readonly global::TNRD.Zeepkist.GTR.IGetLevelTrackTournamentsQuery _getLevelTrackTournaments;
         private readonly global::TNRD.Zeepkist.GTR.IWatchTrackTournamentPageSubscription _watchTrackTournamentPage;
-        public GtrClient(global::TNRD.Zeepkist.GTR.IBrowseLevelItemsQuery browseLevelItems, global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsSubscription watchCurrentLevelRecords, global::TNRD.Zeepkist.GTR.IGetAdditionalGhostsQuery getAdditionalGhosts, global::TNRD.Zeepkist.GTR.IGetAllPersonalBestGhostsQuery getAllPersonalBestGhosts, global::TNRD.Zeepkist.GTR.IGetLevelPointsQuery getLevelPoints, global::TNRD.Zeepkist.GTR.IGetLevelVoteSummaryQuery getLevelVoteSummary, global::TNRD.Zeepkist.GTR.IGetNextFastestPersonalBestQuery getNextFastestPersonalBest, global::TNRD.Zeepkist.GTR.IGetPersonalBestQuery getPersonalBest, global::TNRD.Zeepkist.GTR.IGetPersonalBestCountQuery getPersonalBestCount, global::TNRD.Zeepkist.GTR.IGetPersonalBestGhostsQuery getPersonalBestGhosts, global::TNRD.Zeepkist.GTR.IGetPersonalBestsQuery getPersonalBests, global::TNRD.Zeepkist.GTR.IGetTopRecordGhostsQuery getTopRecordGhosts, global::TNRD.Zeepkist.GTR.IGetTotalUserCountQuery getTotalUserCount, global::TNRD.Zeepkist.GTR.IGetWorldRecordHolderQuery getWorldRecordHolder, global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageSubscription watchLeaderboardPage, global::TNRD.Zeepkist.GTR.ISearchUsersByNameQuery searchUsersByName, global::TNRD.Zeepkist.GTR.IGetLevelTrackTournamentsQuery getLevelTrackTournaments, global::TNRD.Zeepkist.GTR.IWatchTrackTournamentPageSubscription watchTrackTournamentPage)
+        public GtrClient(global::TNRD.Zeepkist.GTR.IBrowseLevelItemsQuery browseLevelItems, global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsSubscription watchCurrentLevelRecords, global::TNRD.Zeepkist.GTR.IGetAdditionalGhostsQuery getAdditionalGhosts, global::TNRD.Zeepkist.GTR.IGetAllPersonalBestGhostsQuery getAllPersonalBestGhosts, global::TNRD.Zeepkist.GTR.IGetLevelPointsQuery getLevelPoints, global::TNRD.Zeepkist.GTR.IGetLevelVoteSummaryQuery getLevelVoteSummary, global::TNRD.Zeepkist.GTR.IGetNextFastestPersonalBestQuery getNextFastestPersonalBest, global::TNRD.Zeepkist.GTR.IGetPersonalBestQuery getPersonalBest, global::TNRD.Zeepkist.GTR.IGetPersonalBestCountQuery getPersonalBestCount, global::TNRD.Zeepkist.GTR.IGetPersonalBestGhostsQuery getPersonalBestGhosts, global::TNRD.Zeepkist.GTR.IGetPersonalBestsQuery getPersonalBests, global::TNRD.Zeepkist.GTR.IGetTopRecordGhostsQuery getTopRecordGhosts, global::TNRD.Zeepkist.GTR.IGetTotalUserCountQuery getTotalUserCount, global::TNRD.Zeepkist.GTR.IGetWorldRecordHolderQuery getWorldRecordHolder, global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageSubscription watchLeaderboardPage, global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsQuery resolveCurrentLevelRecordIds, global::TNRD.Zeepkist.GTR.ISearchUsersByNameQuery searchUsersByName, global::TNRD.Zeepkist.GTR.IGetLevelTrackTournamentsQuery getLevelTrackTournaments, global::TNRD.Zeepkist.GTR.IWatchTrackTournamentPageSubscription watchTrackTournamentPage)
         {
             _browseLevelItems = browseLevelItems ?? throw new global::System.ArgumentNullException(nameof(browseLevelItems));
             _watchCurrentLevelRecords = watchCurrentLevelRecords ?? throw new global::System.ArgumentNullException(nameof(watchCurrentLevelRecords));
@@ -114181,6 +115141,7 @@ namespace TNRD.Zeepkist.GTR
             _getTotalUserCount = getTotalUserCount ?? throw new global::System.ArgumentNullException(nameof(getTotalUserCount));
             _getWorldRecordHolder = getWorldRecordHolder ?? throw new global::System.ArgumentNullException(nameof(getWorldRecordHolder));
             _watchLeaderboardPage = watchLeaderboardPage ?? throw new global::System.ArgumentNullException(nameof(watchLeaderboardPage));
+            _resolveCurrentLevelRecordIds = resolveCurrentLevelRecordIds ?? throw new global::System.ArgumentNullException(nameof(resolveCurrentLevelRecordIds));
             _searchUsersByName = searchUsersByName ?? throw new global::System.ArgumentNullException(nameof(searchUsersByName));
             _getLevelTrackTournaments = getLevelTrackTournaments ?? throw new global::System.ArgumentNullException(nameof(getLevelTrackTournaments));
             _watchTrackTournamentPage = watchTrackTournamentPage ?? throw new global::System.ArgumentNullException(nameof(watchTrackTournamentPage));
@@ -114202,6 +115163,7 @@ namespace TNRD.Zeepkist.GTR
         public global::TNRD.Zeepkist.GTR.IGetTotalUserCountQuery GetTotalUserCount => _getTotalUserCount;
         public global::TNRD.Zeepkist.GTR.IGetWorldRecordHolderQuery GetWorldRecordHolder => _getWorldRecordHolder;
         public global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageSubscription WatchLeaderboardPage => _watchLeaderboardPage;
+        public global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsQuery ResolveCurrentLevelRecordIds => _resolveCurrentLevelRecordIds;
         public global::TNRD.Zeepkist.GTR.ISearchUsersByNameQuery SearchUsersByName => _searchUsersByName;
         public global::TNRD.Zeepkist.GTR.IGetLevelTrackTournamentsQuery GetLevelTrackTournaments => _getLevelTrackTournaments;
         public global::TNRD.Zeepkist.GTR.IWatchTrackTournamentPageSubscription WatchTrackTournamentPage => _watchTrackTournamentPage;
@@ -114242,6 +115204,8 @@ namespace TNRD.Zeepkist.GTR
         global::TNRD.Zeepkist.GTR.IGetWorldRecordHolderQuery GetWorldRecordHolder { get; }
 
         global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageSubscription WatchLeaderboardPage { get; }
+
+        global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsQuery ResolveCurrentLevelRecordIds { get; }
 
         global::TNRD.Zeepkist.GTR.ISearchUsersByNameQuery SearchUsersByName { get; }
 
@@ -114443,7 +115407,7 @@ namespace TNRD.Zeepkist.GTR.State
             IWatchCurrentLevelRecords_Query_PersonalBest_Nodes returnValue = default !;
             if (data.__typename.Equals("RecordHistoryEntry", global::System.StringComparison.Ordinal))
             {
-                returnValue = new WatchCurrentLevelRecords_Query_PersonalBest_Nodes_RecordHistoryEntry(data.LevelPosition, data.Time, data.LevelDecayedPoints, data.UserSteamId, data.UserName, data.PlayerDecayedPoints);
+                returnValue = new WatchCurrentLevelRecords_Query_PersonalBest_Nodes_RecordHistoryEntry(data.LevelPosition, data.Time, data.LevelDecayedPoints, data.PlayerDecayedPoints);
             }
             else
             {
@@ -116379,6 +117343,139 @@ namespace TNRD.Zeepkist.GTR.State
         public global::StrawberryShake.IOperationResultDataInfo WithVersion(global::System.UInt64 version)
         {
             return new WatchLeaderboardPageResultInfo(Query, _entityIds, version);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class ResolveCurrentLevelRecordIdsResultFactory : global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.ResolveCurrentLevelRecordIdsResult>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        public ResolveCurrentLevelRecordIdsResultFactory(global::StrawberryShake.IEntityStore entityStore)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+        }
+
+        global::System.Type global::StrawberryShake.IOperationResultDataFactory.ResultType => typeof(global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsResult);
+
+        public ResolveCurrentLevelRecordIdsResult Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            if (dataInfo is ResolveCurrentLevelRecordIdsResultInfo info)
+            {
+                return new ResolveCurrentLevelRecordIdsResult(MapIResolveCurrentLevelRecordIds_Levels(info.Levels, snapshot), MapIResolveCurrentLevelRecordIds_UserBySteamId(info.UserBySteamId, snapshot));
+            }
+
+            throw new global::System.ArgumentException("ResolveCurrentLevelRecordIdsResultInfo expected.");
+        }
+
+        private global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIds_Levels? MapIResolveCurrentLevelRecordIds_Levels(global::TNRD.Zeepkist.GTR.State.LevelsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (data is null)
+            {
+                return null;
+            }
+
+            IResolveCurrentLevelRecordIds_Levels returnValue = default !;
+            if (data?.__typename.Equals("LevelsConnection", global::System.StringComparison.Ordinal) ?? false)
+            {
+                returnValue = new ResolveCurrentLevelRecordIds_Levels_LevelsConnection(MapNonNullableIResolveCurrentLevelRecordIds_Levels_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIds_Levels_Nodes> MapNonNullableIResolveCurrentLevelRecordIds_Levels_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (list is null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var levels = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIds_Levels_Nodes>();
+            foreach (global::TNRD.Zeepkist.GTR.State.LevelData child in list)
+            {
+                levels.Add(MapNonNullableIResolveCurrentLevelRecordIds_Levels_Nodes(child, snapshot));
+            }
+
+            return levels;
+        }
+
+        private global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIds_Levels_Nodes MapNonNullableIResolveCurrentLevelRecordIds_Levels_Nodes(global::TNRD.Zeepkist.GTR.State.LevelData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            IResolveCurrentLevelRecordIds_Levels_Nodes returnValue = default !;
+            if (data.__typename.Equals("Level", global::System.StringComparison.Ordinal))
+            {
+                returnValue = new ResolveCurrentLevelRecordIds_Levels_Nodes_Level(data.Id ?? throw new global::System.ArgumentNullException());
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        private global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIds_UserBySteamId? MapIResolveCurrentLevelRecordIds_UserBySteamId(global::TNRD.Zeepkist.GTR.State.UserData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (data is null)
+            {
+                return null;
+            }
+
+            IResolveCurrentLevelRecordIds_UserBySteamId returnValue = default !;
+            if (data?.__typename.Equals("User", global::System.StringComparison.Ordinal) ?? false)
+            {
+                returnValue = new ResolveCurrentLevelRecordIds_UserBySteamId_User(data.Id ?? throw new global::System.ArgumentNullException());
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        global::System.Object global::StrawberryShake.IOperationResultDataFactory.Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot)
+        {
+            return Create(dataInfo, snapshot);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class ResolveCurrentLevelRecordIdsResultInfo : global::StrawberryShake.IOperationResultDataInfo
+    {
+        private readonly global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> _entityIds;
+        private readonly global::System.UInt64 _version;
+        public ResolveCurrentLevelRecordIdsResultInfo(global::TNRD.Zeepkist.GTR.State.LevelsConnectionData? levels, global::TNRD.Zeepkist.GTR.State.UserData? userBySteamId, global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> entityIds, global::System.UInt64 version)
+        {
+            Levels = levels;
+            UserBySteamId = userBySteamId;
+            _entityIds = entityIds ?? throw new global::System.ArgumentNullException(nameof(entityIds));
+            _version = version;
+        }
+
+        /// <summary>
+        /// Reads and enables pagination through a set of `Level`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.State.LevelsConnectionData? Levels { get; }
+        /// <summary>
+        /// Get a single `User`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.State.UserData? UserBySteamId { get; }
+        public global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> EntityIds => _entityIds;
+        public global::System.UInt64 Version => _version;
+
+        public global::StrawberryShake.IOperationResultDataInfo WithVersion(global::System.UInt64 version)
+        {
+            return new ResolveCurrentLevelRecordIdsResultInfo(Levels, UserBySteamId, _entityIds, version);
         }
     }
 
@@ -121895,19 +122992,19 @@ namespace TNRD.Zeepkist.GTR.State
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
         private readonly global::StrawberryShake.IEntityIdSerializer _idSerializer;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
-        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _bigIntParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Int32, global::System.Int32> _intParser;
         private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Double, global::System.Double> _floatParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _bigIntParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
         public WatchCurrentLevelRecordsBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
         {
             _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
             _idSerializer = idSerializer ?? throw new global::System.ArgumentNullException(nameof(idSerializer));
             ResultDataFactory = resultDataFactory ?? throw new global::System.ArgumentNullException(nameof(resultDataFactory));
-            _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
-            _bigIntParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("BigInt") ?? throw new global::System.ArgumentException("No serializer for type `BigInt` found.");
             _intParser = serializerResolver.GetLeafValueParser<global::System.Int32, global::System.Int32>("Int") ?? throw new global::System.ArgumentException("No serializer for type `Int` found.");
             _floatParser = serializerResolver.GetLeafValueParser<global::System.Double, global::System.Double>("Float") ?? throw new global::System.ArgumentException("No serializer for type `Float` found.");
+            _bigIntParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("BigInt") ?? throw new global::System.ArgumentException("No serializer for type `BigInt` found.");
+            _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
         }
 
         protected override global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsResult> ResultDataFactory { get; }
@@ -122001,7 +123098,7 @@ namespace TNRD.Zeepkist.GTR.State
             var typename = obj.Value.GetProperty("__typename").GetString();
             if (typename?.Equals("RecordHistoryEntry", global::System.StringComparison.Ordinal) ?? false)
             {
-                return new global::TNRD.Zeepkist.GTR.State.RecordHistoryEntryData(typename, levelPosition: Deserialize_Int32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPosition")), time: Deserialize_Double(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "time")), levelDecayedPoints: Deserialize_Double(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelDecayedPoints")), userSteamId: Deserialize_String(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "userSteamId")), userName: Deserialize_String(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "userName")), playerDecayedPoints: Deserialize_Double(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "playerDecayedPoints")));
+                return new global::TNRD.Zeepkist.GTR.State.RecordHistoryEntryData(typename, levelPosition: Deserialize_Int32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelPosition")), time: Deserialize_Double(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "time")), levelDecayedPoints: Deserialize_Double(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelDecayedPoints")), playerDecayedPoints: Deserialize_Double(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "playerDecayedPoints")));
             }
 
             throw new global::System.NotSupportedException();
@@ -122035,21 +123132,6 @@ namespace TNRD.Zeepkist.GTR.State
             }
 
             return _floatParser.Parse(obj.Value.GetDouble()!);
-        }
-
-        private global::System.String? Deserialize_String(global::System.Text.Json.JsonElement? obj)
-        {
-            if (!obj.HasValue)
-            {
-                return null;
-            }
-
-            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
-            {
-                return null;
-            }
-
-            return _bigIntParser.Parse(obj.Value.GetString()!);
         }
 
         private global::TNRD.Zeepkist.GTR.State.RecordHistoryEntriesConnectionData? Deserialize_IWatchCurrentLevelRecords_Query_WorldRecord(global::System.Text.Json.JsonElement? obj)
@@ -122113,6 +123195,21 @@ namespace TNRD.Zeepkist.GTR.State
             }
 
             throw new global::System.NotSupportedException();
+        }
+
+        private global::System.String? Deserialize_String(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                return null;
+            }
+
+            return _bigIntParser.Parse(obj.Value.GetString()!);
         }
     }
 
@@ -124191,6 +125288,137 @@ namespace TNRD.Zeepkist.GTR.State
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class ResolveCurrentLevelRecordIdsBuilder : global::StrawberryShake.OperationResultBuilder<global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsResult>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        private readonly global::StrawberryShake.IEntityIdSerializer _idSerializer;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _bigIntParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Int32, global::System.Int32> _intParser;
+        public ResolveCurrentLevelRecordIdsBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+            _idSerializer = idSerializer ?? throw new global::System.ArgumentNullException(nameof(idSerializer));
+            ResultDataFactory = resultDataFactory ?? throw new global::System.ArgumentNullException(nameof(resultDataFactory));
+            _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
+            _bigIntParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("BigInt") ?? throw new global::System.ArgumentException("No serializer for type `BigInt` found.");
+            _intParser = serializerResolver.GetLeafValueParser<global::System.Int32, global::System.Int32>("Int") ?? throw new global::System.ArgumentException("No serializer for type `Int` found.");
+        }
+
+        protected override global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsResult> ResultDataFactory { get; }
+
+        protected override global::StrawberryShake.IOperationResultDataInfo BuildData(global::System.Text.Json.JsonElement obj)
+        {
+            var entityIds = new global::System.Collections.Generic.HashSet<global::StrawberryShake.EntityId>();
+            global::StrawberryShake.IEntityStoreSnapshot snapshot = default !;
+            _entityStore.Update(session =>
+            {
+                snapshot = session.CurrentSnapshot;
+            });
+            return new ResolveCurrentLevelRecordIdsResultInfo(Deserialize_IResolveCurrentLevelRecordIds_Levels(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levels")), Deserialize_IResolveCurrentLevelRecordIds_UserBySteamId(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "userBySteamId")), entityIds, snapshot.Version);
+        }
+
+        private global::TNRD.Zeepkist.GTR.State.LevelsConnectionData? Deserialize_IResolveCurrentLevelRecordIds_Levels(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                return null;
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("LevelsConnection", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::TNRD.Zeepkist.GTR.State.LevelsConnectionData(typename, nodes: Deserialize_NonNullableIResolveCurrentLevelRecordIds_Levels_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelData> Deserialize_NonNullableIResolveCurrentLevelRecordIds_Levels_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var levels = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.LevelData>();
+            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
+            {
+                levels.Add(Deserialize_NonNullableIResolveCurrentLevelRecordIds_Levels_Nodes(child));
+            }
+
+            return levels;
+        }
+
+        private global::TNRD.Zeepkist.GTR.State.LevelData Deserialize_NonNullableIResolveCurrentLevelRecordIds_Levels_Nodes(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("Level", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::TNRD.Zeepkist.GTR.State.LevelData(typename, id: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Int32 Deserialize_NonNullableInt32(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _intParser.Parse(obj.Value.GetInt32()!);
+        }
+
+        private global::TNRD.Zeepkist.GTR.State.UserData? Deserialize_IResolveCurrentLevelRecordIds_UserBySteamId(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                return null;
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("User", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::TNRD.Zeepkist.GTR.State.UserData(typename, id: Deserialize_NonNullableInt32(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "id")));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class SearchUsersByNameBuilder : global::StrawberryShake.OperationResultBuilder<global::TNRD.Zeepkist.GTR.ISearchUsersByNameResult>
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
@@ -124718,24 +125946,24 @@ namespace TNRD.Zeepkist.GTR.State
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class RecordHistoryEntryData : INodeData
     {
-        public RecordHistoryEntryData(global::System.String __typename, global::System.Int32? levelPosition = default !, global::System.Double? time = default !, global::System.Double? levelDecayedPoints = default !, global::System.String? userSteamId = default !, global::System.String? userName = default !, global::System.Double? playerDecayedPoints = default !)
+        public RecordHistoryEntryData(global::System.String __typename, global::System.Int32? levelPosition = default !, global::System.Double? time = default !, global::System.Double? levelDecayedPoints = default !, global::System.Double? playerDecayedPoints = default !, global::System.String? userSteamId = default !, global::System.String? userName = default !)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
             LevelPosition = levelPosition;
             Time = time;
             LevelDecayedPoints = levelDecayedPoints;
+            PlayerDecayedPoints = playerDecayedPoints;
             UserSteamId = userSteamId;
             UserName = userName;
-            PlayerDecayedPoints = playerDecayedPoints;
         }
 
         public global::System.String __typename { get; }
         public global::System.Int32? LevelPosition { get; }
         public global::System.Double? Time { get; }
         public global::System.Double? LevelDecayedPoints { get; }
+        public global::System.Double? PlayerDecayedPoints { get; }
         public global::System.String? UserSteamId { get; }
         public global::System.String? UserName { get; }
-        public global::System.Double? PlayerDecayedPoints { get; }
     }
 
     ///<summary>A connection to a list of `PersonalBestGlobal` values.</summary>
@@ -124802,16 +126030,18 @@ namespace TNRD.Zeepkist.GTR.State
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class UserData : INodeData
     {
-        public UserData(global::System.String __typename, global::System.String? steamName = default !, global::System.String? steamId = default !)
+        public UserData(global::System.String __typename, global::System.String? steamName = default !, global::System.String? steamId = default !, global::System.Int32? id = default !)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
             SteamName = steamName;
             SteamId = steamId;
+            Id = id;
         }
 
         public global::System.String __typename { get; }
         public global::System.String? SteamName { get; }
         public global::System.String? SteamId { get; }
+        public global::System.Int32? Id { get; }
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
@@ -124984,15 +126214,17 @@ namespace TNRD.Zeepkist.GTR.State
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class LevelData : INodeData
     {
-        public LevelData(global::System.String __typename, global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? levelItems = default !)
+        public LevelData(global::System.String __typename, global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? levelItems = default !, global::System.Int32? id = default !)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
             LevelItems = levelItems;
+            Id = id;
         }
 
         public global::System.String __typename { get; }
         ///<summary>Reads and enables pagination through a set of `LevelItem`.</summary>
         public global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? LevelItems { get; }
+        public global::System.Int32? Id { get; }
     }
 
     ///<summary>A connection to a list of `UserPointContribution` values.</summary>
@@ -125023,6 +126255,21 @@ namespace TNRD.Zeepkist.GTR.State
         public global::System.String __typename { get; }
         public global::System.Double? LevelDecayedPoints { get; }
         public global::System.Int32? LevelPosition { get; }
+    }
+
+    ///<summary>A connection to a list of `Level` values.</summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class LevelsConnectionData
+    {
+        public LevelsConnectionData(global::System.String __typename, global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelData>? nodes = default !)
+        {
+            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
+            Nodes = nodes;
+        }
+
+        public global::System.String __typename { get; }
+        ///<summary>A list of `Level` objects.</summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelData>? Nodes { get; }
     }
 
     ///<summary>A connection to a list of `TrackTournament` values.</summary>

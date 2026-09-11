@@ -64,6 +64,7 @@
     <Compile Include="..\Voting\VoteReminderFormatter.cs" Link="Source\VoteReminderFormatter.cs" />
     <Compile Include="..\Voting\VoteSummary.cs" Link="Source\VoteSummary.cs" />
     <Compile Include="..\GraphQL\LevelGraphqlIdentity.cs" Link="Source\LevelGraphqlIdentity.cs" />
+    <Compile Include="..\GraphQL\CurrentLevelRecordIdCache.cs" Link="Source\CurrentLevelRecordIdCache.cs" />
     <Compile Include="..\Leaderboard\LeaderboardTextFormatter.cs" Link="Source\LeaderboardTextFormatter.cs" />
     <Compile Include="..\Leaderboard\LeaderboardPagination.cs" Link="Source\LeaderboardPagination.cs" />
     <Compile Include="..\Leaderboard\TrackTournamentDescriptor.cs" Link="Source\TrackTournamentDescriptor.cs" />

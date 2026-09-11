@@ -1,4 +1,11 @@
-fragment RecordHolderFields on RecordHistoryEntry {
+fragment PersonalBestHolderFields on RecordHistoryEntry {
+    levelPosition
+    time
+    levelDecayedPoints
+    playerDecayedPoints
+}
+
+fragment WorldRecordHolderFields on RecordHistoryEntry {
     levelPosition
     time
     levelDecayedPoints
@@ -7,29 +14,31 @@ fragment RecordHolderFields on RecordHistoryEntry {
     playerDecayedPoints
 }
 
-subscription WatchCurrentLevelRecords($xxHash: String!, $steamId: BigInt!) {
+subscription WatchCurrentLevelRecords($levelId: Int!, $userId: Int!) {
     query {
         personalBest: recordHistoryEntries(
-            filter: {
-                historyView: { equalTo: "personal-bests" }
-                levelXxHash: { equalTo: $xxHash }
-                userSteamId: { equalTo: $steamId }
+            condition: {
+                historyView: "personal-bests"
+                levelId: $levelId
+                userId: $userId
             }
             first: 1
+            orderBy: [ID_DESC]
         ) {
             nodes {
-                ...RecordHolderFields
+                ...PersonalBestHolderFields
             }
         }
         worldRecord: recordHistoryEntries(
-            filter: {
-                historyView: { equalTo: "world-records" }
-                levelXxHash: { equalTo: $xxHash }
+            condition: {
+                historyView: "world-records"
+                levelId: $levelId
             }
             first: 1
+            orderBy: [ID_DESC]
         ) {
             nodes {
-                ...RecordHolderFields
+                ...WorldRecordHolderFields
             }
         }
     }
