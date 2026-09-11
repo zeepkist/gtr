@@ -69,15 +69,15 @@ public class LeaderboardTextFormatterTests
     }
 
     [Fact]
-    public void PrefixesSmallDateBeforeText()
+    public void AppendsSmallDateAfterText()
     {
         string result = LeaderboardTextFormatter.PrefixRecordDate(
             "<color=#fff><link=\"1\">player</link></color>",
             Now.AddMinutes(-2).ToString("O"),
             Now);
 
-        Assert.StartsWith("<size=50%>", result);
-        Assert.EndsWith(" <color=#fff><link=\"1\">player</link></color>", result);
+        Assert.StartsWith("<color=#fff><link=\"1\">player</link></color><br><size=50%>", result);
+        Assert.EndsWith("</color></size>", result);
     }
 
     [Fact]

@@ -43,8 +43,8 @@ public class RecordFeedbackFormatterTests
         });
 
         Assert.Equal(
-            $"<size=75%><color=#FACC15>[GTR]</color> PB improved by {TextColour.Pink.Wrap("00:01.000")}</size><br>" +
-            $"<size=75%>#8 → #5 <size=60%>({TextColour.Yellow.Wrap("124pts")})</size></size><br>" +
+            $"<size=75%>PB improved by {TextColour.Pink.Wrap("00:01.000")}</size><br>" +
+            $"<size=75%>#8 -> #5 <size=60%>({TextColour.Yellow.Wrap("124pts")})</size></size><br>" +
             $"<size=50%>Gap to next player: {TextColour.Pink.Wrap("00:00.250")}</size>",
             result);
     }
@@ -62,8 +62,8 @@ public class RecordFeedbackFormatterTests
         });
 
         Assert.Equal(
-            $"<size=75%><color=#FACC15>[GTR]</color> WR improved by {TextColour.Pink.Wrap("00:00.500")}</size><br>" +
-            $"<size=75%>#2 → {TextColour.Yellow.Wrap("#1")} " +
+            $"<size=75%>WR improved by {TextColour.Pink.Wrap("00:00.500")}</size><br>" +
+            $"<size=75%>#2 -> {TextColour.Yellow.Wrap("#1")} " +
             $"<size=60%>({TextColour.Yellow.Wrap("100pts")})</size></size>",
             result);
     }
@@ -157,5 +157,20 @@ public class RecordFeedbackFormatterTests
     public void DetectsWorldRecordFromLevelPosition(int? levelPosition, bool expected)
     {
         Assert.Equal(expected, RecordFeedbackFormatter.IsWorldRecordPosition(levelPosition));
+    }
+
+    [Theory]
+    [InlineData(true, 5, 100.0, true)]
+    [InlineData(false, 5, 100.0, false)]
+    [InlineData(true, null, 100.0, false)]
+    [InlineData(true, 5, null, false)]
+    public void RequiresMatchingRankedProjection(
+        bool matchingPersonalBest,
+        int? position,
+        double? levelPoints,
+        bool expected)
+    {
+        Assert.Equal(expected,
+            RecordFeedbackFormatter.HasRankedProjection(matchingPersonalBest, position, levelPoints));
     }
 }

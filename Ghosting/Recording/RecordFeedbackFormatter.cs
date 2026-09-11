@@ -95,6 +95,11 @@ public static class RecordFeedbackFormatter
         return levelPosition == 1;
     }
 
+    public static bool HasRankedProjection(bool matchingPersonalBest, int? position, double? levelPoints)
+    {
+        return matchingPersonalBest && position.HasValue && levelPoints.HasValue;
+    }
+
     public static string Format(RecordFeedbackMessageData data)
     {
         List<string> lines = new();
@@ -107,7 +112,7 @@ public static class RecordFeedbackFormatter
         };
 
         if (improvement != null && !string.IsNullOrEmpty(data.PreviousDelta))
-            lines.Add($"<size=75%>{TextColour.Yellow.Wrap("[GTR]")} {improvement} improved by {TextColour.Pink.Wrap(data.PreviousDelta)}</size>");
+            lines.Add($"<size=75%>{improvement} improved by {TextColour.Pink.Wrap(data.PreviousDelta)}</size>");
 
         if (data.Position.HasValue && data.LevelDecayedPoints.HasValue)
         {
@@ -122,14 +127,14 @@ public static class RecordFeedbackFormatter
                      data.PreviousPosition.Value > data.Position.Value)
             {
                 lines.Add(
-                    $"<size=70%>#{data.PreviousPosition.Value} -> {position} <size=60%>({score})</size></size>");
+                    $"<size=75%>#{data.PreviousPosition.Value} -> {position} <size=60%>({score})</size></size>");
             }
         }
 
         if (!string.IsNullOrEmpty(data.NextDelta) &&
             data.Kind is RecordFeedbackKind.PersonalBest or RecordFeedbackKind.FirstPersonalBest)
         {
-            lines.Add($"<size=70%>Gap to next player: {TextColour.Pink.Wrap(data.NextDelta)}</size>");
+            lines.Add($"<size=50%>Gap to next player: {TextColour.Pink.Wrap(data.NextDelta)}</size>");
         }
 
         return string.Join("<br>", lines);

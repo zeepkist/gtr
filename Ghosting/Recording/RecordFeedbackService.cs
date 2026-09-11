@@ -27,8 +27,6 @@ public sealed class RecordFeedbackBaseline
 
 public sealed class RecordFeedbackService : IEagerService, IDisposable
 {
-    private static readonly TimeSpan CompletionTimeout = TimeSpan.FromSeconds(5);
-
     private readonly CurrentLevelRecordService _currentLevelRecordService;
     private readonly ConfigService _configService;
     private readonly IGtrClient _gtrClient;
@@ -93,6 +91,11 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
             _logger.LogWarning("Skipping record feedback because no pre-submit snapshot was available");
             return;
         }
+        if (baseline.PersonalBestTime.HasValue && !baseline.PersonalBestPosition.HasValue)
+        {
+            _logger.LogWarning("Skipping record feedback because the pre-submit PB position was unavailable");
+            return;
+        }
 
         string playerSteamId = SteamClient.SteamId.ToString();
         RecordFeedbackKind baselineKind = RecordFeedbackFormatter.Classify(
@@ -108,8 +111,7 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
         int generation = ++_generation;
         _pending = new PendingFeedback(baseline, submittedTime, baselineKind, playerSteamId, generation);
         _pendingCancellationTokenSource = new CancellationTokenSource();
-        WaitForCompletionAsync(generation, _pendingCancellationTokenSource.Token).Forget();
-        TryComplete(_currentLevelRecordService.Snapshot, false).Forget();
+        TryComplete(_currentLevelRecordService.Snapshot).Forget();
     }
 
     private bool ShouldShow(RecordFeedbackKind kind)
@@ -123,23 +125,10 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
 
     private void OnSnapshotChanged(CurrentLevelRecordSnapshot snapshot)
     {
-        TryComplete(snapshot, false).Forget();
+        TryComplete(snapshot).Forget();
     }
 
-    private async UniTaskVoid WaitForCompletionAsync(int generation, CancellationToken cancellationToken)
-    {
-        try
-        {
-            await UniTask.Delay(CompletionTimeout, cancellationToken: cancellationToken);
-            if (generation == _generation)
-                await TryComplete(_currentLevelRecordService.Snapshot, true);
-        }
-        catch (OperationCanceledException)
-        {
-        }
-    }
-
-    private async UniTask TryComplete(CurrentLevelRecordSnapshot snapshot, bool allowPartial)
+    private async UniTask TryComplete(CurrentLevelRecordSnapshot snapshot)
     {
         PendingFeedback pending = _pending;
         if (pending == null || pending.Generation != _generation)
@@ -150,7 +139,7 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
         PersonalBestHolder personalBest = snapshot?.PersonalBest;
         bool matchingPersonalBest = personalBest != null &&
                                     Math.Abs(personalBest.Time - pending.SubmittedTime) < 0.001;
-        if (matchingPersonalBest)
+        if (matchingPersonalBest && personalBest.Rank.HasValue)
         {
             bool isWorldRecord = RecordFeedbackFormatter.IsWorldRecordPosition(personalBest.Rank);
             pending.ConfirmedKind = ClassifyConfirmed(pending, isWorldRecord);
@@ -168,20 +157,17 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
             }
         }
 
-        RecordFeedbackKind kind = pending.ConfirmedKind ??
-                                  (allowPartial ? pending.BaselineKind : RecordFeedbackKind.None);
+        RecordFeedbackKind kind = pending.ConfirmedKind ?? RecordFeedbackKind.None;
         if (kind == RecordFeedbackKind.None || !ShouldShow(kind))
-        {
-            if (allowPartial)
-                CompleteWithoutMessage(pending);
             return;
-        }
 
-        bool projectionReady = matchingPersonalBest && personalBest.Rank.HasValue &&
-                               personalBest.LevelDecayedPoints.HasValue;
+        bool projectionReady = RecordFeedbackFormatter.HasRankedProjection(
+            matchingPersonalBest,
+            personalBest?.Rank,
+            personalBest?.LevelDecayedPoints);
         bool nextFastestReady = kind is RecordFeedbackKind.NewWorldRecord or RecordFeedbackKind.ImprovedWorldRecord ||
                                 pending.NextFastestRequestCompleted;
-        if ((!projectionReady || !nextFastestReady) && !allowPartial)
+        if (!projectionReady || !nextFastestReady)
             return;
 
         RecordFeedbackMessageData data = new()
@@ -245,7 +231,7 @@ public sealed class RecordFeedbackService : IEagerService, IDisposable
 
         pending.NextDelta = nextDelta;
         pending.NextFastestRequestCompleted = true;
-        TryComplete(_currentLevelRecordService.Snapshot, false).Forget();
+        TryComplete(_currentLevelRecordService.Snapshot).Forget();
     }
 
     private static RecordFeedbackKind ClassifyConfirmed(PendingFeedback pending, bool isWorldRecord)

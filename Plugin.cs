@@ -132,6 +132,7 @@ public class Plugin : BaseUnityPlugin
         services.AddSingleton<GhostReaderFactory>();
         services.AddSingleton<GhostRecorderFactory>();
         services.AddSingleton<LeaderboardGraphqlService>();
+        services.AddSingleton<TrackTournamentGraphqlService>();
         services.AddSingleton<OnlineLeaderboardTab>();
         services.AddSingleton<OfflineLeaderboardTab>();
         services.AddSingleton<MessengerService>();
