@@ -7,9 +7,10 @@ using ZeepSDK.External.Cysharp.Threading.Tasks;
 
 namespace TNRD.Zeepkist.GTR.Leaderboard;
 
-public class LeaderboardGraphqlService
+public class LeaderboardGraphqlService : IDisposable
 {
     private readonly IGtrClient _gtrClient;
+    private readonly SharedLeaderboardPageStore<LeaderboardPageSnapshot> _pages = new();
 
     public LeaderboardGraphqlService(IGtrClient gtrClient)
     {
@@ -21,6 +22,19 @@ public class LeaderboardGraphqlService
         int page,
         int pageSize,
         Action<LeaderboardPageSnapshot> onNext,
+        Action<Exception> onError) =>
+        _pages.Watch($"{level.CacheKey}|{page}|{pageSize}",
+            (next, error) => WatchPageCore(level, page, pageSize, next, error), onNext, onError);
+
+    public void ClearPages() => _pages.Dispose();
+
+    public void Dispose() => ClearPages();
+
+    private IDisposable WatchPageCore(
+        LevelGraphqlIdentity level,
+        int page,
+        int pageSize,
+        Action<LeaderboardPageSnapshot> onNext,
         Action<Exception> onError)
     {
         var medalTrackers = new Dictionary<string, UI.Medals.MedalUpgradeTracker>();
@@ -28,9 +42,15 @@ public class LeaderboardGraphqlService
         RecoveringSubscription<IOperationResult<IWatchLeaderboardPageResult>> subscription = null;
         subscription = new RecoveringSubscription<IOperationResult<IWatchLeaderboardPageResult>>(
             observer => _gtrClient.WatchLeaderboardPage.Watch(level.XxHash, level.Hash, pageSize, page * pageSize).Subscribe(observer),
-            (result, attempt) => Deliver(result, attempt).Forget(), onError);
+            (result, attempt) => Deliver(result, attempt).Forget(), error => DeliverError(error).Forget());
         subscription.Start();
         return subscription;
+
+        async UniTaskVoid DeliverError(Exception error)
+        {
+            await UniTask.SwitchToMainThread();
+            onError(error);
+        }
 
         async UniTaskVoid Deliver(IOperationResult<IWatchLeaderboardPageResult> result, int attempt)
         {
@@ -59,7 +79,7 @@ public class LeaderboardGraphqlService
             }
             catch (Exception error)
             {
-                if (subscription.IsCurrentAttempt(attempt)) onError(error);
+                if (subscription.IsCurrentAttempt(attempt)) DeliverError(error).Forget();
             }
         }
     }

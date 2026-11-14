@@ -16,7 +16,7 @@ namespace TNRD.Zeepkist.GTR.Leaderboard;
 
 public class OfflineLeaderboardTab : BaseSingleplayerLeaderboardTab, IDisposable
 {
-    private const int PageSize = 14;
+    internal const int PageSize = 14;
 
     private readonly LeaderboardGraphqlService _graphqlService;
     private readonly OfflineGhostsService _offlineGhostsService;
