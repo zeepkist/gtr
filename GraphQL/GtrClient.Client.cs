@@ -21,6 +21,7 @@ namespace Microsoft.Extensions.DependencyInjection
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.WatchCurrentLevelRecordsSubscription>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetAdditionalGhostsQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetAllPersonalBestGhostsQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetCurrentLevelMedalTargetsQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetLevelPointsQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetLevelVoteSummaryQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetNextFastestPersonalBestQuery>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<ClientServiceProvider>(sp)));
@@ -460,6 +461,14 @@ namespace Microsoft.Extensions.DependencyInjection
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>, global::StrawberryShake.Json.JsonResultPatcher>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.GetAllPersonalBestGhostsQuery>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.IGetAllPersonalBestGhostsQuery>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetAllPersonalBestGhostsQuery>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsResult>, global::TNRD.Zeepkist.GTR.State.GetCurrentLevelMedalTargetsResultFactory>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsResult>>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsQuery>(sp));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsResult>, global::TNRD.Zeepkist.GTR.State.GetCurrentLevelMedalTargetsBuilder>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationExecutor<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsResult>>(services, sp => new global::StrawberryShake.OperationExecutor<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsResult>(global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.Transport.Http.IHttpConnection>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultBuilder<global::System.Text.Json.JsonDocument, global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsResult>>(sp), () => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>>(sp), global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationStore>(sp), strategy));
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IResultPatcher<global::System.Text.Json.JsonDocument>, global::StrawberryShake.Json.JsonResultPatcher>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.GetCurrentLevelMedalTargetsQuery>(services);
+            global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsQuery>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.GetCurrentLevelMedalTargetsQuery>(sp));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IGetLevelPointsResult>, global::TNRD.Zeepkist.GTR.State.GetLevelPointsResultFactory>(services);
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationResultDataFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IGetLevelPointsResult>>(sp));
             global::Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton<global::StrawberryShake.IOperationRequestFactory>(services, sp => global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService<global::TNRD.Zeepkist.GTR.IGetLevelPointsQuery>(sp));
@@ -2429,6 +2438,461 @@ namespace TNRD.Zeepkist.GTR
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial interface IGetAllPersonalBestGhosts_Records_Nodes_RecordMedia_RecordMedia : IGetAllPersonalBestGhosts_Records_Nodes_RecordMedia
+    {
+    }
+
+    /// <summary>
+    /// The root query type which gives access points into the data universe.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class GetCurrentLevelMedalTargetsResult : global::System.IEquatable<GetCurrentLevelMedalTargetsResult>, IGetCurrentLevelMedalTargetsResult
+    {
+        public GetCurrentLevelMedalTargetsResult(global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels? levels)
+        {
+            Levels = levels;
+        }
+
+        /// <summary>
+        /// Reads and enables pagination through a set of `Level`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels? Levels { get; }
+
+        public virtual global::System.Boolean Equals(GetCurrentLevelMedalTargetsResult? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (((Levels is null && other.Levels is null) || Levels != null && Levels.Equals(other.Levels)));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((GetCurrentLevelMedalTargetsResult)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                if (Levels != null)
+                {
+                    hash ^= 397 * Levels.GetHashCode();
+                }
+
+                return hash;
+            }
+        }
+    }
+
+    /// <summary>
+    /// A connection to a list of `Level` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class GetCurrentLevelMedalTargets_Levels_LevelsConnection : global::System.IEquatable<GetCurrentLevelMedalTargets_Levels_LevelsConnection>, IGetCurrentLevelMedalTargets_Levels_LevelsConnection
+    {
+        public GetCurrentLevelMedalTargets_Levels_LevelsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes> nodes)
+        {
+            Nodes = nodes;
+        }
+
+        /// <summary>
+        /// A list of `Level` objects.
+        /// </summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes> Nodes { get; }
+
+        public virtual global::System.Boolean Equals(GetCurrentLevelMedalTargets_Levels_LevelsConnection? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((GetCurrentLevelMedalTargets_Levels_LevelsConnection)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                foreach (var Nodes_elm in Nodes)
+                {
+                    hash ^= 397 * Nodes_elm.GetHashCode();
+                }
+
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class GetCurrentLevelMedalTargets_Levels_Nodes_Level : global::System.IEquatable<GetCurrentLevelMedalTargets_Levels_Nodes_Level>, IGetCurrentLevelMedalTargets_Levels_Nodes_Level
+    {
+        public GetCurrentLevelMedalTargets_Levels_Nodes_Level(global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems levelItems)
+        {
+            LevelItems = levelItems;
+        }
+
+        /// <summary>
+        /// Reads and enables pagination through a set of `LevelItem`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems LevelItems { get; }
+
+        public virtual global::System.Boolean Equals(GetCurrentLevelMedalTargets_Levels_Nodes_Level? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (LevelItems.Equals(other.LevelItems));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((GetCurrentLevelMedalTargets_Levels_Nodes_Level)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * LevelItems.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    /// <summary>
+    /// A connection to a list of `LevelItem` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class GetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_LevelItemsConnection : global::System.IEquatable<GetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_LevelItemsConnection>, IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_LevelItemsConnection
+    {
+        public GetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_LevelItemsConnection(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes> nodes)
+        {
+            Nodes = nodes;
+        }
+
+        /// <summary>
+        /// A list of `LevelItem` objects.
+        /// </summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes> Nodes { get; }
+
+        public virtual global::System.Boolean Equals(GetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_LevelItemsConnection? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (global::StrawberryShake.Internal.ComparisonHelper.SequenceEqual(Nodes, other.Nodes));
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((GetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_LevelItemsConnection)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                foreach (var Nodes_elm in Nodes)
+                {
+                    hash ^= 397 * Nodes_elm.GetHashCode();
+                }
+
+                return hash;
+            }
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class GetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes_LevelItem : global::System.IEquatable<GetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes_LevelItem>, IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes_LevelItem
+    {
+        public GetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes_LevelItem(global::System.Double validationTimeBronze, global::System.Double validationTimeSilver, global::System.Double validationTimeGold, global::System.Double validationTimeAuthor, global::System.Double? validationTimeExpert, global::System.Double? validationTimeApex)
+        {
+            ValidationTimeBronze = validationTimeBronze;
+            ValidationTimeSilver = validationTimeSilver;
+            ValidationTimeGold = validationTimeGold;
+            ValidationTimeAuthor = validationTimeAuthor;
+            ValidationTimeExpert = validationTimeExpert;
+            ValidationTimeApex = validationTimeApex;
+        }
+
+        public global::System.Double ValidationTimeBronze { get; }
+        public global::System.Double ValidationTimeSilver { get; }
+        public global::System.Double ValidationTimeGold { get; }
+        public global::System.Double ValidationTimeAuthor { get; }
+        /// <summary>
+        /// Expert target in seconds; null until available.
+        /// </summary>
+        public global::System.Double? ValidationTimeExpert { get; }
+        /// <summary>
+        /// Apex target in seconds; null until available.
+        /// </summary>
+        public global::System.Double? ValidationTimeApex { get; }
+
+        public virtual global::System.Boolean Equals(GetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes_LevelItem? other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            if (other.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return (global::System.Object.Equals(ValidationTimeBronze, other.ValidationTimeBronze)) && global::System.Object.Equals(ValidationTimeSilver, other.ValidationTimeSilver) && global::System.Object.Equals(ValidationTimeGold, other.ValidationTimeGold) && global::System.Object.Equals(ValidationTimeAuthor, other.ValidationTimeAuthor) && global::System.Object.Equals(ValidationTimeExpert, other.ValidationTimeExpert) && global::System.Object.Equals(ValidationTimeApex, other.ValidationTimeApex);
+        }
+
+        public override global::System.Boolean Equals(global::System.Object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != GetType())
+            {
+                return false;
+            }
+
+            return Equals((GetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes_LevelItem)obj);
+        }
+
+        public override global::System.Int32 GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 5;
+                hash ^= 397 * ValidationTimeBronze.GetHashCode();
+                hash ^= 397 * ValidationTimeSilver.GetHashCode();
+                hash ^= 397 * ValidationTimeGold.GetHashCode();
+                hash ^= 397 * ValidationTimeAuthor.GetHashCode();
+                if (ValidationTimeExpert != null)
+                {
+                    hash ^= 397 * ValidationTimeExpert.GetHashCode();
+                }
+
+                if (ValidationTimeApex != null)
+                {
+                    hash ^= 397 * ValidationTimeApex.GetHashCode();
+                }
+
+                return hash;
+            }
+        }
+    }
+
+    /// <summary>
+    /// The root query type which gives access points into the data universe.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IGetCurrentLevelMedalTargetsResult
+    {
+        /// <summary>
+        /// Reads and enables pagination through a set of `Level`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels? Levels { get; }
+    }
+
+    /// <summary>
+    /// A connection to a list of `Level` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IGetCurrentLevelMedalTargets_Levels
+    {
+        /// <summary>
+        /// A list of `Level` objects.
+        /// </summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes> Nodes { get; }
+    }
+
+    /// <summary>
+    /// A connection to a list of `Level` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IGetCurrentLevelMedalTargets_Levels_LevelsConnection : IGetCurrentLevelMedalTargets_Levels
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IGetCurrentLevelMedalTargets_Levels_Nodes
+    {
+        /// <summary>
+        /// Reads and enables pagination through a set of `LevelItem`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems LevelItems { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IGetCurrentLevelMedalTargets_Levels_Nodes_Level : IGetCurrentLevelMedalTargets_Levels_Nodes
+    {
+    }
+
+    /// <summary>
+    /// A connection to a list of `LevelItem` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems
+    {
+        /// <summary>
+        /// A list of `LevelItem` objects.
+        /// </summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes> Nodes { get; }
+    }
+
+    /// <summary>
+    /// A connection to a list of `LevelItem` values.
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_LevelItemsConnection : IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems
+    {
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes
+    {
+        public global::System.Double ValidationTimeBronze { get; }
+        public global::System.Double ValidationTimeSilver { get; }
+        public global::System.Double ValidationTimeGold { get; }
+        public global::System.Double ValidationTimeAuthor { get; }
+        /// <summary>
+        /// Expert target in seconds; null until available.
+        /// </summary>
+        public global::System.Double? ValidationTimeExpert { get; }
+        /// <summary>
+        /// Apex target in seconds; null until available.
+        /// </summary>
+        public global::System.Double? ValidationTimeApex { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes_LevelItem : IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes
     {
     }
 
@@ -140379,6 +140843,702 @@ namespace TNRD.Zeepkist.GTR
     }
 
     /// <summary>
+    /// Represents the operation service of the GetCurrentLevelMedalTargets GraphQL operation
+    /// <code>
+    /// query GetCurrentLevelMedalTargets($xxHash: String!, $hash: String!) {
+    ///   levels(first: 1, filter: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, orderBy: [ ID_DESC ]) {
+    ///     __typename
+    ///     nodes {
+    ///       __typename
+    ///       levelItems(first: 1, condition: { deleted: false }, orderBy: [ UPDATED_AT_DESC, ID_DESC ]) {
+    ///         __typename
+    ///         nodes {
+    ///           __typename
+    ///           validationTimeBronze
+    ///           validationTimeSilver
+    ///           validationTimeGold
+    ///           validationTimeAuthor
+    ///           validationTimeExpert
+    ///           validationTimeApex
+    ///         }
+    ///       }
+    ///     }
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class GetCurrentLevelMedalTargetsQueryDocument : global::StrawberryShake.IDocument
+    {
+        private GetCurrentLevelMedalTargetsQueryDocument()
+        {
+        }
+
+        public static GetCurrentLevelMedalTargetsQueryDocument Instance { get; } = new GetCurrentLevelMedalTargetsQueryDocument();
+        public global::StrawberryShake.OperationKind Kind => global::StrawberryShake.OperationKind.Query;
+        public MemoryAlias::System.ReadOnlySpan<global::System.Byte> Body => new global::System.Byte[]
+        {
+            0x71,
+            0x75,
+            0x65,
+            0x72,
+            0x79,
+            0x20,
+            0x47,
+            0x65,
+            0x74,
+            0x43,
+            0x75,
+            0x72,
+            0x72,
+            0x65,
+            0x6e,
+            0x74,
+            0x4c,
+            0x65,
+            0x76,
+            0x65,
+            0x6c,
+            0x4d,
+            0x65,
+            0x64,
+            0x61,
+            0x6c,
+            0x54,
+            0x61,
+            0x72,
+            0x67,
+            0x65,
+            0x74,
+            0x73,
+            0x28,
+            0x24,
+            0x78,
+            0x78,
+            0x48,
+            0x61,
+            0x73,
+            0x68,
+            0x3a,
+            0x20,
+            0x53,
+            0x74,
+            0x72,
+            0x69,
+            0x6e,
+            0x67,
+            0x21,
+            0x2c,
+            0x20,
+            0x24,
+            0x68,
+            0x61,
+            0x73,
+            0x68,
+            0x3a,
+            0x20,
+            0x53,
+            0x74,
+            0x72,
+            0x69,
+            0x6e,
+            0x67,
+            0x21,
+            0x29,
+            0x20,
+            0x7b,
+            0x20,
+            0x6c,
+            0x65,
+            0x76,
+            0x65,
+            0x6c,
+            0x73,
+            0x28,
+            0x66,
+            0x69,
+            0x72,
+            0x73,
+            0x74,
+            0x3a,
+            0x20,
+            0x31,
+            0x2c,
+            0x20,
+            0x66,
+            0x69,
+            0x6c,
+            0x74,
+            0x65,
+            0x72,
+            0x3a,
+            0x20,
+            0x7b,
+            0x20,
+            0x6f,
+            0x72,
+            0x3a,
+            0x20,
+            0x5b,
+            0x20,
+            0x7b,
+            0x20,
+            0x78,
+            0x78,
+            0x48,
+            0x61,
+            0x73,
+            0x68,
+            0x3a,
+            0x20,
+            0x7b,
+            0x20,
+            0x65,
+            0x71,
+            0x75,
+            0x61,
+            0x6c,
+            0x54,
+            0x6f,
+            0x3a,
+            0x20,
+            0x24,
+            0x78,
+            0x78,
+            0x48,
+            0x61,
+            0x73,
+            0x68,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d,
+            0x2c,
+            0x20,
+            0x7b,
+            0x20,
+            0x61,
+            0x6e,
+            0x64,
+            0x3a,
+            0x20,
+            0x5b,
+            0x20,
+            0x7b,
+            0x20,
+            0x68,
+            0x61,
+            0x73,
+            0x68,
+            0x3a,
+            0x20,
+            0x7b,
+            0x20,
+            0x65,
+            0x71,
+            0x75,
+            0x61,
+            0x6c,
+            0x54,
+            0x6f,
+            0x3a,
+            0x20,
+            0x24,
+            0x68,
+            0x61,
+            0x73,
+            0x68,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d,
+            0x2c,
+            0x20,
+            0x7b,
+            0x20,
+            0x61,
+            0x64,
+            0x76,
+            0x65,
+            0x6e,
+            0x74,
+            0x75,
+            0x72,
+            0x65,
+            0x3a,
+            0x20,
+            0x7b,
+            0x20,
+            0x65,
+            0x71,
+            0x75,
+            0x61,
+            0x6c,
+            0x54,
+            0x6f,
+            0x3a,
+            0x20,
+            0x74,
+            0x72,
+            0x75,
+            0x65,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d,
+            0x20,
+            0x5d,
+            0x20,
+            0x7d,
+            0x20,
+            0x5d,
+            0x20,
+            0x7d,
+            0x2c,
+            0x20,
+            0x6f,
+            0x72,
+            0x64,
+            0x65,
+            0x72,
+            0x42,
+            0x79,
+            0x3a,
+            0x20,
+            0x5b,
+            0x20,
+            0x49,
+            0x44,
+            0x5f,
+            0x44,
+            0x45,
+            0x53,
+            0x43,
+            0x20,
+            0x5d,
+            0x29,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x6e,
+            0x6f,
+            0x64,
+            0x65,
+            0x73,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x6c,
+            0x65,
+            0x76,
+            0x65,
+            0x6c,
+            0x49,
+            0x74,
+            0x65,
+            0x6d,
+            0x73,
+            0x28,
+            0x66,
+            0x69,
+            0x72,
+            0x73,
+            0x74,
+            0x3a,
+            0x20,
+            0x31,
+            0x2c,
+            0x20,
+            0x63,
+            0x6f,
+            0x6e,
+            0x64,
+            0x69,
+            0x74,
+            0x69,
+            0x6f,
+            0x6e,
+            0x3a,
+            0x20,
+            0x7b,
+            0x20,
+            0x64,
+            0x65,
+            0x6c,
+            0x65,
+            0x74,
+            0x65,
+            0x64,
+            0x3a,
+            0x20,
+            0x66,
+            0x61,
+            0x6c,
+            0x73,
+            0x65,
+            0x20,
+            0x7d,
+            0x2c,
+            0x20,
+            0x6f,
+            0x72,
+            0x64,
+            0x65,
+            0x72,
+            0x42,
+            0x79,
+            0x3a,
+            0x20,
+            0x5b,
+            0x20,
+            0x55,
+            0x50,
+            0x44,
+            0x41,
+            0x54,
+            0x45,
+            0x44,
+            0x5f,
+            0x41,
+            0x54,
+            0x5f,
+            0x44,
+            0x45,
+            0x53,
+            0x43,
+            0x2c,
+            0x20,
+            0x49,
+            0x44,
+            0x5f,
+            0x44,
+            0x45,
+            0x53,
+            0x43,
+            0x20,
+            0x5d,
+            0x29,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x6e,
+            0x6f,
+            0x64,
+            0x65,
+            0x73,
+            0x20,
+            0x7b,
+            0x20,
+            0x5f,
+            0x5f,
+            0x74,
+            0x79,
+            0x70,
+            0x65,
+            0x6e,
+            0x61,
+            0x6d,
+            0x65,
+            0x20,
+            0x76,
+            0x61,
+            0x6c,
+            0x69,
+            0x64,
+            0x61,
+            0x74,
+            0x69,
+            0x6f,
+            0x6e,
+            0x54,
+            0x69,
+            0x6d,
+            0x65,
+            0x42,
+            0x72,
+            0x6f,
+            0x6e,
+            0x7a,
+            0x65,
+            0x20,
+            0x76,
+            0x61,
+            0x6c,
+            0x69,
+            0x64,
+            0x61,
+            0x74,
+            0x69,
+            0x6f,
+            0x6e,
+            0x54,
+            0x69,
+            0x6d,
+            0x65,
+            0x53,
+            0x69,
+            0x6c,
+            0x76,
+            0x65,
+            0x72,
+            0x20,
+            0x76,
+            0x61,
+            0x6c,
+            0x69,
+            0x64,
+            0x61,
+            0x74,
+            0x69,
+            0x6f,
+            0x6e,
+            0x54,
+            0x69,
+            0x6d,
+            0x65,
+            0x47,
+            0x6f,
+            0x6c,
+            0x64,
+            0x20,
+            0x76,
+            0x61,
+            0x6c,
+            0x69,
+            0x64,
+            0x61,
+            0x74,
+            0x69,
+            0x6f,
+            0x6e,
+            0x54,
+            0x69,
+            0x6d,
+            0x65,
+            0x41,
+            0x75,
+            0x74,
+            0x68,
+            0x6f,
+            0x72,
+            0x20,
+            0x76,
+            0x61,
+            0x6c,
+            0x69,
+            0x64,
+            0x61,
+            0x74,
+            0x69,
+            0x6f,
+            0x6e,
+            0x54,
+            0x69,
+            0x6d,
+            0x65,
+            0x45,
+            0x78,
+            0x70,
+            0x65,
+            0x72,
+            0x74,
+            0x20,
+            0x76,
+            0x61,
+            0x6c,
+            0x69,
+            0x64,
+            0x61,
+            0x74,
+            0x69,
+            0x6f,
+            0x6e,
+            0x54,
+            0x69,
+            0x6d,
+            0x65,
+            0x41,
+            0x70,
+            0x65,
+            0x78,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d,
+            0x20,
+            0x7d
+        };
+        public global::StrawberryShake.DocumentHash Hash { get; } = new global::StrawberryShake.DocumentHash("md5Hash", "cae441dce696e99150ea0f30b0f5c827");
+
+        public override global::System.String ToString()
+        {
+#if NETCOREAPP3_1_OR_GREATER
+        return global::System.Text.Encoding.UTF8.GetString(Body);
+#else
+            return global::System.Text.Encoding.UTF8.GetString(Body.ToArray());
+#endif
+        }
+    }
+
+    /// <summary>
+    /// Represents the operation service of the GetCurrentLevelMedalTargets GraphQL operation
+    /// <code>
+    /// query GetCurrentLevelMedalTargets($xxHash: String!, $hash: String!) {
+    ///   levels(first: 1, filter: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, orderBy: [ ID_DESC ]) {
+    ///     __typename
+    ///     nodes {
+    ///       __typename
+    ///       levelItems(first: 1, condition: { deleted: false }, orderBy: [ UPDATED_AT_DESC, ID_DESC ]) {
+    ///         __typename
+    ///         nodes {
+    ///           __typename
+    ///           validationTimeBronze
+    ///           validationTimeSilver
+    ///           validationTimeGold
+    ///           validationTimeAuthor
+    ///           validationTimeExpert
+    ///           validationTimeApex
+    ///         }
+    ///       }
+    ///     }
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class GetCurrentLevelMedalTargetsQuery : global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsQuery
+    {
+        private readonly global::StrawberryShake.IOperationExecutor<IGetCurrentLevelMedalTargetsResult> _operationExecutor;
+        private readonly global::StrawberryShake.Serialization.IInputValueFormatter _stringFormatter;
+        public GetCurrentLevelMedalTargetsQuery(global::StrawberryShake.IOperationExecutor<IGetCurrentLevelMedalTargetsResult> operationExecutor, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _operationExecutor = operationExecutor ?? throw new global::System.ArgumentNullException(nameof(operationExecutor));
+            _stringFormatter = serializerResolver.GetInputValueFormatter("String");
+        }
+
+        global::System.Type global::StrawberryShake.IOperationRequestFactory.ResultType => typeof(IGetCurrentLevelMedalTargetsResult);
+
+        public async global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<IGetCurrentLevelMedalTargetsResult>> ExecuteAsync(global::System.String xxHash, global::System.String hash, global::System.Threading.CancellationToken cancellationToken = default)
+        {
+            var request = CreateRequest(xxHash, hash);
+            return await _operationExecutor.ExecuteAsync(request, cancellationToken).ConfigureAwait(false);
+        }
+
+        public global::System.IObservable<global::StrawberryShake.IOperationResult<IGetCurrentLevelMedalTargetsResult>> Watch(global::System.String xxHash, global::System.String hash, global::StrawberryShake.ExecutionStrategy? strategy = null)
+        {
+            var request = CreateRequest(xxHash, hash);
+            return _operationExecutor.Watch(request, strategy);
+        }
+
+        private global::StrawberryShake.OperationRequest CreateRequest(global::System.String xxHash, global::System.String hash)
+        {
+            var variables = new global::System.Collections.Generic.Dictionary<global::System.String, global::System.Object?>();
+            variables.Add("xxHash", FormatXxHash(xxHash));
+            variables.Add("hash", FormatHash(hash));
+            return CreateRequest(variables);
+        }
+
+        private global::StrawberryShake.OperationRequest CreateRequest(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
+        {
+            return new global::StrawberryShake.OperationRequest(id: GetCurrentLevelMedalTargetsQueryDocument.Instance.Hash.Value, name: "GetCurrentLevelMedalTargets", document: GetCurrentLevelMedalTargetsQueryDocument.Instance, strategy: global::StrawberryShake.RequestStrategy.Default, variables: variables);
+        }
+
+        private global::System.Object? FormatXxHash(global::System.String value)
+        {
+            if (value is null)
+            {
+                throw new global::System.ArgumentNullException(nameof(value));
+            }
+
+            return _stringFormatter.Format(value);
+        }
+
+        private global::System.Object? FormatHash(global::System.String value)
+        {
+            if (value is null)
+            {
+                throw new global::System.ArgumentNullException(nameof(value));
+            }
+
+            return _stringFormatter.Format(value);
+        }
+
+        global::StrawberryShake.OperationRequest global::StrawberryShake.IOperationRequestFactory.Create(global::System.Collections.Generic.IReadOnlyDictionary<global::System.String, global::System.Object?>? variables)
+        {
+            return CreateRequest(variables!);
+        }
+    }
+
+    /// <summary>
+    /// Represents the operation service of the GetCurrentLevelMedalTargets GraphQL operation
+    /// <code>
+    /// query GetCurrentLevelMedalTargets($xxHash: String!, $hash: String!) {
+    ///   levels(first: 1, filter: { or: [ { xxHash: { equalTo: $xxHash } }, { and: [ { hash: { equalTo: $hash } }, { adventure: { equalTo: true } } ] } ] }, orderBy: [ ID_DESC ]) {
+    ///     __typename
+    ///     nodes {
+    ///       __typename
+    ///       levelItems(first: 1, condition: { deleted: false }, orderBy: [ UPDATED_AT_DESC, ID_DESC ]) {
+    ///         __typename
+    ///         nodes {
+    ///           __typename
+    ///           validationTimeBronze
+    ///           validationTimeSilver
+    ///           validationTimeGold
+    ///           validationTimeAuthor
+    ///           validationTimeExpert
+    ///           validationTimeApex
+    ///         }
+    ///       }
+    ///     }
+    ///   }
+    /// }
+    /// </code>
+    /// </summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial interface IGetCurrentLevelMedalTargetsQuery : global::StrawberryShake.IOperationRequestFactory
+    {
+        global::System.Threading.Tasks.Task<global::StrawberryShake.IOperationResult<IGetCurrentLevelMedalTargetsResult>> ExecuteAsync(global::System.String xxHash, global::System.String hash, global::System.Threading.CancellationToken cancellationToken = default);
+        global::System.IObservable<global::StrawberryShake.IOperationResult<IGetCurrentLevelMedalTargetsResult>> Watch(global::System.String xxHash, global::System.String hash, global::StrawberryShake.ExecutionStrategy? strategy = null);
+    }
+
+    /// <summary>
     /// Represents the operation service of the GetLevelPoints GraphQL operation
     /// <code>
     /// query GetLevelPoints($xxHash: String!, $hash: String!) {
@@ -148483,6 +149643,7 @@ namespace TNRD.Zeepkist.GTR
         private readonly global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsSubscription _watchCurrentLevelRecords;
         private readonly global::TNRD.Zeepkist.GTR.IGetAdditionalGhostsQuery _getAdditionalGhosts;
         private readonly global::TNRD.Zeepkist.GTR.IGetAllPersonalBestGhostsQuery _getAllPersonalBestGhosts;
+        private readonly global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsQuery _getCurrentLevelMedalTargets;
         private readonly global::TNRD.Zeepkist.GTR.IGetLevelPointsQuery _getLevelPoints;
         private readonly global::TNRD.Zeepkist.GTR.IGetLevelVoteSummaryQuery _getLevelVoteSummary;
         private readonly global::TNRD.Zeepkist.GTR.IGetNextFastestPersonalBestQuery _getNextFastestPersonalBest;
@@ -148499,12 +149660,13 @@ namespace TNRD.Zeepkist.GTR
         private readonly global::TNRD.Zeepkist.GTR.ISearchUsersByNameQuery _searchUsersByName;
         private readonly global::TNRD.Zeepkist.GTR.IGetLevelTrackTournamentsQuery _getLevelTrackTournaments;
         private readonly global::TNRD.Zeepkist.GTR.IWatchTrackTournamentPageSubscription _watchTrackTournamentPage;
-        public GtrClient(global::TNRD.Zeepkist.GTR.IBrowseLevelItemsQuery browseLevelItems, global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsSubscription watchCurrentLevelRecords, global::TNRD.Zeepkist.GTR.IGetAdditionalGhostsQuery getAdditionalGhosts, global::TNRD.Zeepkist.GTR.IGetAllPersonalBestGhostsQuery getAllPersonalBestGhosts, global::TNRD.Zeepkist.GTR.IGetLevelPointsQuery getLevelPoints, global::TNRD.Zeepkist.GTR.IGetLevelVoteSummaryQuery getLevelVoteSummary, global::TNRD.Zeepkist.GTR.IGetNextFastestPersonalBestQuery getNextFastestPersonalBest, global::TNRD.Zeepkist.GTR.IGetPersonalBestQuery getPersonalBest, global::TNRD.Zeepkist.GTR.IGetPersonalBestCountQuery getPersonalBestCount, global::TNRD.Zeepkist.GTR.IGetPersonalBestGhostsQuery getPersonalBestGhosts, global::TNRD.Zeepkist.GTR.IGetPersonalBestsQuery getPersonalBests, global::TNRD.Zeepkist.GTR.IGetTopRecordGhostsQuery getTopRecordGhosts, global::TNRD.Zeepkist.GTR.IGetTotalUserCountQuery getTotalUserCount, global::TNRD.Zeepkist.GTR.IGetWorldRecordHolderQuery getWorldRecordHolder, global::TNRD.Zeepkist.GTR.IGTR_Version_CheckQuery gTR_Version_Check, global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageSubscription watchLeaderboardPage, global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsQuery resolveCurrentLevelRecordIds, global::TNRD.Zeepkist.GTR.ISearchUsersByNameQuery searchUsersByName, global::TNRD.Zeepkist.GTR.IGetLevelTrackTournamentsQuery getLevelTrackTournaments, global::TNRD.Zeepkist.GTR.IWatchTrackTournamentPageSubscription watchTrackTournamentPage)
+        public GtrClient(global::TNRD.Zeepkist.GTR.IBrowseLevelItemsQuery browseLevelItems, global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsSubscription watchCurrentLevelRecords, global::TNRD.Zeepkist.GTR.IGetAdditionalGhostsQuery getAdditionalGhosts, global::TNRD.Zeepkist.GTR.IGetAllPersonalBestGhostsQuery getAllPersonalBestGhosts, global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsQuery getCurrentLevelMedalTargets, global::TNRD.Zeepkist.GTR.IGetLevelPointsQuery getLevelPoints, global::TNRD.Zeepkist.GTR.IGetLevelVoteSummaryQuery getLevelVoteSummary, global::TNRD.Zeepkist.GTR.IGetNextFastestPersonalBestQuery getNextFastestPersonalBest, global::TNRD.Zeepkist.GTR.IGetPersonalBestQuery getPersonalBest, global::TNRD.Zeepkist.GTR.IGetPersonalBestCountQuery getPersonalBestCount, global::TNRD.Zeepkist.GTR.IGetPersonalBestGhostsQuery getPersonalBestGhosts, global::TNRD.Zeepkist.GTR.IGetPersonalBestsQuery getPersonalBests, global::TNRD.Zeepkist.GTR.IGetTopRecordGhostsQuery getTopRecordGhosts, global::TNRD.Zeepkist.GTR.IGetTotalUserCountQuery getTotalUserCount, global::TNRD.Zeepkist.GTR.IGetWorldRecordHolderQuery getWorldRecordHolder, global::TNRD.Zeepkist.GTR.IGTR_Version_CheckQuery gTR_Version_Check, global::TNRD.Zeepkist.GTR.IWatchLeaderboardPageSubscription watchLeaderboardPage, global::TNRD.Zeepkist.GTR.IResolveCurrentLevelRecordIdsQuery resolveCurrentLevelRecordIds, global::TNRD.Zeepkist.GTR.ISearchUsersByNameQuery searchUsersByName, global::TNRD.Zeepkist.GTR.IGetLevelTrackTournamentsQuery getLevelTrackTournaments, global::TNRD.Zeepkist.GTR.IWatchTrackTournamentPageSubscription watchTrackTournamentPage)
         {
             _browseLevelItems = browseLevelItems ?? throw new global::System.ArgumentNullException(nameof(browseLevelItems));
             _watchCurrentLevelRecords = watchCurrentLevelRecords ?? throw new global::System.ArgumentNullException(nameof(watchCurrentLevelRecords));
             _getAdditionalGhosts = getAdditionalGhosts ?? throw new global::System.ArgumentNullException(nameof(getAdditionalGhosts));
             _getAllPersonalBestGhosts = getAllPersonalBestGhosts ?? throw new global::System.ArgumentNullException(nameof(getAllPersonalBestGhosts));
+            _getCurrentLevelMedalTargets = getCurrentLevelMedalTargets ?? throw new global::System.ArgumentNullException(nameof(getCurrentLevelMedalTargets));
             _getLevelPoints = getLevelPoints ?? throw new global::System.ArgumentNullException(nameof(getLevelPoints));
             _getLevelVoteSummary = getLevelVoteSummary ?? throw new global::System.ArgumentNullException(nameof(getLevelVoteSummary));
             _getNextFastestPersonalBest = getNextFastestPersonalBest ?? throw new global::System.ArgumentNullException(nameof(getNextFastestPersonalBest));
@@ -148528,6 +149690,7 @@ namespace TNRD.Zeepkist.GTR
         public global::TNRD.Zeepkist.GTR.IWatchCurrentLevelRecordsSubscription WatchCurrentLevelRecords => _watchCurrentLevelRecords;
         public global::TNRD.Zeepkist.GTR.IGetAdditionalGhostsQuery GetAdditionalGhosts => _getAdditionalGhosts;
         public global::TNRD.Zeepkist.GTR.IGetAllPersonalBestGhostsQuery GetAllPersonalBestGhosts => _getAllPersonalBestGhosts;
+        public global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsQuery GetCurrentLevelMedalTargets => _getCurrentLevelMedalTargets;
         public global::TNRD.Zeepkist.GTR.IGetLevelPointsQuery GetLevelPoints => _getLevelPoints;
         public global::TNRD.Zeepkist.GTR.IGetLevelVoteSummaryQuery GetLevelVoteSummary => _getLevelVoteSummary;
         public global::TNRD.Zeepkist.GTR.IGetNextFastestPersonalBestQuery GetNextFastestPersonalBest => _getNextFastestPersonalBest;
@@ -148559,6 +149722,8 @@ namespace TNRD.Zeepkist.GTR
         global::TNRD.Zeepkist.GTR.IGetAdditionalGhostsQuery GetAdditionalGhosts { get; }
 
         global::TNRD.Zeepkist.GTR.IGetAllPersonalBestGhostsQuery GetAllPersonalBestGhosts { get; }
+
+        global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsQuery GetCurrentLevelMedalTargets { get; }
 
         global::TNRD.Zeepkist.GTR.IGetLevelPointsQuery GetLevelPoints { get; }
 
@@ -149192,6 +150357,160 @@ namespace TNRD.Zeepkist.GTR.State
         public global::StrawberryShake.IOperationResultDataInfo WithVersion(global::System.UInt64 version)
         {
             return new GetAllPersonalBestGhostsResultInfo(Records, _entityIds, version);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class GetCurrentLevelMedalTargetsResultFactory : global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.GetCurrentLevelMedalTargetsResult>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        public GetCurrentLevelMedalTargetsResultFactory(global::StrawberryShake.IEntityStore entityStore)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+        }
+
+        global::System.Type global::StrawberryShake.IOperationResultDataFactory.ResultType => typeof(global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsResult);
+
+        public GetCurrentLevelMedalTargetsResult Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot = null)
+        {
+            if (snapshot is null)
+            {
+                snapshot = _entityStore.CurrentSnapshot;
+            }
+
+            if (dataInfo is GetCurrentLevelMedalTargetsResultInfo info)
+            {
+                return new GetCurrentLevelMedalTargetsResult(MapIGetCurrentLevelMedalTargets_Levels(info.Levels, snapshot));
+            }
+
+            throw new global::System.ArgumentException("GetCurrentLevelMedalTargetsResultInfo expected.");
+        }
+
+        private global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels? MapIGetCurrentLevelMedalTargets_Levels(global::TNRD.Zeepkist.GTR.State.LevelsConnectionData? data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (data is null)
+            {
+                return null;
+            }
+
+            IGetCurrentLevelMedalTargets_Levels returnValue = default !;
+            if (data?.__typename.Equals("LevelsConnection", global::System.StringComparison.Ordinal) ?? false)
+            {
+                returnValue = new GetCurrentLevelMedalTargets_Levels_LevelsConnection(MapNonNullableIGetCurrentLevelMedalTargets_Levels_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes> MapNonNullableIGetCurrentLevelMedalTargets_Levels_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (list is null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var levels = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes>();
+            foreach (global::TNRD.Zeepkist.GTR.State.LevelData child in list)
+            {
+                levels.Add(MapNonNullableIGetCurrentLevelMedalTargets_Levels_Nodes(child, snapshot));
+            }
+
+            return levels;
+        }
+
+        private global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes MapNonNullableIGetCurrentLevelMedalTargets_Levels_Nodes(global::TNRD.Zeepkist.GTR.State.LevelData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            IGetCurrentLevelMedalTargets_Levels_Nodes returnValue = default !;
+            if (data.__typename.Equals("Level", global::System.StringComparison.Ordinal))
+            {
+                returnValue = new GetCurrentLevelMedalTargets_Levels_Nodes_Level(MapNonNullableIGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems(data.LevelItems ?? throw new global::System.ArgumentNullException(), snapshot));
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        private global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems MapNonNullableIGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems(global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems returnValue = default !;
+            if (data.__typename.Equals("LevelItemsConnection", global::System.StringComparison.Ordinal))
+            {
+                returnValue = new GetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_LevelItemsConnection(MapNonNullableIGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_NodesNonNullableArray(data.Nodes ?? throw new global::System.ArgumentNullException(), snapshot));
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes> MapNonNullableIGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_NodesNonNullableArray(global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelItemData>? list, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            if (list is null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var levelItems = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes>();
+            foreach (global::TNRD.Zeepkist.GTR.State.LevelItemData child in list)
+            {
+                levelItems.Add(MapNonNullableIGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes(child, snapshot));
+            }
+
+            return levelItems;
+        }
+
+        private global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes MapNonNullableIGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes(global::TNRD.Zeepkist.GTR.State.LevelItemData data, global::StrawberryShake.IEntityStoreSnapshot snapshot)
+        {
+            IGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes returnValue = default !;
+            if (data.__typename.Equals("LevelItem", global::System.StringComparison.Ordinal))
+            {
+                returnValue = new GetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes_LevelItem(data.ValidationTimeBronze ?? throw new global::System.ArgumentNullException(), data.ValidationTimeSilver ?? throw new global::System.ArgumentNullException(), data.ValidationTimeGold ?? throw new global::System.ArgumentNullException(), data.ValidationTimeAuthor ?? throw new global::System.ArgumentNullException(), data.ValidationTimeExpert, data.ValidationTimeApex);
+            }
+            else
+            {
+                throw new global::System.NotSupportedException();
+            }
+
+            return returnValue;
+        }
+
+        global::System.Object global::StrawberryShake.IOperationResultDataFactory.Create(global::StrawberryShake.IOperationResultDataInfo dataInfo, global::StrawberryShake.IEntityStoreSnapshot? snapshot)
+        {
+            return Create(dataInfo, snapshot);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class GetCurrentLevelMedalTargetsResultInfo : global::StrawberryShake.IOperationResultDataInfo
+    {
+        private readonly global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> _entityIds;
+        private readonly global::System.UInt64 _version;
+        public GetCurrentLevelMedalTargetsResultInfo(global::TNRD.Zeepkist.GTR.State.LevelsConnectionData? levels, global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> entityIds, global::System.UInt64 version)
+        {
+            Levels = levels;
+            _entityIds = entityIds ?? throw new global::System.ArgumentNullException(nameof(entityIds));
+            _version = version;
+        }
+
+        /// <summary>
+        /// Reads and enables pagination through a set of `Level`.
+        /// </summary>
+        public global::TNRD.Zeepkist.GTR.State.LevelsConnectionData? Levels { get; }
+        public global::System.Collections.Generic.IReadOnlyCollection<global::StrawberryShake.EntityId> EntityIds => _entityIds;
+        public global::System.UInt64 Version => _version;
+
+        public global::StrawberryShake.IOperationResultDataInfo WithVersion(global::System.UInt64 version)
+        {
+            return new GetCurrentLevelMedalTargetsResultInfo(Levels, _entityIds, version);
         }
     }
 
@@ -158784,6 +160103,192 @@ namespace TNRD.Zeepkist.GTR.State
     }
 
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class GetCurrentLevelMedalTargetsBuilder : global::StrawberryShake.OperationResultBuilder<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsResult>
+    {
+        private readonly global::StrawberryShake.IEntityStore _entityStore;
+        private readonly global::StrawberryShake.IEntityIdSerializer _idSerializer;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.String, global::System.String> _stringParser;
+        private readonly global::StrawberryShake.Serialization.ILeafValueParser<global::System.Double, global::System.Double> _floatParser;
+        public GetCurrentLevelMedalTargetsBuilder(global::StrawberryShake.IEntityStore entityStore, global::StrawberryShake.IEntityIdSerializer idSerializer, global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsResult> resultDataFactory, global::StrawberryShake.Serialization.ISerializerResolver serializerResolver)
+        {
+            _entityStore = entityStore ?? throw new global::System.ArgumentNullException(nameof(entityStore));
+            _idSerializer = idSerializer ?? throw new global::System.ArgumentNullException(nameof(idSerializer));
+            ResultDataFactory = resultDataFactory ?? throw new global::System.ArgumentNullException(nameof(resultDataFactory));
+            _stringParser = serializerResolver.GetLeafValueParser<global::System.String, global::System.String>("String") ?? throw new global::System.ArgumentException("No serializer for type `String` found.");
+            _floatParser = serializerResolver.GetLeafValueParser<global::System.Double, global::System.Double>("Float") ?? throw new global::System.ArgumentException("No serializer for type `Float` found.");
+        }
+
+        protected override global::StrawberryShake.IOperationResultDataFactory<global::TNRD.Zeepkist.GTR.IGetCurrentLevelMedalTargetsResult> ResultDataFactory { get; }
+
+        protected override global::StrawberryShake.IOperationResultDataInfo BuildData(global::System.Text.Json.JsonElement obj)
+        {
+            var entityIds = new global::System.Collections.Generic.HashSet<global::StrawberryShake.EntityId>();
+            global::StrawberryShake.IEntityStoreSnapshot snapshot = default !;
+            _entityStore.Update(session =>
+            {
+                snapshot = session.CurrentSnapshot;
+            });
+            return new GetCurrentLevelMedalTargetsResultInfo(Deserialize_IGetCurrentLevelMedalTargets_Levels(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levels")), entityIds, snapshot.Version);
+        }
+
+        private global::TNRD.Zeepkist.GTR.State.LevelsConnectionData? Deserialize_IGetCurrentLevelMedalTargets_Levels(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                return null;
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("LevelsConnection", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::TNRD.Zeepkist.GTR.State.LevelsConnectionData(typename, nodes: Deserialize_NonNullableIGetCurrentLevelMedalTargets_Levels_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelData> Deserialize_NonNullableIGetCurrentLevelMedalTargets_Levels_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var levels = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.LevelData>();
+            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
+            {
+                levels.Add(Deserialize_NonNullableIGetCurrentLevelMedalTargets_Levels_Nodes(child));
+            }
+
+            return levels;
+        }
+
+        private global::TNRD.Zeepkist.GTR.State.LevelData Deserialize_NonNullableIGetCurrentLevelMedalTargets_Levels_Nodes(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("Level", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::TNRD.Zeepkist.GTR.State.LevelData(typename, levelItems: Deserialize_NonNullableIGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "levelItems")));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData Deserialize_NonNullableIGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("LevelItemsConnection", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData(typename, nodes: Deserialize_NonNullableIGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_NodesNonNullableArray(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "nodes")));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelItemData> Deserialize_NonNullableIGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_NodesNonNullableArray(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var levelItems = new global::System.Collections.Generic.List<global::TNRD.Zeepkist.GTR.State.LevelItemData>();
+            foreach (global::System.Text.Json.JsonElement child in obj.Value.EnumerateArray())
+            {
+                levelItems.Add(Deserialize_NonNullableIGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes(child));
+            }
+
+            return levelItems;
+        }
+
+        private global::TNRD.Zeepkist.GTR.State.LevelItemData Deserialize_NonNullableIGetCurrentLevelMedalTargets_Levels_Nodes_LevelItems_Nodes(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            var typename = obj.Value.GetProperty("__typename").GetString();
+            if (typename?.Equals("LevelItem", global::System.StringComparison.Ordinal) ?? false)
+            {
+                return new global::TNRD.Zeepkist.GTR.State.LevelItemData(typename, validationTimeBronze: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "validationTimeBronze")), validationTimeSilver: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "validationTimeSilver")), validationTimeGold: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "validationTimeGold")), validationTimeAuthor: Deserialize_NonNullableDouble(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "validationTimeAuthor")), validationTimeExpert: Deserialize_Double(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "validationTimeExpert")), validationTimeApex: Deserialize_Double(global::StrawberryShake.Json.JsonElementExtensions.GetPropertyOrNull(obj, "validationTimeApex")));
+            }
+
+            throw new global::System.NotSupportedException();
+        }
+
+        private global::System.Double Deserialize_NonNullableDouble(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                throw new global::System.ArgumentNullException();
+            }
+
+            return _floatParser.Parse(obj.Value.GetDouble()!);
+        }
+
+        private global::System.Double? Deserialize_Double(global::System.Text.Json.JsonElement? obj)
+        {
+            if (!obj.HasValue)
+            {
+                return null;
+            }
+
+            if (obj.Value.ValueKind == global::System.Text.Json.JsonValueKind.Null)
+            {
+                return null;
+            }
+
+            return _floatParser.Parse(obj.Value.GetDouble()!);
+        }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class GetLevelPointsBuilder : global::StrawberryShake.OperationResultBuilder<global::TNRD.Zeepkist.GTR.IGetLevelPointsResult>
     {
         private readonly global::StrawberryShake.IEntityStore _entityStore;
@@ -161263,7 +162768,7 @@ namespace TNRD.Zeepkist.GTR.State
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class LevelItemData : INodeData
     {
-        public LevelItemData(global::System.String __typename, global::System.String? fileUid = default !, global::System.String? workshopId = default !, global::System.String? name = default !, global::System.String? fileAuthor = default !, global::System.String? imageUrl = default !)
+        public LevelItemData(global::System.String __typename, global::System.String? fileUid = default !, global::System.String? workshopId = default !, global::System.String? name = default !, global::System.String? fileAuthor = default !, global::System.String? imageUrl = default !, global::System.Double? validationTimeBronze = default !, global::System.Double? validationTimeSilver = default !, global::System.Double? validationTimeGold = default !, global::System.Double? validationTimeAuthor = default !, global::System.Double? validationTimeExpert = default !, global::System.Double? validationTimeApex = default !)
         {
             this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
             FileUid = fileUid;
@@ -161271,6 +162776,12 @@ namespace TNRD.Zeepkist.GTR.State
             Name = name;
             FileAuthor = fileAuthor;
             ImageUrl = imageUrl;
+            ValidationTimeBronze = validationTimeBronze;
+            ValidationTimeSilver = validationTimeSilver;
+            ValidationTimeGold = validationTimeGold;
+            ValidationTimeAuthor = validationTimeAuthor;
+            ValidationTimeExpert = validationTimeExpert;
+            ValidationTimeApex = validationTimeApex;
         }
 
         public global::System.String __typename { get; }
@@ -161279,6 +162790,14 @@ namespace TNRD.Zeepkist.GTR.State
         public global::System.String? Name { get; }
         public global::System.String? FileAuthor { get; }
         public global::System.String? ImageUrl { get; }
+        public global::System.Double? ValidationTimeBronze { get; }
+        public global::System.Double? ValidationTimeSilver { get; }
+        public global::System.Double? ValidationTimeGold { get; }
+        public global::System.Double? ValidationTimeAuthor { get; }
+        ///<summary>Expert target in seconds; null until available.</summary>
+        public global::System.Double? ValidationTimeExpert { get; }
+        ///<summary>Apex target in seconds; null until available.</summary>
+        public global::System.Double? ValidationTimeApex { get; }
     }
 
     ///<summary>The root query type which gives access points into the data universe.</summary>
@@ -161453,6 +162972,37 @@ namespace TNRD.Zeepkist.GTR.State
         public global::System.Int32? TotalCount { get; }
     }
 
+    ///<summary>A connection to a list of `Level` values.</summary>
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class LevelsConnectionData
+    {
+        public LevelsConnectionData(global::System.String __typename, global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelData>? nodes = default !)
+        {
+            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
+            Nodes = nodes;
+        }
+
+        public global::System.String __typename { get; }
+        ///<summary>A list of `Level` objects.</summary>
+        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelData>? Nodes { get; }
+    }
+
+    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
+    public partial class LevelData : INodeData
+    {
+        public LevelData(global::System.String __typename, global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? levelItems = default !, global::System.Int32? id = default !)
+        {
+            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
+            LevelItems = levelItems;
+            Id = id;
+        }
+
+        public global::System.String __typename { get; }
+        ///<summary>Reads and enables pagination through a set of `LevelItem`.</summary>
+        public global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? LevelItems { get; }
+        public global::System.Int32? Id { get; }
+    }
+
     ///<summary>A connection to a list of `LevelPoint` values.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class LevelPointsConnectionData
@@ -161619,22 +163169,6 @@ namespace TNRD.Zeepkist.GTR.State
         public global::System.String? Latest { get; }
     }
 
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LevelData : INodeData
-    {
-        public LevelData(global::System.String __typename, global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? levelItems = default !, global::System.Int32? id = default !)
-        {
-            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
-            LevelItems = levelItems;
-            Id = id;
-        }
-
-        public global::System.String __typename { get; }
-        ///<summary>Reads and enables pagination through a set of `LevelItem`.</summary>
-        public global::TNRD.Zeepkist.GTR.State.LevelItemsConnectionData? LevelItems { get; }
-        public global::System.Int32? Id { get; }
-    }
-
     ///<summary>A connection to a list of `UserPointContribution` values.</summary>
     [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
     public partial class UserPointContributionsConnectionData
@@ -161663,21 +163197,6 @@ namespace TNRD.Zeepkist.GTR.State
         public global::System.String __typename { get; }
         public global::System.Double? LevelDecayedPoints { get; }
         public global::System.Int32? LevelPosition { get; }
-    }
-
-    ///<summary>A connection to a list of `Level` values.</summary>
-    [global::System.CodeDom.Compiler.GeneratedCode("StrawberryShake", "14.3.0.0")]
-    public partial class LevelsConnectionData
-    {
-        public LevelsConnectionData(global::System.String __typename, global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelData>? nodes = default !)
-        {
-            this.__typename = __typename ?? throw new global::System.ArgumentNullException(nameof(__typename));
-            Nodes = nodes;
-        }
-
-        public global::System.String __typename { get; }
-        ///<summary>A list of `Level` objects.</summary>
-        public global::System.Collections.Generic.IReadOnlyList<global::TNRD.Zeepkist.GTR.State.LevelData>? Nodes { get; }
     }
 
     ///<summary>A connection to a list of `TrackTournament` values.</summary>

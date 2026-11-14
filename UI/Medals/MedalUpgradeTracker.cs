@@ -24,7 +24,7 @@ public sealed class MedalUpgrade
     }
 }
 
-/// <summary>Compares confirmed snapshots, never locally calculated target times.</summary>
+/// <summary>Compares confirmed result snapshots.</summary>
 public sealed class MedalUpgradeTracker
 {
     private bool _initialized;

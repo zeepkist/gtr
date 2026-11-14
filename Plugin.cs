@@ -213,6 +213,7 @@ public class Plugin : BaseUnityPlugin
         services.AddEagerService<GhostTimelineOverlayVisibilityService>();
         services.AddEagerService<GhostPlaybackInputService>();
         services.AddEagerService<LeaderboardService>();
+        services.AddEagerService<RoundLeaderboardMedalService>();
         services.AddEagerService<CurrentLevelRecordService>();
         services.AddEagerService<RecordHolderService>();
         services.AddEagerService<DiscordService>();
