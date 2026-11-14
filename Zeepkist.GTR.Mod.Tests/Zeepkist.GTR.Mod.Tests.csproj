@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\UI\Medals\MedalUpgradeTracker.cs" Link="Source\MedalUpgradeTracker.cs" />
     <Compile Include="..\Ghosting\Playback\GhostEnablementService.cs" Link="Source\GhostEnablementService.cs" />
     <Compile Include="..\Ghosting\Playback\GhostPlayer.Collection.cs" Link="Source\GhostPlayer.Collection.cs" />
     <Compile Include="..\Ghosting\Playback\GhostPlayer.EventArgs.cs" Link="Source\GhostPlayer.EventArgs.cs" />

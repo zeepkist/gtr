@@ -72,24 +72,50 @@ public class GhostFrameMemoryMeasurements(ITestOutputHelper output)
 
     private static Func<int, float> FrameTimes<T>(T[] frames) where T : struct, IFrame => index => frames[index].Time;
 
+    [Fact]
+    public void SamplingAllocationMeasurement_DetectsAllocatingAccessor()
+    {
+        Func<int, float>[] times = [index =>
+        {
+            GC.KeepAlive(new byte[32]);
+            return index * 0.02f;
+        }];
+        Sample(times, 256);
+        Assert.True(MeasureSamplingAllocations(times, 256) > 0);
+    }
+
     private static double[] Measure(Func<int, float>[] times, int count)
     {
         var durations = new double[100];
         for (int warmup = 0; warmup < 100; warmup++)
-            foreach (var getTime in times)
-                GhostFrameSearch.TryGetFrameSample(count, 2.01f, getTime, out _);
+            Sample(times, count);
+
+        // Check sampling alone. Timing/runtime initialization must not enter this allocation interval.
+        Assert.Equal(0, MeasureSamplingAllocations(times, count));
+        _ = Stopwatch.GetTimestamp();
         for (int iteration = 0; iteration < 100; iteration++)
         {
-            long beforeBytes = GC.GetAllocatedBytesForCurrentThread();
             long start = Stopwatch.GetTimestamp();
-            foreach (var getTime in times)
-                if (!GhostFrameSearch.TryGetFrameSample(count, 2.01f, getTime, out _))
-                    throw new InvalidOperationException("Missing benchmark sample");
+            Sample(times, count);
             durations[iteration] = (Stopwatch.GetTimestamp() - start) * 1_000_000d / Stopwatch.Frequency;
-            Assert.Equal(beforeBytes, GC.GetAllocatedBytesForCurrentThread());
         }
         Array.Sort(durations);
         return durations;
+    }
+
+    private static long MeasureSamplingAllocations(Func<int, float>[] times, int count)
+    {
+        long beforeBytes = GC.GetAllocatedBytesForCurrentThread();
+        for (int iteration = 0; iteration < 100; iteration++)
+            Sample(times, count);
+        return GC.GetAllocatedBytesForCurrentThread() - beforeBytes;
+    }
+
+    private static void Sample(Func<int, float>[] times, int count)
+    {
+        foreach (var getTime in times)
+            if (!GhostFrameSearch.TryGetFrameSample(count, 2.01f, getTime, out _))
+                throw new InvalidOperationException("Missing benchmark sample");
     }
 
     private static double Percentile(double[] sorted, double percentile) => sorted[(int)Math.Ceiling(sorted.Length * percentile) - 1];

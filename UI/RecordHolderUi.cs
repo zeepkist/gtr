@@ -37,7 +37,9 @@ public class RecordHolderUi : MonoBehaviour
         GetCombinedInstance().Initialize(configService.ShowRecordHolder, _combinedWorldRecordHolderUi,
             _combinedPersonalBestHolderUi);
         GetCombinedInstance().SetRecordHolders(worldRecordHolder, personalBestHolder);
-        GetCombinedInstance().ToggleDisplay();
+        if (!_combinedWorldRecordHolderUi.gameObject.activeSelf &&
+            !_combinedPersonalBestHolderUi.gameObject.activeSelf)
+            GetCombinedInstance().ToggleDisplay();
         GetWorldRecordInstance().Initialize(configService.ShowWorldRecordHolder, _singleWorldRecordHolderUi, null);
         GetWorldRecordInstance().SetRecordHolders(worldRecordHolder, null);
         GetWorldRecordInstance().ToggleDisplay();
@@ -61,7 +63,9 @@ public class RecordHolderUi : MonoBehaviour
 
     public static void Disable()
     {
-        GetCombinedInstance().gameObject.SetActive(false);
+        if (_combinedInstance != null) _combinedInstance.gameObject.SetActive(false);
+        if (_worldRecordInstance != null) _worldRecordInstance.gameObject.SetActive(false);
+        if (_personalBestInstance != null) _personalBestInstance.gameObject.SetActive(false);
     }
 
     internal static void DestroyInstances()
@@ -268,8 +272,10 @@ public class RecordHolderUi : MonoBehaviour
         }
         else
         {
-            _worldRecordHolderUi.gameObject.SetActive(false);
-            _personalBestHolderUi.gameObject.SetActive(false);
+            if (!ConfigService.ShowWorldRecordOnHolder.Value)
+                _worldRecordHolderUi.gameObject.SetActive(false);
+            if (!ConfigService.ShowPersonalBestOnHolder.Value)
+                _personalBestHolderUi.gameObject.SetActive(false);
             _toggleActions.Clear();
 
             if (ConfigService.ShowWorldRecordOnHolder.Value)
@@ -282,6 +288,13 @@ public class RecordHolderUi : MonoBehaviour
             {
                 _toggleActions.Add(new ToggleAction(_personalBestHolderUi.gameObject,
                     _worldRecordHolderUi.gameObject));
+            }
+
+            if (_toggleActions.Count > 1 && _toggleActions[0].IsActive)
+            {
+                ToggleAction current = _toggleActions[0];
+                _toggleActions.RemoveAt(0);
+                _toggleActions.Add(current);
             }
         }
     }
@@ -301,6 +314,8 @@ public class RecordHolderUi : MonoBehaviour
     {
         private readonly GameObject _toEnable;
         private readonly GameObject _toDisable;
+
+        public bool IsActive => _toEnable.activeSelf;
 
         public ToggleAction(GameObject toEnable, GameObject toDisable)
         {

@@ -23,6 +23,8 @@ public class LeaderboardGraphqlService
         Action<LeaderboardPageSnapshot> onNext,
         Action<Exception> onError)
     {
+        var medalTrackers = new Dictionary<string, UI.Medals.MedalUpgradeTracker>();
+        int medalAttempt = 0;
         RecoveringSubscription<IOperationResult<IWatchLeaderboardPageResult>> subscription = null;
         subscription = new RecoveringSubscription<IOperationResult<IWatchLeaderboardPageResult>>(
             observer => _gtrClient.WatchLeaderboardPage.Watch(level.XxHash, level.Hash, pageSize, page * pageSize).Subscribe(observer),
@@ -39,6 +41,19 @@ public class LeaderboardGraphqlService
                 var snapshot = Map(result.Data?.Query);
                 await UniTask.SwitchToMainThread();
                 if (!subscription.IsCurrentAttempt(attempt)) return;
+                if (medalAttempt != attempt) medalTrackers.Clear();
+                medalAttempt = attempt;
+                var visibleUsers = new HashSet<string>();
+                foreach (LeaderboardRecord record in snapshot.Records)
+                {
+                    if (string.IsNullOrEmpty(record.SteamId)) continue;
+                    visibleUsers.Add(record.SteamId);
+                    if (!medalTrackers.TryGetValue(record.SteamId, out var tracker))
+                        medalTrackers[record.SteamId] = tracker = new UI.Medals.MedalUpgradeTracker();
+                    record.MedalUpgrade = tracker.Update(level.CacheKey, record.Time, record.Medal);
+                }
+                foreach (string steamId in medalTrackers.Keys.ToArray())
+                    if (!visibleUsers.Contains(steamId)) medalTrackers.Remove(steamId);
                 subscription.MarkHealthy(attempt);
                 onNext(snapshot);
             }
@@ -61,6 +76,7 @@ public class LeaderboardGraphqlService
                     SteamId = record.User?.SteamId,
                     SteamName = record.User?.SteamName,
                     Time = record.Time,
+                    Medal = record.Medal,
                     DateCreated = record.DateCreated,
                     LevelPosition = contribution?.LevelPosition,
                     LevelDecayedPoints = contribution?.LevelDecayedPoints

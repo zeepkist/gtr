@@ -6,6 +6,16 @@ namespace TNRD.Zeepkist.GTR.Tests;
 public class GraphqlOperationContractTests
 {
     [Fact]
+    public void AllRecordSurfacesRequestServerMedals()
+    {
+        string holders = ReadOperation("CurrentLevelRecords.graphql");
+        Assert.Matches(@"fragment PersonalBestHolderFields[\s\S]*?\bmedal\b", holders);
+        Assert.Matches(@"fragment WorldRecordHolderFields[\s\S]*?\bmedal\b", holders);
+        Assert.Contains("medal", ReadOperation("LeaderboardPage.graphql"));
+        Assert.Matches(@"record\s*\{\s*medal\s*\}", ReadOperation("TrackTournamentLeaderboards.graphql"));
+    }
+
+    [Fact]
     public void TournamentOperationsUseLevelFallbackAndRankedPagination()
     {
         string operation = ReadOperation("TrackTournamentLeaderboards.graphql");
