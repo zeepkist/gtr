@@ -23,20 +23,23 @@ public class RecordHolderUi : MonoBehaviour
     private static PersonalBestHolderUi _singlePersonalBestHolderUi;
 
     internal static bool HasTemplate => GetTemplate() != null;
+    public static event Action CombinedViewChanged;
 
     public static void EnsureExists()
     {
         GetCombinedInstance();
     }
 
-    public static void Create(WorldRecordHolder worldRecordHolder, PersonalBestHolder personalBestHolder)
+    public static void Create(WorldRecordHolder worldRecordHolder, PersonalBestHolder personalBestHolder,
+        bool preferPersonalBest = false, Medals.MedalUpgrade medalUpgrade = null)
     {
         if (GetTemplate() == null)
             return;
         ConfigService configService = ServiceHelper.Instance.GetRequiredService<ConfigService>();
         GetCombinedInstance().Initialize(configService.ShowRecordHolder, _combinedWorldRecordHolderUi,
             _combinedPersonalBestHolderUi);
-        GetCombinedInstance().SetRecordHolders(worldRecordHolder, personalBestHolder);
+        if (preferPersonalBest) GetCombinedInstance().ShowPersonalBest();
+        GetCombinedInstance().SetRecordHolders(worldRecordHolder, personalBestHolder, medalUpgrade);
         if (!_combinedWorldRecordHolderUi.gameObject.activeSelf &&
             !_combinedPersonalBestHolderUi.gameObject.activeSelf)
             GetCombinedInstance().ToggleDisplay();
@@ -243,15 +246,28 @@ public class RecordHolderUi : MonoBehaviour
         _personalBestHolderUi = personalBestHolderUi;
     }
 
-    private void SetRecordHolders(WorldRecordHolder worldRecordHolder, PersonalBestHolder personalBestHolder)
+    private void SetRecordHolders(WorldRecordHolder worldRecordHolder, PersonalBestHolder personalBestHolder,
+        Medals.MedalUpgrade medalUpgrade = null)
     {
         _worldRecordHolder = worldRecordHolder;
         _personalBestHolder = personalBestHolder;
         if (_worldRecordHolderUi != null)
             _worldRecordHolderUi.SetWorldRecordHolder(_worldRecordHolder);
         if (_personalBestHolderUi != null)
-            _personalBestHolderUi.SetPersonalBestHolder(_personalBestHolder);
+            _personalBestHolderUi.SetPersonalBestHolder(_personalBestHolder, medalUpgrade);
         UpdateDisplayActions();
+    }
+
+    private void ShowPersonalBest()
+    {
+        if (!_showConfig.Value || !ConfigService.ShowPersonalBestOnHolder.Value) return;
+        UpdateDisplayActions();
+        bool changed = !_personalBestHolderUi.gameObject.activeSelf;
+        _worldRecordHolderUi.gameObject.SetActive(false);
+        // Activate with the previous medal first. The new snapshot can then animate its replacement.
+        _personalBestHolderUi.gameObject.SetActive(true);
+        UpdateDisplayActions();
+        if (changed) CombinedViewChanged?.Invoke();
     }
 
     private void UpdateDisplayActions()
@@ -306,8 +322,10 @@ public class RecordHolderUi : MonoBehaviour
 
         ToggleAction toggleAction = _toggleActions.First();
         _toggleActions.RemoveAt(0);
+        bool changed = !toggleAction.IsActive;
         toggleAction.Toggle();
         _toggleActions.Add(toggleAction);
+        if (changed && ReferenceEquals(this, _combinedInstance)) CombinedViewChanged?.Invoke();
     }
 
     private class ToggleAction

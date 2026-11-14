@@ -28,7 +28,7 @@ public class PersonalBestHolderUi : MonoBehaviour
         Medals.RecordMedalUi.ConfigureHolder(_timeText, _playerNameText);
     }
 
-    public void SetPersonalBestHolder(PersonalBestHolder personalBestHolder)
+    public void SetPersonalBestHolder(PersonalBestHolder personalBestHolder, Medals.MedalUpgrade medalUpgrade = null)
     {
         var version = ServiceHelper.Instance.GetRequiredService<GtrVersionStatus>();
         if (version.IsUnsupported)
@@ -44,7 +44,7 @@ public class PersonalBestHolderUi : MonoBehaviour
             return;
         }
 
-        Medals.RecordMedalUi.Set(_timeText, personalBestHolder?.Medal, personalBestHolder?.MedalUpgrade);
+        Medals.RecordMedalUi.Set(_timeText, personalBestHolder?.Medal, medalUpgrade ?? personalBestHolder?.MedalUpgrade);
 
         if (personalBestHolder == null)
         {
